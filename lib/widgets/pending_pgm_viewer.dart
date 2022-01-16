@@ -1,8 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:test2/componets/view_pgm_card.dart';
 import 'package:test2/constants/constants.dart';
-import 'package:test2/wrapper/view_wrapper.dart';
+import 'package:test2/wrapper/pending_pgm_wrapper.dart';
 
 import 'package:flutter/gestures.dart';
 
@@ -39,6 +37,7 @@ class _PendingPgmViewerState extends State<PendingPgmViewer> {
             behavior: VerticalScroll(),
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
+              child: PendingPgmWrapper(),
             )),
       ),
     ));

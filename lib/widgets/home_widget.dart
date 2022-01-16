@@ -11,7 +11,7 @@ class Homewidget extends StatefulWidget {
 }
 
 class _HomewidgetState extends State<Homewidget> {
-  final List storedocs = [];
+  final List techprofile = [];
 
   @override
   Widget build(BuildContext context) {
@@ -431,10 +431,10 @@ class Example extends StatelessWidget {
             );
           }
 
-          final List storedocs = [];
+          final List techprofile = [];
           snapshot.data!.docs.map((DocumentSnapshot document) {
             Map a = document.data() as Map<String, dynamic>;
-            storedocs.add(a);
+            techprofile.add(a);
             print(a);
             a['uid'] = document.id;
           }).toList();
@@ -444,10 +444,10 @@ class Example extends StatelessWidget {
                 SizedBox(
                   width: 30,
                 ),
-                for (var i = 0; i < storedocs.length; i++) ...[
+                for (var i = 0; i < techprofile.length; i++) ...[
                   Techcard(
-                    name: storedocs[i]['name'],
-                    img: storedocs[i]['pic'],
+                    name: techprofile[i]['name'],
+                    img: techprofile[i]['pic'],
                   )
                 ]
               ],
