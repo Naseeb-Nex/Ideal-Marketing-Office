@@ -7,10 +7,7 @@ import 'package:test2/wrapper/view_wrapper.dart';
 import 'package:flutter/gestures.dart';
 
 class PendingPgmViewer extends StatefulWidget {
-  PendingPgmViewer({
-    Key? key,
-  }) : super(key: key);
-  List<String> _pendinglist = [];
+  const PendingPgmViewer({Key? key}) : super(key: key);
 
   @override
   _PendingPgmViewerState createState() => _PendingPgmViewerState();

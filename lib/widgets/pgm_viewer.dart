@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:test2/widgets/all_viewer.dart';
+import 'package:test2/widgets/export_widget.dart';
 
 class Pgmviewer extends StatefulWidget {
   const Pgmviewer({Key? key}) : super(key: key);
@@ -223,7 +224,7 @@ class _PgmviewerState extends State<Pgmviewer> {
           SizedBox(
             height: 10,
           ),
-          ViewerWrapper()
+          ViewerWrapper(currentsw: _currentsw)
         ],
       ),
     );
@@ -241,10 +242,12 @@ class MyCustomScrollBehavior extends MaterialScrollBehavior {
 }
 
 class ViewerWrapper extends StatelessWidget {
-  const ViewerWrapper({Key? key}) : super(key: key);
+  String? currentsw;
+  ViewerWrapper({Key? key, this.currentsw}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if (currentsw == 'Pending') return PendingPgmViewer();
     return ViewAll();
   }
 }
