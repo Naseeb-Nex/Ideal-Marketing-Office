@@ -1,6 +1,7 @@
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:test2/widgets/export_widget.dart';
 
 class Homewidget extends StatefulWidget {
   String? uid;
@@ -667,12 +668,75 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                               ),
                             ],
                           ),
+                          SizedBox(height: 30,),
+                          InkWell(
+                                onTap: () => print("Assigning"),
+                                child: Container(
+                                  height: 55,
+                                  width: double.infinity,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      color: cheryred),
+                                  child: Text(
+                                    "Assign Programs",
+                                    style: TextStyle(
+                                      fontFamily: "Nunito",
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                          const SizedBox(height: 20,),
+                          InkWell(
+                                onTap: () => print("Status"),
+                                child: Container(
+                                  height: 55,
+                                  width: double.infinity,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30),
+                                      color: cheryred),
+                                  child: Text(
+                                    "Status",
+                                    style: TextStyle(
+                                      fontFamily: "Nunito",
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                          const SizedBox(height: 20,),
+                          
                         ],
                       ),
                     ),
                   ),
                 ),
-              )
+              ),
+              Expanded(
+                  child: Container(
+                    padding: EdgeInsets.only(right: 10, top: 10, bottom: 5),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: white,
+                        boxShadow: [
+                          BoxShadow(
+                            offset: Offset(0, 5),
+                            blurRadius: 20,
+                            color: secondbg.withOpacity(0.20),
+                          ),
+                        ],
+                      ),
+                      child: Assignpgmwidget()
+                      ),
+                    ),
+                  ),
             ],
           ))
         ],
