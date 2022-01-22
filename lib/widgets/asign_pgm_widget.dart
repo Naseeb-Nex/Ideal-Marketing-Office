@@ -113,6 +113,7 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
     );
   }
 
+
   Widget buildSearch() => SearchWidget(
         text: textquery,
         hintText: 'Name or Phone number',

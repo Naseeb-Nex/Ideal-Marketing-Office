@@ -25,6 +25,8 @@ class Assignpgmcard extends StatelessWidget {
     this.docname,
   }) : super(key: key);
 
+  final controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -169,10 +171,21 @@ class Assignpgmcard extends StatelessWidget {
                     ],
                   ),
                   Container(
-                    child: IconButton(
-                      icon: Icon(Icons.edit),
-                      color: Color(0xff660066),
-                      onPressed: () => print("Pressed"),
+                    child: const Text(
+                      "Set Prority : ",
+                      style: TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF008080),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 300,
+                    child: TextField(
+                      autofocus: false,
+                      controller: controller,
                     ),
                   )
                 ],
