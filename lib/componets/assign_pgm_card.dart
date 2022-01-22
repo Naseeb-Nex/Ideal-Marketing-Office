@@ -171,23 +171,34 @@ class Assignpgmcard extends StatelessWidget {
                     ],
                   ),
                   Container(
-                    child: const Text(
-                      "Set Prority : ",
-                      style: TextStyle(
-                        fontFamily: "Nunito",
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF008080),
-                      ),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(10)),
+                    padding: EdgeInsets.symmetric(vertical: 3, horizontal: 6),
+                    child: Row(
+                      children: [
+                        Container(
+                          child: const Text(
+                            "Set Prority : ",
+                            style: TextStyle(
+                              fontFamily: "Nunito",
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF008080),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: 40,
+                          child: TextField(
+                            autofocus: false,
+                            controller: controller,
+                            decoration: InputDecoration(border: InputBorder.none),
+                          ),
+                        )
+                      ],
                     ),
                   ),
-                  Container(
-                    width: 300,
-                    child: TextField(
-                      autofocus: false,
-                      controller: controller,
-                    ),
-                  )
                 ],
               ),
             ),
