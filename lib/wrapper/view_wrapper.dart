@@ -7,13 +7,13 @@ import 'package:test2/constants/constants.dart';
 class Pgmwrapper extends StatelessWidget {
   String? userid;
   Pgmwrapper({Key? key, this.userid}) : super(key: key);
-  final Stream<QuerySnapshot> studentsStream =
+  final Stream<QuerySnapshot> programstream =
       FirebaseFirestore.instance.collection('Programs').snapshots();
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-        stream: studentsStream,
+        stream: programstream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             print('Something went Wrong');

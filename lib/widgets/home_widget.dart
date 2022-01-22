@@ -485,6 +485,7 @@ class Assigntechpgm extends StatefulWidget {
 
 class _AssigntechpgmState extends State<Assigntechpgm> {
   @override
+  String _currentsrc = "Assign";
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
@@ -670,42 +671,47 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                           ),
                           SizedBox(height: 30,),
                           InkWell(
-                                onTap: () => print("Assigning"),
+                                onTap: () => setState(() {
+                          _currentsrc = 'Assign';
+                        }),
                                 child: Container(
                                   height: 55,
                                   width: double.infinity,
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(30),
-                                      color: cheryred),
+                                      color: _currentsrc == "Assign" ? white : cheryred,
+                            border: Border.all(color: cheryred)),
                                   child: Text(
                                     "Assign Programs",
                                     style: TextStyle(
                                       fontFamily: "Nunito",
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
-                                      color: white,
+                                      color: _currentsrc == "Assign" ? cheryred : white,
                                     ),
                                   ),
                                 ),
                               ),
                           const SizedBox(height: 20,),
                           InkWell(
-                                onTap: () => print("Status"),
+                                onTap: () => setState(() {
+                          _currentsrc = 'Status';
+                        }),
                                 child: Container(
                                   height: 55,
                                   width: double.infinity,
                                   alignment: Alignment.center,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(30),
-                                      color: cheryred),
+                                      color: _currentsrc == "Status" ? white : cheryred,border: Border.all(color: cheryred),),
                                   child: Text(
                                     "Status",
                                     style: TextStyle(
                                       fontFamily: "Nunito",
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
-                                      color: white,
+                                      color: _currentsrc == "Status" ? cheryred : white,
                                     ),
                                   ),
                                 ),
