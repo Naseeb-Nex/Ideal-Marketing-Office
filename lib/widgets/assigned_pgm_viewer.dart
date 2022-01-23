@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test2/constants/constants.dart';
-import 'package:test2/wrapper/pending_pgm_wrapper.dart';
+import 'package:test2/wrapper/assigned_pgm_wrapper.dart';
 
 import 'package:flutter/gestures.dart';
 
@@ -28,17 +28,17 @@ class Assignedpgmviewer extends StatelessWidget {
             ],
             color: primarybg),
         child: ScrollConfiguration(
-            behavior: VerticalScroll(),
+            behavior: Assignedpgmscroll(),
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
-              child: PendingPgmWrapper(),
+              child: Assignedpgmwrapper(),
             )),
       ),
     ));
   }
 }
 
-class VerticalScroll extends MaterialScrollBehavior {
+class Assignedpgmscroll extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices
   @override
   Set<PointerDeviceKind> get dragDevices => {
