@@ -1,14 +1,17 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:test2/componets/assign_pgm_card.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:test2/componets/search_box.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:test2/services/pgm.dart';
 import 'package:flutter/gestures.dart';
 
 class Assignpgmwidget extends StatefulWidget {
-  const Assignpgmwidget({Key? key}) : super(key: key);
+  String? uid;
+  String? username;
+  String? techname;
+
+  Assignpgmwidget({Key? key, this.uid, this.username, this.techname})
+      : super(key: key);
 
   @override
   _AssignpgmwidgetState createState() => _AssignpgmwidgetState();
@@ -72,34 +75,40 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
                             ),
                           );
                         }
-
+                        _allpgm.clear();
                         snapshot.data!.docs.map((DocumentSnapshot document) {
                           Map a = document.data() as Map<String, dynamic>;
                           _allpgm.add(a);
                           print(a);
                           a['uid'] = document.id;
                         }).toList();
-                        List pendingpgm =
-              _allpgm.where((i) => i['status'] == 'pending').toList();
+                        List pendingpgm = _allpgm
+                            .where((i) => i['status'] == 'pending')
+                            .toList();
                         return Container(
                           child: Column(
                             children: [
                               SizedBox(
                                 width: 30,
                               ),
-                                for (var i = 0; i < pendingpgm.length; i++) ...[
-                                  Assignpgmcard(
-                                    name: pendingpgm[i]["name"],
-                                    address: pendingpgm[i]["address"],
-                                    loc: pendingpgm[i]["loc"],
-                                    pgm: pendingpgm[i]["pgm"],
-                                    phn: pendingpgm[i]["phn"],
-                                    type: pendingpgm[i]["type"],
-                                    upDate: pendingpgm[i]["upDate"],
-                                    upTime: pendingpgm[i]["upTime"],
-                                    docname: pendingpgm[i]["docname"],
-                                  )
-                                ]
+                              for (var i = 0; i < pendingpgm.length; i++) ...[
+                                Assignpgmcard(
+                                  uid: pendingpgm[i]["uid"],
+                                  name: pendingpgm[i]["name"],
+                                  address: pendingpgm[i]["address"],
+                                  loc: pendingpgm[i]["loc"],
+                                  pgm: pendingpgm[i]["pgm"],
+                                  chrg: pendingpgm[i]["chrg"],
+                                  phn: pendingpgm[i]["phn"],
+                                  type: pendingpgm[i]["type"],
+                                  upDate: pendingpgm[i]["upDate"],
+                                  upTime: pendingpgm[i]["upTime"],
+                                  docname: pendingpgm[i]["docname"],
+                                  techuid: widget.uid,
+                                  techname: widget.techname,
+                                  username: widget.username,
+                                )
+                              ]
                             ],
                           ),
                         );
@@ -112,7 +121,6 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
       ),
     );
   }
-
 
   Widget buildSearch() => SearchWidget(
         text: textquery,

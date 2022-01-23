@@ -739,7 +739,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                           ),
                         ],
                       ),
-                      child: Assignpgmwidget()
+                      child: Assignpgmwidget(uid: widget.uid, username: widget.username, techname: widget.name)
                       ),
                     ),
                   ),
