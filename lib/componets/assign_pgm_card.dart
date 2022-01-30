@@ -46,7 +46,7 @@ class Assignpgmcard extends StatefulWidget {
 class _AssignpgmcardState extends State<Assignpgmcard> {
   final controller = TextEditingController();
   final _priorityKey = GlobalKey<FormState>();
-  bool up = false;
+  bool _up = false;
   bool error = false;
 
   @override
@@ -240,7 +240,7 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
                             width: 30,
                             height: 30,
                             decoration: BoxDecoration(
-                              color: up == true
+                              color: _up == true
                                   ? Colors.greenAccent
                                   : Colors.redAccent,
                               borderRadius: BorderRadius.circular(10),
@@ -311,7 +311,7 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
       .set(apgm.toMap())
       .then((value) {print("assigned pgm to technicain");
       setState(() {
-        up = true;
+        _up = true;
       });})
     .catchError((error) => print("Failed to assign program : $error"));
     }
