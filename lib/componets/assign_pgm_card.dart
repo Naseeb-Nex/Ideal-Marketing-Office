@@ -44,7 +44,7 @@ class Assignpgmcard extends StatefulWidget {
 }
 
 class _AssignpgmcardState extends State<Assignpgmcard> {
-  final controller = TextEditingController();
+  final _controller = TextEditingController();
   final _priorityKey = GlobalKey<FormState>();
   bool _up = false;
   bool error = false;
@@ -217,9 +217,9 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
                             key: _priorityKey,
                             child: TextFormField(
                               autofocus: false,
-                              controller: controller,
+                              controller: _controller,
                               onSaved: (value) {
-                                controller.text = value!;
+                                _controller.text = value!;
                               },
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -263,57 +263,62 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
     );
   }
 
-  void uploadpgmdata() async{
+  void uploadpgmdata() async {
     FirebaseFirestore fb = await FirebaseFirestore.instance;
     DateTime now = DateTime.now();
     String assigneddate = DateFormat('d MMM y').format(now);
     String assignedtime = DateFormat('kk:mm').format(now);
 
     Assignpgmdata apgm = Assignpgmdata(
-          uid: widget.uid,
-          name: widget.name,
-          address: widget.address,
-          loc: widget.loc,
-          phn: widget.phn,
-          pgm: widget.pgm,
-          chrg: widget.chrg,
-          type: widget.type,
-          upDate: widget.upDate,
-          upTime: widget.upTime,
-          docname: widget.docname,
-          status: "pending",
-          username: widget.username,
-          techname: widget.techname,
-          priority: controller.text,
-          assigneddate: assigneddate,
-          assignedtime: assignedtime);
+        uid: widget.uid,
+        name: widget.name,
+        address: widget.address,
+        loc: widget.loc,
+        phn: widget.phn,
+        pgm: widget.pgm,
+        chrg: widget.chrg,
+        type: widget.type,
+        upDate: widget.upDate,
+        upTime: widget.upTime,
+        docname: widget.docname,
+        status: "pending",
+        username: widget.username,
+        techname: widget.techname,
+        priority: _controller.text,
+        assigneddate: assigneddate,
+        assignedtime: assignedtime);
 
     if (_priorityKey.currentState!.validate()) {
-      fb.collection("Programs")
-      .doc(widget.docname)
-      .update({'status': 'assigned'})
-      .then((value) => print("Updated as assigned"))
-    .catchError((error) => print("Failed to update program : $error"));
+      fb
+          .collection("Programs")
+          .doc(widget.docname)
+          .update({'status': 'assigned'})
+          .then((value) => print("Updated as assigned"))
+          .catchError((error) => print("Failed to update program : $error"));
 
-      fb.collection("Programs")
-      .doc(widget.docname)
-      .collection("AssignedPgm")
-      .doc("Technician")
-      .set(apgm.toMap())
-      .then((value){ print("Updated as assigned in program");
-      })
-    .catchError((error) => print("Failed to update program in program field : $error"));
+      fb
+          .collection("Programs")
+          .doc(widget.docname)
+          .collection("AssignedPgm")
+          .doc("Technician")
+          .set(apgm.toMap())
+          .then((value) {
+        print("Updated as assigned in program");
+      }).catchError((error) =>
+              print("Failed to update program in program field : $error"));
 
-    fb.collection("Technician")
-      .doc(widget.username)
-      .collection("Assignedpgm")
-      .doc(widget.docname)
-      .set(apgm.toMap())
-      .then((value) {print("assigned pgm to technicain");
-      setState(() {
-        _up = true;
-      });})
-    .catchError((error) => print("Failed to assign program : $error"));
+      fb
+          .collection("Technician")
+          .doc(widget.username)
+          .collection("Assignedpgm")
+          .doc(widget.docname)
+          .set(apgm.toMap())
+          .then((value) {
+        print("assigned pgm to technicain");
+        setState(() {
+          _up = true;
+        });
+      }).catchError((error) => print("Failed to assign program : $error"));
     }
   }
 }
