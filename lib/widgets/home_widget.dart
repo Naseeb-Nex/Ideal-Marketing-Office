@@ -791,7 +791,7 @@ class Techsrcwrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (src == 'Status')
-      return Statussrc();
+      return Statussrc(uid: uid, username: username, techname: name);
     return Assignpgmwidget(uid: uid, username: username, techname: name);
   }
 }

@@ -1,10 +1,13 @@
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:test2/widgets/export_widget.dart';
 import 'package:flutter/gestures.dart';
+import 'Techview/exporttech.dart';
 
 class Statussrc extends StatefulWidget {
-  const Statussrc({ Key? key }) : super(key: key);
+  String? uid;
+  String? username;
+  String? techname;
+  Statussrc({ Key? key, this.uid, this.username, this.techname }) : super(key: key);
 
   @override
   StatussrcState createState() => StatussrcState();
@@ -30,14 +33,14 @@ class StatussrcState extends State<Statussrc> {
               fontFamily: "Nunito",
               fontSize: 25,
               fontWeight: FontWeight.bold,
-              color: Colors.black38,
+              color: Colors.blueAccent,
             ),
           ),
           Container(
             height: 5,
             width: 36,
             decoration: BoxDecoration(
-                color: Colors.black26, borderRadius: BorderRadius.circular(10)),
+                color: Colors.blueAccent, borderRadius: BorderRadius.circular(10)),
           ),
           const SizedBox(
             height: 20,
@@ -196,7 +199,7 @@ class StatussrcState extends State<Statussrc> {
           SizedBox(
             height: 10,
           ),
-          ViewerWrapper(currentsw: _currentsw)
+          Techview(currentsw: _currentsw, uid: widget.uid, username: widget.username, techname: widget.techname)
         ],
       ),
     );
@@ -213,14 +216,17 @@ class Horizontalswipe extends MaterialScrollBehavior {
       };
 }
 
-// class ViewerWrapper extends StatelessWidget {
-//   String? currentsw;
-//   ViewerWrapper({Key? key, this.currentsw}) : super(key: key);
+class Techview extends StatelessWidget {
+  String? currentsw;
+  String? uid;
+  String? username;
+  String? techname;
+  Techview({Key? key, this.currentsw, this.uid, this.username, this.techname }) : super(key: key);
 
-//   @override
-//   Widget build(BuildContext context) {
-//     if (currentsw == 'Pending') return PendingPgmViewer();
-//     else if (currentsw == 'Assign') return Assignedpgmviewer();
-//     return ViewAll();
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    // if (currentsw == 'Pending') return PendingPgmViewer();
+    // else if (currentsw == 'Assign') return Assignedpgmviewer();
+    return Techasign(uid: uid, username: username, techname: techname);
+  }
+}
