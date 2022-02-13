@@ -66,8 +66,8 @@ class StatussrcState extends State<Statussrc> {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
-                            color: _currentsw == "Assign" ? white : cheryred,
-                            border: Border.all(color: cheryred),
+                            color: _currentsw == "Assign" ? white : Colors.blue,
+                            border: Border.all(color: Colors.blue),
                           ),
                           child: Text(
                             "Assigned Programs",
@@ -75,7 +75,7 @@ class StatussrcState extends State<Statussrc> {
                               fontFamily: "Nunito",
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
-                              color: _currentsw == "Assign" ? cheryred : white,
+                              color: _currentsw == "Assign" ? Colors.blue : white,
                             ),
                           ),
                         ),
@@ -93,8 +93,8 @@ class StatussrcState extends State<Statussrc> {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
-                            color: _currentsw == "Pending" ? white : cheryred,
-                            border: Border.all(color: cheryred),
+                            color: _currentsw == "Pending" ? white : Colors.blue,
+                            border: Border.all(color: Colors.blue),
                           ),
                           child: Text(
                             "Pending Programs",
@@ -102,7 +102,7 @@ class StatussrcState extends State<Statussrc> {
                               fontFamily: "Nunito",
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
-                              color: _currentsw == "Pending" ? cheryred : white,
+                              color: _currentsw == "Pending" ? Colors.blue : white,
                             ),
                           ),
                         ),
@@ -120,8 +120,8 @@ class StatussrcState extends State<Statussrc> {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
-                            color: _currentsw == "Completed" ? white : cheryred,
-                            border: Border.all(color: cheryred),
+                            color: _currentsw == "Completed" ? white : Colors.blue,
+                            border: Border.all(color: Colors.blue),
                           ),
                           child: Text(
                             "Completed Programs",
@@ -130,7 +130,7 @@ class StatussrcState extends State<Statussrc> {
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
                               color:
-                                  _currentsw == "Completed" ? cheryred : white,
+                                  _currentsw == "Completed" ? Colors.blue : white,
                             ),
                           ),
                         ),
@@ -148,8 +148,8 @@ class StatussrcState extends State<Statussrc> {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
-                            color: _currentsw == "pros" ? white : cheryred,
-                            border: Border.all(color: cheryred),
+                            color: _currentsw == "pros" ? white : Colors.blue,
+                            border: Border.all(color: Colors.blue),
                           ),
                           child: Text(
                             "Processing Programs",
@@ -157,7 +157,7 @@ class StatussrcState extends State<Statussrc> {
                               fontFamily: "Nunito",
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
-                              color: _currentsw == "pros" ? cheryred : white,
+                              color: _currentsw == "pros" ? Colors.blue : white,
                             ),
                           ),
                         ),
@@ -175,8 +175,8 @@ class StatussrcState extends State<Statussrc> {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
-                            color: _currentsw == "History" ? white : cheryred,
-                            border: Border.all(color: cheryred),
+                            color: _currentsw == "History" ? white : Colors.blue,
+                            border: Border.all(color: Colors.blue),
                           ),
                           child: Text(
                             "History",
@@ -184,7 +184,7 @@ class StatussrcState extends State<Statussrc> {
                               fontFamily: "Nunito",
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
-                              color: _currentsw == "History" ? cheryred : white,
+                              color: _currentsw == "History" ? Colors.blue : white,
                             ),
                           ),
                         ),

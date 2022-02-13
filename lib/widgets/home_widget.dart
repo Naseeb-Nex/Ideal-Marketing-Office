@@ -693,8 +693,8 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                                   borderRadius: BorderRadius.circular(30),
                                   color: _currentsrc == "Assign"
                                       ? white
-                                      : cheryred,
-                                  border: Border.all(color: cheryred)),
+                                      : Colors.blue,
+                                  border: Border.all(color: Colors.blue)),
                               child: Text(
                                 "Assign Programs",
                                 style: TextStyle(
@@ -702,7 +702,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: _currentsrc == "Assign"
-                                      ? cheryred
+                                      ? Colors.blue
                                       : white,
                                 ),
                               ),
@@ -722,8 +722,8 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
                                 color:
-                                    _currentsrc == "Status" ? white : cheryred,
-                                border: Border.all(color: cheryred),
+                                    _currentsrc == "Status" ? white : Colors.blue,
+                                border: Border.all(color: Colors.blue),
                               ),
                               child: Text(
                                 "Status",
@@ -732,7 +732,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   color: _currentsrc == "Status"
-                                      ? cheryred
+                                      ? Colors.blue
                                       : white,
                                 ),
                               ),
