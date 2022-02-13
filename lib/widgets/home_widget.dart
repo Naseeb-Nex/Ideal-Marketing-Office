@@ -2,6 +2,8 @@ import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:test2/widgets/export_widget.dart';
+import 'package:test2/screens/homesrc.dart';
+import 'package:test2/widgets/statussrc.dart';
 
 class Homewidget extends StatefulWidget {
   String? uid;
@@ -511,10 +513,17 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                     left: 30,
                   ),
                   child: Center(
-                    child: Image(
-                      image: AssetImage("assets/icons/imaicon.png"),
-                      height: 45,
-                      filterQuality: FilterQuality.high,
+                    child: GestureDetector(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => OfficeHome(),
+                          )),
+                      child: Image(
+                        image: AssetImage("assets/icons/imaicon.png"),
+                        height: 45,
+                        filterQuality: FilterQuality.high,
+                      ),
                     ),
                   ),
                 )
@@ -669,55 +678,69 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 30,),
+                          SizedBox(
+                            height: 30,
+                          ),
                           InkWell(
-                                onTap: () => setState(() {
-                          _currentsrc = 'Assign';
-                        }),
-                                child: Container(
-                                  height: 55,
-                                  width: double.infinity,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30),
-                                      color: _currentsrc == "Assign" ? white : cheryred,
-                            border: Border.all(color: cheryred)),
-                                  child: Text(
-                                    "Assign Programs",
-                                    style: TextStyle(
-                                      fontFamily: "Nunito",
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: _currentsrc == "Assign" ? cheryred : white,
-                                    ),
-                                  ),
+                            onTap: () => setState(() {
+                              _currentsrc = 'Assign';
+                            }),
+                            child: Container(
+                              height: 55,
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: _currentsrc == "Assign"
+                                      ? white
+                                      : cheryred,
+                                  border: Border.all(color: cheryred)),
+                              child: Text(
+                                "Assign Programs",
+                                style: TextStyle(
+                                  fontFamily: "Nunito",
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: _currentsrc == "Assign"
+                                      ? cheryred
+                                      : white,
                                 ),
                               ),
-                          const SizedBox(height: 20,),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
                           InkWell(
-                                onTap: () => setState(() {
-                          _currentsrc = 'Status';
-                        }),
-                                child: Container(
-                                  height: 55,
-                                  width: double.infinity,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30),
-                                      color: _currentsrc == "Status" ? white : cheryred,border: Border.all(color: cheryred),),
-                                  child: Text(
-                                    "Status",
-                                    style: TextStyle(
-                                      fontFamily: "Nunito",
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                      color: _currentsrc == "Status" ? cheryred : white,
-                                    ),
-                                  ),
+                            onTap: () => setState(() {
+                              _currentsrc = 'Status';
+                            }),
+                            child: Container(
+                              height: 55,
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color:
+                                    _currentsrc == "Status" ? white : cheryred,
+                                border: Border.all(color: cheryred),
+                              ),
+                              child: Text(
+                                "Status",
+                                style: TextStyle(
+                                  fontFamily: "Nunito",
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  color: _currentsrc == "Status"
+                                      ? cheryred
+                                      : white,
                                 ),
                               ),
-                          const SizedBox(height: 20,),
-                          
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
                         ],
                       ),
                     ),
@@ -725,28 +748,50 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                 ),
               ),
               Expanded(
+                child: Container(
+                  padding: EdgeInsets.only(right: 10, top: 10, bottom: 5),
                   child: Container(
-                    padding: EdgeInsets.only(right: 10, top: 10, bottom: 5),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: white,
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(0, 5),
-                            blurRadius: 20,
-                            color: secondbg.withOpacity(0.20),
-                          ),
-                        ],
-                      ),
-                      child: Assignpgmwidget(uid: widget.uid, username: widget.username, techname: widget.name)
-                      ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: white,
+                      boxShadow: [
+                        BoxShadow(
+                          offset: Offset(0, 5),
+                          blurRadius: 20,
+                          color: secondbg.withOpacity(0.20),
+                        ),
+                      ],
+                    ),
+                    // Use wrapper here
+                    child: Techsrcwrapper(
+                      src: _currentsrc,
+                      uid: widget.uid,
+                      username: widget.username,
+                      name: widget.name,
                     ),
                   ),
+                ),
+              ),
             ],
           ))
         ],
       ),
     );
+  }
+}
+
+class Techsrcwrapper extends StatelessWidget {
+  String? src;
+  String? uid;
+  String? username;
+  String? name;
+  Techsrcwrapper({Key? key, this.src, this.uid, this.username, this.name})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (src == 'Status')
+      return Statussrc();
+    return Assignpgmwidget(uid: uid, username: username, techname: name);
   }
 }
