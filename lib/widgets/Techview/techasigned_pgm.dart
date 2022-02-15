@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test2/componets/assign_pgm_card.dart';
+import 'package:test2/componets/view_pgm_card.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
@@ -19,25 +20,14 @@ class Techasign extends StatefulWidget {
 class _TechasignState extends State<Techasign> {
   @override
   List _allpgm = [];
-  final Stream<QuerySnapshot> programstream =
-      FirebaseFirestore.instance.collection('Programs').snapshots();
 
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 20,
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(10),
-              child: ScrollConfiguration(
-                behavior: htechassignswipe(),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
+    return ScrollConfiguration(
+            behavior: htechassignswipe(),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
                   child: StreamBuilder<QuerySnapshot>(
-                      stream: programstream,
+                      stream: FirebaseFirestore.instance.collection('Technician').doc(widget.username).collection("Assignedpgm").snapshots(),
                       builder: (BuildContext context,
                           AsyncSnapshot<QuerySnapshot> snapshot) {
                         if (snapshot.hasError) {
@@ -53,6 +43,7 @@ class _TechasignState extends State<Techasign> {
                             ),
                           );
                         }
+                        _allpgm.clear();
                         snapshot.data!.docs.map((DocumentSnapshot document) {
                           Map a = document.data() as Map<String, dynamic>;
                           _allpgm.add(a);
@@ -67,34 +58,23 @@ class _TechasignState extends State<Techasign> {
                                 width: 30,
                               ),
                               for (var i = 0; i < _allpgm.length; i++) ...[
-                                Assignpgmcard(
-                                  uid: _allpgm[i]["uid"],
+                                Viewpgmcard(
                                   name: _allpgm[i]["name"],
                                   address: _allpgm[i]["address"],
                                   loc: _allpgm[i]["loc"],
                                   pgm: _allpgm[i]["pgm"],
-                                  chrg: _allpgm[i]["chrg"],
                                   phn: _allpgm[i]["phn"],
                                   type: _allpgm[i]["type"],
                                   upDate: _allpgm[i]["upDate"],
                                   upTime: _allpgm[i]["upTime"],
                                   docname: _allpgm[i]["docname"],
-                                  techuid: widget.uid,
-                                  techname: widget.techname,
-                                  username: widget.username,
                                 )
                               ]
                             ],
                           ),
                         );
                       }),
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
+            ),);
   }
 }
 

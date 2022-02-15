@@ -7,7 +7,8 @@ class Statussrc extends StatefulWidget {
   String? uid;
   String? username;
   String? techname;
-  Statussrc({ Key? key, this.uid, this.username, this.techname }) : super(key: key);
+  Statussrc({Key? key, this.uid, this.username, this.techname})
+      : super(key: key);
 
   @override
   StatussrcState createState() => StatussrcState();
@@ -40,7 +41,8 @@ class StatussrcState extends State<Statussrc> {
             height: 5,
             width: 36,
             decoration: BoxDecoration(
-                color: Colors.blueAccent, borderRadius: BorderRadius.circular(10)),
+                color: Colors.blueAccent,
+                borderRadius: BorderRadius.circular(10)),
           ),
           const SizedBox(
             height: 20,
@@ -78,7 +80,8 @@ class StatussrcState extends State<Statussrc> {
                               fontFamily: "Nunito",
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
-                              color: _currentsw == "Assign" ? Colors.blue : white,
+                              color:
+                                  _currentsw == "Assign" ? Colors.blue : white,
                             ),
                           ),
                         ),
@@ -96,7 +99,8 @@ class StatussrcState extends State<Statussrc> {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
-                            color: _currentsw == "Pending" ? white : Colors.blue,
+                            color:
+                                _currentsw == "Pending" ? white : Colors.blue,
                             border: Border.all(color: Colors.blue),
                           ),
                           child: Text(
@@ -105,7 +109,8 @@ class StatussrcState extends State<Statussrc> {
                               fontFamily: "Nunito",
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
-                              color: _currentsw == "Pending" ? Colors.blue : white,
+                              color:
+                                  _currentsw == "Pending" ? Colors.blue : white,
                             ),
                           ),
                         ),
@@ -123,7 +128,8 @@ class StatussrcState extends State<Statussrc> {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
-                            color: _currentsw == "Completed" ? white : Colors.blue,
+                            color:
+                                _currentsw == "Completed" ? white : Colors.blue,
                             border: Border.all(color: Colors.blue),
                           ),
                           child: Text(
@@ -132,8 +138,9 @@ class StatussrcState extends State<Statussrc> {
                               fontFamily: "Nunito",
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
-                              color:
-                                  _currentsw == "Completed" ? Colors.blue : white,
+                              color: _currentsw == "Completed"
+                                  ? Colors.blue
+                                  : white,
                             ),
                           ),
                         ),
@@ -178,7 +185,8 @@ class StatussrcState extends State<Statussrc> {
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(30),
-                            color: _currentsw == "History" ? white : Colors.blue,
+                            color:
+                                _currentsw == "History" ? white : Colors.blue,
                             border: Border.all(color: Colors.blue),
                           ),
                           child: Text(
@@ -187,7 +195,8 @@ class StatussrcState extends State<Statussrc> {
                               fontFamily: "Nunito",
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
-                              color: _currentsw == "History" ? Colors.blue : white,
+                              color:
+                                  _currentsw == "History" ? Colors.blue : white,
                             ),
                           ),
                         ),
@@ -199,7 +208,28 @@ class StatussrcState extends State<Statussrc> {
           SizedBox(
             height: 10,
           ),
-          Techview(currentsw: _currentsw, uid: widget.uid, username: widget.username, techname: widget.techname)
+          // Techview(currentsw: _currentsw, uid: widget.uid, username: widget.username, techname: widget.techname)
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Container(
+                width: double.infinity,
+                height: double.infinity,
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(0, 5),
+                        blurRadius: 15,
+                        color: secondbg.withOpacity(0.20),
+                      ),
+                    ],
+                    color: primarybg),
+                    child: Techview(currentsw: _currentsw, uid: widget.uid, username: widget.username, techname: widget.techname),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -221,7 +251,8 @@ class Techview extends StatelessWidget {
   String? uid;
   String? username;
   String? techname;
-  Techview({Key? key, this.currentsw, this.uid, this.username, this.techname }) : super(key: key);
+  Techview({Key? key, this.currentsw, this.uid, this.username, this.techname})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
