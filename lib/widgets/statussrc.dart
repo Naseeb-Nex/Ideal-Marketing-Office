@@ -1,6 +1,8 @@
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:test2/widgets/Techview/techpending_pgm.dart';
+import 'package:test2/widgets/Techview/techprocessing_pgm.dart';
 import 'Techview/exporttech.dart';
 
 class Statussrc extends StatefulWidget {
@@ -256,8 +258,8 @@ class Techview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // if (currentsw == 'Pending') return PendingPgmViewer();
-    // else if (currentsw == 'Assign') return Assignedpgmviewer();
+    if (currentsw == 'Pending') return Techpending(uid: uid, username: username, techname: techname);
+    else if (currentsw == 'pros') return Techprocessing(uid: uid, username: username, techname: techname);
     return Techasign(uid: uid, username: username, techname: techname);
   }
 }
