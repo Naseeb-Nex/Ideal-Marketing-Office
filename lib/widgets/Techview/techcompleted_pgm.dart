@@ -23,10 +23,8 @@ class _TechcompletedState extends State<Techcompleted> {
   @override
   List _allpgm = [];
   String _currentsw = "day";
-  
 
   Widget build(BuildContext context) {
-    
     return Column(
       children: [
         SizedBox(
