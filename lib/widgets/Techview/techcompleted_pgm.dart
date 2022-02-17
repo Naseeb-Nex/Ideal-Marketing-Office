@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:test2/componets/completed_pgm_card.dart';
 import 'package:test2/constants/constants.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
+import 'package:intl/intl.dart';
+
+import 'package:test2/widgets/Techview/techcompleted/techcday.dart';
+import 'package:test2/widgets/Techview/techcompleted/techcmonth.dart';
+import 'package:test2/widgets/Techview/techcompleted/techcyear.dart';
 
 class Techcompleted extends StatefulWidget {
   String? uid;
@@ -20,11 +23,15 @@ class _TechcompletedState extends State<Techcompleted> {
   @override
   List _allpgm = [];
   String _currentsw = "day";
+  
 
   Widget build(BuildContext context) {
+    
     return Column(
       children: [
-        SizedBox(height: 8,),
+        SizedBox(
+          height: 8,
+        ),
         Container(
           height: 50,
           width: double.infinity,
@@ -126,7 +133,20 @@ class _TechcompletedState extends State<Techcompleted> {
             ),
           ),
         ),
-        
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              child: Ctechwrapper(
+                  currentsw: _currentsw,
+                  uid: widget.uid,
+                  username: widget.username,
+                  techname: widget.techname),
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -140,4 +160,23 @@ class Techcswipe extends MaterialScrollBehavior {
         PointerDeviceKind.mouse,
         // etc.
       };
+}
+
+class Ctechwrapper extends StatelessWidget {
+  String? currentsw;
+  String? uid;
+  String? username;
+  String? techname;
+  Ctechwrapper(
+      {Key? key, this.currentsw, this.uid, this.username, this.techname})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (currentsw == 'year')
+      return Techcyear(uid: uid, username: username, techname: techname);
+    else if (currentsw == 'month')
+      return Techcmonth(uid: uid, username: username, techname: techname);
+    return Techcday(uid: uid, username: username, techname: techname);
+  }
 }
