@@ -21,16 +21,17 @@ class Techcyear extends StatefulWidget {
 class _TechcyearState extends State<Techcyear> {
   @override
   List _allpgm = [];
+  // /Technician/tech1/Completedpgm/Day/
 
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
-    String ycollname = DateFormat('y').format(now);
+    String cyear = DateFormat('y').format(now);
     return ScrollConfiguration(
             behavior: htechassignswipe(),
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
                   child: StreamBuilder<QuerySnapshot>(
-                      stream: FirebaseFirestore.instance.collection('Technician').doc(widget.username).collection("Assignedpgm").snapshots(),
+                      stream: FirebaseFirestore.instance.collection('Technician').doc(widget.username).collection("Completedpgm").doc("Year").collection(cyear).snapshots(),
                       builder: (BuildContext context,
                           AsyncSnapshot<QuerySnapshot> snapshot) {
                         if (snapshot.hasError) {

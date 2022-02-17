@@ -24,13 +24,13 @@ class _TechcmonthState extends State<Techcmonth> {
 
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
-    String mcollname = DateFormat('MM y').format(now);
+    String cmonth = DateFormat('MM y').format(now);
     return ScrollConfiguration(
             behavior: htechassignswipe(),
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
                   child: StreamBuilder<QuerySnapshot>(
-                      stream: FirebaseFirestore.instance.collection('Technician').doc(widget.username).collection("Assignedpgm").snapshots(),
+                      stream: FirebaseFirestore.instance.collection('Technician').doc(widget.username).collection("Completedpgm").doc("Month").collection(cmonth).snapshots(),
                       builder: (BuildContext context,
                           AsyncSnapshot<QuerySnapshot> snapshot) {
                         if (snapshot.hasError) {

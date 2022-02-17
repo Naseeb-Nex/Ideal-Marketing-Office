@@ -24,13 +24,13 @@ class _TechcdayState extends State<Techcday> {
 
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
-    String ccollname = DateFormat('MM d y').format(now);
+    String cday = DateFormat('MM d y').format(now);
     return ScrollConfiguration(
             behavior: htechassignswipe(),
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
                   child: StreamBuilder<QuerySnapshot>(
-                      stream: FirebaseFirestore.instance.collection('Technician').doc(widget.username).collection("Assignedpgm").snapshots(),
+                      stream: FirebaseFirestore.instance.collection('Technician').doc(widget.username).collection("Completedpgm").doc("Day").collection(cday).snapshots(),
                       builder: (BuildContext context,
                           AsyncSnapshot<QuerySnapshot> snapshot) {
                         if (snapshot.hasError) {
