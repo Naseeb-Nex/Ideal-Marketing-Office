@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test2/componets/assign_pgm_card.dart';
-import 'package:test2/componets/view_pgm_card.dart';
+import 'package:test2/componets/completed_pgm_card.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
@@ -27,7 +26,7 @@ class _TechcompletedState extends State<Techcompleted> {
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
                   child: StreamBuilder<QuerySnapshot>(
-                      stream: FirebaseFirestore.instance.collection('Technician').doc(widget.username).collection("Assignedpgm").snapshots(),
+                      stream: FirebaseFirestore.instance.collection('Technician').doc(widget.username).collection("Pendingpgm").snapshots(),
                       builder: (BuildContext context,
                           AsyncSnapshot<QuerySnapshot> snapshot) {
                         if (snapshot.hasError) {
@@ -58,7 +57,7 @@ class _TechcompletedState extends State<Techcompleted> {
                                 width: 30,
                               ),
                               for (var i = 0; i < _allpgm.length; i++) ...[
-                                Viewpgmcard(
+                                Completedpgmcard(
                                   name: _allpgm[i]["name"],
                                   address: _allpgm[i]["address"],
                                   loc: _allpgm[i]["loc"],

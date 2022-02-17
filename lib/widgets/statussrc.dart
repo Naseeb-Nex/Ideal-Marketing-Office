@@ -1,6 +1,7 @@
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:test2/widgets/Techview/techcompleted_pgm.dart';
 import 'package:test2/widgets/Techview/techpending_pgm.dart';
 import 'package:test2/widgets/Techview/techprocessing_pgm.dart';
 import 'Techview/exporttech.dart';
@@ -260,6 +261,7 @@ class Techview extends StatelessWidget {
   Widget build(BuildContext context) {
     if (currentsw == 'Pending') return Techpending(uid: uid, username: username, techname: techname);
     else if (currentsw == 'pros') return Techprocessing(uid: uid, username: username, techname: techname);
+    else if (currentsw == 'Completed') return Techcompleted(uid: uid, username: username, techname: techname);
     return Techasign(uid: uid, username: username, techname: techname);
   }
 }
