@@ -11,6 +11,9 @@ class Completedpgmcard extends StatelessWidget {
   String? upDate;
   String? upTime;
   String? docname;
+  String? remarks;
+  String? ctime;
+  String? cdate;
 
   Completedpgmcard({
     Key? key,
@@ -23,6 +26,9 @@ class Completedpgmcard extends StatelessWidget {
     this.upDate,
     this.upTime,
     this.docname,
+    this.remarks,
+    this.cdate,
+    this.ctime,
   }) : super(key: key);
 
   @override
@@ -30,7 +36,7 @@ class Completedpgmcard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
       child: Container(
-        height: 200,
+        height: 220,
         width: double.infinity,
         padding: EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
@@ -122,7 +128,7 @@ class Completedpgmcard extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.pin_drop_outlined,
-                        color: cheryred,
+                        color: Colors.blue,
                       ),
                       Container(
                         child: Text(
@@ -179,17 +185,54 @@ class Completedpgmcard extends StatelessWidget {
               ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(width: 25),
-                      Text(
-                        "$address",
+                Row(
+                  children: [
+                    SizedBox(width: 20),
+                    Text(
+                      "Remarks : ",
+                      style: TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "$remarks",
+                      style: TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 18,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                      child: Text(
+                        "Completed Date : $cdate",
                         style: TextStyle(
                           fontFamily: "Nunito",
-                          fontSize: 18,
+                          fontSize: 17,
                         ),
                       ),
+                    ),
+                    Container(
+                      child: Text(
+                        "Completed Time : $ctime",
+                        style: TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
               ],
-
             )
           ],
         ),

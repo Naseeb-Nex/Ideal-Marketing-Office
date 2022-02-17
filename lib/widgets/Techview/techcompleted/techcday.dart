@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:test2/componets/assign_pgm_card.dart';
-import 'package:test2/componets/view_pgm_card.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:intl/intl.dart';
+
+import 'package:test2/componets/completed_pgm_card.dart';
 
 class Techcday extends StatefulWidget {
   String? uid;
@@ -66,7 +66,7 @@ class _TechcdayState extends State<Techcday> {
                       width: 30,
                     ),
                     for (var i = 0; i < _allpgm.length; i++) ...[
-                      Viewpgmcard(
+                      Completedpgmcard(
                         name: _allpgm[i]["name"],
                         address: _allpgm[i]["address"],
                         loc: _allpgm[i]["loc"],
@@ -76,6 +76,9 @@ class _TechcdayState extends State<Techcday> {
                         upDate: _allpgm[i]["upDate"],
                         upTime: _allpgm[i]["upTime"],
                         docname: _allpgm[i]["docname"],
+                        remarks: _allpgm[i]["remarks"],
+                        cdate: _allpgm[i]["cdate"],
+                        ctime: _allpgm[i]["ctime"],
                       )
                     ]
                   ],
