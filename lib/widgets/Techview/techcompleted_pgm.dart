@@ -19,65 +19,120 @@ class Techcompleted extends StatefulWidget {
 class _TechcompletedState extends State<Techcompleted> {
   @override
   List _allpgm = [];
+  String _currentsw = "day";
 
   Widget build(BuildContext context) {
-    return ScrollConfiguration(
-            behavior: htechassignswipe(),
+    return Column(
+      children: [
+        SizedBox(height: 8,),
+        Container(
+          height: 50,
+          width: double.infinity,
+          child: ScrollConfiguration(
+            behavior: Techcswipe(),
             child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-                  child: StreamBuilder<QuerySnapshot>(
-                      stream: FirebaseFirestore.instance.collection('Technician').doc(widget.username).collection("Pendingpgm").snapshots(),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<QuerySnapshot> snapshot) {
-                        if (snapshot.hasError) {
-                          print('Something went Wrong');
-                        }
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Expanded(
-                            child: Center(
-                              child: CircularProgressIndicator(
-                                color: cheryred,
-                              ),
-                            ),
-                          );
-                        }
-                        _allpgm.clear();
-                        snapshot.data!.docs.map((DocumentSnapshot document) {
-                          Map a = document.data() as Map<String, dynamic>;
-                          _allpgm.add(a);
-                          print(a);
-                          a['uid'] = document.id;
-                        }).toList();
-                        
-                        return Container(
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                width: 30,
-                              ),
-                              for (var i = 0; i < _allpgm.length; i++) ...[
-                                Completedpgmcard(
-                                  name: _allpgm[i]["name"],
-                                  address: _allpgm[i]["address"],
-                                  loc: _allpgm[i]["loc"],
-                                  pgm: _allpgm[i]["pgm"],
-                                  phn: _allpgm[i]["phn"],
-                                  type: _allpgm[i]["type"],
-                                  upDate: _allpgm[i]["upDate"],
-                                  upTime: _allpgm[i]["upTime"],
-                                  docname: _allpgm[i]["docname"],
-                                )
-                              ]
-                            ],
-                          ),
-                        );
-                      }),
-            ),);
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 20,
+                  ),
+                  InkWell(
+                    onTap: () => setState(() {
+                      _currentsw = 'day';
+                    }),
+                    child: Container(
+                      height: 50,
+                      width: 200,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: _currentsw == "day" ? white : Color(0xff560bad),
+                        border: Border.all(color: Color(0xff560bad)),
+                      ),
+                      child: Text(
+                        "Day",
+                        style: TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color:
+                              _currentsw == "day" ? Color(0xff560bad) : white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  InkWell(
+                    onTap: () => setState(() {
+                      _currentsw = 'month';
+                    }),
+                    child: Container(
+                      height: 50,
+                      width: 200,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color:
+                            _currentsw == "month" ? white : Color(0xff560bad),
+                        border: Border.all(color: Color(0xff560bad)),
+                      ),
+                      child: Text(
+                        "Month",
+                        style: TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color:
+                              _currentsw == "month" ? Color(0xff560bad) : white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  InkWell(
+                    onTap: () => setState(() {
+                      _currentsw = 'year';
+                    }),
+                    child: Container(
+                      height: 50,
+                      width: 200,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: _currentsw == "year" ? white : Color(0xff560bad),
+                        border: Border.all(color: Color(0xff560bad)),
+                      ),
+                      child: Text(
+                        "Year",
+                        style: TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color:
+                              _currentsw == "year" ? Color(0xff560bad) : white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        
+      ],
+    );
   }
 }
 
-class htechassignswipe extends MaterialScrollBehavior {
+class Techcswipe extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices
   @override
   Set<PointerDeviceKind> get dragDevices => {

@@ -30,7 +30,7 @@ class Completedpgmcard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
       child: Container(
-        height: 180,
+        height: 200,
         width: double.infinity,
         padding: EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
@@ -178,6 +178,19 @@ class Completedpgmcard extends StatelessWidget {
                 ],
               ),
             ),
+            Row(
+              children: [
+                SizedBox(width: 25),
+                      Text(
+                        "$address",
+                        style: TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 18,
+                        ),
+                      ),
+              ],
+
+            )
           ],
         ),
       ),
