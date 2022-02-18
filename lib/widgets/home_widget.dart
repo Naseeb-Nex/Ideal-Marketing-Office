@@ -539,6 +539,17 @@ class Assigntechpgm extends StatefulWidget {
 }
 
 class _AssigntechpgmState extends State<Assigntechpgm> {
+   FirebaseFirestore fb = FirebaseFirestore.instance;
+  int a = 0;
+  int c = 0;
+  int p = 0;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    startup();
+  }
+ 
   @override
   String _currentsrc = "Assign";
   Widget build(BuildContext context) {
@@ -655,7 +666,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                                 ),
                               ),
                               Text(
-                                "10",
+                                "$a",
                                 style: TextStyle(
                                   fontFamily: "Nunito",
                                   fontSize: 15,
@@ -688,7 +699,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                                 ),
                               ),
                               Text(
-                                "10",
+                                "$c",
                                 style: TextStyle(
                                   fontFamily: "Nunito",
                                   fontSize: 15,
@@ -721,7 +732,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                                 ),
                               ),
                               Text(
-                                "10",
+                                "$p",
                                 style: TextStyle(
                                   fontFamily: "Nunito",
                                   fontSize: 15,
@@ -831,6 +842,44 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
         ],
       ),
     );
+  }
+  startup() async{
+    DateTime now = DateTime.now();
+    String cday = DateFormat('MM d y').format(now);
+
+    await fb
+        .collection('Technician')
+        .doc(widget.username)
+        .collection("Assignedpgm")
+        .get()
+        .then((snap) => {
+          setState(() {
+       this.a = snap.size;
+     })
+});
+        
+    await fb
+        .collection('Technician')
+        .doc(widget.username)
+        .collection("Completedpgm")
+        .doc("Day")
+        .collection(cday)
+        .get()
+        .then((snap) => {
+          setState(() {
+       this.c = snap.size;
+     })
+});
+    await fb
+        .collection('Technician')
+        .doc(widget.username)
+        .collection("Pendingpgm")
+        .get()
+        .then((snap) => {
+          setState(() {
+       this.p = snap.size;
+     })
+});
   }
 }
 
