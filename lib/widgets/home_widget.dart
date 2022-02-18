@@ -5,6 +5,8 @@ import 'package:test2/widgets/export_widget.dart';
 import 'package:test2/screens/homesrc.dart';
 import 'package:test2/widgets/statussrc.dart';
 
+import 'package:intl/intl.dart';
+
 class Homewidget extends StatefulWidget {
   String? uid;
   Homewidget({Key? key, this.uid}) : super(key: key);
@@ -305,6 +307,16 @@ class Techcard extends StatefulWidget {
 }
 
 class _TechcardState extends State<Techcard> {
+  FirebaseFirestore fb = FirebaseFirestore.instance;
+  int a = 0;
+  int c = 0;
+  int p = 0;
+  @override
+  void initState() {
+    super.initState();
+    startup();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -344,35 +356,38 @@ class _TechcardState extends State<Techcard> {
             SizedBox(
               height: 10,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 10,
-                  width: 10,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.yellow),
-                ),
-                Text(
-                  " Assingned Programs    ",
-                  style: TextStyle(
-                    fontFamily: "Nunito",
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xff273746),
+            InkWell(
+              onTap: () => startup(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 10,
+                    width: 10,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.yellow),
                   ),
-                ),
-                Text(
-                  "10",
-                  style: TextStyle(
-                    fontFamily: "Nunito",
-                    fontSize: 13,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xff273746),
+                  Text(
+                    " Assingned Programs    ",
+                    style: TextStyle(
+                      fontFamily: "Nunito",
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff273746),
+                    ),
                   ),
-                ),
-              ],
+                  Text(
+                    "$a",
+                    style: TextStyle(
+                      fontFamily: "Nunito",
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff273746),
+                    ),
+                  ),
+                ],
+              ),
             ),
             SizedBox(
               height: 10,
@@ -397,7 +412,7 @@ class _TechcardState extends State<Techcard> {
                   ),
                 ),
                 Text(
-                  "10",
+                  "$c",
                   style: TextStyle(
                     fontFamily: "Nunito",
                     fontSize: 13,
@@ -429,7 +444,7 @@ class _TechcardState extends State<Techcard> {
                   ),
                 ),
                 Text(
-                  "10",
+                  "$p",
                   style: TextStyle(
                     fontFamily: "Nunito",
                     fontSize: 13,
@@ -470,6 +485,44 @@ class _TechcardState extends State<Techcard> {
         ),
       ),
     );
+  }
+  startup() async{
+    DateTime now = DateTime.now();
+    String cday = DateFormat('MM d y').format(now);
+
+    await fb
+        .collection('Technician')
+        .doc(widget.username)
+        .collection("Assignedpgm")
+        .get()
+        .then((snap) => {
+          setState(() {
+       this.a = snap.size;
+     })
+});
+        
+    await fb
+        .collection('Technician')
+        .doc(widget.username)
+        .collection("Completedpgm")
+        .doc("Day")
+        .collection(cday)
+        .get()
+        .then((snap) => {
+          setState(() {
+       this.c = snap.size;
+     })
+});
+    await fb
+        .collection('Technician')
+        .doc(widget.username)
+        .collection("Pendingpgm")
+        .get()
+        .then((snap) => {
+          setState(() {
+       this.p = snap.size;
+     })
+});
   }
 }
 
@@ -721,8 +774,9 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
-                                color:
-                                    _currentsrc == "Status" ? white : Colors.blue,
+                                color: _currentsrc == "Status"
+                                    ? white
+                                    : Colors.blue,
                                 border: Border.all(color: Colors.blue),
                               ),
                               child: Text(
