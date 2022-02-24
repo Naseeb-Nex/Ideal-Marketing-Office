@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:test2/widgets/export_widget.dart';
 import 'package:test2/screens/homesrc.dart';
-import 'package:test2/widgets/statussrc.dart';
 
 import 'package:intl/intl.dart';
 
