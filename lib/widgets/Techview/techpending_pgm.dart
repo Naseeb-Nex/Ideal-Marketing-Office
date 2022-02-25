@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test2/componets/assign_pgm_card.dart';
-import 'package:test2/componets/view_pgm_card.dart';
+import 'package:test2/componets/pending_tech_card.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
@@ -58,7 +57,7 @@ class _TechpendingState extends State<Techpending> {
                                 width: 30,
                               ),
                               for (var i = 0; i < _allpgm.length; i++) ...[
-                                Viewpgmcard(
+                                PendingTechcard(
                                   name: _allpgm[i]["name"],
                                   address: _allpgm[i]["address"],
                                   loc: _allpgm[i]["loc"],
@@ -68,6 +67,7 @@ class _TechpendingState extends State<Techpending> {
                                   upDate: _allpgm[i]["upDate"],
                                   upTime: _allpgm[i]["upTime"],
                                   docname: _allpgm[i]["docname"],
+                                  remarks: _allpgm[i]["remarks"],
                                 )
                               ]
                             ],
