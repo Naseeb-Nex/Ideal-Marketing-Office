@@ -58,9 +58,12 @@ class _TechpendingState extends State<Techpending> {
                               ),
                               for (var i = 0; i < _allpgm.length; i++) ...[
                                 PendingTechcard(
+                                  uid: widget.uid,
+                                  username: widget.username,
                                   name: _allpgm[i]["name"],
                                   address: _allpgm[i]["address"],
                                   loc: _allpgm[i]["loc"],
+                                  chrg: _allpgm[i]["chrg"],
                                   pgm: _allpgm[i]["pgm"],
                                   phn: _allpgm[i]["phn"],
                                   type: _allpgm[i]["type"],
@@ -68,6 +71,8 @@ class _TechpendingState extends State<Techpending> {
                                   upTime: _allpgm[i]["upTime"],
                                   docname: _allpgm[i]["docname"],
                                   remarks: _allpgm[i]["remarks"],
+                                  ptime: _allpgm[i]["ptime"],
+                                  pdate: _allpgm[i]["pdate"],
                                 )
                               ]
                             ],

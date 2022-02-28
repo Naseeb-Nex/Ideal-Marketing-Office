@@ -2,33 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:test2/constants/constants.dart';
 
 class PendingTechcard extends StatelessWidget {
+  String? uid;
+  String? username;
   String? name;
   String? address;
   String? loc;
   String? phn;
   String? type;
+  String? chrg;
   String? pgm;
   String? upDate;
   String? upTime;
   String? docname;
   String? remarks;
-  String? ctime;
-  String? cdate;
+  String? ptime;
+  String? pdate;
 
   PendingTechcard({
     Key? key,
+    this.uid,
+    this.username,
     this.name,
     this.address,
     this.loc,
     this.phn,
     this.type,
+    this.chrg,
     this.pgm,
     this.upDate,
     this.upTime,
     this.docname,
     this.remarks,
-    this.cdate,
-    this.ctime,
+    this.pdate,
+    this.ptime,
   }) : super(key: key);
 
   @override
@@ -174,16 +180,24 @@ class PendingTechcard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Container(
-                    width: 50,
-                    height: 30,
-                    child: Text(
-                      "Convert",
-                      style: TextStyle(
-                        fontFamily: "Nunito",
-                        fontSize: 20,
-                        fontWeight: FontWeight.normal,
-                        color: Color(0xFF008080),
+                  InkWell(
+                    onTap: () => Converttopending(),
+                    child: Container(
+                      width: 100,
+                      height: 30,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.redAccent),
+                      child: Center(
+                        child: Text(
+                          "Convert",
+                          style: TextStyle(
+                            fontFamily: "Nunito",
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                   )
@@ -220,7 +234,7 @@ class PendingTechcard extends StatelessWidget {
                   children: [
                     Container(
                       child: Text(
-                        "Completed Date : ",
+                        "Completed Date : $ptime",
                         style: TextStyle(
                           fontFamily: "Nunito",
                           fontSize: 17,
@@ -229,7 +243,7 @@ class PendingTechcard extends StatelessWidget {
                     ),
                     Container(
                       child: Text(
-                        "Completed Time :",
+                        "Completed Time :  $pdate",
                         style: TextStyle(
                           fontFamily: "Nunito",
                           fontSize: 17,
@@ -244,5 +258,9 @@ class PendingTechcard extends StatelessWidget {
         ),
       ),
     );
+  }
+  
+  void Converttopending(){
+
   }
 }
