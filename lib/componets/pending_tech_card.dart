@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:test2/constants/constants.dart';
 
+import 'package:test2/services/pgm.dart';
+
 class PendingTechcard extends StatelessWidget {
   String? uid;
   String? username;
@@ -261,6 +263,20 @@ class PendingTechcard extends StatelessWidget {
   }
   
   void Converttopending(){
+    
+    Pgmdata pgmr = Pgmdata(
+          uid: uid,
+          name: name,
+          address: address,
+          loc: loc,
+          phn: phn,
+          pgm: pgm,
+          chrg: chrg,
+          type: type,
+          upDate: upDate,
+          upTime: upTime,
+          docname: docname,
+          status: "pending");
 
   }
 }
