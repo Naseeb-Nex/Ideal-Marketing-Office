@@ -183,7 +183,25 @@ class PendingTechcard extends StatelessWidget {
                     ],
                   ),
                   InkWell(
-                    onTap: () => Converttopending(),
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return ConfirmBox(
+                              username: username,
+                              name: name,
+                              address: address,
+                              loc: loc,
+                              phn: phn,
+                              type: type,
+                              chrg: chrg,
+                              pgm: pgm,
+                              upDate: upDate,
+                              upTime: upTime,
+                              docname: docname,
+                            );
+                          });
+                    },
                     child: Container(
                       width: 100,
                       height: 30,
@@ -261,22 +279,133 @@ class PendingTechcard extends StatelessWidget {
       ),
     );
   }
-  
-  void Converttopending(){
-    
-    Pgmdata pgmr = Pgmdata(
-          uid: uid,
-          name: name,
-          address: address,
-          loc: loc,
-          phn: phn,
-          pgm: pgm,
-          chrg: chrg,
-          type: type,
-          upDate: upDate,
-          upTime: upTime,
-          docname: docname,
-          status: "pending");
+}
 
+class ConfirmBox extends StatelessWidget {
+  String? username;
+  String? name;
+  String? address;
+  String? loc;
+  String? phn;
+  String? type;
+  String? chrg;
+  String? pgm;
+  String? upDate;
+  String? upTime;
+  String? docname;
+  ConfirmBox({
+    this.username,
+    this.name,
+    this.address,
+    this.loc,
+    this.phn,
+    this.type,
+    this.chrg,
+    this.pgm,
+    this.upDate,
+    this.upTime,
+    this.docname,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: Colors.greenAccent,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      child: Container(
+        height: 300,
+        width: 500,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.warning_amber_rounded,
+                    color: primarybg,
+                    size: 30,
+                  ),
+                  Text(
+                    "Confirm",
+                    style: TextStyle(
+                      fontFamily: "Nunito",
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              "Do you want to convert to Main List?",
+              style: TextStyle(
+                fontFamily: "Nunito",
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(
+              height: 28,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Container(
+                    height: 50,
+                    width: 120,
+                    decoration: BoxDecoration(color: white, borderRadius: BorderRadius.circular(20)),
+                    child: Center(
+                      child: Text(
+                        "Cancel",
+                        style: TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 30,),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Container(
+                    height: 50,
+                    width: 120,
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: white),
+                    child: Center(
+                      child: Text(
+                        "Okay",
+                        style: TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.green,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
