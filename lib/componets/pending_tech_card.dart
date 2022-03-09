@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test2/constants/constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:test2/services/pgm.dart';
 
@@ -19,6 +20,7 @@ class PendingTechcard extends StatelessWidget {
   String? remarks;
   String? ptime;
   String? pdate;
+  String? pdocname;
 
   PendingTechcard({
     Key? key,
@@ -37,6 +39,7 @@ class PendingTechcard extends StatelessWidget {
     this.remarks,
     this.pdate,
     this.ptime,
+    this.pdocname,
   }) : super(key: key);
 
   @override
@@ -188,6 +191,7 @@ class PendingTechcard extends StatelessWidget {
                           context: context,
                           builder: (BuildContext context) {
                             return ConfirmBox(
+                              uid: uid,
                               username: username,
                               name: name,
                               address: address,
@@ -199,6 +203,7 @@ class PendingTechcard extends StatelessWidget {
                               upDate: upDate,
                               upTime: upTime,
                               docname: docname,
+                              pdocname: pdocname,
                             );
                           });
                     },
@@ -282,6 +287,7 @@ class PendingTechcard extends StatelessWidget {
 }
 
 class ConfirmBox extends StatelessWidget {
+  String? uid;
   String? username;
   String? name;
   String? address;
@@ -293,7 +299,10 @@ class ConfirmBox extends StatelessWidget {
   String? upDate;
   String? upTime;
   String? docname;
+  String? pdocname;
+
   ConfirmBox({
+    this.uid,
     this.username,
     this.name,
     this.address,
@@ -305,11 +314,13 @@ class ConfirmBox extends StatelessWidget {
     this.upDate,
     this.upTime,
     this.docname,
+    this.pdocname,
   });
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Colors.greenAccent,
+      backgroundColor: Colors.blue,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       child: Container(
         height: 300,
@@ -373,7 +384,7 @@ class ConfirmBox extends StatelessWidget {
                           fontFamily: "Nunito",
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
-                          color: Colors.green,
+                          color: Colors.blue,
                         ),
                       ),
                     ),
@@ -381,9 +392,7 @@ class ConfirmBox extends StatelessWidget {
                 ),
                 SizedBox(width: 30,),
                 InkWell(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
+                  onTap: () => coverttomain(context),
                   child: Container(
                     height: 50,
                     width: 120,
@@ -395,7 +404,7 @@ class ConfirmBox extends StatelessWidget {
                           fontFamily: "Nunito",
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
-                          color: Colors.green,
+                          color: Colors.blue,
                         ),
                       ),
                     ),
@@ -407,5 +416,43 @@ class ConfirmBox extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void coverttomain(BuildContext context)async{
+    FirebaseFirestore fb = FirebaseFirestore.instance;
+
+    Pgmdata pgmr = Pgmdata(
+          uid: uid,
+          name: name,
+          address: address,
+          loc: loc,
+          phn: phn,
+          pgm: pgm,
+          chrg: chrg,
+          type: type,
+          upDate: upDate,
+          upTime: upTime,
+          docname: docname,
+          status: "pending");
+    
+    await fb
+            .collection("Technician")
+            .doc(username)
+            .collection("Pendingpgm")
+            .doc(pdocname)
+            .delete()
+            .then((value) {
+          print("Delete from pending list");
+        }).catchError((error) => print("Failed to Delete Pending pgm list : $error"));
+
+
+    await fb
+          .collection("Programs")
+          .doc("$docname")
+          .set(pgmr.toMap())
+          .then((value) {
+        print("Successfully Program created");
+        Navigator.pop(context);
+            });
   }
 }

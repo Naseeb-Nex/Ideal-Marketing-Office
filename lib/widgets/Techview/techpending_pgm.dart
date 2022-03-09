@@ -73,6 +73,7 @@ class _TechpendingState extends State<Techpending> {
                                   remarks: _allpgm[i]["remarks"],
                                   ptime: _allpgm[i]["ptime"],
                                   pdate: _allpgm[i]["pdate"],
+                                  pdocname: _allpgm[i]["pdocname"],
                                 )
                               ]
                             ],

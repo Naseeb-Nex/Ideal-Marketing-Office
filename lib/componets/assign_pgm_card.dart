@@ -292,9 +292,10 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
       fb
           .collection("Programs")
           .doc(widget.docname)
-          .update({'status': 'assigned'})
-          .then((value) => print("Updated as assigned"))
-          .catchError((error) => print("Failed to update program : $error"));
+          .update({'status': 'assigned'}).then((value) {
+        print("Updated as assigned");
+        _controller.clear();
+      }).catchError((error) => print("Failed to update program : $error"));
 
       fb
           .collection("Programs")
@@ -304,6 +305,9 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
           .set(apgm.toMap())
           .then((value) {
         print("Updated as assigned in program");
+        setState(() {
+          _up = true;
+        });
       }).catchError((error) =>
               print("Failed to update program in program field : $error"));
 
@@ -316,7 +320,7 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
           .then((value) {
         print("assigned pgm to technicain");
         setState(() {
-          _up = true;
+          _up = false;
         });
       }).catchError((error) => print("Failed to assign program : $error"));
     }
