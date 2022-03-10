@@ -107,8 +107,8 @@ class _LoginSrcState extends State<LoginSrc> {
 
     return Scaffold(
       backgroundColor: newbg,
-      body: Stack(
-        children:[ Center(
+      body: Stack(children: [
+        Center(
           child: SingleChildScrollView(
             child: Container(
               color: newbg,
@@ -147,41 +147,46 @@ class _LoginSrcState extends State<LoginSrc> {
             ),
           ),
         ),
-        Center(child: load ? CircularProgressIndicator(color: Colors.redAccent,): null,)
-        ]
-      ),
+        Center(
+          child: load
+              ? CircularProgressIndicator(
+                  color: Colors.redAccent,
+                )
+              : null,
+        )
+      ]),
     );
   }
 
   // login function
   void signIn(String email, String password) async {
     // firebase
-    // if (_formKey.currentState!.validate()) {
-    setState(() {
-      load = true;
-    });
-    try {
-      await _auth
-          // .signInWithEmailAndPassword(email: email, password: password)
-          .signInWithEmailAndPassword(
-              email: "o@gmail.com", password: "12345678")
-          .then((uid) => {
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => OfficeHome())),
-              });
-    } catch (error) {
-      print(error);
+    if (_formKey.currentState!.validate()) {
       setState(() {
-        load = false;
+        load = true;
       });
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return SimpleCustomAlert("Email or Password is incorrect!");
-          });
+      try {
+        await _auth
+            .signInWithEmailAndPassword(email: email, password: password)
+            // .signInWithEmailAndPassword(
+            //     email: "o@gmail.com", password: "12345678")
+            .then((uid) => {
+                  Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) => OfficeHome())),
+                });
+      } catch (error) {
+        print(error);
+        setState(() {
+          load = false;
+        });
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return SimpleCustomAlert("Email or Password is incorrect!");
+            });
+      }
     }
   }
-  // }
 }
 
 class SimpleCustomAlert extends StatelessWidget {
