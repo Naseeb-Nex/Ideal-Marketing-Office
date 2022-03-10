@@ -15,6 +15,13 @@ class Homewidget extends StatefulWidget {
 }
 
 class _HomewidgetState extends State<Homewidget> {
+  FirebaseFirestore fb = FirebaseFirestore.instance;
+  int p=0, c=0;
+  @override
+  void initState() {
+    super.initState();
+    pgmsetup();
+  }
   final List techprofile = [];
 
   @override
@@ -84,48 +91,7 @@ class _HomewidgetState extends State<Homewidget> {
                                 ],
                               ),
                               Text(
-                                "10",
-                                style: TextStyle(
-                                  fontFamily: "Nunito",
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xff273746),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )),
-                    Flexible(
-                        flex: 3,
-                        child: Container(
-                          height: double.infinity,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: 10,
-                                    width: 10,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Colors.yellow),
-                                  ),
-                                  Text(
-                                    " Assigned Programs",
-                                    style: TextStyle(
-                                      fontFamily: "Nunito",
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xff273746),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Text(
-                                "10",
+                                "$p",
                                 style: TextStyle(
                                   fontFamily: "Nunito",
                                   fontSize: 20,
@@ -166,7 +132,7 @@ class _HomewidgetState extends State<Homewidget> {
                                 ],
                               ),
                               Text(
-                                "10",
+                                "$c",
                                 style: TextStyle(
                                   fontFamily: "Nunito",
                                   fontSize: 20,
@@ -233,6 +199,29 @@ class _HomewidgetState extends State<Homewidget> {
         ),
       ),
     );
+  }
+  pgmsetup() async{
+    DateTime now = DateTime.now();
+    String cday = DateFormat('MM d y').format(now);
+        
+    await fb
+        .collection('Completedpgm')
+        .doc("Day")
+        .collection(cday)
+        .get()
+        .then((snap) => {
+          setState(() {
+       this.c = snap.size;
+     })
+});
+    await fb
+        .collection('Programs')
+        .get()
+        .then((snap) => {
+          setState(() {
+       this.p = snap.size;
+     })
+});
   }
 }
 
