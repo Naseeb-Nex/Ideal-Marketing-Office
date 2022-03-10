@@ -266,7 +266,6 @@ class Example extends StatelessWidget {
             a['uid'] = document.id;
           }).toList();
           return Container(
-            color: bluebg,
             child: ScrollConfiguration(
               behavior: Hscroll(),
               child: SingleChildScrollView(
