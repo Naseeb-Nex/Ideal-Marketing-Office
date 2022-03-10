@@ -5,6 +5,7 @@ import 'package:test2/widgets/export_widget.dart';
 import 'package:test2/screens/homesrc.dart';
 
 import 'package:intl/intl.dart';
+import 'package:flutter/gestures.dart';
 
 class Homewidget extends StatefulWidget {
   String? uid;
@@ -16,12 +17,13 @@ class Homewidget extends StatefulWidget {
 
 class _HomewidgetState extends State<Homewidget> {
   FirebaseFirestore fb = FirebaseFirestore.instance;
-  int p=0, c=0;
+  int p = 0, c = 0;
   @override
   void initState() {
     super.initState();
     pgmsetup();
   }
+
   final List techprofile = [];
 
   @override
@@ -191,37 +193,39 @@ class _HomewidgetState extends State<Homewidget> {
                 ],
               ),
             ),
-            SizedBox(height: 10),
-            Example(
-              userid: widget.uid,
+            SizedBox(height: 20,),
+            Row(
+              children: [
+                Example(
+                  userid: widget.uid,
+                ),
+              ],
             )
           ],
         ),
       ),
     );
   }
-  pgmsetup() async{
+
+  pgmsetup() async {
     DateTime now = DateTime.now();
     String cday = DateFormat('MM d y').format(now);
-        
+
     await fb
         .collection('Completedpgm')
         .doc("Day")
         .collection(cday)
         .get()
         .then((snap) => {
+              setState(() {
+                this.c = snap.size;
+              })
+            });
+    await fb.collection('Programs').get().then((snap) => {
           setState(() {
-       this.c = snap.size;
-     })
-});
-    await fb
-        .collection('Programs')
-        .get()
-        .then((snap) => {
-          setState(() {
-       this.p = snap.size;
-     })
-});
+            this.p = snap.size;
+          })
+        });
   }
 }
 
@@ -262,20 +266,29 @@ class Example extends StatelessWidget {
             a['uid'] = document.id;
           }).toList();
           return Container(
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 30,
+            color: bluebg,
+            child: ScrollConfiguration(
+              behavior: Hscroll(),
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 30,
+                    ),
+                    for (var i = 0; i < techprofile.length; i++) ...[
+                      Techcard(
+                        name: techprofile[i]['name'],
+                        img: techprofile[i]['pic'],
+                        username: techprofile[i]['username'],
+                        uid: techprofile[i]['uid'],
+                      )
+                    ]
+                  ],
                 ),
-                for (var i = 0; i < techprofile.length; i++) ...[
-                  Techcard(
-                    name: techprofile[i]['name'],
-                    img: techprofile[i]['pic'],
-                    username: techprofile[i]['username'],
-                    uid: techprofile[i]['uid'],
-                  )
-                ]
-              ],
+              ),
             ),
           );
         });
@@ -474,7 +487,8 @@ class _TechcardState extends State<Techcard> {
       ),
     );
   }
-  startup() async{
+
+  startup() async {
     DateTime now = DateTime.now();
     String cday = DateFormat('MM d y').format(now);
 
@@ -484,11 +498,11 @@ class _TechcardState extends State<Techcard> {
         .collection("Assignedpgm")
         .get()
         .then((snap) => {
-          setState(() {
-       this.a = snap.size;
-     })
-});
-        
+              setState(() {
+                this.a = snap.size;
+              })
+            });
+
     await fb
         .collection('Technician')
         .doc(widget.username)
@@ -497,20 +511,20 @@ class _TechcardState extends State<Techcard> {
         .collection(cday)
         .get()
         .then((snap) => {
-          setState(() {
-       this.c = snap.size;
-     })
-});
+              setState(() {
+                this.c = snap.size;
+              })
+            });
     await fb
         .collection('Technician')
         .doc(widget.username)
         .collection("Pendingpgm")
         .get()
         .then((snap) => {
-          setState(() {
-       this.p = snap.size;
-     })
-});
+              setState(() {
+                this.p = snap.size;
+              })
+            });
   }
 }
 
@@ -527,7 +541,7 @@ class Assigntechpgm extends StatefulWidget {
 }
 
 class _AssigntechpgmState extends State<Assigntechpgm> {
-   FirebaseFirestore fb = FirebaseFirestore.instance;
+  FirebaseFirestore fb = FirebaseFirestore.instance;
   int a = 0;
   int c = 0;
   int p = 0;
@@ -537,7 +551,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
     super.initState();
     startup();
   }
- 
+
   @override
   String _currentsrc = "Assign";
   Widget build(BuildContext context) {
@@ -831,7 +845,8 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
       ),
     );
   }
-  startup() async{
+
+  startup() async {
     DateTime now = DateTime.now();
     String cday = DateFormat('MM d y').format(now);
 
@@ -841,11 +856,11 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
         .collection("Assignedpgm")
         .get()
         .then((snap) => {
-          setState(() {
-       this.a = snap.size;
-     })
-});
-        
+              setState(() {
+                this.a = snap.size;
+              })
+            });
+
     await fb
         .collection('Technician')
         .doc(widget.username)
@@ -854,20 +869,20 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
         .collection(cday)
         .get()
         .then((snap) => {
-          setState(() {
-       this.c = snap.size;
-     })
-});
+              setState(() {
+                this.c = snap.size;
+              })
+            });
     await fb
         .collection('Technician')
         .doc(widget.username)
         .collection("Pendingpgm")
         .get()
         .then((snap) => {
-          setState(() {
-       this.p = snap.size;
-     })
-});
+              setState(() {
+                this.p = snap.size;
+              })
+            });
   }
 }
 
@@ -885,4 +900,14 @@ class Techsrcwrapper extends StatelessWidget {
       return Statussrc(uid: uid, username: username, techname: name);
     return Assignpgmwidget(uid: uid, username: username, techname: name);
   }
+}
+
+class Hscroll extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        // etc.
+      };
 }
