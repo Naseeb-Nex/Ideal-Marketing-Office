@@ -24,6 +24,7 @@ class _LoginSrcState extends State<LoginSrc> {
 
   // string for displaying the error Message
   String? errorMessage;
+  bool load = false;
 
   @override
   Widget build(BuildContext context) {
@@ -106,44 +107,48 @@ class _LoginSrcState extends State<LoginSrc> {
 
     return Scaffold(
       backgroundColor: newbg,
-      body: Center(
-        child: SingleChildScrollView(
-          child: Container(
-            color: newbg,
-            child: Center(
-              child: Container(
-                padding: EdgeInsets.all(30),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: Colors.white),
-                width: MediaQuery.of(context).size.width / 3,
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                          height: 100,
-                          width: 150,
-                          child: Image.asset(
-                            "assets/icons/imaicon.png",
-                            fit: BoxFit.contain,
-                            filterQuality: FilterQuality.high,
-                          )),
-                      SizedBox(height: 45),
-                      emailField,
-                      SizedBox(height: 25),
-                      passwordField,
-                      SizedBox(height: 35),
-                      loginButton,
-                    ],
+      body: Stack(
+        children:[ Center(
+          child: SingleChildScrollView(
+            child: Container(
+              color: newbg,
+              child: Center(
+                child: Container(
+                  padding: EdgeInsets.all(30),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.white),
+                  width: MediaQuery.of(context).size.width / 3,
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(
+                            height: 100,
+                            width: 150,
+                            child: Image.asset(
+                              "assets/icons/imaicon.png",
+                              fit: BoxFit.contain,
+                              filterQuality: FilterQuality.high,
+                            )),
+                        SizedBox(height: 45),
+                        emailField,
+                        SizedBox(height: 25),
+                        passwordField,
+                        SizedBox(height: 35),
+                        loginButton,
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
           ),
         ),
+        Center(child: load ? CircularProgressIndicator(color: Colors.redAccent,): null,)
+        ]
       ),
     );
   }
@@ -152,6 +157,9 @@ class _LoginSrcState extends State<LoginSrc> {
   void signIn(String email, String password) async {
     // firebase
     // if (_formKey.currentState!.validate()) {
+    setState(() {
+      load = true;
+    });
     try {
       await _auth
           // .signInWithEmailAndPassword(email: email, password: password)
@@ -163,6 +171,9 @@ class _LoginSrcState extends State<LoginSrc> {
               });
     } catch (error) {
       print(error);
+      setState(() {
+        load = false;
+      });
       showDialog(
           context: context,
           builder: (BuildContext context) {
