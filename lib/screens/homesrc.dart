@@ -35,7 +35,7 @@ class _OfficeHomeState extends State<OfficeHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        children: [
+        children: <Widget>[
           Container(
             height: 60,
             width: double.infinity,
@@ -51,7 +51,7 @@ class _OfficeHomeState extends State<OfficeHome> {
               ],
             ),
             child: Row(
-              children: [
+              children: <Widget>[
                 Padding(
                   padding: EdgeInsets.only(
                     left: 30,
