@@ -193,7 +193,9 @@ class _HomewidgetState extends State<Homewidget> {
                 ],
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Row(
               children: [
                 Example(
@@ -210,22 +212,25 @@ class _HomewidgetState extends State<Homewidget> {
   pgmsetup() async {
     DateTime now = DateTime.now();
     String cday = DateFormat('MM d y').format(now);
-
-    await fb
-        .collection('Completedpgm')
-        .doc("Day")
-        .collection(cday)
-        .get()
-        .then((snap) => {
-              setState(() {
-                this.c = snap.size;
-              })
-            });
-    await fb.collection('Programs').get().then((snap) => {
-          setState(() {
-            this.p = snap.size;
-          })
-        });
+    try {
+      await fb
+          .collection('Completedpgm')
+          .doc("Day")
+          .collection(cday)
+          .get()
+          .then((snap) => {
+                setState(() {
+                  this.c = snap.size;
+                })
+              });
+      await fb.collection('Programs').get().then((snap) => {
+            setState(() {
+              this.p = snap.size;
+            })
+          });
+    } catch (e) {
+      print(e);
+    }
   }
 }
 
@@ -490,40 +495,43 @@ class _TechcardState extends State<Techcard> {
   startup() async {
     DateTime now = DateTime.now();
     String cday = DateFormat('MM d y').format(now);
+    try {
+      await fb
+          .collection('Technician')
+          .doc(widget.username)
+          .collection("Assignedpgm")
+          .get()
+          .then((snap) => {
+                setState(() {
+                  this.a = snap.size;
+                })
+              });
 
-    await fb
-        .collection('Technician')
-        .doc(widget.username)
-        .collection("Assignedpgm")
-        .get()
-        .then((snap) => {
-              setState(() {
-                this.a = snap.size;
-              })
-            });
-
-    await fb
-        .collection('Technician')
-        .doc(widget.username)
-        .collection("Completedpgm")
-        .doc("Day")
-        .collection(cday)
-        .get()
-        .then((snap) => {
-              setState(() {
-                this.c = snap.size;
-              })
-            });
-    await fb
-        .collection('Technician')
-        .doc(widget.username)
-        .collection("Pendingpgm")
-        .get()
-        .then((snap) => {
-              setState(() {
-                this.p = snap.size;
-              })
-            });
+      await fb
+          .collection('Technician')
+          .doc(widget.username)
+          .collection("Completedpgm")
+          .doc("Day")
+          .collection(cday)
+          .get()
+          .then((snap) => {
+                setState(() {
+                  this.c = snap.size;
+                })
+              });
+      await fb
+          .collection('Technician')
+          .doc(widget.username)
+          .collection("Pendingpgm")
+          .get()
+          .then((snap) => {
+                setState(() {
+                  this.p = snap.size;
+                })
+              });
+    } catch (e) {
+      print(e);
+    }
   }
 }
 
@@ -848,40 +856,43 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
   startup() async {
     DateTime now = DateTime.now();
     String cday = DateFormat('MM d y').format(now);
+    try {
+      await fb
+          .collection('Technician')
+          .doc(widget.username)
+          .collection("Assignedpgm")
+          .get()
+          .then((snap) => {
+                setState(() {
+                  this.a = snap.size;
+                })
+              });
 
-    await fb
-        .collection('Technician')
-        .doc(widget.username)
-        .collection("Assignedpgm")
-        .get()
-        .then((snap) => {
-              setState(() {
-                this.a = snap.size;
-              })
-            });
-
-    await fb
-        .collection('Technician')
-        .doc(widget.username)
-        .collection("Completedpgm")
-        .doc("Day")
-        .collection(cday)
-        .get()
-        .then((snap) => {
-              setState(() {
-                this.c = snap.size;
-              })
-            });
-    await fb
-        .collection('Technician')
-        .doc(widget.username)
-        .collection("Pendingpgm")
-        .get()
-        .then((snap) => {
-              setState(() {
-                this.p = snap.size;
-              })
-            });
+      await fb
+          .collection('Technician')
+          .doc(widget.username)
+          .collection("Completedpgm")
+          .doc("Day")
+          .collection(cday)
+          .get()
+          .then((snap) => {
+                setState(() {
+                  this.c = snap.size;
+                })
+              });
+      await fb
+          .collection('Technician')
+          .doc(widget.username)
+          .collection("Pendingpgm")
+          .get()
+          .then((snap) => {
+                setState(() {
+                  this.p = snap.size;
+                })
+              });
+    } catch (e) {
+      print(e);
+    }
   }
 }
 
