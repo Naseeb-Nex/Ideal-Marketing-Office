@@ -30,7 +30,6 @@ class _OfficeHomeState extends State<OfficeHome> {
       this.loggedInUser = UserModel.fromMap(value.data());
     });
     print(user!.uid);
-    print(loggedInUser.email);
     }catch(e){
       print(e);
     }

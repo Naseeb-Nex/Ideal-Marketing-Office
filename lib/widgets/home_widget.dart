@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -228,6 +230,8 @@ class _HomewidgetState extends State<Homewidget> {
               this.p = snap.size;
             })
           });
+      print(c);
+      print(p);
     } catch (e) {
       print(e);
     }
@@ -529,6 +533,9 @@ class _TechcardState extends State<Techcard> {
                   this.p = snap.size;
                 })
               });
+      print(a);
+      print(c);
+      print(p);
     } catch (e) {
       print(e);
     }
