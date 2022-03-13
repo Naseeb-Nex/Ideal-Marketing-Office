@@ -39,7 +39,7 @@ class Assignedpgmwrapper extends StatelessWidget {
           List assignedpgm =
               _allpgm.where((i) => i['status'] == 'assigned').toList();
           return Container(
-            child: Column(
+            child: ListView(
               children: [
                 SizedBox(
                   width: 30,

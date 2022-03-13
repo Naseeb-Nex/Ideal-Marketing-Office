@@ -563,7 +563,9 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    startup();
+    if (mounted) {
+      startup();
+    }
   }
 
   @override
@@ -617,40 +619,40 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                 height: double.infinity,
                 width: 350,
                 padding: EdgeInsets.all(10),
-                child: Expanded(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: white,
-                      boxShadow: [
-                        BoxShadow(
-                          offset: Offset(0, 5),
-                          blurRadius: 20,
-                          color: secondbg.withOpacity(0.20),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: white,
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(0, 5),
+                        blurRadius: 20,
+                        color: secondbg.withOpacity(0.20),
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: ListView(
+                      // crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 35,
                         ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 35,
+                        Container(
+                          height: 200,
+                          width: 200,
+                          child: CircleAvatar(
+                            backgroundColor: Colors.red,
+                            backgroundImage:
+                                AssetImage("assets/icons/avataricon.png"),
                           ),
-                          Container(
-                            height: 150,
-                            width: 150,
-                            child: CircleAvatar(
-                              backgroundColor: Colors.red,
-                              backgroundImage:
-                                  AssetImage("assets/icons/avataricon.png"),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Center(
+                          child: Text(
                             "${widget.name}",
                             style: TextStyle(
                               fontFamily: "Nunito",
@@ -659,171 +661,170 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                               color: Color(0xff273746),
                             ),
                           ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 10,
-                                width: 10,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.yellow),
-                              ),
-                              Text(
-                                " Assingned Programs    ",
-                                style: TextStyle(
-                                  fontFamily: "Nunito",
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xff273746),
-                                ),
-                              ),
-                              Text(
-                                "$a",
-                                style: TextStyle(
-                                  fontFamily: "Nunito",
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xff273746),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 10,
-                                width: 10,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.greenAccent),
-                              ),
-                              Text(
-                                " Completed Programs   ",
-                                style: TextStyle(
-                                  fontFamily: "Nunito",
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xff273746),
-                                ),
-                              ),
-                              Text(
-                                "$c",
-                                style: TextStyle(
-                                  fontFamily: "Nunito",
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xff273746),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 10,
-                                width: 10,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: cheryred),
-                              ),
-                              Text(
-                                " Pending Programs        ",
-                                style: TextStyle(
-                                  fontFamily: "Nunito",
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xff273746),
-                                ),
-                              ),
-                              Text(
-                                "$p",
-                                style: TextStyle(
-                                  fontFamily: "Nunito",
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xff273746),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 30,
-                          ),
-                          InkWell(
-                            onTap: () => setState(() {
-                              _currentsrc = 'Assign';
-                            }),
-                            child: Container(
-                              height: 55,
-                              width: double.infinity,
-                              alignment: Alignment.center,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 10,
+                              width: 10,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: _currentsrc == "Assign"
-                                      ? white
-                                      : Colors.blue,
-                                  border: Border.all(color: Colors.blue)),
-                              child: Text(
-                                "Assign Programs",
-                                style: TextStyle(
-                                  fontFamily: "Nunito",
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: _currentsrc == "Assign"
-                                      ? Colors.blue
-                                      : white,
-                                ),
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.yellow),
+                            ),
+                            Text(
+                              " Assingned Programs    ",
+                              style: TextStyle(
+                                fontFamily: "Nunito",
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff273746),
                               ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          InkWell(
-                            onTap: () => setState(() {
-                              _currentsrc = 'Status';
-                            }),
-                            child: Container(
-                              height: 55,
-                              width: double.infinity,
-                              alignment: Alignment.center,
+                            Text(
+                              "$a",
+                              style: TextStyle(
+                                fontFamily: "Nunito",
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff273746),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 10,
+                              width: 10,
                               decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.greenAccent),
+                            ),
+                            Text(
+                              " Completed Programs   ",
+                              style: TextStyle(
+                                fontFamily: "Nunito",
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff273746),
+                              ),
+                            ),
+                            Text(
+                              "$c",
+                              style: TextStyle(
+                                fontFamily: "Nunito",
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff273746),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 10,
+                              width: 10,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: cheryred),
+                            ),
+                            Text(
+                              " Pending Programs        ",
+                              style: TextStyle(
+                                fontFamily: "Nunito",
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff273746),
+                              ),
+                            ),
+                            Text(
+                              "$p",
+                              style: TextStyle(
+                                fontFamily: "Nunito",
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff273746),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        InkWell(
+                          onTap: () => setState(() {
+                            _currentsrc = 'Assign';
+                          }),
+                          child: Container(
+                            height: 55,
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
-                                color: _currentsrc == "Status"
+                                color: _currentsrc == "Assign"
                                     ? white
                                     : Colors.blue,
-                                border: Border.all(color: Colors.blue),
-                              ),
-                              child: Text(
-                                "Status",
-                                style: TextStyle(
-                                  fontFamily: "Nunito",
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: _currentsrc == "Status"
-                                      ? Colors.blue
-                                      : white,
-                                ),
+                                border: Border.all(color: Colors.blue)),
+                            child: Text(
+                              "Assign Programs",
+                              style: TextStyle(
+                                fontFamily: "Nunito",
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: _currentsrc == "Assign"
+                                    ? Colors.blue
+                                    : white,
                               ),
                             ),
                           ),
-                          const SizedBox(
-                            height: 20,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        InkWell(
+                          onTap: () => setState(() {
+                            _currentsrc = 'Status';
+                          }),
+                          child: Container(
+                            height: 55,
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color:
+                                  _currentsrc == "Status" ? white : Colors.blue,
+                              border: Border.all(color: Colors.blue),
+                            ),
+                            child: Text(
+                              "Status",
+                              style: TextStyle(
+                                fontFamily: "Nunito",
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: _currentsrc == "Status"
+                                    ? Colors.blue
+                                    : white,
+                              ),
+                            ),
                           ),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                      ],
                     ),
                   ),
                 ),
