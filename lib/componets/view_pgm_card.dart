@@ -168,13 +168,13 @@ class Viewpgmcard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Container(
-                    child: IconButton(
-                      icon: Icon(Icons.edit),
-                      color: Color(0xff660066),
-                      onPressed: () => print("Pressed"),
-                    ),
-                  )
+                  // Container(
+                  //   child: IconButton(
+                  //     icon: Icon(Icons.edit),
+                  //     color: Color(0xff660066),
+                  //     onPressed: () => print("Pressed"),
+                  //   ),
+                  // )
                 ],
               ),
             ),

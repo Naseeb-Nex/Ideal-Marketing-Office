@@ -125,13 +125,15 @@ class _OfficeHomeState extends State<OfficeHome> {
                           SizedBox(
                             height: 20,
                           ),
-                          Text(
-                            "Progam Management",
-                            style: TextStyle(
-                              fontFamily: "Nunito",
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xffD3D3D3),
+                          Center(
+                            child: Text(
+                              "Progam Management",
+                              style: TextStyle(
+                                fontFamily: "Nunito",
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xffD3D3D3),
+                              ),
                             ),
                           ),
                           SizedBox(

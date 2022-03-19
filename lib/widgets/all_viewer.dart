@@ -38,7 +38,8 @@ class _ViewAllState extends State<ViewAll> {
         child: ScrollConfiguration(
             behavior: VerticalScroll(),
             child: SingleChildScrollView(
-                scrollDirection: Axis.vertical, child: Pgmwrapper())),
+                scrollDirection: Axis.vertical, 
+                child: Pgmwrapper())),
       ),
     ));
   }
