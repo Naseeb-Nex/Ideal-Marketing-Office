@@ -253,16 +253,14 @@ class Example extends StatelessWidget {
             print('Something went Wrong');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 150,
-                  ),
-                  CircularProgressIndicator(
+            return Expanded(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(150),
+                  child: CircularProgressIndicator(
                     color: cheryred,
                   ),
-                ],
+                ),
               ),
             );
           }
@@ -275,21 +273,28 @@ class Example extends StatelessWidget {
             a['uid'] = document.id;
           }).toList();
           return Container(
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                SizedBox(
-                  width: 30,
+            child: ScrollConfiguration(
+              behavior: Hscroll(),
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 30,
+                    ),
+                    for (var i = 0; i < techprofile.length; i++) ...[
+                      Techcard(
+                        name: techprofile[i]['name'],
+                        img: techprofile[i]['pic'],
+                        username: techprofile[i]['username'],
+                        uid: techprofile[i]['uid'],
+                      )
+                    ]
+                  ],
                 ),
-                for (var i = 0; i < techprofile.length; i++) ...[
-                  Techcard(
-                    name: techprofile[i]['name'],
-                    img: techprofile[i]['pic'],
-                    username: techprofile[i]['username'],
-                    uid: techprofile[i]['uid'],
-                  )
-                ]
-              ],
+              ),
             ),
           );
         });
@@ -911,4 +916,14 @@ class Techsrcwrapper extends StatelessWidget {
       return Statussrc(uid: uid, username: username, techname: name);
     return Assignpgmwidget(uid: uid, username: username, techname: name);
   }
+}
+
+class Hscroll extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        // etc.
+      };
 }
