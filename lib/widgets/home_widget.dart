@@ -273,28 +273,21 @@ class Example extends StatelessWidget {
             a['uid'] = document.id;
           }).toList();
           return Container(
-            child: ScrollConfiguration(
-              behavior: Hscroll(),
-              child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 30,
-                    ),
-                    for (var i = 0; i < techprofile.length; i++) ...[
-                      Techcard(
-                        name: techprofile[i]['name'],
-                        img: techprofile[i]['pic'],
-                        username: techprofile[i]['username'],
-                        uid: techprofile[i]['uid'],
-                      )
-                    ]
-                  ],
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                SizedBox(
+                  width: 30,
                 ),
-              ),
+                for (var i = 0; i < techprofile.length; i++) ...[
+                  Techcard(
+                    name: techprofile[i]['name'],
+                    img: techprofile[i]['pic'],
+                    username: techprofile[i]['username'],
+                    uid: techprofile[i]['uid'],
+                  )
+                ]
+              ],
             ),
           );
         });
