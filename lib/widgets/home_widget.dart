@@ -35,7 +35,6 @@ class _HomewidgetState extends State<Homewidget> {
 
   @override
   Widget build(BuildContext context) {
-    
     var size = MediaQuery.of(context).size;
 
     return Container(
@@ -193,7 +192,7 @@ class _HomewidgetState extends State<Homewidget> {
             height: 20,
           ),
           Container(
-            height: size.height * 0.46,
+            height: size.height * 0.5,
             child: Example(
               userid: widget.uid,
             ),
@@ -295,6 +294,7 @@ class _TechcardState extends State<Techcard> {
   int a = 0;
   int c = 0;
   int p = 0;
+  int pro = 0;
   @override
   void initState() {
     super.initState();
@@ -414,7 +414,8 @@ class _TechcardState extends State<Techcard> {
                     height: 10,
                     width: 10,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10), color: cheryred),
+                        borderRadius: BorderRadius.circular(10),
+                        color: cheryred),
                   ),
                   Text(
                     " Pending Programs        ",
@@ -427,6 +428,39 @@ class _TechcardState extends State<Techcard> {
                   ),
                   Text(
                     "$p",
+                    style: TextStyle(
+                      fontFamily: "Nunito",
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff273746),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 10,
+                    width: 10,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.blue),
+                  ),
+                  Text(
+                    " Processing Programs   ",
+                    style: TextStyle(
+                      fontFamily: "Nunito",
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff273746),
+                    ),
+                  ),
+                  Text(
+                    "$pro",
                     style: TextStyle(
                       fontFamily: "Nunito",
                       fontSize: 13,
@@ -507,9 +541,21 @@ class _TechcardState extends State<Techcard> {
                   this.p = snap.size;
                 })
               });
+
+      await fb
+          .collection('Technician')
+          .doc(widget.username)
+          .collection("Processingpgm")
+          .get()
+          .then((snap) => {
+                setState(() {
+                  this.pro = snap.size;
+                })
+              });
       print(a);
       print(c);
       print(p);
+      print(pro);
     } catch (e) {
       print(e);
     }
@@ -533,6 +579,8 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
   int a = 0;
   int c = 0;
   int p = 0;
+  int pro = 0;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -564,6 +612,24 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
             ),
             child: Row(
               children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: InkWell(
+                    onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => OfficeHome(),
+                          )),
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.blue),
+                      child: Icon(Icons.arrow_back, color: Colors.white),
+                    ),
+                  ),
+                ),
                 Padding(
                   padding: EdgeInsets.only(
                     left: 30,
@@ -736,6 +802,39 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                           ],
                         ),
                         SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 10,
+                              width: 10,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.blue),
+                            ),
+                            Text(
+                              " Processing Programs   ",
+                              style: TextStyle(
+                                fontFamily: "Nunito",
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff273746),
+                              ),
+                            ),
+                            Text(
+                              "$pro",
+                              style: TextStyle(
+                                fontFamily: "Nunito",
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff273746),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
                           height: 30,
                         ),
                         InkWell(
@@ -870,6 +969,16 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
           .then((snap) => {
                 setState(() {
                   this.p = snap.size;
+                })
+              });
+      await fb
+          .collection('Technician')
+          .doc(widget.username)
+          .collection("Processingpgm")
+          .get()
+          .then((snap) => {
+                setState(() {
+                  this.pro = snap.size;
                 })
               });
     } catch (e) {
