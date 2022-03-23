@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test2/componets/assign_pgm_card.dart';
+import 'package:test2/componets/processing_tech_card.dart';
 import 'package:test2/componets/view_pgm_card.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -58,7 +59,7 @@ class _TechprocessingState extends State<Techprocessing> {
                                 width: 30,
                               ),
                               for (var i = 0; i < _allpgm.length; i++) ...[
-                                Viewpgmcard(
+                                Protechcard(
                                   name: _allpgm[i]["name"],
                                   address: _allpgm[i]["address"],
                                   loc: _allpgm[i]["loc"],
@@ -68,6 +69,10 @@ class _TechprocessingState extends State<Techprocessing> {
                                   upDate: _allpgm[i]["upDate"],
                                   upTime: _allpgm[i]["upTime"],
                                   docname: _allpgm[i]["docname"],
+                                  remarks: _allpgm[i]["remarks"],
+                                  ptime: _allpgm[i]["ptime"],
+                                  pdate: _allpgm[i]["pdate"],
+                                  pdocname: _allpgm[i]["pdocname"],
                                 )
                               ]
                             ],

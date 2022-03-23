@@ -41,27 +41,21 @@ class _HomewidgetState extends State<Homewidget> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: ListView(
         children: <Widget>[
           SizedBox(
             height: 30,
           ),
-          Text(
-            "Home",
-            style: TextStyle(
-              fontFamily: "Nunito",
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-              color: Color(0xff8F9194),
-            ),
-          ),
-          Container(
-            height: 5,
-            width: 36,
-            decoration: BoxDecoration(
+          Center(
+            child: Text(
+              "Home",
+              style: TextStyle(
+                fontFamily: "Nunito",
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
                 color: Color(0xff8F9194),
-                borderRadius: BorderRadius.circular(10)),
+              ),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
