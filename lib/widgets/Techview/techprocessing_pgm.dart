@@ -60,9 +60,12 @@ class _TechprocessingState extends State<Techprocessing> {
                               ),
                               for (var i = 0; i < _allpgm.length; i++) ...[
                                 Protechcard(
+                                  uid: widget.uid,
+                                  username: widget.username,
                                   name: _allpgm[i]["name"],
                                   address: _allpgm[i]["address"],
                                   loc: _allpgm[i]["loc"],
+                                  chrg: _allpgm[i]["chrg"],
                                   pgm: _allpgm[i]["pgm"],
                                   phn: _allpgm[i]["phn"],
                                   type: _allpgm[i]["type"],

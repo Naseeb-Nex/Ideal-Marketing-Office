@@ -447,6 +447,7 @@ class ConfirmBox extends StatelessWidget {
                   width: 30,
                 ),
                 InkWell(
+                  onTap: () => coverttomain(context),
                   child: Container(
                     height: 60,
                     width: 130,
