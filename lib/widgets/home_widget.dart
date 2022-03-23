@@ -192,7 +192,7 @@ class _HomewidgetState extends State<Homewidget> {
             height: 20,
           ),
           Container(
-            height: size.height * 0.5,
+            height: size.height * 0.55,
             child: Example(
               userid: widget.uid,
             ),
@@ -834,7 +834,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         InkWell(
