@@ -163,33 +163,6 @@ class _PgmviewerState extends State<Pgmviewer> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      InkWell(
-                        onTap: () => setState(() {
-                          _currentsw = 'pros';
-                        }),
-                        child: Container(
-                          height: 50,
-                          width: 200,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: _currentsw == "pros" ? white : cheryred,
-                            border: Border.all(color: cheryred),
-                          ),
-                          child: Text(
-                            "Processing Programs",
-                            style: TextStyle(
-                              fontFamily: "Nunito",
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                              color: _currentsw == "pros" ? cheryred : white,
-                            ),
-                          ),
-                        ),
-                      ),
                       const SizedBox(
                         width: 20,
                       ),
