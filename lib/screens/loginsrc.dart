@@ -161,7 +161,7 @@ class _LoginSrcState extends State<LoginSrc> {
   // login function
   void signIn(String email, String password) async {
     // firebase
-    // if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate()) {
       setState(() {
         load = true;
       });
@@ -186,7 +186,7 @@ class _LoginSrcState extends State<LoginSrc> {
             });
       }
     }
-  // }
+  }
 }
 
 class SimpleCustomAlert extends StatelessWidget {
