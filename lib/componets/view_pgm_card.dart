@@ -32,13 +32,13 @@ class Viewpgmcard extends StatelessWidget {
       child: Container(
         height: 180,
         width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              offset: Offset(0, 2),
+              offset: const Offset(0, 2),
               blurRadius: 5,
               color: secondbg.withOpacity(0.18),
             ),
@@ -50,28 +50,24 @@ class Viewpgmcard extends StatelessWidget {
           children: [
             Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 Column(
                   children: [
-                    Container(
-                      child: Text(
-                        "$name",
-                        style: TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    Text(
+                      "$name",
+                      style: const TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Container(
-                      child: Text(
-                        "$address",
-                        style: TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 18,
-                        ),
+                    Text(
+                      "$address",
+                      style: const TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 18,
                       ),
                     ),
                   ],
@@ -80,7 +76,7 @@ class Viewpgmcard extends StatelessWidget {
                   child: Center(
                     child: Text(
                       "$pgm",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: "Nunito",
                         fontSize: 22,
                         fontWeight: FontWeight.w500,
@@ -91,22 +87,18 @@ class Viewpgmcard extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Container(
-                      child: Text(
-                        "$upDate",
-                        style: TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 17,
-                        ),
+                    Text(
+                      "$upDate",
+                      style: const TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 17,
                       ),
                     ),
-                    Container(
-                      child: Text(
-                        "$upTime",
-                        style: TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 17,
-                        ),
+                    Text(
+                      "$upTime",
+                      style:const TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 17,
                       ),
                     ),
                   ],
@@ -114,27 +106,25 @@ class Viewpgmcard extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(top: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.pin_drop_outlined,
                         color: cheryred,
                       ),
-                      Container(
-                        child: Text(
-                          "  $loc",
-                          style: TextStyle(
-                            fontFamily: "Nunito",
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                          ),
+                      Text(
+                        "  $loc",
+                        style: const TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 50,
                       ),
                       Container(
@@ -148,22 +138,20 @@ class Viewpgmcard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 50,
                       ),
-                      Icon(
+                      const Icon(
                         Icons.phone_android,
                         color: Color(0xFF008080),
                       ),
-                      Container(
-                        child: Text(
-                          "  $phn",
-                          style: TextStyle(
-                            fontFamily: "Nunito",
-                            fontSize: 20,
-                            fontWeight: FontWeight.normal,
-                            color: Color(0xFF008080),
-                          ),
+                      Text(
+                        "  $phn",
+                        style: const TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 20,
+                          fontWeight: FontWeight.normal,
+                          color: Color(0xFF008080),
                         ),
                       ),
                     ],
