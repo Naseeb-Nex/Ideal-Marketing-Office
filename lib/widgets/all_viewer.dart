@@ -24,33 +24,25 @@ class _ViewAllState extends State<ViewAll> {
       child: Container(
         width: double.infinity,
         height: double.infinity,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
             boxShadow: [
               BoxShadow(
-                offset: Offset(0, 5),
+                offset: const Offset(0, 5),
                 blurRadius: 15,
                 color: secondbg.withOpacity(0.20),
               ),
             ],
             color: primarybg),
-        child: ScrollConfiguration(
-            behavior: VerticalScroll(),
-            child: SingleChildScrollView(
-                scrollDirection: Axis.vertical, 
-                child: Pgmwrapper())),
+        child: ListView(
+          scrollDirection: Axis.vertical,
+          physics:const  BouncingScrollPhysics(),
+          children: [
+            Pgmwrapper(),
+          ],
+        ),
       ),
     ));
   }
-}
-
-class VerticalScroll extends MaterialScrollBehavior {
-  // Override behavior methods and getters like dragDevices
-  @override
-  Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.mouse,
-        // etc.
-      };
 }

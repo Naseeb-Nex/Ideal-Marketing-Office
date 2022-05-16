@@ -22,7 +22,7 @@ class _PendingPgmViewerState extends State<PendingPgmViewer> {
       child: Container(
         width: double.infinity,
         height: double.infinity,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
             boxShadow: [

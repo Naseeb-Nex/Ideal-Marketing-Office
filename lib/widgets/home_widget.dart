@@ -221,8 +221,6 @@ class _HomewidgetState extends State<Homewidget> {
               this.p = snap.size;
             })
           });
-      print(c);
-      print(p);
     } catch (e) {
       print(e);
     }
@@ -255,7 +253,6 @@ class Example extends StatelessWidget {
           snapshot.data!.docs.map((DocumentSnapshot document) {
             Map a = document.data() as Map<String, dynamic>;
             techprofile.add(a);
-            print(a);
             a['uid'] = document.id;
           }).toList();
           return ScrollConfiguration(
@@ -552,10 +549,6 @@ class _TechcardState extends State<Techcard> {
                   this.pro = snap.size;
                 })
               });
-      print(a);
-      print(c);
-      print(p);
-      print(pro);
     } catch (e) {
       print(e);
     }

@@ -22,103 +22,99 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
   String textquery = '';
   List pgm = [];
   List _allpgm = [];
+  List pendingpgm = [];
   final Stream<QuerySnapshot> programstream =
       FirebaseFirestore.instance.collection('Programs').snapshots();
 
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 20,
+    return Column(
+      children: [
+        const SizedBox(
+          height: 20,
+        ),
+        Container(
+          width: 700,
+          height: 40,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: primarybg,
+            boxShadow: [
+              BoxShadow(
+                offset: const Offset(0, 5),
+                blurRadius: 5,
+                color: secondbg.withOpacity(0.20),
+              ),
+            ],
           ),
-          Container(
-            width: 700,
-            height: 40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: primarybg,
-              boxShadow: [
-                BoxShadow(
-                  offset: Offset(0, 5),
-                  blurRadius: 5,
-                  color: secondbg.withOpacity(0.20),
-                ),
-              ],
-            ),
-            child: buildSearch(),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(10),
-              child: ScrollConfiguration(
-                behavior: VerticalScrollgesture(),
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: StreamBuilder<QuerySnapshot>(
-                      stream: programstream,
-                      builder: (BuildContext context,
-                          AsyncSnapshot<QuerySnapshot> snapshot) {
-                        if (snapshot.hasError) {
-                          print('Something went Wrong');
-                        }
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Expanded(
-                            child: Center(
-                              child: CircularProgressIndicator(
-                                color: cheryred,
-                              ),
+          child: buildSearch(),
+        ),
+        const SizedBox(
+          height: 30,
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: ScrollConfiguration(
+              behavior: VerticalScrollgesture(),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: StreamBuilder<QuerySnapshot>(
+                    stream: programstream,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (snapshot.hasError) {
+                        print('Something went Wrong');
+                      }
+                      if (snapshot.connectionState ==
+                          ConnectionState.waiting) {
+                        return const Expanded(
+                          child: Center(
+                            child: CircularProgressIndicator(
+                              color: cheryred,
                             ),
-                          );
-                        }
-                        _allpgm.clear();
-                        snapshot.data!.docs.map((DocumentSnapshot document) {
-                          Map a = document.data() as Map<String, dynamic>;
-                          _allpgm.add(a);
-                          print(a);
-                          a['uid'] = document.id;
-                        }).toList();
-                        List pendingpgm = _allpgm
-                            .where((i) => i['status'] == 'pending')
-                            .toList();
-                        return Container(
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                width: 30,
-                              ),
-                              for (var i = 0; i < pendingpgm.length; i++) ...[
-                                Assignpgmcard(
-                                  uid: pendingpgm[i]["uid"],
-                                  name: pendingpgm[i]["name"],
-                                  address: pendingpgm[i]["address"],
-                                  loc: pendingpgm[i]["loc"],
-                                  pgm: pendingpgm[i]["pgm"],
-                                  chrg: pendingpgm[i]["chrg"],
-                                  phn: pendingpgm[i]["phn"],
-                                  type: pendingpgm[i]["type"],
-                                  upDate: pendingpgm[i]["upDate"],
-                                  upTime: pendingpgm[i]["upTime"],
-                                  docname: pendingpgm[i]["docname"],
-                                  techuid: widget.uid,
-                                  techname: widget.techname,
-                                  username: widget.username,
-                                )
-                              ]
-                            ],
                           ),
                         );
-                      }),
-                ),
+                      }
+                      _allpgm.clear();
+                      snapshot.data!.docs.map((DocumentSnapshot document) {
+                        Map a = document.data() as Map<String, dynamic>;
+                        _allpgm.add(a);
+                        a['uid'] = document.id;
+                      }).toList();
+                      // List pendingpgm = _allpgm
+                      //     .where((i) => i['status'] == 'pending')
+                      //     .toList();
+                      return Column(
+                        children: [
+                          const SizedBox(
+                            width: 30,
+                          ),
+                          for (var i = 0; i < pendingpgm.length; i++) ...[
+                            Assignpgmcard(
+                              uid: pendingpgm[i]["uid"],
+                              name: pendingpgm[i]["name"],
+                              address: pendingpgm[i]["address"],
+                              loc: pendingpgm[i]["loc"],
+                              pgm: pendingpgm[i]["pgm"],
+                              chrg: pendingpgm[i]["chrg"],
+                              phn: pendingpgm[i]["phn"],
+                              type: pendingpgm[i]["type"],
+                              upDate: pendingpgm[i]["upDate"],
+                              upTime: pendingpgm[i]["upTime"],
+                              docname: pendingpgm[i]["docname"],
+                              techuid: widget.uid,
+                              techname: widget.techname,
+                              username: widget.username,
+                            )
+                          ]
+                        ],
+                      );
+                    }),
               ),
             ),
-          )
-        ],
-      ),
+          ),
+        )
+      ],
     );
   }
 
@@ -129,13 +125,16 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
       );
 
   void searchpgm(String query) {
-    // _allpgm = _allpgm.where((pgm) {
-    //   final nameLower = pgm["name"]!.toLowerCase();
-    //   final phnumber = pgm["phn"]!;
-    //   final searchquery = query.toLowerCase();
+    setState(() {
+      
+    pendingpgm = _allpgm.where((pgm) {
+      final nameLower = pgm["name"]!.toLowerCase();
+      final phnumber = pgm["phn"]!;
+      final searchquery = query.toLowerCase();
 
-    //   return nameLower.contains(searchquery) || phnumber.contains(searchquery);
-    // }).toList();
+      return nameLower.contains(searchquery) || phnumber.contains(searchquery);
+    }).toList();
+    });
     // searching is postponed
   }
 }
