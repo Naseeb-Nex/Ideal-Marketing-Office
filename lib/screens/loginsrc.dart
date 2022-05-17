@@ -17,8 +17,8 @@ class _LoginSrcState extends State<LoginSrc> {
   final _formKey = GlobalKey<FormState>();
 
   // editing controller
-  final TextEditingController emailController = new TextEditingController();
-  final TextEditingController passwordController = new TextEditingController();
+  final TextEditingController emailController =  TextEditingController();
+  final TextEditingController passwordController =  TextEditingController();
 
   final _auth = FirebaseAuth.instance;
 
@@ -49,8 +49,8 @@ class _LoginSrcState extends State<LoginSrc> {
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.mail),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          prefixIcon: const Icon(Icons.mail),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Email",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -63,7 +63,7 @@ class _LoginSrcState extends State<LoginSrc> {
         controller: passwordController,
         obscureText: true,
         validator: (value) {
-          RegExp regex = new RegExp(r'^.{6,}$');
+          RegExp regex = RegExp(r'^.{6,}$');
           if (value!.isEmpty) {
             return ("Password is required for login");
           }
@@ -76,8 +76,8 @@ class _LoginSrcState extends State<LoginSrc> {
         },
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
-          prefixIcon: Icon(Icons.vpn_key),
-          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          prefixIcon: const Icon(Icons.vpn_key),
+          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Password",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -92,7 +92,7 @@ class _LoginSrcState extends State<LoginSrc> {
           onPressed: () {
             signIn(emailController.text, passwordController.text);
           },
-          child: Padding(
+          child: const Padding(
             padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
             child: Text(
               "Login",
@@ -114,7 +114,7 @@ class _LoginSrcState extends State<LoginSrc> {
               color: newbg,
               child: Center(
                 child: Container(
-                  padding: EdgeInsets.all(30),
+                  padding: const EdgeInsets.all(30),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.white),
@@ -133,11 +133,11 @@ class _LoginSrcState extends State<LoginSrc> {
                               fit: BoxFit.contain,
                               filterQuality: FilterQuality.high,
                             )),
-                        SizedBox(height: 45),
+                        const SizedBox(height: 45),
                         emailField,
-                        SizedBox(height: 25),
+                        const SizedBox(height: 25),
                         passwordField,
-                        SizedBox(height: 35),
+                        const SizedBox(height: 35),
                         loginButton,
                       ],
                     ),
@@ -149,7 +149,7 @@ class _LoginSrcState extends State<LoginSrc> {
         ),
         Center(
           child: load
-              ? CircularProgressIndicator(
+              ? const CircularProgressIndicator(
                   color: Colors.redAccent,
                 )
               : null,
@@ -190,7 +190,7 @@ class _LoginSrcState extends State<LoginSrc> {
 }
 
 class SimpleCustomAlert extends StatelessWidget {
-  final title;
+  final String title;
   SimpleCustomAlert(this.title);
   @override
   Widget build(BuildContext context) {
@@ -207,7 +207,7 @@ class SimpleCustomAlert extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                children: const [
                   Icon(
                     Icons.warning_amber_rounded,
                     color: primarybg,
@@ -225,10 +225,10 @@ class SimpleCustomAlert extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            Text(
+            const Text(
               "Incorrect username or password",
               style: TextStyle(
                 fontFamily: "Nunito",
@@ -237,7 +237,7 @@ class SimpleCustomAlert extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 28,
             ),
             RaisedButton(
@@ -245,7 +245,7 @@ class SimpleCustomAlert extends StatelessWidget {
                 Navigator.of(context).pop();
               },
               color: white,
-              child: Text(
+              child: const Text(
                 "Okay",
                 style: TextStyle(
                   fontFamily: "Nunito",
