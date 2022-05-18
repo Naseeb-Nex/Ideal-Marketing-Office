@@ -10,6 +10,8 @@ class Pgmdata {
   String? upDate;
   String? upTime;
   String? docname;
+  String? prospec;
+  String? instadate;
   String? status;
 
   Pgmdata(
@@ -24,6 +26,8 @@ class Pgmdata {
       this.upDate,
       this.upTime,
       this.docname,
+      this.prospec,
+      this.instadate,
       this.status});
 
   // receiving data from server
@@ -40,6 +44,8 @@ class Pgmdata {
       upDate: map['upDate'],
       upTime: map['upTime'],
       docname: map['docname'],
+      prospec: map['prospec'],
+      instadate: map['instadate'],
       status: map['status'],
     );
   }
@@ -58,6 +64,8 @@ class Pgmdata {
       'upDate': upDate,
       'upTime': upTime,
       'docname': docname,
+      'prospec': prospec,
+      'instadate': instadate,
       'status': status,
     };
   }

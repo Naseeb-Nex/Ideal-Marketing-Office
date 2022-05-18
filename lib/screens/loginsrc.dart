@@ -1,5 +1,3 @@
-import 'dart:ui';
-import 'package:intl/intl.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';

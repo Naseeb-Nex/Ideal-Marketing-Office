@@ -30,7 +30,6 @@ class Viewpgmcard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
       child: Container(
-        height: 180,
         width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(

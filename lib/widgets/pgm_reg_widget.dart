@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -18,12 +17,14 @@ class _PgmregState extends State<Pgmreg> {
   final _formKey = GlobalKey<FormState>();
 
   //text Controllers
-  final TextEditingController nameController = new TextEditingController();
-  final TextEditingController addressController = new TextEditingController();
-  final TextEditingController locController = new TextEditingController();
-  final TextEditingController phnController = new TextEditingController();
-  final TextEditingController pgmController = new TextEditingController();
-  final TextEditingController chrgController = new TextEditingController();
+  final TextEditingController nameController =  TextEditingController();
+  final TextEditingController addressController =  TextEditingController();
+  final TextEditingController locController =  TextEditingController();
+  final TextEditingController phnController =  TextEditingController();
+  final TextEditingController pgmController =  TextEditingController();
+  final TextEditingController chrgController =  TextEditingController();
+  final TextEditingController productspecController =  TextEditingController();
+  final TextEditingController instadateController =  TextEditingController();
 
   List<DropdownMenuItem<String>> _dropDownItem() {
     List<String> categorylist = [
@@ -38,7 +39,7 @@ class _PgmregState extends State<Pgmreg> {
               value: value,
               child: Text(
                 value,
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: "Nunito",
                   fontSize: 15,
                   color: Colors.black,
@@ -69,9 +70,9 @@ class _PgmregState extends State<Pgmreg> {
         return null;
       },
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         labelText: "Full Name",
-        labelStyle: TextStyle(
+        labelStyle: const TextStyle(
             fontFamily: "Nunito", fontSize: 14, fontWeight: FontWeight.bold),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
@@ -94,9 +95,9 @@ class _PgmregState extends State<Pgmreg> {
         return null;
       },
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         labelText: "Address",
-        labelStyle: TextStyle(
+        labelStyle: const TextStyle(
             fontFamily: "Nunito", fontSize: 14, fontWeight: FontWeight.bold),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
@@ -120,9 +121,9 @@ class _PgmregState extends State<Pgmreg> {
         return null;
       },
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         labelText: "Location",
-        labelStyle: TextStyle(
+        labelStyle: const TextStyle(
             fontFamily: "Nunito", fontSize: 14, fontWeight: FontWeight.bold),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
@@ -148,9 +149,9 @@ class _PgmregState extends State<Pgmreg> {
         return null;
       },
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         labelText: "Phone Number",
-        labelStyle: TextStyle(
+        labelStyle:const  TextStyle(
             fontFamily: "Nunito", fontSize: 14, fontWeight: FontWeight.bold),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
@@ -176,9 +177,9 @@ class _PgmregState extends State<Pgmreg> {
         return null;
       },
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         labelText: "Program",
-        labelStyle: TextStyle(
+        labelStyle: const TextStyle(
             fontFamily: "Nunito", fontSize: 14, fontWeight: FontWeight.bold),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
@@ -202,9 +203,9 @@ class _PgmregState extends State<Pgmreg> {
         return null;
       },
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
         labelText: "Charge",
-        labelStyle: TextStyle(
+        labelStyle:const TextStyle(
             fontFamily: "Nunito", fontSize: 14, fontWeight: FontWeight.bold),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
@@ -212,17 +213,69 @@ class _PgmregState extends State<Pgmreg> {
       ),
     );
 
+        //Product field
+    final productspec = TextFormField(
+      autofocus: false,
+      controller: productspecController,
+      onSaved: (value) {
+        productspecController.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return ("Product Feild Cannot be empty");
+        }
+        return null;
+      },
+      decoration: InputDecoration(
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        labelText: "Product Specification",
+        labelStyle: const TextStyle(
+            fontFamily: "Nunito", fontSize: 14, fontWeight: FontWeight.bold),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+    );
+
+    //INstalation field
+    final instadate = TextFormField(
+      autofocus: false,
+      controller: instadateController,
+      keyboardType: TextInputType.datetime,
+      onSaved: (value) {
+        instadateController.text = value!;
+      },
+      textInputAction: TextInputAction.next,
+      validator: (value) {
+        if (value!.isEmpty) {
+          return ("Installation date Feild Cannot be empty");
+        }
+        return null;
+      },
+      decoration: InputDecoration(
+        contentPadding:const  EdgeInsets.fromLTRB(20, 15, 20, 15),
+        labelText: "Installation date",
+        labelStyle: const TextStyle(
+            fontFamily: "Nunito", fontSize: 14, fontWeight: FontWeight.bold),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+      ),
+    );
+
+
     final categoryselector = InputDecorator(
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.edit),
-        contentPadding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+        prefixIcon: const Icon(Icons.edit),
+        contentPadding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
         hintText: "Category",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
       ),
-      child: new DropdownButtonHideUnderline(
-        child: new DropdownButton(
+      child:  DropdownButtonHideUnderline(
+        child:  DropdownButton(
           value: _selectedcategory,
           items: _dropDownItem(),
           onChanged: (value) {
@@ -230,10 +283,10 @@ class _PgmregState extends State<Pgmreg> {
               _selectedcategory = value as String?;
             });
           },
-          hint: Text("Select service type"),
+          hint: const Text("Select service type"),
           elevation: 12,
-          style: TextStyle(color: Colors.grey, fontSize: 16),
-          icon: Icon(Icons.arrow_drop_down_circle),
+          style: const TextStyle(color: Colors.grey, fontSize: 16),
+          icon: const Icon(Icons.arrow_drop_down_circle),
           iconDisabledColor: Colors.grey,
           iconEnabledColor: Colors.redAccent,
           isExpanded: true,
@@ -241,17 +294,18 @@ class _PgmregState extends State<Pgmreg> {
       ),
     );
 
-    return Container(
+
+    return SizedBox(
       height: double.infinity,
       width: double.infinity,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
-          Text(
+          const Text(
             "Program Register",
             style: TextStyle(
               fontFamily: "Nunito",
@@ -266,69 +320,75 @@ class _PgmregState extends State<Pgmreg> {
             decoration: BoxDecoration(
                 color: Colors.black26, borderRadius: BorderRadius.circular(10)),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Container(
-            child: Form(
-              key: _formKey,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 30,
-                          ),
-                          namefield,
-                          SizedBox(
-                            height: 20,
-                          ),
-                          locfield,
-                          SizedBox(
-                            height: 20,
-                          ),
-                          phnfield,
-                        ],
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                      child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+          Form(
+            key: _formKey,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
-                        addressfield,
-                        SizedBox(
+                        namefield,
+                        const SizedBox(
                           height: 20,
                         ),
-                        pgmfield,
-                        SizedBox(
+                        locfield,
+                        const SizedBox(
                           height: 20,
                         ),
-                        chrgfield,
+                        phnfield,
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        productspec,
                       ],
                     ),
-                  ))
-                ],
-              ),
+                  ),
+                ),
+                Expanded(
+                    child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      addressfield,
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      pgmfield,
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      chrgfield,
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      instadate,
+                    ],
+                  ),
+                ))
+              ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Container(
+          SizedBox(
             width: 400,
             child: categoryselector,
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           InkWell(
@@ -343,7 +403,7 @@ class _PgmregState extends State<Pgmreg> {
                 color: cheryred,
               ),
               alignment: Alignment.center,
-              child: Text(
+              child: const Text(
                 "Register Program",
                 style: TextStyle(
                   fontFamily: "Nunito",
@@ -354,11 +414,11 @@ class _PgmregState extends State<Pgmreg> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           _loading == true
-              ? CircularProgressIndicator(
+              ? const CircularProgressIndicator(
                   color: cheryred,
                 )
               : Container()
@@ -391,7 +451,10 @@ class _PgmregState extends State<Pgmreg> {
           upDate: upDate,
           upTime: upTime,
           docname: formattedDate,
-          status: "pending");
+          prospec: productspecController.text,
+          instadate: instadateController.text,
+          status: "pending",
+          );
 
       await firebaseFirestore
           .collection("Programs")
@@ -415,6 +478,8 @@ class _PgmregState extends State<Pgmreg> {
         phnController.clear();
         pgmController.clear();
         chrgController.clear();
+        productspecController.clear();
+        instadateController.clear();
       }).catchError((error) {
         print("Failed to add Program: $error");
         showDialog(
@@ -441,7 +506,7 @@ class SimpleCustomAlert extends StatelessWidget {
     return Dialog(
       backgroundColor: colorr,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-      child: Container(
+      child: SizedBox(
         height: 200,
         width: 450,
         child: Column(
@@ -452,14 +517,14 @@ class SimpleCustomAlert extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.warning_amber_rounded,
                     color: primarybg,
                     size: 30,
                   ),
                   Text(
                     done!,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: "Nunito",
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
@@ -474,14 +539,14 @@ class SimpleCustomAlert extends StatelessWidget {
             ),
             Text(
               titles!,
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: "Nunito",
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 28,
             ),
             RaisedButton(
