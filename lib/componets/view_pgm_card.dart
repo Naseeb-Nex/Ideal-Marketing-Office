@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test2/constants/constants.dart';
 
-class Viewpgmcard extends StatelessWidget {
+class Viewpgmcard extends StatefulWidget {
   String? name;
   String? address;
   String? loc;
@@ -26,6 +26,12 @@ class Viewpgmcard extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<Viewpgmcard> createState() => _ViewpgmcardState();
+}
+
+class _ViewpgmcardState extends State<Viewpgmcard> {
+  @override
+  bool vis = false;
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
@@ -43,197 +49,265 @@ class Viewpgmcard extends StatelessWidget {
             ),
           ],
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Column(
           children: [
-            Column(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "$name",
-                  style: const TextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: 22,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  "$address",
-                  style: const TextStyle(
-                      fontFamily: "Nunito",
-                      fontSize: 16,
-                      color: Colors.black26),
-                ),
-              ],
-            ),
-            Column(
-              children: [
-                Text(
-                  "$pgm",
-                  style: const TextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: 16,
-                  ),
-                ),
-                const SizedBox(height: 10,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "$phn",
+                      "${widget.name}",
+                      style: const TextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: 22,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      "${widget.address}",
+                      style: const TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 16,
+                          color: Colors.black26),
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "${widget.pgm}",
+                      style: const TextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: 16,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "${widget.phn}",
                       style: const TextStyle(
                           fontFamily: "Montserrat",
                           fontSize: 15,
                           color: Colors.black26),
+                    )
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text(
+                      "${widget.upDate}",
+                      style: const TextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: 15,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "${widget.upTime}",
+                          style: const TextStyle(
+                            fontFamily: "Nunito",
+                            fontSize: 15,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        InkWell(
+                          onTap: () => setState(() {
+                            vis = !vis;
+                          }),
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  color: white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      spreadRadius: 1,
+                                      blurRadius: 2,
+                                      color: Colors.black.withOpacity(0.1),
+                                      // offset: const Offset(0, 5),
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(5)),
+                              padding: const EdgeInsets.all(2),
+                              child: const Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.black38,
+                              )),
+                        )
+                      ],
                     ),
                   ],
-                )
+                ),
+
+                // first try
+
+                //   Row(
+                //     children: [
+                //       const SizedBox(
+                //         width: 20,
+                //       ),
+                //       Column(
+                //         children: [
+                //           Text(
+                //             "$name",
+                //             style: const TextStyle(
+                //               fontFamily: "Nunito",
+                //               fontSize: 25,
+                //               fontWeight: FontWeight.bold,
+                //             ),
+                //           ),
+                //           Text(
+                //             "$address",
+                //             style: const TextStyle(
+                //               fontFamily: "Nunito",
+                //               fontSize: 18,
+                //             ),
+                //           ),
+                //         ],
+                //       ),
+                //       Expanded(
+                //         child: Center(
+                //           child: Text(
+                //             "$pgm",
+                //             style: const TextStyle(
+                //               fontFamily: "Nunito",
+                //               fontSize: 22,
+                //               fontWeight: FontWeight.w500,
+                //               color: Color(0xFF666666),
+                //             ),
+                //           ),
+                //         ),
+                //       ),
+                //       Column(
+                //         children: [
+                //           Text(
+                //             "$upDate",
+                //             style: const TextStyle(
+                //               fontFamily: "Nunito",
+                //               fontSize: 17,
+                //             ),
+                //           ),
+                //           Text(
+                //             "$upTime",
+                //             style:const TextStyle(
+                //               fontFamily: "Nunito",
+                //               fontSize: 17,
+                //             ),
+                //           ),
+                //         ],
+                //       )
+                //     ],
+                //   ),
+                //   Padding(
+                //     padding: const EdgeInsets.only(top: 10),
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //       children: [
+                //         Row(
+                //           children: [
+                //             const Icon(
+                //               Icons.pin_drop_outlined,
+                //               color: cheryred,
+                //             ),
+                //             Text(
+                //               "  $loc",
+                //               style: const TextStyle(
+                //                 fontFamily: "Nunito",
+                //                 fontSize: 20,
+                //                 fontWeight: FontWeight.w500,
+                //               ),
+                //             ),
+                //             const SizedBox(
+                //               width: 50,
+                //             ),
+                //             Container(
+                //               alignment: Alignment.centerRight,
+                //               child: Text(
+                //                 "Type : $type",
+                //                 style: const TextStyle(
+                //                   fontFamily: "Nunito",
+                //                   fontSize: 20,
+                //                   color: Color(0xFF0e2f44),
+                //                 ),
+                //               ),
+                //             ),
+                //             const SizedBox(
+                //               width: 50,
+                //             ),
+                //             const Icon(
+                //               Icons.phone_android,
+                //               color: Color(0xFF008080),
+                //             ),
+                //             Text(
+                //               "  $phn",
+                //               style: const TextStyle(
+                //                 fontFamily: "Nunito",
+                //                 fontSize: 20,
+                //                 fontWeight: FontWeight.normal,
+                //                 color: Color(0xFF008080),
+                //               ),
+                //             ),
+                //           ],
+                //         ),
+                //         // Container(
+                //         //   child: IconButton(
+                //         //     icon: Icon(Icons.edit),
+                //         //     color: Color(0xff660066),
+                //         //     onPressed: () => print("Pressed"),
+                //         //   ),
+                //         // )
+                //       ],
+                //     ),
+                //   ),
               ],
             ),
-            Column(
-              children: [
-                Text(
-                  "$upDate",
-                  style: const TextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: 15,
-                  ),
+            Visibility(
+              visible: vis,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Row(
+                  children: [
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "${widget.loc}",
+                      style: const TextStyle(
+                          fontFamily: "Montserrat",
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: bluebg,
+                          borderRadius: BorderRadius.circular(20)),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 10),
+                      child: Text(
+                        "${widget.type}",
+                        style: const TextStyle(
+                            fontFamily: "Nunito", fontSize: 15, color: white),
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 10,),
-                Text(
-                  "$upTime",
-                  style: const TextStyle(
-                    fontFamily: "Nunito",
-                    fontSize: 15,
-                  ),
-                )
-              ],
-            )
-            
-            // first try
-
-            //   Row(
-            //     children: [
-            //       const SizedBox(
-            //         width: 20,
-            //       ),
-            //       Column(
-            //         children: [
-            //           Text(
-            //             "$name",
-            //             style: const TextStyle(
-            //               fontFamily: "Nunito",
-            //               fontSize: 25,
-            //               fontWeight: FontWeight.bold,
-            //             ),
-            //           ),
-            //           Text(
-            //             "$address",
-            //             style: const TextStyle(
-            //               fontFamily: "Nunito",
-            //               fontSize: 18,
-            //             ),
-            //           ),
-            //         ],
-            //       ),
-            //       Expanded(
-            //         child: Center(
-            //           child: Text(
-            //             "$pgm",
-            //             style: const TextStyle(
-            //               fontFamily: "Nunito",
-            //               fontSize: 22,
-            //               fontWeight: FontWeight.w500,
-            //               color: Color(0xFF666666),
-            //             ),
-            //           ),
-            //         ),
-            //       ),
-            //       Column(
-            //         children: [
-            //           Text(
-            //             "$upDate",
-            //             style: const TextStyle(
-            //               fontFamily: "Nunito",
-            //               fontSize: 17,
-            //             ),
-            //           ),
-            //           Text(
-            //             "$upTime",
-            //             style:const TextStyle(
-            //               fontFamily: "Nunito",
-            //               fontSize: 17,
-            //             ),
-            //           ),
-            //         ],
-            //       )
-            //     ],
-            //   ),
-            //   Padding(
-            //     padding: const EdgeInsets.only(top: 10),
-            //     child: Row(
-            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //       children: [
-            //         Row(
-            //           children: [
-            //             const Icon(
-            //               Icons.pin_drop_outlined,
-            //               color: cheryred,
-            //             ),
-            //             Text(
-            //               "  $loc",
-            //               style: const TextStyle(
-            //                 fontFamily: "Nunito",
-            //                 fontSize: 20,
-            //                 fontWeight: FontWeight.w500,
-            //               ),
-            //             ),
-            //             const SizedBox(
-            //               width: 50,
-            //             ),
-            //             Container(
-            //               alignment: Alignment.centerRight,
-            //               child: Text(
-            //                 "Type : $type",
-            //                 style: const TextStyle(
-            //                   fontFamily: "Nunito",
-            //                   fontSize: 20,
-            //                   color: Color(0xFF0e2f44),
-            //                 ),
-            //               ),
-            //             ),
-            //             const SizedBox(
-            //               width: 50,
-            //             ),
-            //             const Icon(
-            //               Icons.phone_android,
-            //               color: Color(0xFF008080),
-            //             ),
-            //             Text(
-            //               "  $phn",
-            //               style: const TextStyle(
-            //                 fontFamily: "Nunito",
-            //                 fontSize: 20,
-            //                 fontWeight: FontWeight.normal,
-            //                 color: Color(0xFF008080),
-            //               ),
-            //             ),
-            //           ],
-            //         ),
-            //         // Container(
-            //         //   child: IconButton(
-            //         //     icon: Icon(Icons.edit),
-            //         //     color: Color(0xff660066),
-            //         //     onPressed: () => print("Pressed"),
-            //         //   ),
-            //         // )
-            //       ],
-            //     ),
-            //   ),
+              ),
+            ),
           ],
         ),
       ),
