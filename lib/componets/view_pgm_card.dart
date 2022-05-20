@@ -11,6 +11,8 @@ class Viewpgmcard extends StatefulWidget {
   String? upDate;
   String? upTime;
   String? docname;
+  String? prospec;
+  String? instadate;
 
   Viewpgmcard({
     Key? key,
@@ -23,6 +25,8 @@ class Viewpgmcard extends StatefulWidget {
     this.upDate,
     this.upTime,
     this.docname,
+    this.prospec,
+    this.instadate,
   }) : super(key: key);
 
   @override
@@ -67,14 +71,22 @@ class _ViewpgmcardState extends State<Viewpgmcard> {
                       ),
                     ),
                     const SizedBox(
-                      height: 5,
+                      height: 4,
                     ),
                     Text(
                       "${widget.address}",
                       style: const TextStyle(
                           fontFamily: "Nunito",
                           fontSize: 16,
-                          color: Colors.black26),
+                          color: Colors.black54),
+                    ),
+                    Text(
+                      "${widget.loc}",
+                      style: const TextStyle(
+                          fontFamily: "Montserrat",
+                          fontSize: 15,
+                          color: Colors.black45,
+                          fontWeight: FontWeight.w500),
                     ),
                   ],
                 ),
@@ -89,7 +101,7 @@ class _ViewpgmcardState extends State<Viewpgmcard> {
                       ),
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 12,
                     ),
                     Text(
                       "${widget.phn}",
@@ -161,16 +173,6 @@ class _ViewpgmcardState extends State<Viewpgmcard> {
                     const SizedBox(
                       width: 10,
                     ),
-                    Text(
-                      "${widget.loc}",
-                      style: const TextStyle(
-                          fontFamily: "Montserrat",
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    const SizedBox(
-                      width: 30,
-                    ),
                     Container(
                       decoration: BoxDecoration(
                           color: bluebg,
@@ -183,6 +185,22 @@ class _ViewpgmcardState extends State<Viewpgmcard> {
                             fontFamily: "Nunito", fontSize: 15, color: white),
                       ),
                     ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      "${widget.prospec}",
+                      style: const TextStyle(
+                          fontFamily: "Montserrat", fontSize: 17),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      "${widget.instadate}",
+                      style: const TextStyle(
+                          fontFamily: "Montserrat", fontSize: 17),
+                    )
                   ],
                 ),
               ),

@@ -49,6 +49,8 @@ class Pgmwrapper extends StatelessWidget {
                   type: _allpgm[i]["type"],
                   upDate: _allpgm[i]["upDate"],
                   upTime: _allpgm[i]["upTime"],
+                  prospec: _allpgm[i]["prospec"],
+                  instadate: _allpgm[i]["instadate"],
                   docname: _allpgm[i]["docname"],
                 )
               ]

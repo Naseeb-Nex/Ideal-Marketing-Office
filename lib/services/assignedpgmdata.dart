@@ -10,6 +10,8 @@ class Assignpgmdata {
   String? upDate;
   String? upTime;
   String? docname;
+  String? prospec;
+  String? instadate;
   String? status;
   String? username;
   String? techname;
@@ -30,6 +32,8 @@ class Assignpgmdata {
       this.upDate,
       this.upTime,
       this.docname,
+      this.prospec,
+      this.instadate,
       this.status,
       this.username,
       this.techname,
@@ -51,6 +55,8 @@ class Assignpgmdata {
       upDate: map['upDate'],
       upTime: map['upTime'],
       docname: map['docname'],
+      prospec: map['prospec'],
+      instadate: map['instadate'],
       status: map['status'],
       username: map['username'],
       techname: map['techname'],
@@ -74,6 +80,8 @@ class Assignpgmdata {
       'upDate': upDate,
       'upTime': upTime,
       'docname': docname,
+      'prospec': prospec,
+      'instadate': instadate,
       'status': status,
       'username': username,
       'techname': techname,

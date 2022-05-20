@@ -57,6 +57,7 @@ class Assignedpgmwrapper extends StatelessWidget {
                     type: assignedpgm[i]["type"],
                     upDate: assignedpgm[i]["upDate"],
                     upTime: assignedpgm[i]["upTime"],
+                    
                     docname: assignedpgm[i]["docname"],
                   )
                 ]
