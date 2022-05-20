@@ -23,6 +23,7 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
   List pgm = [];
   List _allpgm = [];
   List pendingpgm = [];
+  List assignpgm = [];
   final Stream<QuerySnapshot> programstream =
       FirebaseFirestore.instance.collection('Programs').snapshots();
 
@@ -81,9 +82,9 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
                         _allpgm.add(a);
                         a['uid'] = document.id;
                       }).toList();
-                      // List pendingpgm = _allpgm
-                      //     .where((i) => i['status'] == 'pending')
-                      //     .toList();
+                      assignpgm = _allpgm
+                          .where((i) => i['status'] == 'pending')
+                          .toList();
                       return Column(
                         children: [
                           const SizedBox(
@@ -102,6 +103,8 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
                               upDate: pendingpgm[i]["upDate"],
                               upTime: pendingpgm[i]["upTime"],
                               docname: pendingpgm[i]["docname"],
+                              prospec: pendingpgm[i]["prospec"],
+                  instadate: pendingpgm[i]["instadate"],
                               techuid: widget.uid,
                               techname: widget.techname,
                               username: widget.username,
@@ -127,7 +130,7 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
   void searchpgm(String query) {
     setState(() {
       
-    pendingpgm = _allpgm.where((pgm) {
+    pendingpgm = assignpgm.where((pgm) {
       final nameLower = pgm["name"]!.toLowerCase();
       final phnumber = pgm["phn"]!;
       final searchquery = query.toLowerCase();

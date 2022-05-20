@@ -41,7 +41,7 @@ class _ViewpgmcardState extends State<Viewpgmcard> {
       padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
           color: Colors.white,
@@ -108,7 +108,7 @@ class _ViewpgmcardState extends State<Viewpgmcard> {
                       style: const TextStyle(
                           fontFamily: "Montserrat",
                           fontSize: 15,
-                          color: Colors.black26),
+                          color: Colors.black54),
                     )
                   ],
                 ),
@@ -200,7 +200,7 @@ class _ViewpgmcardState extends State<Viewpgmcard> {
                       "${widget.instadate}",
                       style: const TextStyle(
                           fontFamily: "Montserrat", fontSize: 17),
-                    )
+                    ),
                   ],
                 ),
               ),
