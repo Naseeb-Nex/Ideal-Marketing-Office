@@ -212,13 +212,15 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
                           padding: const EdgeInsets.symmetric(horizontal: 6),
                           child: Row(
                             children: [
-                              const Text(
+                               Text(
                                 "Set Priority :   ",
                                 style: TextStyle(
                                   fontFamily: "Nunito",
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
-                                  color: Color(0xFF008080),
+                                  color: _up == true
+                                        ? Colors.greenAccent
+                                        : Colors.redAccent,
                                 ),
                               ),
                               Container(
@@ -284,218 +286,6 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
         ),
       ),
     );
-
-    // return Padding(
-    //   padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
-    //   child: Container(
-    //     width: double.infinity,
-    //     padding: EdgeInsets.symmetric(horizontal: 20),
-    //     decoration: BoxDecoration(
-    //       borderRadius: BorderRadius.circular(25),
-    //       color: Colors.white,
-    //       boxShadow: [
-    //         BoxShadow(
-    //           offset: Offset(0, 2),
-    //           blurRadius: 5,
-    //           color: secondbg.withOpacity(0.18),
-    //         ),
-    //       ],
-    //     ),
-    //     child: Column(
-    //       crossAxisAlignment: CrossAxisAlignment.start,
-    //       mainAxisAlignment: MainAxisAlignment.center,
-    //       children: [
-    // new ui
-
-    // Row(
-    //   children: [
-    //     SizedBox(
-    //       width: 20,
-    //     ),
-    //     Column(
-    //       children: [
-    //         Container(
-    //           child: Text(
-    //             "${widget.name}",
-    //             style: TextStyle(
-    //               fontFamily: "Nunito",
-    //               fontSize: 25,
-    //               fontWeight: FontWeight.bold,
-    //             ),
-    //           ),
-    //         ),
-    //         Container(
-    //           child: Text(
-    //             "${widget.address}",
-    //             style: TextStyle(
-    //               fontFamily: "Nunito",
-    //               fontSize: 18,
-    //             ),
-    //           ),
-    //         ),
-    //       ],
-    //     ),
-    //     Expanded(
-    //       child: Center(
-    //         child: Text(
-    //           "${widget.pgm}",
-    //           style: TextStyle(
-    //             fontFamily: "Nunito",
-    //             fontSize: 22,
-    //             fontWeight: FontWeight.w500,
-    //             color: Color(0xFF666666),
-    //           ),
-    //         ),
-    //       ),
-    //     ),
-    //     Column(
-    //       children: [
-    //         Container(
-    //           child: Text(
-    //             "${widget.upDate}",
-    //             style: TextStyle(
-    //               fontFamily: "Nunito",
-    //               fontSize: 17,
-    //             ),
-    //           ),
-    //         ),
-    //         Container(
-    //           child: Text(
-    //             "${widget.upTime}",
-    //             style: TextStyle(
-    //               fontFamily: "Nunito",
-    //               fontSize: 17,
-    //             ),
-    //           ),
-    //         ),
-    //       ],
-    //     )
-    //   ],
-    // ),
-    // Padding(
-    //   padding: EdgeInsets.only(top: 10),
-    //   child: Row(
-    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //     children: [
-    //       Row(
-    //         children: [
-    //           Icon(
-    //             Icons.pin_drop_outlined,
-    //             color: cheryred,
-    //           ),
-    //           Container(
-    //             child: Text(
-    //               "  ${widget.loc}",
-    //               style: TextStyle(
-    //                 fontFamily: "Nunito",
-    //                 fontSize: 20,
-    //                 fontWeight: FontWeight.w500,
-    //               ),
-    //             ),
-    //           ),
-    //           SizedBox(
-    //             width: 50,
-    //           ),
-    //           Container(
-    //             alignment: Alignment.centerRight,
-    //             child: Text(
-    //               "Type : ${widget.type}",
-    //               style: const TextStyle(
-    //                 fontFamily: "Nunito",
-    //                 fontSize: 20,
-    //                 color: Color(0xFF0e2f44),
-    //               ),
-    //             ),
-    //           ),
-    //           SizedBox(
-    //             width: 50,
-    //           ),
-    //           Icon(
-    //             Icons.phone_android,
-    //             color: Color(0xFF008080),
-    //           ),
-    //           Container(
-    //             child: Text(
-    //               "  ${widget.phn}",
-    //               style: TextStyle(
-    //                 fontFamily: "Nunito",
-    //                 fontSize: 20,
-    //                 fontWeight: FontWeight.normal,
-    //                 color: Color(0xFF008080),
-    //               ),
-    //             ),
-    //           ),
-    //         ],
-    //       ),
-    //       Container(
-    //         decoration: BoxDecoration(
-    //             border: Border.all(color: Colors.grey),
-    //             borderRadius: BorderRadius.circular(10)),
-    //         padding: EdgeInsets.symmetric(vertical: 3, horizontal: 6),
-    //         child: Row(
-    //           children: [
-    //             Container(
-    //               child: const Text(
-    //                 "Set Priority :   ",
-    //                 style: TextStyle(
-    //                   fontFamily: "Nunito",
-    //                   fontSize: 14,
-    //                   fontWeight: FontWeight.bold,
-    //                   color: Color(0xFF008080),
-    //                 ),
-    //               ),
-    //             ),
-    //             Container(
-    //               width: 35,
-    //               alignment: Alignment.center,
-    //               child: Form(
-    //                 key: _priorityKey,
-    //                 child: TextFormField(
-    //                   autofocus: false,
-    //                   controller: _controller,
-    //                   onSaved: (value) {
-    //                     _controller.text = value!;
-    //                   },
-    //                   validator: (value) {
-    //                     if (value!.isEmpty) {
-    //                       error = true;
-    //                       return null;
-    //                     }
-    //                     error = false;
-    //                     return null;
-    //                   },
-    //                   decoration:
-    //                       InputDecoration(border: InputBorder.none),
-    //                 ),
-    //               ),
-    //             ),
-    //             InkWell(
-    //               onTap: () => uploadpgmdata(),
-    //               child: Container(
-    //                 width: 30,
-    //                 height: 30,
-    //                 decoration: BoxDecoration(
-    //                   color: _up == true
-    //                       ? Colors.greenAccent
-    //                       : Colors.redAccent,
-    //                   borderRadius: BorderRadius.circular(10),
-    //                 ),
-    //                 child: Icon(
-    //                   Icons.done,
-    //                   color: white,
-    //                 ),
-    //               ),
-    //             )
-    //           ],
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    // ),
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
 
   void uploadpgmdata() async {
@@ -563,7 +353,7 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
         setState(() {
           loading=false;
         });
-        _controller.clear();
+        // _controller.clear();
       }).catchError((error) => print("Failed to assign program : $error"));
     }
   }
