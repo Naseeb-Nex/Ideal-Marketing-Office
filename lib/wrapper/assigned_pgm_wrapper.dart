@@ -41,29 +41,27 @@ class Assignedpgmwrapper extends StatelessWidget {
           }).toList();
           List assignedpgm =
               _allpgm.where((i) => i['status'] == 'assigned').toList();
-          return Container(
-            child: Column(
-              children: [
-                SizedBox(
-                  width: 30,
-                ),
-                for (var i = 0; i < assignedpgm.length; i++) ...[
-                  Viewpgmcard(
-                    name: assignedpgm[i]["name"],
-                    address: assignedpgm[i]["address"],
-                    loc: assignedpgm[i]["loc"],
-                    pgm: assignedpgm[i]["pgm"],
-                    phn: assignedpgm[i]["phn"],
-                    type: assignedpgm[i]["type"],
-                    upDate: assignedpgm[i]["upDate"],
-                    upTime: assignedpgm[i]["upTime"],
-                    prospec: assignedpgm[i]["prospec"],
-                  instadate: assignedpgm[i]["instadate"],
-                    docname: assignedpgm[i]["docname"],
-                  )
-                ]
-              ],
-            ),
+          return Column(
+            children: [
+              const SizedBox(
+                width: 30,
+              ),
+              for (var i = 0; i < assignedpgm.length; i++) ...[
+                Viewpgmcard(
+                  name: assignedpgm[i]["name"],
+                  address: assignedpgm[i]["address"],
+                  loc: assignedpgm[i]["loc"],
+                  pgm: assignedpgm[i]["pgm"],
+                  phn: assignedpgm[i]["phn"],
+                  type: assignedpgm[i]["type"],
+                  upDate: assignedpgm[i]["upDate"],
+                  upTime: assignedpgm[i]["upTime"],
+                  prospec: assignedpgm[i]["prospec"],
+                instadate: assignedpgm[i]["instadate"],
+                  docname: assignedpgm[i]["docname"],
+                )
+              ]
+            ],
           );
         });
   }
