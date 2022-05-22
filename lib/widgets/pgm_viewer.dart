@@ -222,6 +222,7 @@ class ViewerWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     if (currentsw == 'Pending') return PendingPgmViewer();
     else if (currentsw == 'Assign') return Assignedpgmviewer();
+    else if (currentsw == 'Completed') return Completedpgmviewer();
     return ViewAll();
   }
 }

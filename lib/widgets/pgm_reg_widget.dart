@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:test2/services/pgm.dart';
+import 'package:test2/services/history.dart';
 
 class Pgmreg extends StatefulWidget {
   String uid;
@@ -456,12 +457,29 @@ class _PgmregState extends State<Pgmreg> {
           status: "pending",
           );
 
+      Pgmhistory history = Pgmhistory(
+          name: nameController.text,
+          address: addressController.text,
+          loc: locController.text,
+          phn: phnController.text,
+          pgm: pgmController.text,
+          chrg: chrgController.text,
+          type: _selectedcategory,
+          upDate: upDate,
+          upTime: upTime,
+          docname: formattedDate,
+          prospec: productspecController.text,
+          instadate: instadateController.text,
+          status: "pending",
+          ch: "New program added"
+          );
+
       await firebaseFirestore
           .collection("Programs")
           .doc("$formattedDate")
           .set(pgmr.toMap())
           .then((value) {
-        print("Successfully Program created");
+            firebaseFirestore.collection("history").doc("$formattedDate").set(history.toMap());
         showDialog(
             context: context,
             builder: (BuildContext context) {

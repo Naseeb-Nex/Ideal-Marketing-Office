@@ -4,4 +4,5 @@ export 'pgm_viewer.dart';
 export 'pending_pgm_viewer.dart';
 export 'asign_pgm_widget.dart';
 export 'assigned_pgm_viewer.dart';
+export 'completed_pgm_viewer.dart';
 export 'statussrc.dart';
