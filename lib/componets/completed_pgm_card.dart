@@ -161,15 +161,13 @@ class Completedpgmcard extends StatelessWidget {
                         Icons.phone_android,
                         color: Color(0xFF008080),
                       ),
-                      Container(
-                        child: Text(
-                          "  $phn",
-                          style: TextStyle(
-                            fontFamily: "Nunito",
-                            fontSize: 20,
-                            fontWeight: FontWeight.normal,
-                            color: Color(0xFF008080),
-                          ),
+                      Text(
+                        "  $phn",
+                        style: const TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 20,
+                          fontWeight: FontWeight.normal,
+                          color: Color(0xFF008080),
                         ),
                       ),
                     ],
@@ -189,8 +187,8 @@ class Completedpgmcard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    SizedBox(width: 20),
-                    Text(
+                    const SizedBox(width: 20),
+                    const Text(
                       "Remarks : ",
                       style: TextStyle(
                         fontFamily: "Nunito",
@@ -198,12 +196,12 @@ class Completedpgmcard extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Text(
                       "$remarks",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: "Nunito",
                         fontSize: 18,
                       ),
@@ -212,22 +210,18 @@ class Completedpgmcard extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Container(
-                      child: Text(
-                        "Completed Date : $cdate",
-                        style: TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 17,
-                        ),
+                    Text(
+                      "Completed Date : $cdate",
+                      style: const TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 17,
                       ),
                     ),
-                    Container(
-                      child: Text(
-                        "Completed Time : $ctime",
-                        style: TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 17,
-                        ),
+                    Text(
+                      "Completed Time : $ctime",
+                      style: const TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 17,
                       ),
                     ),
                   ],
