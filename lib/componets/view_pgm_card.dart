@@ -34,8 +34,8 @@ class Viewpgmcard extends StatefulWidget {
 }
 
 class _ViewpgmcardState extends State<Viewpgmcard> {
-  @override
   bool vis = false;
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 5),

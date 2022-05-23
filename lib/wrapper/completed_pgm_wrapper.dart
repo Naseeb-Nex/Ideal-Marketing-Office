@@ -5,7 +5,6 @@ import 'package:test2/constants/constants.dart';
 
 import 'package:test2/widgets/all completed pgm list/completeddayview.dart';
 import 'package:test2/widgets/all completed pgm list/completedmonthview.dart';
-import 'package:test2/widgets/Techview/techcompleted/techcyear.dart';
 
 class Completedpgmwrapper extends StatefulWidget {
   String? userid;
@@ -22,7 +21,7 @@ class _CompletedpgmwrapperState extends State<Completedpgmwrapper> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
+        const SizedBox(
           height: 8,
         ),
         Container(
@@ -36,7 +35,7 @@ class _CompletedpgmwrapperState extends State<Completedpgmwrapper> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
                   InkWell(
@@ -64,7 +63,7 @@ class _CompletedpgmwrapperState extends State<Completedpgmwrapper> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
                   InkWell(
@@ -93,34 +92,7 @@ class _CompletedpgmwrapperState extends State<Completedpgmwrapper> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  InkWell(
-                    onTap: () => setState(() {
-                      _currentsw = 'year';
-                    }),
-                    child: Container(
-                      height: 50,
-                      width: 200,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: _currentsw == "year" ? white : cheryred,
-                        border: Border.all(color: cheryred),
-                      ),
-                      child: Text(
-                        "Year",
-                        style: TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color:
-                              _currentsw == "year" ? cheryred : white,
-                        ),
-                      ),
-                    ),
-                  ),
+                  
                 ],
               ),
             ),
