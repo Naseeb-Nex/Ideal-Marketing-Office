@@ -49,13 +49,13 @@ class Protechcard extends StatelessWidget {
       child: Container(
         height: 220,
         width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              offset: Offset(0, 2),
+              offset: const Offset(0, 2),
               blurRadius: 5,
               color: secondbg.withOpacity(0.18),
             ),
@@ -67,28 +67,24 @@ class Protechcard extends StatelessWidget {
           children: [
             Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 Column(
                   children: [
-                    Container(
-                      child: Text(
-                        "$name",
-                        style: TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    Text(
+                      "$name",
+                      style: const TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Container(
-                      child: Text(
-                        "$address",
-                        style: TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 18,
-                        ),
+                    Text(
+                      "$address",
+                      style: const TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 18,
                       ),
                     ),
                   ],
@@ -97,7 +93,7 @@ class Protechcard extends StatelessWidget {
                   child: Center(
                     child: Text(
                       "$pgm",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: "Nunito",
                         fontSize: 22,
                         fontWeight: FontWeight.w500,
@@ -108,22 +104,18 @@ class Protechcard extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Container(
-                      child: Text(
-                        "$upDate",
-                        style: TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 17,
-                        ),
+                    Text(
+                      "$upDate",
+                      style: const TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 17,
                       ),
                     ),
-                    Container(
-                      child: Text(
-                        "$upTime",
-                        style: TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 17,
-                        ),
+                    Text(
+                      "$upTime",
+                      style: const TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 17,
                       ),
                     ),
                   ],
@@ -131,27 +123,25 @@ class Protechcard extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(top: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.pin_drop_outlined,
                         color: cheryred,
                       ),
-                      Container(
-                        child: Text(
-                          "  $loc",
-                          style: TextStyle(
-                            fontFamily: "Nunito",
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                          ),
+                      Text(
+                        "  $loc",
+                        style: const TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 50,
                       ),
                       Container(
@@ -165,22 +155,20 @@ class Protechcard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 50,
                       ),
-                      Icon(
+                      const Icon(
                         Icons.phone_android,
                         color: Color(0xFF008080),
                       ),
-                      Container(
-                        child: Text(
-                          "  $phn",
-                          style: TextStyle(
-                            fontFamily: "Nunito",
-                            fontSize: 20,
-                            fontWeight: FontWeight.normal,
-                            color: Color(0xFF008080),
-                          ),
+                      Text(
+                        "  $phn",
+                        style: const TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 20,
+                          fontWeight: FontWeight.normal,
+                          color: Color(0xFF008080),
                         ),
                       ),
                     ],
@@ -211,9 +199,9 @@ class Protechcard extends StatelessWidget {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.redAccent),
-                      child: Center(
+                      child: const Center(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                          padding:  EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                           child: Text(
                             "Set New Program",
                             style: TextStyle(
@@ -235,8 +223,8 @@ class Protechcard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    SizedBox(width: 20),
-                    Text(
+                    const SizedBox(width: 20),
+                    const Text(
                       "Remarks : ",
                       style: TextStyle(
                         fontFamily: "Nunito",
@@ -244,12 +232,12 @@ class Protechcard extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Text(
                       "$remarks",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: "Nunito",
                         fontSize: 18,
                       ),
@@ -258,22 +246,18 @@ class Protechcard extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Container(
-                      child: Text(
-                        "Completed Date : $ptime",
-                        style: TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 17,
-                        ),
+                    Text(
+                      "Completed Date : $ptime",
+                      style: const TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 17,
                       ),
                     ),
-                    Container(
-                      child: Text(
-                        "Completed Time :  $pdate",
-                        style: TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 17,
-                        ),
+                    Text(
+                      "Completed Time :  $pdate",
+                      style: const TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 17,
                       ),
                     ),
                   ],
@@ -287,6 +271,7 @@ class Protechcard extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class ConfirmBox extends StatelessWidget {
   String? uid;
   String? username;
@@ -302,7 +287,7 @@ class ConfirmBox extends StatelessWidget {
   String? docname;
   String? pdocname;
 
-  ConfirmBox({
+  ConfirmBox({Key? key, 
     this.uid,
     this.username,
     this.name,
@@ -316,9 +301,9 @@ class ConfirmBox extends StatelessWidget {
     this.upTime,
     this.docname,
     this.pdocname,
-  });
+  }) : super(key: key);
 
-  final TextEditingController pgmController = new TextEditingController();
+  final TextEditingController pgmController =  TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -339,7 +324,7 @@ class ConfirmBox extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                children:const [
                   Center(
                     child: Text(
                       "Processing Program",
@@ -354,7 +339,7 @@ class ConfirmBox extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             const Center(
@@ -376,7 +361,7 @@ class ConfirmBox extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "Program : ",
                     style: TextStyle(
                       fontFamily: "Nunito",
@@ -385,7 +370,7 @@ class ConfirmBox extends StatelessWidget {
                       color: Colors.black26,
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: s.width * 0.20,
                     child: TextFormField(
                       autofocus: false,
@@ -404,7 +389,7 @@ class ConfirmBox extends StatelessWidget {
                         return null;
                       },
                       decoration: InputDecoration(
-                        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
@@ -430,7 +415,7 @@ class ConfirmBox extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.redAccent,
                         borderRadius: BorderRadius.circular(20)),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         "Cancel",
                         style: TextStyle(
@@ -443,7 +428,7 @@ class ConfirmBox extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 30,
                 ),
                 InkWell(
@@ -454,7 +439,7 @@ class ConfirmBox extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.greenAccent),
-                    child: Center(
+                    child:const  Center(
                       child: Text(
                         "Okay",
                         style: TextStyle(
