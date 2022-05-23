@@ -1,66 +1,138 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:test2/componets/view_pgm_card.dart';
+import 'package:flutter/gestures.dart';
 import 'package:test2/constants/constants.dart';
 
-class Completedpgmwrapper extends StatelessWidget {
+class Completedpgmwrapper extends StatefulWidget {
   String? userid;
   Completedpgmwrapper({Key? key, this.userid}) : super(key: key);
-  final Stream<QuerySnapshot> studentsStream =
-      FirebaseFirestore.instance.collection('completed').limit(10).snapshots();
+
+  @override
+  State<Completedpgmwrapper> createState() => _CompletedpgmwrapperState();
+}
+
+class _CompletedpgmwrapperState extends State<Completedpgmwrapper> {
+      String _currentsw = "day";
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-        stream: studentsStream,
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasError) {
-            print('Something went Wrong');
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Expanded(
-              child: Container(
-                color: white,
-                child: const Center(
-                  child: CircularProgressIndicator(
-                    color: cheryred,
+    return Column(
+      children: [
+        SizedBox(
+          height: 8,
+        ),
+        Container(
+          height: 50,
+          width: double.infinity,
+          child: ScrollConfiguration(
+            behavior: Techcswipe(),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 20,
                   ),
-                ),
+                  InkWell(
+                    onTap: () => setState(() {
+                      _currentsw = 'day';
+                    }),
+                    child: Container(
+                      height: 50,
+                      width: 200,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: _currentsw == "day" ? white : cheryred,
+                        border: Border.all(color: cheryred),
+                      ),
+                      child: Text(
+                        "Day",
+                        style: TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color:
+                              _currentsw == "day" ? cheryred : white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  InkWell(
+                    onTap: () => setState(() {
+                      _currentsw = 'month';
+                    }),
+                    child: Container(
+                      height: 50,
+                      width: 200,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color:
+                            _currentsw == "month" ? white : cheryred,
+                        border: Border.all(color: cheryred),
+                      ),
+                      child: Text(
+                        "Month",
+                        style: TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color:
+                              _currentsw == "month" ? cheryred : white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  InkWell(
+                    onTap: () => setState(() {
+                      _currentsw = 'year';
+                    }),
+                    child: Container(
+                      height: 50,
+                      width: 200,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: _currentsw == "year" ? white : cheryred,
+                        border: Border.all(color: cheryred),
+                      ),
+                      child: Text(
+                        "Year",
+                        style: TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color:
+                              _currentsw == "year" ? cheryred : white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            );
-          }
-
-          List _allpgm = [];
-          _allpgm.clear();
-          snapshot.data!.docs.map((DocumentSnapshot document) {
-            Map a = document.data() as Map<String, dynamic>;
-            _allpgm.add(a);
-            print(a);
-            a['uid'] = document.id;
-          }).toList();
-          List pendingpgm =
-              _allpgm.where((i) => i['status'] == 'pending').toList();
-          return Column(
-            children: [
-              const SizedBox(
-                width: 30,
-              ),
-              for (var i = 0; i < pendingpgm.length; i++) ...[
-                Viewpgmcard(
-                  name: pendingpgm[i]["name"],
-                  address: pendingpgm[i]["address"],
-                  loc: pendingpgm[i]["loc"],
-                  pgm: pendingpgm[i]["pgm"],
-                  phn: pendingpgm[i]["phn"],
-                  type: pendingpgm[i]["type"],
-                  upDate: pendingpgm[i]["upDate"],
-                  upTime: pendingpgm[i]["upTime"],
-                  docname: pendingpgm[i]["docname"],
-                )
-              ]
-            ],
-          );
-        });
+            ),
+          ),
+        ),
+      ],
+    );
   }
+}
+
+class Techcswipe extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+        // etc.
+      };
 }
