@@ -55,28 +55,24 @@ class Completedpgmcard extends StatelessWidget {
           children: [
             Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 Column(
                   children: [
-                    Container(
-                      child: Text(
-                        "$name",
-                        style: TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    Text(
+                      "$name",
+                      style: const TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Container(
-                      child: Text(
-                        "$address",
-                        style: TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 18,
-                        ),
+                    Text(
+                      "$address",
+                      style: const TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 18,
                       ),
                     ),
                   ],
@@ -85,7 +81,7 @@ class Completedpgmcard extends StatelessWidget {
                   child: Center(
                     child: Text(
                       "$pgm",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: "Nunito",
                         fontSize: 22,
                         fontWeight: FontWeight.w500,
@@ -96,22 +92,18 @@ class Completedpgmcard extends StatelessWidget {
                 ),
                 Column(
                   children: [
-                    Container(
-                      child: Text(
-                        "$upDate",
-                        style: TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 17,
-                        ),
+                    Text(
+                      "$upDate",
+                      style: const TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 17,
                       ),
                     ),
-                    Container(
-                      child: Text(
-                        "$upTime",
-                        style: TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 17,
-                        ),
+                    Text(
+                      "$upTime",
+                      style: const TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 17,
                       ),
                     ),
                   ],
