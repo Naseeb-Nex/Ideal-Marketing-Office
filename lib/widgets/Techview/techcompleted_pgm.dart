@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/gestures.dart';
-import 'package:intl/intl.dart';
 
 import 'package:test2/widgets/Techview/techcompleted/techcday.dart';
 import 'package:test2/widgets/Techview/techcompleted/techcmonth.dart';
@@ -134,7 +133,7 @@ class _TechcompletedState extends State<Techcompleted> {
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(10),
-            child: Container(
+            child: SizedBox(
               width: double.infinity,
               height: double.infinity,
               child: Ctechwrapper(
