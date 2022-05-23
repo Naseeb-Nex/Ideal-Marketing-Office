@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:test2/constants/constants.dart';
 
-import 'package:test2/widgets/Techview/techcompleted/techcday.dart';
-import 'package:test2/widgets/Techview/techcompleted/techcmonth.dart';
+import 'package:test2/widgets/all completed pgm list/completeddayview.dart';
+import 'package:test2/widgets/all completed pgm list/completedmonthview.dart';
 import 'package:test2/widgets/Techview/techcompleted/techcyear.dart';
 
 class Completedpgmwrapper extends StatefulWidget {
@@ -131,7 +131,7 @@ class _CompletedpgmwrapperState extends State<Completedpgmwrapper> {
             child: SizedBox(
               width: double.infinity,
               // height: double.infinity,
-              child: Ctechwrapper(
+              child: Completedveiwwrapper(
                   currentsw: _currentsw,
                   // uid: widget.uid,
                   username: "_tech123",
@@ -155,21 +155,22 @@ class Techcswipe extends MaterialScrollBehavior {
 }
 
 
-class Ctechwrapper extends StatelessWidget {
+// ignore: must_be_immutable
+class Completedveiwwrapper extends StatelessWidget {
   String? currentsw;
   String? uid;
   String? username;
   String? techname;
-  Ctechwrapper(
+  Completedveiwwrapper(
       {Key? key, this.currentsw, this.uid, this.username, this.techname})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (currentsw == 'year')
-      return Techcyear(uid: uid, username: username, techname: techname);
-    else if (currentsw == 'month')
-      return Techcmonth(uid: uid, username: username, techname: techname);
-    return Techcday(uid: uid, username: username, techname: techname);
+   if (currentsw == 'month')
+    {
+      return Completedmonthview();
+    }
+    return Completeddayview();
   }
 }
