@@ -5,11 +5,11 @@ import 'package:test2/componets/view_pgm_card.dart';
 import 'package:test2/constants/constants.dart';
 
 // ignore: must_be_immutable
-class Assignedpgmwrapper extends StatelessWidget {
+class Historypgmwrapper extends StatelessWidget {
   String? userid;
-  Assignedpgmwrapper({Key? key, this.userid}) : super(key: key);
+  Historypgmwrapper({Key? key, this.userid}) : super(key: key);
   final Stream<QuerySnapshot> studentsStream =
-      FirebaseFirestore.instance.collection('Programs').snapshots();
+      FirebaseFirestore.instance.collection('history').snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,6 @@ class Assignedpgmwrapper extends StatelessWidget {
           snapshot.data!.docs.map((DocumentSnapshot document) {
             Map a = document.data() as Map<String, dynamic>;
             _allpgm.add(a);
-            print(a);
             a['uid'] = document.id;
           }).toList();
           List assignedpgm =

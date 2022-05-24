@@ -3,6 +3,7 @@ import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:test2/widgets/all_viewer.dart';
 import 'package:test2/widgets/export_widget.dart';
+import 'package:test2/widgets/history_pgm_viewer.dart';
 
 class Pgmviewer extends StatefulWidget {
   const Pgmviewer({Key? key}) : super(key: key);
@@ -15,8 +16,7 @@ class _PgmviewerState extends State<Pgmviewer> {
   String _currentsw = "All";
   @override
   Widget build(BuildContext context) {
-    final ScrollController controller = ScrollController();
-    return Container(
+    return SizedBox(
       height: double.infinity,
       width: double.infinity,
       child: Column(
@@ -43,7 +43,7 @@ class _PgmviewerState extends State<Pgmviewer> {
           const SizedBox(
             height: 20,
           ),
-          Container(
+          SizedBox(
             height: 50,
             width: double.infinity,
             child: ScrollConfiguration(
@@ -54,7 +54,7 @@ class _PgmviewerState extends State<Pgmviewer> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       InkWell(
@@ -81,7 +81,7 @@ class _PgmviewerState extends State<Pgmviewer> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       InkWell(
@@ -108,7 +108,7 @@ class _PgmviewerState extends State<Pgmviewer> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       InkWell(
@@ -135,7 +135,7 @@ class _PgmviewerState extends State<Pgmviewer> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       InkWell(
@@ -194,7 +194,7 @@ class _PgmviewerState extends State<Pgmviewer> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           ViewerWrapper(currentsw: _currentsw)
@@ -214,15 +214,22 @@ class MyCustomScrollBehavior extends MaterialScrollBehavior {
       };
 }
 
+// ignore: must_be_immutable
 class ViewerWrapper extends StatelessWidget {
   String? currentsw;
   ViewerWrapper({Key? key, this.currentsw}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (currentsw == 'Pending') return PendingPgmViewer();
-    else if (currentsw == 'Assign') return Assignedpgmviewer();
-    else if (currentsw == 'Completed') return Completedpgmviewer();
-    return ViewAll();
+    if (currentsw == 'Pending') {
+      return const PendingPgmViewer();
+    } else if (currentsw == 'Assign') {
+      return Assignedpgmviewer();
+    } else if (currentsw == 'Completed') {
+      return Completedpgmviewer();
+    } else if (currentsw == 'History') {
+      return const Historypgmviewer();
+    }
+    return const ViewAll();
   }
 }
