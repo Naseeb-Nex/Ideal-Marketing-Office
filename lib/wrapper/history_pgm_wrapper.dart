@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:test2/componets/view_pgm_card.dart';
+import 'package:test2/componets/history_pgm_card.dart';
 import 'package:test2/constants/constants.dart';
 
 // ignore: must_be_immutable
@@ -39,26 +39,25 @@ class Historypgmwrapper extends StatelessWidget {
             _allpgm.add(a);
             a['uid'] = document.id;
           }).toList();
-          List assignedpgm =
-              _allpgm.where((i) => i['status'] == 'assigned').toList();
           return Column(
             children: [
               const SizedBox(
                 width: 30,
               ),
-              for (var i = 0; i < assignedpgm.length; i++) ...[
-                Viewpgmcard(
-                  name: assignedpgm[i]["name"],
-                  address: assignedpgm[i]["address"],
-                  loc: assignedpgm[i]["loc"],
-                  pgm: assignedpgm[i]["pgm"],
-                  phn: assignedpgm[i]["phn"],
-                  type: assignedpgm[i]["type"],
-                  upDate: assignedpgm[i]["upDate"],
-                  upTime: assignedpgm[i]["upTime"],
-                  prospec: assignedpgm[i]["prospec"],
-                instadate: assignedpgm[i]["instadate"],
-                  docname: assignedpgm[i]["docname"],
+              for (var i = 0; i < _allpgm.length; i++) ...[
+                Historypgmcard(
+                  name: _allpgm[i]["name"],
+                  address: _allpgm[i]["address"],
+                  loc: _allpgm[i]["loc"],
+                  pgm: _allpgm[i]["pgm"],
+                  phn: _allpgm[i]["phn"],
+                  type: _allpgm[i]["type"],
+                  upDate: _allpgm[i]["upDate"],
+                  upTime: _allpgm[i]["upTime"],
+                  prospec: _allpgm[i]["prospec"],
+                  instadate: _allpgm[i]["instadate"],
+                  docname: _allpgm[i]["docname"],
+                  ch: _allpgm[i]["ch"],
                 )
               ]
             ],
