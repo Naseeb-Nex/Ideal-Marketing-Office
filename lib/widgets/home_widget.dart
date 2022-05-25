@@ -312,10 +312,10 @@ class _TechcardState extends State<Techcard> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              Container(
+              const SizedBox(
                 height: 100,
                 width: 100,
                 child: CircleAvatar(
@@ -323,7 +323,7 @@ class _TechcardState extends State<Techcard> {
                   backgroundImage: AssetImage("assets/icons/avataricon.png"),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Text(

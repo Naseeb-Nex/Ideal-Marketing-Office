@@ -62,13 +62,16 @@ class _HistorypgmcardState extends State<Historypgmcard> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                    Row(
+                    const Image(
+                      image: AssetImage("assets/icons/add_icon.png"),
+                      width: 60,
+                      height: 60,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Image(image: AssetImage("assets/icons/add_icon.png"), width: 50 ,height: 50,),
-                        Column(children: [
                         Text(
                           "${widget.name}",
                           style: const TextStyle(
@@ -77,58 +80,56 @@ class _HistorypgmcardState extends State<Historypgmcard> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    Text(
-                      "${widget.address}",
-                      style: const TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 16,
-                          color: Colors.black54),
-                    ),
-                    Text(
-                      "${widget.loc}",
-                      style: const TextStyle(
-                          fontFamily: "Montserrat",
-                          fontSize: 15,
-                          color: Colors.black45,
-                          fontWeight: FontWeight.w500),
-                    ),
-                        ],)
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          "${widget.address}",
+                          style: const TextStyle(
+                              fontFamily: "Nunito",
+                              fontSize: 16,
+                              color: Colors.black54),
+                        ),
+                        Text(
+                          "${widget.loc}",
+                          style: const TextStyle(
+                              fontFamily: "Montserrat",
+                              fontSize: 15,
+                              color: Colors.black45,
+                              fontWeight: FontWeight.w500),
+                        ),
                       ],
-                    ),
+                    )
                   ],
                 ),
 
-                // Column(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     Text(
-                //       "${widget.pgm}",
-                //       style: const TextStyle(
-                //         fontFamily: "Montserrat",
-                //         fontSize: 16,
-                //       ),
-                //     ),
-                //     const SizedBox(
-                //       height: 12,
-                //     ),
-                //     Text(
-                //       "${widget.phn}",
-                //       style: const TextStyle(
-                //           fontFamily: "Montserrat",
-                //           fontSize: 15,
-                //           color: Colors.black54),
-                //     )
-                //   ],
-                // ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "${widget.pgm}",
+                      style: const TextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: 16,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Text(
+                      "${widget.phn}",
+                      style: const TextStyle(
+                          fontFamily: "Montserrat",
+                          fontSize: 15,
+                          color: Colors.black54),
+                    )
+                  ],
+                ),
                 Column(
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20),
+                          vertical: 5, horizontal: 10),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: bluebg),
@@ -137,10 +138,12 @@ class _HistorypgmcardState extends State<Historypgmcard> {
                         style: const TextStyle(
                           fontFamily: "Montserrat",
                           fontSize: 17,
+                          fontWeight: FontWeight.w500,
                           color: white,
                         ),
                       ),
                     ),
+                    const SizedBox(height: 5,),
                     Text(
                       "${widget.upDate}",
                       style: const TextStyle(
