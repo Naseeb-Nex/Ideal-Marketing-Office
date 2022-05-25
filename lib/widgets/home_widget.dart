@@ -105,7 +105,7 @@ class _HomewidgetState extends State<Homewidget> {
                       )),
                   Flexible(
                       flex: 3,
-                      child: Container(
+                      child: SizedBox(
                         height: double.infinity,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -149,7 +149,7 @@ class _HomewidgetState extends State<Homewidget> {
             ),
           ),
           Row(
-            children: [
+            children: const [
               SizedBox(
                 width: 50,
               ),
@@ -173,7 +173,7 @@ class _HomewidgetState extends State<Homewidget> {
           ),
           Row(
             children: [
-              SizedBox(
+              const SizedBox(
                 width: 100,
               ),
               Container(
@@ -188,7 +188,7 @@ class _HomewidgetState extends State<Homewidget> {
           const SizedBox(
             height: 20,
           ),
-          Container(
+          SizedBox(
             height: size.height * 0.55,
             child: Example(
               userid: widget.uid,
@@ -224,6 +224,7 @@ class _HomewidgetState extends State<Homewidget> {
   }
 }
 
+// ignore: must_be_immutable
 class Example extends StatelessWidget {
   String? userid;
   Example({Key? key, this.userid}) : super(key: key);
@@ -553,6 +554,7 @@ class _TechcardState extends State<Techcard> {
   }
 }
 
+// ignore: must_be_immutable
 class Assigntechpgm extends StatefulWidget {
   String? username;
   String? name;
@@ -581,8 +583,8 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
     }
   }
 
-  @override
   String _currentsrc = "Assign";
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
@@ -591,7 +593,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
             height: 60,
             width: double.infinity,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(bottomRight: Radius.circular(5)),
+              borderRadius: const BorderRadius.only(bottomRight: Radius.circular(5)),
               color: white,
               boxShadow: [
                 BoxShadow(
