@@ -1,7 +1,3 @@
-import 'dart:html';
-import 'dart:math';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:flutter/gestures.dart';
 import 'package:test2/componets/vscroll.dart';
 
+// ignore: must_be_immutable
 class Homewidget extends StatefulWidget {
   String? uid;
   Homewidget({Key? key, this.uid}) : super(key: key);
@@ -37,15 +34,15 @@ class _HomewidgetState extends State<Homewidget> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
-    return Container(
+    return SizedBox(
       height: double.infinity,
       width: double.infinity,
       child: ListView(
         children: <Widget>[
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
-          Center(
+          const Center(
             child: Text(
               "Home",
               style: TextStyle(
@@ -58,7 +55,7 @@ class _HomewidgetState extends State<Homewidget> {
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Container(
+            child: SizedBox(
               height: 100,
               width: double.infinity,
               child: Row(
@@ -67,7 +64,7 @@ class _HomewidgetState extends State<Homewidget> {
                 children: <Widget>[
                   Flexible(
                       flex: 3,
-                      child: Container(
+                      child: SizedBox(
                         height: double.infinity,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -83,7 +80,7 @@ class _HomewidgetState extends State<Homewidget> {
                                       borderRadius: BorderRadius.circular(10),
                                       color: cheryred),
                                 ),
-                                Text(
+                                const Text(
                                   " Pending Programs",
                                   style: TextStyle(
                                     fontFamily: "Nunito",
@@ -96,7 +93,7 @@ class _HomewidgetState extends State<Homewidget> {
                             ),
                             Text(
                               "$p",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontFamily: "Nunito",
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -124,7 +121,7 @@ class _HomewidgetState extends State<Homewidget> {
                                       borderRadius: BorderRadius.circular(10),
                                       color: Colors.greenAccent),
                                 ),
-                                Text(
+                                const Text(
                                   " Completed Programs",
                                   style: TextStyle(
                                     fontFamily: "Nunito",
@@ -137,7 +134,7 @@ class _HomewidgetState extends State<Homewidget> {
                             ),
                             Text(
                               "$c",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontFamily: "Nunito",
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -171,7 +168,7 @@ class _HomewidgetState extends State<Homewidget> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Row(
@@ -188,7 +185,7 @@ class _HomewidgetState extends State<Homewidget> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Container(
@@ -213,12 +210,12 @@ class _HomewidgetState extends State<Homewidget> {
           .get()
           .then((snap) => {
                 setState(() {
-                  this.c = snap.size;
+                  c = snap.size;
                 })
               });
       await fb.collection('Programs').get().then((snap) => {
             setState(() {
-              this.p = snap.size;
+              p = snap.size;
             })
           });
     } catch (e) {
@@ -274,6 +271,7 @@ class Example extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class Techcard extends StatefulWidget {
   String? name;
   String? img;
@@ -301,11 +299,11 @@ class _TechcardState extends State<Techcard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Color(0xFFFBFCFC),
+      color: const Color(0xFFFBFCFC),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       elevation: 15,
       shadowColor: primarybg,
-      child: Container(
+      child: SizedBox(
         width: 250,
         child: Center(
           child: Column(
@@ -368,7 +366,7 @@ class _TechcardState extends State<Techcard> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
@@ -381,7 +379,7 @@ class _TechcardState extends State<Techcard> {
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.greenAccent),
                   ),
-                  Text(
+                  const Text(
                     " Completed Programs   ",
                     style: TextStyle(
                       fontFamily: "Nunito",
@@ -392,7 +390,7 @@ class _TechcardState extends State<Techcard> {
                   ),
                   Text(
                     "$c",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: "Nunito",
                       fontSize: 13,
                       fontWeight: FontWeight.bold,
@@ -401,7 +399,7 @@ class _TechcardState extends State<Techcard> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
@@ -414,7 +412,7 @@ class _TechcardState extends State<Techcard> {
                         borderRadius: BorderRadius.circular(10),
                         color: cheryred),
                   ),
-                  Text(
+                  const Text(
                     " Pending Programs        ",
                     style: TextStyle(
                       fontFamily: "Nunito",
@@ -425,7 +423,7 @@ class _TechcardState extends State<Techcard> {
                   ),
                   Text(
                     "$p",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: "Nunito",
                       fontSize: 13,
                       fontWeight: FontWeight.bold,
@@ -434,7 +432,7 @@ class _TechcardState extends State<Techcard> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
@@ -447,7 +445,7 @@ class _TechcardState extends State<Techcard> {
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.blue),
                   ),
-                  Text(
+                  const Text(
                     " Processing Programs   ",
                     style: TextStyle(
                       fontFamily: "Nunito",
@@ -458,7 +456,7 @@ class _TechcardState extends State<Techcard> {
                   ),
                   Text(
                     "$pro",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: "Nunito",
                       fontSize: 13,
                       fontWeight: FontWeight.bold,
@@ -467,7 +465,7 @@ class _TechcardState extends State<Techcard> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               InkWell(
@@ -483,7 +481,7 @@ class _TechcardState extends State<Techcard> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(40), color: cheryred),
                   alignment: Alignment.center,
-                  child: Text(
+                  child: const Text(
                     "Assign Program",
                     style: TextStyle(
                       fontFamily: "Nunito",
@@ -512,7 +510,7 @@ class _TechcardState extends State<Techcard> {
           .get()
           .then((snap) => {
                 setState(() {
-                  this.a = snap.size;
+                  a = snap.size;
                 })
               });
 
@@ -525,7 +523,7 @@ class _TechcardState extends State<Techcard> {
           .get()
           .then((snap) => {
                 setState(() {
-                  this.c = snap.size;
+                  c = snap.size;
                 })
               });
       await fb
@@ -535,7 +533,7 @@ class _TechcardState extends State<Techcard> {
           .get()
           .then((snap) => {
                 setState(() {
-                  this.p = snap.size;
+                  p = snap.size;
                 })
               });
 
@@ -546,7 +544,7 @@ class _TechcardState extends State<Techcard> {
           .get()
           .then((snap) => {
                 setState(() {
-                  this.pro = snap.size;
+                  pro = snap.size;
                 })
               });
     } catch (e) {
@@ -597,7 +595,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
               color: white,
               boxShadow: [
                 BoxShadow(
-                  offset: Offset(0, 5),
+                  offset: const Offset(0, 5),
                   blurRadius: 10,
                   color: secondbg.withOpacity(0.20),
                 ),
@@ -609,22 +607,22 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                   padding: const EdgeInsets.only(left: 20),
                   child: InkWell(
                     onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => OfficeHome(),
-                          )),
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const OfficeHome(),
+                        )),
                     child: Container(
                       height: 40,
                       width: 40,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           color: Colors.blue),
-                      child: Icon(Icons.arrow_back, color: Colors.white),
+                      child: const Icon(Icons.arrow_back, color: Colors.white),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     left: 30,
                   ),
                   child: Center(
@@ -632,9 +630,9 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                       onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => OfficeHome(),
+                            builder: (context) => const OfficeHome(),
                           )),
-                      child: Image(
+                      child: const Image(
                         image: AssetImage("assets/icons/imaicon.png"),
                         height: 45,
                         filterQuality: FilterQuality.high,
@@ -651,28 +649,28 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
               Container(
                 height: double.infinity,
                 width: 350,
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     color: white,
                     boxShadow: [
                       BoxShadow(
-                        offset: Offset(0, 5),
+                        offset: const Offset(0, 5),
                         blurRadius: 20,
                         color: secondbg.withOpacity(0.20),
                       ),
                     ],
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: ListView(
                       // crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 35,
                         ),
-                        Container(
+                        const SizedBox(
                           height: 200,
                           width: 200,
                           child: CircleAvatar(
@@ -681,13 +679,13 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                                 AssetImage("assets/icons/avataricon.png"),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Center(
                           child: Text(
                             "${widget.name}",
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontFamily: "Nunito",
                               fontSize: 22,
                               fontWeight: FontWeight.bold,
@@ -695,7 +693,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Row(
@@ -708,7 +706,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                                   borderRadius: BorderRadius.circular(10),
                                   color: Colors.yellow),
                             ),
-                            Text(
+                            const Text(
                               " Assingned Programs    ",
                               style: TextStyle(
                                 fontFamily: "Nunito",
@@ -719,7 +717,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                             ),
                             Text(
                               "$a",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontFamily: "Nunito",
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
@@ -728,7 +726,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Row(
@@ -741,7 +739,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                                   borderRadius: BorderRadius.circular(10),
                                   color: Colors.greenAccent),
                             ),
-                            Text(
+                            const Text(
                               " Completed Programs   ",
                               style: TextStyle(
                                 fontFamily: "Nunito",
@@ -752,7 +750,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                             ),
                             Text(
                               "$c",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontFamily: "Nunito",
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
@@ -761,7 +759,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Row(
@@ -774,7 +772,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                                   borderRadius: BorderRadius.circular(10),
                                   color: cheryred),
                             ),
-                            Text(
+                            const Text(
                               " Pending Programs        ",
                               style: TextStyle(
                                 fontFamily: "Nunito",
@@ -785,7 +783,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                             ),
                             Text(
                               "$p",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontFamily: "Nunito",
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
@@ -794,7 +792,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Row(
@@ -807,7 +805,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                                   borderRadius: BorderRadius.circular(10),
                                   color: Colors.blue),
                             ),
-                            Text(
+                            const Text(
                               " Processing Programs   ",
                               style: TextStyle(
                                 fontFamily: "Nunito",
@@ -818,7 +816,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                             ),
                             Text(
                               "$pro",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontFamily: "Nunito",
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold,
@@ -897,14 +895,14 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
               ),
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.only(right: 10, top: 10, bottom: 5),
+                  padding: const EdgeInsets.only(right: 10, top: 10, bottom: 5),
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: white,
                       boxShadow: [
                         BoxShadow(
-                          offset: Offset(0, 5),
+                          offset: const Offset(0, 5),
                           blurRadius: 20,
                           color: secondbg.withOpacity(0.20),
                         ),
@@ -991,8 +989,9 @@ class Techsrcwrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (src == 'Status')
+    if (src == 'Status') {
       return Statussrc(uid: uid, username: username, techname: name);
+    }
     return Assignpgmwidget(uid: uid, username: username, techname: name);
   }
 }
