@@ -328,14 +328,14 @@ class _TechcardState extends State<Techcard> {
               ),
               Text(
                 "${widget.name}",
-                style: TextStyle(
+                style: const TextStyle(
                   fontFamily: "Nunito",
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Color(0xff273746),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
@@ -348,7 +348,7 @@ class _TechcardState extends State<Techcard> {
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.yellow),
                   ),
-                  Text(
+                  const Text(
                     " Assingned Programs    ",
                     style: TextStyle(
                       fontFamily: "Nunito",
@@ -359,7 +359,7 @@ class _TechcardState extends State<Techcard> {
                   ),
                   Text(
                     "$a",
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: "Nunito",
                       fontSize: 13,
                       fontWeight: FontWeight.bold,
@@ -938,7 +938,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
           .get()
           .then((snap) => {
                 setState(() {
-                  this.a = snap.size;
+                  a = snap.size;
                 })
               });
 
@@ -951,7 +951,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
           .get()
           .then((snap) => {
                 setState(() {
-                  this.c = snap.size;
+                  c = snap.size;
                 })
               });
       await fb
@@ -961,7 +961,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
           .get()
           .then((snap) => {
                 setState(() {
-                  this.p = snap.size;
+                  p = snap.size;
                 })
               });
       await fb
@@ -971,7 +971,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
           .get()
           .then((snap) => {
                 setState(() {
-                  this.pro = snap.size;
+                  pro = snap.size;
                 })
               });
     } catch (e) {
@@ -980,6 +980,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
   }
 }
 
+// ignore: must_be_immutable
 class Techsrcwrapper extends StatelessWidget {
   String? src;
   String? uid;
