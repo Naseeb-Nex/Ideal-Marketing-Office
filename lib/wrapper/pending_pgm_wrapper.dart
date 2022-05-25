@@ -19,13 +19,12 @@ class PendingPgmWrapper extends StatelessWidget {
             print('Something went Wrong');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Expanded(
-              child: Container(
-                color: white,
-                child: const Center(
-                  child: CircularProgressIndicator(
-                    color: cheryred,
-                  ),
+            return Container(
+              width: double.infinity,
+              color: white,
+              child: const Center(
+                child: CircularProgressIndicator(
+                  color: cheryred,
                 ),
               ),
             );
