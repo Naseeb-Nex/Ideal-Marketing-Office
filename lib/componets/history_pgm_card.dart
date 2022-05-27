@@ -8,6 +8,7 @@ class Historypgmcard extends StatefulWidget {
   String? loc;
   String? phn;
   String? type;
+  String? status;
   String? pgm;
   String? upDate;
   String? upTime;
@@ -23,6 +24,7 @@ class Historypgmcard extends StatefulWidget {
     this.loc,
     this.phn,
     this.type,
+    this.status,
     this.pgm,
     this.upDate,
     this.upTime,
@@ -64,7 +66,11 @@ class _HistorypgmcardState extends State<Historypgmcard> {
               children: [
                 Row(
                   children: [
-                    const Image(
+                    widget.status == "assigned" ? const Image(
+                      image: AssetImage("assets/icons/assigned_icon.png"),
+                      width: 60,
+                      height: 60,
+                    ) : const Image(
                       image: AssetImage("assets/icons/add_icon.png"),
                       width: 60,
                       height: 60,
@@ -102,7 +108,6 @@ class _HistorypgmcardState extends State<Historypgmcard> {
                     )
                   ],
                 ),
-
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -129,21 +134,24 @@ class _HistorypgmcardState extends State<Historypgmcard> {
                   children: [
                     Container(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 5, horizontal: 10),
+                          vertical: 10, horizontal: 20),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: bluebg),
+                          color: widget.status == "assigned"
+                              ? bluebg
+                              : cheryred),
                       child: Text(
                         "${widget.ch}",
                         style: const TextStyle(
                           fontFamily: "Montserrat",
-                          fontSize: 17,
-                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
                           color: white,
                         ),
                       ),
                     ),
-                    const SizedBox(height: 5,),
+                    const SizedBox(
+                      height: 5,
+                    ),
                     Text(
                       "${widget.upDate}",
                       style: const TextStyle(

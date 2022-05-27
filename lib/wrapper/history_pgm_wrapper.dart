@@ -8,8 +8,10 @@ import 'package:test2/constants/constants.dart';
 class Historypgmwrapper extends StatelessWidget {
   String? userid;
   Historypgmwrapper({Key? key, this.userid}) : super(key: key);
-  final Stream<QuerySnapshot> studentsStream =
-      FirebaseFirestore.instance.collection('history').snapshots();
+  final Stream<QuerySnapshot> studentsStream = FirebaseFirestore.instance
+      .collection('history')
+      .orderBy("docname", descending: true)
+      .snapshots();
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +54,7 @@ class Historypgmwrapper extends StatelessWidget {
                   pgm: _allpgm[i]["pgm"],
                   phn: _allpgm[i]["phn"],
                   type: _allpgm[i]["type"],
+                  status: _allpgm[i]["status"],
                   upDate: _allpgm[i]["upDate"],
                   upTime: _allpgm[i]["upTime"],
                   prospec: _allpgm[i]["prospec"],

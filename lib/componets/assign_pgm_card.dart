@@ -3,6 +3,7 @@ import 'package:test2/constants/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:test2/services/assignedpgmdata.dart';
 import 'package:intl/intl.dart';
+import 'package:test2/services/history.dart';
 
 class Assignpgmcard extends StatefulWidget {
   String? uid;
@@ -212,15 +213,15 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
                           padding: const EdgeInsets.symmetric(horizontal: 6),
                           child: Row(
                             children: [
-                               Text(
+                              Text(
                                 "Set Priority :   ",
                                 style: TextStyle(
                                   fontFamily: "Nunito",
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                   color: _up == true
-                                        ? Colors.greenAccent
-                                        : Colors.redAccent,
+                                      ? Colors.greenAccent
+                                      : Colors.redAccent,
                                 ),
                               ),
                               Container(
@@ -289,43 +290,62 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
   }
 
   void uploadpgmdata() async {
-    FirebaseFirestore fb = await FirebaseFirestore.instance;
+    FirebaseFirestore fb = FirebaseFirestore.instance;
     DateTime now = DateTime.now();
+    String formattedDate = DateFormat('MM d y kk:mm:ss').format(now);
     String assigneddate = DateFormat('d MMM y').format(now);
     String assignedtime = DateFormat('kk:mm').format(now);
 
     Assignpgmdata apgm = Assignpgmdata(
-        uid: widget.uid,
-        name: widget.name,
-        address: widget.address,
-        loc: widget.loc,
-        phn: widget.phn,
-        pgm: widget.pgm,
-        chrg: widget.chrg,
-        type: widget.type,
-        upDate: widget.upDate,
-        upTime: widget.upTime,
-        docname: widget.docname,
-        prospec: widget.prospec,
-        instadate: widget.instadate,
-        status: "pending",
-        username: widget.username,
-        techname: widget.techname,
-        priority: _controller.text,
-        assigneddate: assigneddate,
-        assignedtime: assignedtime);
+      uid: widget.uid,
+      name: widget.name,
+      address: widget.address,
+      loc: widget.loc,
+      phn: widget.phn,
+      pgm: widget.pgm,
+      chrg: widget.chrg,
+      type: widget.type,
+      upDate: widget.upDate,
+      upTime: widget.upTime,
+      docname: widget.docname,
+      prospec: widget.prospec,
+      instadate: widget.instadate,
+      status: "pending",
+      username: widget.username,
+      techname: widget.techname,
+      priority: _controller.text,
+      assigneddate: assigneddate,
+      assignedtime: assignedtime,
+    );
+
+    Pgmhistory history = Pgmhistory(
+      name: widget.name,
+      address: widget.address,
+      loc: widget.loc,
+      phn: widget.phn,
+      pgm: widget.pgm,
+      chrg: widget.chrg,
+      type: widget.type,
+      upDate: assigneddate,
+      upTime: assignedtime,
+      docname: formattedDate,
+      prospec: widget.prospec,
+      instadate: widget.instadate,
+      status: "assigned",
+      ch: "Program Assigned",
+      techname: widget.techname,
+    );
 
     if (_priorityKey.currentState!.validate()) {
       setState(() {
-        loading=true;
+        loading = true;
       });
-      
+
       fb
           .collection("Programs")
           .doc(widget.docname)
           .update({'status': 'assigned'}).then((value) {
         print("Updated as assigned");
-        
       }).catchError((error) => print("Failed to update program : $error"));
 
       fb
@@ -349,10 +369,10 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
           .doc(widget.docname)
           .set(apgm.toMap())
           .then((value) {
-        print("assigned pgm to technicain");
         setState(() {
-          loading=false;
+          loading = false;
         });
+        fb.collection("history").doc("$formattedDate").set(history.toMap());
         // _controller.clear();
       }).catchError((error) => print("Failed to assign program : $error"));
     }
