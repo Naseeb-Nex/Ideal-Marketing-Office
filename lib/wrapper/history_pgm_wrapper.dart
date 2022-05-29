@@ -10,6 +10,7 @@ class Historypgmwrapper extends StatelessWidget {
   Historypgmwrapper({Key? key, this.userid}) : super(key: key);
   final Stream<QuerySnapshot> studentsStream = FirebaseFirestore.instance
       .collection('history')
+      .limit(20)
       .orderBy("docname", descending: true)
       .snapshots();
 
@@ -62,6 +63,9 @@ class Historypgmwrapper extends StatelessWidget {
                   instadate: _allpgm[i]["instadate"],
                   docname: _allpgm[i]["docname"],
                   ch: _allpgm[i]["ch"],
+                  chrg: _allpgm[i]["chrg"],
+                  collection: _allpgm[i]["collection"],
+                  remark: _allpgm[i]["remarks"],
                 )
               ]
             ],

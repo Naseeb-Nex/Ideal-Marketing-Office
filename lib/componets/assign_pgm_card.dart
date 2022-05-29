@@ -372,7 +372,7 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
         setState(() {
           loading = false;
         });
-        fb.collection("history").doc("$formattedDate").set(history.toMap());
+        fb.collection("history").doc(formattedDate).set(history.toMap());
         // _controller.clear();
       }).catchError((error) => print("Failed to assign program : $error"));
     }

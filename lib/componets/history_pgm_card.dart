@@ -17,6 +17,9 @@ class Historypgmcard extends StatefulWidget {
   String? techname;
   String? docname;
   String? prospec;
+  String? remark;
+  String? chrg;
+  String? collection;
   String? instadate;
   String? ch;
 
@@ -34,6 +37,9 @@ class Historypgmcard extends StatefulWidget {
     this.docname,
     this.prospec,
     this.instadate,
+    this.remark,
+    this.chrg,
+    this.collection,
     this.ch,
     this.techname,
   }) : super(key: key);
@@ -70,21 +76,45 @@ class _HistorypgmcardState extends State<Historypgmcard> {
               children: [
                 Row(
                   children: [
-                    widget.status == "assigned"
-                        ? const Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Image(
-                              image:
-                                  AssetImage("assets/icons/assigned_icon.png"),
-                              width: 60,
-                              height: 60,
-                            ),
-                          )
-                        : const Image(
-                            image: AssetImage("assets/icons/add_icon.png"),
-                            width: 60,
-                            height: 60,
-                          ),
+                    Container(
+                      child: widget.status == "assigned"
+                          ? const Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Image(
+                                image: AssetImage(
+                                    "assets/icons/assigned_icon.png"),
+                                width: 60,
+                                height: 60,
+                              ),
+                            )
+                          : null,
+                    ),
+                    Container(
+                      child: widget.status == "pending"
+                          ? const Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Image(
+                                image: AssetImage(
+                                    "assets/icons/add_icon.png"),
+                                width: 60,
+                                height: 60,
+                              ),
+                            )
+                          : null,
+                    ),
+                    Container(
+                      child: widget.status == "completed"
+                          ? const Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Image(
+                                image: AssetImage(
+                                    "assets/icons/completed_icon.png"),
+                                width: 60,
+                                height: 60,
+                              ),
+                            )
+                          : null,
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -142,21 +172,59 @@ class _HistorypgmcardState extends State<Historypgmcard> {
                 ),
                 Column(
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color:
-                              widget.status == "assigned" ? bluebg : cheryred),
-                      child: Text(
-                        "${widget.ch}",
-                        style: const TextStyle(
-                          fontFamily: "Montserrat",
-                          fontSize: 15,
-                          color: white,
+                    Center(
+                      child: widget.status == "assigned" ? Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 20),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: const Color(0xFF45B8AC)),
+                        child: Text(
+                          "${widget.ch}",
+                          style: const TextStyle(
+                            fontFamily: "Montserrat",
+                            fontSize: 15,
+                            color: white,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
+                      ) : null,
+                    ),
+                    Center(
+                      child: widget.status == "pending" ? Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 20),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: const Color(0xFFDD4124)),
+                        child: Text(
+                          "${widget.ch}",
+                          style: const TextStyle(
+                            fontFamily: "Montserrat",
+                            fontSize: 15,
+                            color: white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ) : null,
+                    ),
+                    Center(
+                      child: widget.status == "completed" ? Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 20),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: const Color(0xFF71C562)),
+                        child: Text(
+                          "${widget.ch}",
+                          style: const TextStyle(
+                            fontFamily: "Montserrat",
+                            fontSize: 15,
+                            color: white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ) : null,
                     ),
                     const SizedBox(
                       height: 5,
@@ -220,31 +288,34 @@ class _HistorypgmcardState extends State<Historypgmcard> {
                     const SizedBox(
                       width: 10,
                     ),
-                    
                     Center(
-                      child: widget.status == "assigned" ?Container(
-                        decoration: BoxDecoration(
-                            color: cheryred,
-                            borderRadius: BorderRadius.circular(20)),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 10),
-                        child: Row(
-                          children: [
-                            const Icon(
-                              Icons.account_circle_rounded,
-                              color: white,
-                            ),
-                            const SizedBox(width: 10,),
-                            Text(
-                              "${widget.techname}",
-                              style: const TextStyle(
-                                  fontFamily: "Nunito",
-                                  fontSize: 15,
-                                  color: white),
-                            ),
-                          ],
-                        ),
-                      ):null,
+                      child: widget.status == "assigned" || widget.status == "completed"
+                          ? Container(
+                              decoration: BoxDecoration(
+                                  color: cheryred,
+                                  borderRadius: BorderRadius.circular(20)),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 10),
+                              child: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.account_circle_rounded,
+                                    color: white,
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    "${widget.techname}",
+                                    style: const TextStyle(
+                                        fontFamily: "Nunito",
+                                        fontSize: 15,
+                                        color: white),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : null,
                     ),
                     const SizedBox(
                       width: 10,
@@ -277,6 +348,45 @@ class _HistorypgmcardState extends State<Historypgmcard> {
                       style: const TextStyle(
                           fontFamily: "Montserrat", fontSize: 17),
                     ),
+                    Container(
+                      child: widget.status == "completed" ? Row(
+                        children: [
+                          const SizedBox(width: 10,),
+                           Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Colors.blue[400]),
+                              child: Row(
+                                children: [
+                                  const Text(
+                                    "Collection",
+                                    style: TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontSize: 15,
+                                      color: white,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  Text(
+                                    " ${widget.collection} / ${widget.chrg}",
+                                    style: const TextStyle(
+                                        fontFamily: "Nunito",
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white),
+                                  ),
+                                ],
+                              ),),
+                              const SizedBox( width: 10),
+                          Text("Remarks : ${widget.remark}", style: const TextStyle(fontFamily: "Montserrat", fontSize: 16),),
+                        ],
+                      ): null,
+                    ),
+                    
                   ],
                 ),
               ),
