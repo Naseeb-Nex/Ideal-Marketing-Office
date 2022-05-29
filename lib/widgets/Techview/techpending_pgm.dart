@@ -34,7 +34,7 @@ class _TechpendingState extends State<Techpending> {
                         }
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return Expanded(
+                          return const Expanded(
                             child: Center(
                               child: CircularProgressIndicator(
                                 color: cheryred,
@@ -74,6 +74,9 @@ class _TechpendingState extends State<Techpending> {
                                   ptime: _allpgm[i]["ptime"],
                                   pdate: _allpgm[i]["pdate"],
                                   pdocname: _allpgm[i]["pdocname"],
+                                  instadate: _allpgm[i]["instadate"],
+                                  prospec: _allpgm[i]["prospec"],
+                                  techname: _allpgm[i]["techname"],
                                 )
                               ]
                             ],

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:test2/constants/constants.dart';
 
@@ -121,6 +119,19 @@ class _HistorypgmcardState extends State<Historypgmcard> {
                               child: Image(
                                 image:
                                     AssetImage("assets/icons/pending_icon.png"),
+                                width: 60,
+                                height: 60,
+                              ),
+                            )
+                          : null,
+                    ),
+                    Container(
+                      child: widget.status == "pro"
+                          ? const Padding(
+                              padding: EdgeInsets.all(10),
+                              child: Image(
+                                image: AssetImage(
+                                    "assets/icons/processing_icon.png"),
                                 width: 60,
                                 height: 60,
                               ),
@@ -264,6 +275,26 @@ class _HistorypgmcardState extends State<Historypgmcard> {
                             )
                           : null,
                     ),
+                    Center(
+                      child: widget.status == "pro"
+                          ? Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 20),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: const Color(0xFF0AA1DD)),
+                              child: Text(
+                                "${widget.ch}",
+                                style: const TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontSize: 15,
+                                  color: white,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            )
+                          : null,
+                    ),
                     const SizedBox(
                       height: 5,
                     ),
@@ -328,7 +359,9 @@ class _HistorypgmcardState extends State<Historypgmcard> {
                     ),
                     Center(
                       child: widget.status == "assigned" ||
-                              widget.status == "completed"
+                              widget.status == "completed" ||
+                              widget.status == "unresolved" ||
+                              widget.status == "pro"
                           ? Container(
                               decoration: BoxDecoration(
                                   color: cheryred,
@@ -435,7 +468,8 @@ class _HistorypgmcardState extends State<Historypgmcard> {
                           : null,
                     ),
                     Container(
-                      child: widget.status == "unresolved"
+                      child: widget.status == "unresolved" ||
+                              widget.status == "pro"
                           ? Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10),

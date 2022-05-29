@@ -1,9 +1,13 @@
+// import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:test2/constants/constants.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+// import 'package:test2/services/history.dart';
 import 'package:test2/services/pgm.dart';
 
+// ignore: must_be_immutable
 class PendingTechcard extends StatelessWidget {
   String? uid;
   String? username;
@@ -21,26 +25,32 @@ class PendingTechcard extends StatelessWidget {
   String? ptime;
   String? pdate;
   String? pdocname;
+  String? prospec;
+  String? instadate;
+  String? techname;
 
-  PendingTechcard({
-    Key? key,
-    this.uid,
-    this.username,
-    this.name,
-    this.address,
-    this.loc,
-    this.phn,
-    this.type,
-    this.chrg,
-    this.pgm,
-    this.upDate,
-    this.upTime,
-    this.docname,
-    this.remarks,
-    this.pdate,
-    this.ptime,
-    this.pdocname,
-  }) : super(key: key);
+  PendingTechcard(
+      {Key? key,
+      this.uid,
+      this.username,
+      this.name,
+      this.address,
+      this.loc,
+      this.phn,
+      this.type,
+      this.chrg,
+      this.pgm,
+      this.upDate,
+      this.upTime,
+      this.docname,
+      this.remarks,
+      this.pdate,
+      this.ptime,
+      this.pdocname,
+      this.prospec,
+      this.instadate,
+      this.techname})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -192,6 +202,9 @@ class PendingTechcard extends StatelessWidget {
                               upTime: upTime,
                               docname: docname,
                               pdocname: pdocname,
+                              prospec: prospec,
+                              instadate: instadate,
+                              techname: techname,
                             );
                           });
                     },
@@ -284,8 +297,12 @@ class ConfirmBox extends StatelessWidget {
   String? upTime;
   String? docname;
   String? pdocname;
+  String? prospec;
+  String? instadate;
+  String? techname;
 
   ConfirmBox({
+    Key? key,
     this.uid,
     this.username,
     this.name,
@@ -299,7 +316,10 @@ class ConfirmBox extends StatelessWidget {
     this.upTime,
     this.docname,
     this.pdocname,
-  });
+    this.prospec,
+    this.instadate,
+    this.techname,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -360,7 +380,8 @@ class ConfirmBox extends StatelessWidget {
                   child: Container(
                     height: 50,
                     width: 120,
-                    decoration: BoxDecoration(color: white, borderRadius: BorderRadius.circular(20)),
+                    decoration: BoxDecoration(
+                        color: white, borderRadius: BorderRadius.circular(20)),
                     child: const Center(
                       child: Text(
                         "Cancel",
@@ -374,13 +395,16 @@ class ConfirmBox extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: 30,),
+                const SizedBox(
+                  width: 30,
+                ),
                 InkWell(
                   onTap: () => coverttomain(context),
                   child: Container(
                     height: 50,
                     width: 120,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: white),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20), color: white),
                     child: const Center(
                       child: Text(
                         "Okay",
@@ -402,41 +426,62 @@ class ConfirmBox extends StatelessWidget {
     );
   }
 
-  void coverttomain(BuildContext context)async{
+  void coverttomain(BuildContext context) async {
     FirebaseFirestore fb = FirebaseFirestore.instance;
-
+    // DateTime now = DateTime.now();
+    // String hisdocname = DateFormat('MM d y kk:mm:ss').format(now);
+    // String date = DateFormat('d MMM y').format(now);
+    // String time = DateFormat('kk:mm').format(now);
     Pgmdata pgmr = Pgmdata(
-          uid: uid,
-          name: name,
-          address: address,
-          loc: loc,
-          phn: phn,
-          pgm: pgm,
-          chrg: chrg,
-          type: type,
-          upDate: upDate,
-          upTime: upTime,
-          docname: docname,
-          status: "pending");
-    
-    await fb
-            .collection("Technician")
-            .doc(username)
-            .collection("Pendingpgm")
-            .doc(pdocname)
-            .delete()
-            .then((value) {
-          print("Delete from pending list");
-        }).catchError((error) => print("Failed to Delete Pending pgm list : $error"));
+        uid: uid,
+        name: name,
+        address: address,
+        loc: loc,
+        phn: phn,
+        pgm: pgm,
+        chrg: chrg,
+        type: type,
+        upDate: upDate,
+        upTime: upTime,
+        docname: docname,
+        status: "pending");
 
+    // Pgmhistory history = Pgmhistory(
+    //   name: name,
+    //   address: address,
+    //   loc: loc,
+    //   phn: phn,
+    //   pgm: pgm,
+    //   chrg: chrg,
+    //   type: type,
+    //   upDate: date,
+    //   upTime: time,
+    //   docname: hisdocname,
+    //   prospec: prospec,
+    //   instadate: instadate,
+    //   status: "pending",
+    //   ch: "$techname's Pending list to Main list",
+    // );
 
     await fb
-          .collection("Programs")
-          .doc("$docname")
-          .set(pgmr.toMap())
-          .then((value) {
-        print("Successfully Program created");
-        Navigator.pop(context);
-            });
+        .collection("Technician")
+        .doc(username)
+        .collection("Pendingpgm")
+        .doc(pdocname)
+        .delete()
+        .then((value) {
+      print("Delete from pending list");
+    }).catchError(
+            (error) => print("Failed to Delete Pending pgm list : $error"));
+
+    // fb.collection("history").doc(hisdocname).set(history.toMap());
+
+    await fb
+        .collection("Programs")
+        .doc("$docname")
+        .set(pgmr.toMap())
+        .then((value) {
+      Navigator.pop(context);
+    });
   }
 }
