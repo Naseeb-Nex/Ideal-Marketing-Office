@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:test2/constants/constants.dart';
 
@@ -12,6 +14,7 @@ class Historypgmcard extends StatefulWidget {
   String? pgm;
   String? upDate;
   String? upTime;
+  String? techname;
   String? docname;
   String? prospec;
   String? instadate;
@@ -32,6 +35,7 @@ class Historypgmcard extends StatefulWidget {
     this.prospec,
     this.instadate,
     this.ch,
+    this.techname,
   }) : super(key: key);
 
   @override
@@ -66,15 +70,21 @@ class _HistorypgmcardState extends State<Historypgmcard> {
               children: [
                 Row(
                   children: [
-                    widget.status == "assigned" ? const Image(
-                      image: AssetImage("assets/icons/assigned_icon.png"),
-                      width: 60,
-                      height: 60,
-                    ) : const Image(
-                      image: AssetImage("assets/icons/add_icon.png"),
-                      width: 60,
-                      height: 60,
-                    ),
+                    widget.status == "assigned"
+                        ? const Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Image(
+                              image:
+                                  AssetImage("assets/icons/assigned_icon.png"),
+                              width: 60,
+                              height: 60,
+                            ),
+                          )
+                        : const Image(
+                            image: AssetImage("assets/icons/add_icon.png"),
+                            width: 60,
+                            height: 60,
+                          ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -137,9 +147,8 @@ class _HistorypgmcardState extends State<Historypgmcard> {
                           vertical: 10, horizontal: 20),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          color: widget.status == "assigned"
-                              ? bluebg
-                              : cheryred),
+                          color:
+                              widget.status == "assigned" ? bluebg : cheryred),
                       child: Text(
                         "${widget.ch}",
                         style: const TextStyle(
@@ -208,6 +217,35 @@ class _HistorypgmcardState extends State<Historypgmcard> {
                 padding: const EdgeInsets.only(top: 10),
                 child: Row(
                   children: [
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    
+                    Center(
+                      child: widget.status == "assigned" ?Container(
+                        decoration: BoxDecoration(
+                            color: cheryred,
+                            borderRadius: BorderRadius.circular(20)),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 5, horizontal: 10),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.account_circle_rounded,
+                              color: white,
+                            ),
+                            const SizedBox(width: 10,),
+                            Text(
+                              "${widget.techname}",
+                              style: const TextStyle(
+                                  fontFamily: "Nunito",
+                                  fontSize: 15,
+                                  color: white),
+                            ),
+                          ],
+                        ),
+                      ):null,
+                    ),
                     const SizedBox(
                       width: 10,
                     ),

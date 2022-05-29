@@ -57,6 +57,7 @@ class Historypgmwrapper extends StatelessWidget {
                   status: _allpgm[i]["status"],
                   upDate: _allpgm[i]["upDate"],
                   upTime: _allpgm[i]["upTime"],
+                  techname: _allpgm[i]["techname"],
                   prospec: _allpgm[i]["prospec"],
                   instadate: _allpgm[i]["instadate"],
                   docname: _allpgm[i]["docname"],
