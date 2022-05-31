@@ -7,8 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:test2/componets/completed_pgm_card.dart';
 
 class Completedmonthview extends StatefulWidget {
-
-  Completedmonthview({Key? key})
+  String? cmonth;
+  Completedmonthview({Key? key, this.cmonth})
       : super(key: key);
 
   @override
@@ -20,8 +20,6 @@ class _CompletedmonthviewState extends State<Completedmonthview> {
 
   @override
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
-    String cmonth = DateFormat('MM y').format(now);
     return ScrollConfiguration(
       behavior: htechassignswipe(),
       child: SingleChildScrollView(
@@ -30,7 +28,7 @@ class _CompletedmonthviewState extends State<Completedmonthview> {
             stream: FirebaseFirestore.instance
                 .collection("Completedpgm")
                 .doc("Month")
-                .collection(cmonth)
+                .collection("${widget.cmonth}")
                 .snapshots(),
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -56,7 +54,7 @@ class _CompletedmonthviewState extends State<Completedmonthview> {
 
               return Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 30,
                   ),
                   for (var i = 0; i < _allpgm.length; i++) ...[
