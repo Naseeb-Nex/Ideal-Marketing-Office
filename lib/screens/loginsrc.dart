@@ -173,14 +173,13 @@ class _LoginSrcState extends State<LoginSrc> {
                       builder: (context) => const OfficeHome())),
                 });
       } catch (error) {
-        print(error);
         setState(() {
           load = false;
         });
         showDialog(
             context: context,
             builder: (BuildContext context) {
-              return SimpleCustomAlert("Email or Password is incorrect!");
+              return const SimpleCustomAlert("Email or Password is incorrect!");
             });
       }
     // }
@@ -189,13 +188,13 @@ class _LoginSrcState extends State<LoginSrc> {
 
 class SimpleCustomAlert extends StatelessWidget {
   final String title;
-  SimpleCustomAlert(this.title);
+  const SimpleCustomAlert(this.title, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Dialog(
       backgroundColor: Colors.redAccent,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-      child: Container(
+      child: SizedBox(
         height: 200,
         width: 450,
         child: Column(

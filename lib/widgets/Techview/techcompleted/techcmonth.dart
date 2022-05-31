@@ -10,8 +10,9 @@ class Techcmonth extends StatefulWidget {
   String? uid;
   String? username;
   String? techname;
+  String? cmonth;
 
-  Techcmonth({Key? key, this.uid, this.username, this.techname})
+  Techcmonth({Key? key, this.uid, this.username, this.techname, this.cmonth})
       : super(key: key);
 
   @override
@@ -23,8 +24,6 @@ class _TechcmonthState extends State<Techcmonth> {
   List _allpgm = [];
 
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
-    String cmonth = DateFormat('MM y').format(now);
     return ScrollConfiguration(
       behavior: htechassignswipe(),
       child: SingleChildScrollView(
@@ -35,7 +34,7 @@ class _TechcmonthState extends State<Techcmonth> {
                 .doc(widget.username)
                 .collection("Completedpgm")
                 .doc("Month")
-                .collection(cmonth)
+                .collection("${widget.cmonth}")
                 .snapshots(),
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -43,7 +42,7 @@ class _TechcmonthState extends State<Techcmonth> {
                 print('Something went Wrong');
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Expanded(
+                return const Expanded(
                   child: Center(
                     child: CircularProgressIndicator(
                       color: cheryred,
