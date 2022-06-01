@@ -1,3 +1,4 @@
+import 'package:test2/componets/search_box.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -9,34 +10,48 @@ class Customersrc extends StatefulWidget {
 }
 
 class _CustomersrcState extends State<Customersrc> {
+  String textquery = '';
   @override
   Widget build(BuildContext context) {
+    Size s = MediaQuery.of(context).size;
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const SizedBox(
-          height: 30,
-        ),
-        const Text(
-          "Viewer",
-          style: TextStyle(
-            fontFamily: "Nunito",
-            fontSize: 25,
-            fontWeight: FontWeight.bold,
-            color: Colors.black38,
+        const Padding(
+          padding: EdgeInsets.only(left: 30, top: 20),
+          child: Text(
+            "Customer Details",
+            style: TextStyle(
+                fontFamily: "Montserrat",
+                fontSize: 22,
+                fontWeight: FontWeight.w500),
           ),
         ),
-        Container(
-          height: 5,
-          width: 36,
-          decoration: BoxDecoration(
-              color: Colors.black26, borderRadius: BorderRadius.circular(10)),
-        ),
         const SizedBox(
-          height: 20,
+          height: 10,
         ),
+        Center(
+          child: Container(
+            height: 40,
+            width: s.width * 0.5,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: white,
+                boxShadow: [
+                  BoxShadow(
+                    spreadRadius: 2,
+                    blurRadius: 6,
+                    color: Colors.black.withOpacity(0.1),
+                    offset: const Offset(0, 3)
+                  )
+                ]),
+                // child: ,
+          ),
+        ),
+        const SizedBox(height: 10,),
         
       ],
     );
   }
+
 }

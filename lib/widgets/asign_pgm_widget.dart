@@ -127,20 +127,20 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
         onChanged: searchpgm,
       );
 
-  void searchpgm(String query) {
-    setState(() {
-      
-    pendingpgm = assignpgm.where((pgm) {
-      final nameLower = pgm["name"]!.toLowerCase();
-      final phnumber = pgm["phn"]!;
-      final searchquery = query.toLowerCase();
+    void searchpgm(String query) {
+      setState(() {
+        
+      pendingpgm = assignpgm.where((pgm) {
+        final nameLower = pgm["name"]!.toLowerCase();
+        final phnumber = pgm["phn"]!;
+        final searchquery = query.toLowerCase();
 
-      return nameLower.contains(searchquery) || phnumber.contains(searchquery);
-    }).toList();
-    });
-    // searching is postponed
+        return nameLower.contains(searchquery) || phnumber.contains(searchquery);
+      }).toList();
+      });
+      // searching is postponed
+    }
   }
-}
 
 class VerticalScrollgesture extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices
