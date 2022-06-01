@@ -1,11 +1,10 @@
-import 'dart:collection';
+import 'package:flutter/material.dart';
+import 'package:test2/constants/constants.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:test2/constants/constants.dart';
-import 'package:flutter/material.dart';
-import 'package:test2/services/user_model.dart';
 
+import 'package:test2/services/user_model.dart';
 import 'package:test2/widgets/export_widget.dart';
 
 class OfficeHome extends StatefulWidget {
@@ -21,6 +20,7 @@ class _OfficeHomeState extends State<OfficeHome> {
   String? currentscr = "Home";
   @override
   void initState() {
+    super.initState();
     if (mounted) {
       try {
         FirebaseFirestore.instance
@@ -28,9 +28,8 @@ class _OfficeHomeState extends State<OfficeHome> {
             .doc(user!.uid)
             .get()
             .then((value) {
-          this.loggedInUser = UserModel.fromMap(value.data());
+          loggedInUser = UserModel.fromMap(value.data());
         });
-        print(user!.uid);
       } catch (e) {
         print(e);
       }
@@ -46,11 +45,12 @@ class _OfficeHomeState extends State<OfficeHome> {
             height: 60.0,
             width: double.infinity,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(bottomRight: Radius.circular(5)),
+              borderRadius:
+                  const BorderRadius.only(bottomRight: Radius.circular(5)),
               color: white,
               boxShadow: [
                 BoxShadow(
-                  offset: Offset(0, 5),
+                  offset: const Offset(0, 5),
                   blurRadius: 10,
                   color: secondbg.withOpacity(0.20),
                 ),
@@ -79,25 +79,26 @@ class _OfficeHomeState extends State<OfficeHome> {
                 Container(
                   height: MediaQuery.of(context).size.height - 60,
                   width: 280,
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: white,
                       boxShadow: [
                         BoxShadow(
-                          offset: Offset(0, 5),
+                          offset: const Offset(0, 5),
                           blurRadius: 20,
                           color: secondbg.withOpacity(0.20),
                         ),
                       ],
                     ),
                     child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
                       child: ListView(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 30,
                           ),
                           InkWell(
@@ -111,7 +112,7 @@ class _OfficeHomeState extends State<OfficeHome> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
                                   color: cheryred),
-                              child: Text(
+                              child: const Text(
                                 "Home",
                                 style: TextStyle(
                                   fontFamily: "Nunito",
@@ -122,10 +123,10 @@ class _OfficeHomeState extends State<OfficeHome> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
-                          Center(
+                          const Center(
                             child: Text(
                               "Progam Management",
                               style: TextStyle(
@@ -136,7 +137,7 @@ class _OfficeHomeState extends State<OfficeHome> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           InkWell(
@@ -150,7 +151,7 @@ class _OfficeHomeState extends State<OfficeHome> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
                                   color: cheryred),
-                              child: Text(
+                              child: const Text(
                                 "View All",
                                 style: TextStyle(
                                   fontFamily: "Nunito",
@@ -161,7 +162,7 @@ class _OfficeHomeState extends State<OfficeHome> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           InkWell(
@@ -175,8 +176,33 @@ class _OfficeHomeState extends State<OfficeHome> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
                                   color: cheryred),
-                              child: Text(
+                              child: const Text(
                                 "Register Program",
+                                style: TextStyle(
+                                  fontFamily: "Nunito",
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          InkWell(
+                            onTap: () => setState(() {
+                              currentscr = 'customer';
+                            }),
+                            child: Container(
+                              height: 50,
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: cheryred),
+                              child: const Text(
+                                "Customer",
                                 style: TextStyle(
                                   fontFamily: "Nunito",
                                   fontSize: 15,
@@ -193,14 +219,15 @@ class _OfficeHomeState extends State<OfficeHome> {
                 ),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.only(right: 10, top: 10, bottom: 5),
+                    padding:
+                        const EdgeInsets.only(right: 10, top: 10, bottom: 5),
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: white,
                         boxShadow: [
                           BoxShadow(
-                            offset: Offset(0, 5),
+                            offset: const Offset(0, 5),
                             blurRadius: 20,
                             color: secondbg.withOpacity(0.20),
                           ),
@@ -230,11 +257,15 @@ class Widgetwrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (src == 'PgmReg')
+    if (src == 'PgmReg') {
       return Pgmreg(
         uid: uid!,
       );
-    else if (src == 'View') return Pgmviewer();
+    } else if (src == 'customer') {
+      return const Customersrc();
+    } else if (src == 'View') {
+      return const Pgmviewer();
+    }
     return Homewidget(
       uid: uid,
     );
