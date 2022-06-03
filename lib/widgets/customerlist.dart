@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:test2/constants/constants.dart';
 
 class Customerlist extends StatelessWidget {
-  // Customerlist({Key? key}) : super(key: key);
+  Customerlist({Key? key}) : super(key: key);
   final Stream<QuerySnapshot> studentsStream =
       FirebaseFirestore.instance.collection('Customerlist').snapshots();
 
@@ -37,8 +37,7 @@ class Customerlist extends StatelessWidget {
             print(a);
             a['uid'] = document.id;
           }).toList();
-          List assignedpgm =
-              _allpgm.where((i) => i['status'] == 'assigned').toList();
+          
           return Column(
             children: [
               Container(

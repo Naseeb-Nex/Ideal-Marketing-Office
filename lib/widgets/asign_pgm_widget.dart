@@ -66,8 +66,7 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
                       if (snapshot.hasError) {
                         print('Something went Wrong');
                       }
-                      if (snapshot.connectionState ==
-                          ConnectionState.waiting) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Expanded(
                           child: Center(
                             child: CircularProgressIndicator(
@@ -104,7 +103,7 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
                               upTime: pendingpgm[i]["upTime"],
                               docname: pendingpgm[i]["docname"],
                               prospec: pendingpgm[i]["prospec"],
-                  instadate: pendingpgm[i]["instadate"],
+                              instadate: pendingpgm[i]["instadate"],
                               techuid: widget.uid,
                               techname: widget.techname,
                               username: widget.username,
@@ -127,20 +126,20 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
         onChanged: searchpgm,
       );
 
-    void searchpgm(String query) {
-      setState(() {
-        
+  void searchpgm(String query) {
+    setState(() {
       pendingpgm = assignpgm.where((pgm) {
         final nameLower = pgm["name"]!.toLowerCase();
         final phnumber = pgm["phn"]!;
         final searchquery = query.toLowerCase();
 
-        return nameLower.contains(searchquery) || phnumber.contains(searchquery);
+        return nameLower.contains(searchquery) ||
+            phnumber.contains(searchquery);
       }).toList();
-      });
-      // searching is postponed
-    }
+    });
+    // searching is postponed
   }
+}
 
 class VerticalScrollgesture extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices
