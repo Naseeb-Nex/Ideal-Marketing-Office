@@ -1,6 +1,7 @@
-import 'package:test2/componets/search_box.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
+
+import 'package:test2/widgets/customerlist.dart';
 
 class Customersrc extends StatefulWidget {
   const Customersrc({Key? key}) : super(key: key);
@@ -22,9 +23,10 @@ class _CustomersrcState extends State<Customersrc> {
           child: Text(
             "Customer Details",
             style: TextStyle(
-                fontFamily: "Montserrat",
-                fontSize: 22,
-                fontWeight: FontWeight.w500),
+              fontFamily: "Nunito",
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         const SizedBox(
@@ -39,19 +41,40 @@ class _CustomersrcState extends State<Customersrc> {
                 color: white,
                 boxShadow: [
                   BoxShadow(
-                    spreadRadius: 2,
-                    blurRadius: 6,
-                    color: Colors.black.withOpacity(0.1),
-                    offset: const Offset(0, 3)
-                  )
+                      spreadRadius: 2,
+                      blurRadius: 6,
+                      color: Colors.black.withOpacity(0.1),
+                      offset: const Offset(0, 3))
                 ]),
-                // child: ,
+            // child: ,
           ),
         ),
-        const SizedBox(height: 10,),
-        
+        const SizedBox(
+          height: 10,
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: white,
+                  boxShadow: [
+                    BoxShadow(
+                      spreadRadius: 3,
+                      blurRadius: 5,
+                      color: Colors.black.withOpacity(0.1),
+                    )
+                  ]),
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Customerlist(),
+              ),
+            ),
+          ),
+        )
       ],
     );
   }
-
 }
