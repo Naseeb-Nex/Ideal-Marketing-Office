@@ -81,9 +81,12 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
                         _allpgm.add(a);
                         a['uid'] = document.id;
                       }).toList();
+
+                      //filtering pending programs
                       assignpgm = _allpgm
                           .where((i) => i['status'] == 'pending')
                           .toList();
+
                       return Column(
                         children: [
                           const SizedBox(

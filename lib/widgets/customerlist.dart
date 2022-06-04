@@ -34,16 +34,19 @@ class Customerlist extends StatelessWidget {
           snapshot.data!.docs.map((DocumentSnapshot document) {
             Map a = document.data() as Map<String, dynamic>;
             _allpgm.add(a);
-            print(a);
             a['uid'] = document.id;
           }).toList();
           
           return Column(
             children: [
-              Container(
-                width: 10,
-                height: 10,
-                color: bluebg,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text("Customer"),
+                  Text("Address"),
+                  Text("Location"),
+                  Text("Phone Number"),
+                ],
               )
             ],
           );
