@@ -17,7 +17,7 @@ class OfficeHome extends StatefulWidget {
 class _OfficeHomeState extends State<OfficeHome> {
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
-  String? currentscr = "customer";
+  String? currentscr = "customerreg";
   @override
   void initState() {
     super.initState();
@@ -212,6 +212,31 @@ class _OfficeHomeState extends State<OfficeHome> {
                               ),
                             ),
                           ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          InkWell(
+                            onTap: () => setState(() {
+                              currentscr = 'customerreg';
+                            }),
+                            child: Container(
+                              height: 50,
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: cheryred),
+                              child: const Text(
+                                "Customer Registration",
+                                style: TextStyle(
+                                  fontFamily: "Nunito",
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: white,
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -263,6 +288,8 @@ class Widgetwrapper extends StatelessWidget {
       );
     } else if (src == 'customer') {
       return const Customersrc();
+    } else if (src == 'customerreg') {
+      return const Customerreg();
     } else if (src == 'View') {
       return const Pgmviewer();
     }

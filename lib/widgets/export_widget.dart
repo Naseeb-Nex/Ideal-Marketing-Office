@@ -7,3 +7,4 @@ export 'assigned_pgm_viewer.dart';
 export 'completed_pgm_viewer.dart';
 export 'statussrc.dart';
 export 'customersrc.dart';
+export 'customer_reg.dart';

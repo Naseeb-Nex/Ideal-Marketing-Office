@@ -17,14 +17,9 @@ class Customerlist extends StatelessWidget {
             print('Something went Wrong');
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Expanded(
-              child: Container(
-                color: white,
-                child: const Center(
-                  child: CircularProgressIndicator(
-                    color: cheryred,
-                  ),
-                ),
+            return const Center(
+              child: CircularProgressIndicator(
+                color: cheryred,
               ),
             );
           }
@@ -39,15 +34,6 @@ class Customerlist extends StatelessWidget {
           
           return Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text("Customer"),
-                  Text("Address"),
-                  Text("Location"),
-                  Text("Phone Number"),
-                ],
-              )
             ],
           );
         });

@@ -2,6 +2,7 @@ import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'package:test2/widgets/customerlist.dart';
+import 'package:test2/widgets/customer_reg.dart';
 
 class Customersrc extends StatefulWidget {
   const Customersrc({Key? key}) : super(key: key);
