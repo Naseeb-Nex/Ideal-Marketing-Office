@@ -44,26 +44,82 @@ class _CustomerregState extends State<Customerreg> {
               Flexible(
                 flex: 1,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: s.width * 0.05),
+                  padding: EdgeInsets.symmetric(
+                      vertical: 5.0, horizontal: s.width * 0.05),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
                         "Full Name",
-                        style: TextStyle(fontFamily: "Nunito", fontSize: 18, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontFamily: "Nunito",
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 5,
                       ),
                       TextFormField(
-                          autofocus: false,
-                          controller: namecontroller,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8))
-                          ),
-                        ),
+                        autofocus: false,
+                        controller: namecontroller,
+                        textInputAction: TextInputAction.next,
+                        onSaved: (value) {
+                          namecontroller.text = value!;
+                        },
+                        validator: (value){
+                          if(value!.isEmpty){
+                            return ("Please enter the Name");
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                      ),
                     ],
                   ),
                 ),
               ),
-              Flexible(flex: 1, fit: FlexFit.tight, child: Text("2"))
+              Flexible(
+                flex: 1,
+                fit: FlexFit.tight,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: 5.0, horizontal: s.width * 0.04),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Address",
+                        style: TextStyle(
+                            fontFamily: "Nunito",
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      TextFormField(
+                        autofocus: false,
+                        controller: addresscontroller,
+                        textInputAction: TextInputAction.next,
+                        onSaved: (value) {
+                          addresscontroller.text = value!;
+                        },
+                        validator: (value){
+                          if(value!.isEmpty){
+                            return ("Please enter the Address");
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8))),
+                      ),
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         )
