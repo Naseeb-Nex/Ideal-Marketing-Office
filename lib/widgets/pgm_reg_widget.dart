@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:test2/services/pgm.dart';
 import 'package:test2/services/history.dart';
 
+// ignore: must_be_immutable
 class Pgmreg extends StatefulWidget {
   String uid;
   Pgmreg({Key? key, required this.uid}) : super(key: key);
@@ -88,7 +89,6 @@ class _PgmregState extends State<Pgmreg> {
       onSaved: (value) {
         addressController.text = value!;
       },
-      textInputAction: TextInputAction.next,
       validator: (value) {
         if (value!.isEmpty) {
           return ("Address Feild Cannot be empty");
@@ -170,7 +170,6 @@ class _PgmregState extends State<Pgmreg> {
       onSaved: (value) {
         pgmController.text = value!;
       },
-      textInputAction: TextInputAction.next,
       validator: (value) {
         if (value!.isEmpty) {
           return ("Program Feild Cannot be empty");
@@ -196,7 +195,6 @@ class _PgmregState extends State<Pgmreg> {
       onSaved: (value) {
         chrgController.text = value!;
       },
-      textInputAction: TextInputAction.next,
       validator: (value) {
         if (value!.isEmpty) {
           return ("it can't be empty");
@@ -247,7 +245,6 @@ class _PgmregState extends State<Pgmreg> {
       onSaved: (value) {
         instadateController.text = value!;
       },
-      textInputAction: TextInputAction.next,
       validator: (value) {
         if (value!.isEmpty) {
           return ("Installation date Feild Cannot be empty");
@@ -476,14 +473,14 @@ class _PgmregState extends State<Pgmreg> {
 
       await firebaseFirestore
           .collection("Programs")
-          .doc("$formattedDate")
+          .doc(formattedDate)
           .set(pgmr.toMap())
           .then((value) {
-            firebaseFirestore.collection("history").doc("$formattedDate").set(history.toMap());
+            firebaseFirestore.collection("history").doc(formattedDate).set(history.toMap());
         showDialog(
             context: context,
             builder: (BuildContext context) {
-              return SimpleCustomAlert(
+              return const SimpleCustomAlert(
                   "Program Registration Completed!", bluebg, "Sucessfull");
             });
         setState(() {
@@ -503,7 +500,7 @@ class _PgmregState extends State<Pgmreg> {
         showDialog(
             context: context,
             builder: (BuildContext context) {
-              return SimpleCustomAlert("Something went Wrong, Try again!",
+              return const  SimpleCustomAlert("Something went Wrong, Try again!",
                   Colors.redAccent, "Error");
             });
         setState(() {
@@ -518,7 +515,7 @@ class SimpleCustomAlert extends StatelessWidget {
   final String? titles;
   final Color colorr;
   final String? done;
-  SimpleCustomAlert(this.titles, this.colorr, this.done);
+  const SimpleCustomAlert(this.titles, this.colorr, this.done, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -552,7 +549,7 @@ class SimpleCustomAlert extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Text(
