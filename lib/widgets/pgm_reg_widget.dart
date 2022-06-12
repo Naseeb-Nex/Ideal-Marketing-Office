@@ -56,6 +56,7 @@ class _PgmregState extends State<Pgmreg> {
 
   @override
   Widget build(BuildContext context) {
+    Size s = MediaQuery.of(context).size;
     //name field
     final namefield = TextFormField(
       autofocus: false,
@@ -293,16 +294,20 @@ class _PgmregState extends State<Pgmreg> {
     );
 
 
-    return SizedBox(
-      height: double.infinity,
-      width: double.infinity,
+    return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          const SizedBox(
-            height: 30,
-          ),
+           Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Image(
+                                image: const AssetImage(
+                                    "assets/images/register.jpg"),
+                                    width: s.width * 0.23,
+                                    height: s.height * 0.2,
+                              ),
+                            ),
           const Text(
             "Program Register",
             style: TextStyle(
@@ -326,14 +331,14 @@ class _PgmregState extends State<Pgmreg> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
+                Flexible(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(
-                          height: 30,
+                          height: 10,
                         ),
                         namefield,
                         const SizedBox(

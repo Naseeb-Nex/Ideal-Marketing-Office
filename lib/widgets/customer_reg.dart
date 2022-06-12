@@ -1,6 +1,11 @@
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
+
+import 'package:test2/services/customer.dart';
+
 class Customerreg extends StatefulWidget {
   const Customerreg({Key? key}) : super(key: key);
 
@@ -10,6 +15,8 @@ class Customerreg extends StatefulWidget {
 
 class _CustomerregState extends State<Customerreg> {
   final _formkey = GlobalKey<FormState>();
+
+  bool _loading = false;
 
   TextEditingController namecontroller = TextEditingController();
   TextEditingController addresscontroller = TextEditingController();
@@ -26,8 +33,18 @@ class _CustomerregState extends State<Customerreg> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const Padding(
-            padding: EdgeInsets.only(left: 30, top: 40),
+          Center(
+            child: Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: Image(
+                                image: const AssetImage(
+                                    "assets/images/customer.jpg"),
+                                    width: s.width * 0.23,
+                                    height: s.height * 0.2,
+                              ),
+                            ),
+          ),
+          const Center(
             child: Text(
               "Customer Registraion",
               style: TextStyle(
@@ -321,4 +338,85 @@ class _CustomerregState extends State<Customerreg> {
       ),
     );
   }
+
+//   void uploadData() async {
+//     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+//     DateTime now = DateTime.now();
+//     String formattedDate = DateFormat('MM d y kk:mm:ss').format(now);
+//     String upDate = DateFormat('d MMM y').format(now);
+//     String upTime = DateFormat('kk:mm').format(now);
+
+//     if (_formkey.currentState!.validate()) {
+//       setState(() {
+//         _loading = true;
+//       });
+
+//       Customer custm = Customer(
+//           name: namecontroller.text,
+//           address: addresscontroller.text,
+//           loc: .text,
+//           phn: phnController.text,
+//           upDate: upDate,
+//           upTime: upTime,
+//           docname: formattedDate,
+//           prospec: productspecController.text,
+//           instadate: instadateController.text,
+//           );
+
+//       Pgmhistory history = Pgmhistory(
+//           name: nameController.text,
+//           address: addressController.text,
+//           loc: locController.text,
+//           phn: phnController.text,
+//           pgm: pgmController.text,
+//           chrg: chrgController.text,
+//           type: _selectedcategory,
+//           upDate: upDate,
+//           upTime: upTime,
+//           docname: formattedDate,
+//           prospec: productspecController.text,
+//           instadate: instadateController.text,
+//           status: "pending",
+//           ch: "New program added"
+//           );
+
+//       await firebaseFirestore
+//           .collection("Programs")
+//           .doc(formattedDate)
+//           .set(custm.toMap())
+//           .then((value) {
+//             firebaseFirestore.collection("history").doc(formattedDate).set(history.toMap());
+//         showDialog(
+//             context: context,
+//             builder: (BuildContext context) {
+//               return const SimpleCustomAlert(
+//                   "Program Registration Completed!", bluebg, "Sucessfull");
+//             });
+//         setState(() {
+//           _loading = false;
+//         });
+
+//         nameController.clear();
+//         addressController.clear();
+//         locController.clear();
+//         phnController.clear();
+//         pgmController.clear();
+//         chrgController.clear();
+//         productspecController.clear();
+//         instadateController.clear();
+//       }).catchError((error) {
+//         print("Failed to add Program: $error");
+//         showDialog(
+//             context: context,
+//             builder: (BuildContext context) {
+//               return const  SimpleCustomAlert("Something went Wrong, Try again!",
+//                   Colors.redAccent, "Error");
+//             });
+//         setState(() {
+//           _loading = false;
+//         });
+//       });
+//     }
+//   }
+// }
 }

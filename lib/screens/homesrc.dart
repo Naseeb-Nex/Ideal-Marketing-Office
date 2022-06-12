@@ -17,7 +17,7 @@ class OfficeHome extends StatefulWidget {
 class _OfficeHomeState extends State<OfficeHome> {
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
-  String? currentscr = "customerreg";
+  String? currentscr = "PgmReg";
   @override
   void initState() {
     super.initState();
