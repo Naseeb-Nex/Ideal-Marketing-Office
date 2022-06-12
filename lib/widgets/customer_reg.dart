@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 
 import 'package:test2/services/customer.dart';
 
+import 'export_widget.dart';
+
 class Customerreg extends StatefulWidget {
   const Customerreg({Key? key}) : super(key: key);
 
@@ -143,85 +145,96 @@ class _CustomerregState extends State<Customerreg> {
                     )
                   ],
                 ),
-                Row(
+                Stack(
                   children: [
-                    Flexible(
-                      flex: 1,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 5.0, horizontal: s.width * 0.05),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Location",
-                              style: TextStyle(
-                                  fontFamily: "Nunito",
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            TextFormField(
-                              autofocus: false,
-                              controller: loccontroller,
-                              textInputAction: TextInputAction.next,
-                              onSaved: (value) {
-                                loccontroller.text = value!;
-                              },
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return ("Please enter the Location");
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10))),
-                            ),
-                          ],
-                        ),
-                      ),
+                    Center(
+                      child: _loading ? const CircularProgressIndicator(
+                        color: bluebg,
+                      ): null,
                     ),
-                    Flexible(
-                      flex: 1,
-                      fit: FlexFit.tight,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 5.0, horizontal: s.width * 0.04),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Product Specification",
-                              style: TextStyle(
-                                  fontFamily: "Nunito",
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
+                    Row(
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 5.0, horizontal: s.width * 0.05),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Location",
+                                  style: TextStyle(
+                                      fontFamily: "Nunito",
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                TextFormField(
+                                  autofocus: false,
+                                  controller: loccontroller,
+                                  textInputAction: TextInputAction.next,
+                                  onSaved: (value) {
+                                    loccontroller.text = value!;
+                                  },
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return ("Please enter the Location");
+                                    }
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10))),
+                                ),
+                              ],
                             ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            TextFormField(
-                              autofocus: false,
-                              controller: prospeccontroller,
-                              onSaved: (value) {
-                                prospeccontroller.text = value!;
-                              },
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return ("Please enter the Product Specification");
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10))),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
+                        Flexible(
+                          flex: 1,
+                          fit: FlexFit.tight,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 5.0, horizontal: s.width * 0.04),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Product Specification",
+                                  style: TextStyle(
+                                      fontFamily: "Nunito",
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                TextFormField(
+                                  autofocus: false,
+                                  controller: prospeccontroller,
+                                  onSaved: (value) {
+                                    prospeccontroller.text = value!;
+                                  },
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return ("Please enter the Product Specification");
+                                    }
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10))),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -351,35 +364,41 @@ class _CustomerregState extends State<Customerreg> {
               ],
             ),
             const SizedBox(
-              height: 30,
+              height: 20,
             ),
             Center(
-              child: Container(
-                width: s.width * 0.2,
-                padding: const EdgeInsets.symmetric(
-                  vertical: 15,
-                ),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: bluebg,
-                    boxShadow: [
-                      BoxShadow(
-                          spreadRadius: 3,
-                          blurRadius: 5,
-                          color: Colors.black.withOpacity(0.2),
-                          offset: const Offset(0, 5))
-                    ]),
-                child: const Center(
-                  child: Text(
-                    "Submit",
-                    style: TextStyle(
-                        fontFamily: "Nunito",
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: white),
+              child: InkWell(
+                onTap: ()=>uploadData(),
+                child: Container(
+                  width: s.width * 0.2,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 15,
+                  ),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: bluebg,
+                      boxShadow: [
+                        BoxShadow(
+                            spreadRadius: 3,
+                            blurRadius: 5,
+                            color: Colors.black.withOpacity(0.2),
+                            offset: const Offset(0, 5))
+                      ]),
+                  child: const Center(
+                    child: Text(
+                      "Submit",
+                      style: TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: white),
+                    ),
                   ),
                 ),
               ),
+            ),
+            const SizedBox(
+              height: 30,
             )
           ],
         ),
@@ -387,84 +406,82 @@ class _CustomerregState extends State<Customerreg> {
     );
   }
 
-//   void uploadData() async {
-//     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-//     DateTime now = DateTime.now();
-//     String formattedDate = DateFormat('MM d y kk:mm:ss').format(now);
-//     String upDate = DateFormat('d MMM y').format(now);
-//     String upTime = DateFormat('kk:mm').format(now);
+  void uploadData() async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    DateTime now = DateTime.now();
+    String upDate = DateFormat('d MMM y').format(now);
+    String upTime = DateFormat('kk:mm').format(now);
 
-//     if (_formkey.currentState!.validate()) {
-//       setState(() {
-//         _loading = true;
-//       });
+    if (_formkey.currentState!.validate()) {
+      setState(() {
+        _loading = true;
+      });
 
-//       Customer custm = Customer(
-//           name: namecontroller.text,
-//           address: addresscontroller.text,
-//           loc: .text,
-//           phn: phnController.text,
-//           upDate: upDate,
-//           upTime: upTime,
-//           docname: formattedDate,
-//           prospec: productspecController.text,
-//           instadate: instadateController.text,
-//           );
+      Customer custm = Customer(
+        name: namecontroller.text,
+        address: addresscontroller.text,
+        loc: loccontroller.text,
+        phn1: phn1controller.text,
+        phn2: phn2controller.text,
+        upDate: upDate,
+        upTime: upTime,
+        docname: "${namecontroller.text}${phn1controller.text}",
+        prospec: prospeccontroller.text,
+        instadate: instadatecontroller.text,
+      );
 
-//       Pgmhistory history = Pgmhistory(
-//           name: nameController.text,
-//           address: addressController.text,
-//           loc: locController.text,
-//           phn: phnController.text,
-//           pgm: pgmController.text,
-//           chrg: chrgController.text,
-//           type: _selectedcategory,
-//           upDate: upDate,
-//           upTime: upTime,
-//           docname: formattedDate,
-//           prospec: productspecController.text,
-//           instadate: instadateController.text,
-//           status: "pending",
-//           ch: "New program added"
-//           );
+      // Pgmhistory history = Pgmhistory(
+      //     name: nameController.text,
+      //     address: addressController.text,
+      //     loc: locController.text,
+      //     phn: phnController.text,
+      //     pgm: pgmController.text,
+      //     chrg: chrgController.text,
+      //     type: _selectedcategory,
+      //     upDate: upDate,
+      //     upTime: upTime,
+      //     docname: formattedDate,
+      //     prospec: productspecController.text,
+      //     instadate: instadateController.text,
+      //     status: "pending",
+      //     ch: "New program added"
+      //     );
 
-//       await firebaseFirestore
-//           .collection("Programs")
-//           .doc(formattedDate)
-//           .set(custm.toMap())
-//           .then((value) {
-//             firebaseFirestore.collection("history").doc(formattedDate).set(history.toMap());
-//         showDialog(
-//             context: context,
-//             builder: (BuildContext context) {
-//               return const SimpleCustomAlert(
-//                   "Program Registration Completed!", bluebg, "Sucessfull");
-//             });
-//         setState(() {
-//           _loading = false;
-//         });
+      await firebaseFirestore
+          .collection("Customer")
+          .doc("${namecontroller.text}${phn1controller.text}")
+          .set(custm.toMap())
+          .then((value) {
+        // firebaseFirestore.collection("history").doc(formattedDate).set(history.toMap());
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return const SimpleCustomAlert(
+                  "Customer Registration Completed!", bluebg, "Sucessfull");
+            });
+        setState(() {
+          _loading = false;
+        });
 
-//         nameController.clear();
-//         addressController.clear();
-//         locController.clear();
-//         phnController.clear();
-//         pgmController.clear();
-//         chrgController.clear();
-//         productspecController.clear();
-//         instadateController.clear();
-//       }).catchError((error) {
-//         print("Failed to add Program: $error");
-//         showDialog(
-//             context: context,
-//             builder: (BuildContext context) {
-//               return const  SimpleCustomAlert("Something went Wrong, Try again!",
-//                   Colors.redAccent, "Error");
-//             });
-//         setState(() {
-//           _loading = false;
-//         });
-//       });
-//     }
-//   }
-// }
+        namecontroller.clear();
+        addresscontroller.clear();
+        loccontroller.clear();
+        phn1controller.clear();
+        phn2controller.clear();
+        prospeccontroller.clear();
+        instadatecontroller.clear();
+      }).catchError((error) {
+        print("Failed to add Program: $error");
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return const SimpleCustomAlert("Something went Wrong, Try again!",
+                  Colors.redAccent, "Error");
+            });
+        setState(() {
+          _loading = false;
+        });
+      });
+    }
+  }
 }
