@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:test2/componets/view_pgm_card.dart';
+import 'package:test2/componets/customer_list_card.dart';
 
 import 'package:test2/constants/constants.dart';
 
@@ -39,17 +39,11 @@ class Customerlist extends StatelessWidget {
                 width: 30,
               ),
               for (var i = 0; i < _allpgm.length; i++) ...[
-                Viewpgmcard(
+                CustomerListCard(
                   name: _allpgm[i]["name"],
                   address: _allpgm[i]["address"],
                   loc: _allpgm[i]["loc"],
-                  pgm: _allpgm[i]["pgm"],
-                  phn: _allpgm[i]["phn"],
-                  type: _allpgm[i]["type"],
-                  upDate: _allpgm[i]["upDate"],
-                  upTime: _allpgm[i]["upTime"],
-                  prospec: _allpgm[i]["prospec"],
-                instadate: _allpgm[i]["instadate"],
+                  phn: _allpgm[i]["phn1"],
                   docname: _allpgm[i]["docname"],
                 )
               ]
