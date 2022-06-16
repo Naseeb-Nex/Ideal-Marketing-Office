@@ -69,15 +69,82 @@ class _CustomersrcState extends State<Customersrc> {
                     )
                   ]),
               child: Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.only(bottom: 10),
                 child: Column(
                   children: [
-                    Row(children: [
-                      const Flexible(flex: 1,child: Text("Name", style: TextStyle(fontSize: 14, fontFamily: "Montserrat"),)), 
-                      const Flexible(flex: 1,child: Text("Address", style: TextStyle(fontSize: 14, fontFamily: "Montserrat"),)), 
-                      const Flexible(flex: 1,child: Text("Location", style: TextStyle(fontSize: 14, fontFamily: "Montserrat"),)), 
-                    ],),
-                    Customerlist(),
+                    Container(
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                              topRight: Radius.circular(20)),
+                          color: bluebg),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 10),
+                      child: Row(
+                        children: const [
+                          Flexible(
+                              flex: 1,
+                              fit: FlexFit.tight,
+                              child: Center(
+                                child: Text(
+                                  "Name",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontFamily: "Montserrat",
+                                    fontWeight: FontWeight.bold,
+                                    color: white
+                                  ),
+                                ),
+                              )),
+                          Flexible(
+                              fit: FlexFit.tight,
+                              flex: 2,
+                              child: Center(
+                                child: Text(
+                                  "Address",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontFamily: "Montserrat",
+                                      fontWeight: FontWeight.bold,
+                                      color: white
+                                    ),
+                                ),
+                              )),
+                          Flexible(
+                              flex: 1,
+                              fit: FlexFit.tight,
+                              child: Center(
+                                child: Text(
+                                  "Location",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontFamily: "Montserrat",
+                                      fontWeight: FontWeight.bold,
+                                      color: white
+                                    ),
+                                ),
+                              )),
+                          Flexible(
+                              flex: 1,
+                              fit: FlexFit.tight,
+                              child: Center(
+                                child: Text(
+                                  "Phone Number",
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontFamily: "Montserrat",
+                                      fontWeight: FontWeight.bold,
+                                      color: white
+                                    ),
+                                ),
+                              )),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Customerlist(),
+                    ),
                   ],
                 ),
               ),
