@@ -70,7 +70,16 @@ class _CustomersrcState extends State<Customersrc> {
                   ]),
               child: Padding(
                 padding: const EdgeInsets.all(10),
-                child: Customerlist(),
+                child: Column(
+                  children: [
+                    Row(children: [
+                      const Flexible(flex: 1,child: Text("Name", style: TextStyle(fontSize: 14, fontFamily: "Montserrat"),)), 
+                      const Flexible(flex: 1,child: Text("Address", style: TextStyle(fontSize: 14, fontFamily: "Montserrat"),)), 
+                      const Flexible(flex: 1,child: Text("Location", style: TextStyle(fontSize: 14, fontFamily: "Montserrat"),)), 
+                    ],),
+                    Customerlist(),
+                  ],
+                ),
               ),
             ),
           ),
