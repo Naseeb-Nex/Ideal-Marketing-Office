@@ -27,12 +27,12 @@ class CustomerListCardState extends State<CustomerListCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric( vertical: 5),
+      padding: const EdgeInsets.symmetric(vertical: 5),
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(5),
           color: Colors.white,
           boxShadow: [
             BoxShadow(
@@ -43,57 +43,61 @@ class CustomerListCardState extends State<CustomerListCard> {
           ],
         ),
         child: Row(
-                        children: [
-                          Flexible(
-                              flex: 1,
-                              fit: FlexFit.tight,
-                              child: Center(
-                                child: Text(
-                                  "${widget.name}",
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontFamily: "Montserrat",
-                                  ),
-                                ),
-                              )),
-                          Flexible(
-                              fit: FlexFit.tight,
-                              flex: 2,
-                              child: Center(
-                                child: Text(
-                                  "${widget.address}",
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      fontFamily: "Montserrat",
-                                    ),
-                                ),
-                              )),
-                          Flexible(
-                              flex: 1,
-                              fit: FlexFit.tight,
-                              child: Center(
-                                child: Text(
-                                  "${widget.loc}",
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      fontFamily: "Montserrat",
-                                    ),
-                                ),
-                              )),
-                          Flexible(
-                              flex: 1,
-                              fit: FlexFit.tight,
-                              child: Center(
-                                child: Text(
-                                  "${widget.phn}",
-                                  style: const TextStyle(
-                                      fontSize: 16,
-                                      fontFamily: "Montserrat",
-                                    ),
-                                ),
-                              )),
-                        ],
-                      ),
+          children: [
+            const Icon(
+              Icons.account_circle_outlined,
+              // color: Colors.black45,
+              color: bluebg,
+            ),
+            Flexible(
+                flex: 2,
+                fit: FlexFit.tight,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Text(
+                    "${widget.name}",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontFamily: "Montserrat",
+                    ),
+                  ),
+                )),
+            Flexible(
+                fit: FlexFit.tight,
+                flex: 3,
+                child: Text(
+                  "${widget.address}",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontFamily: "Montserrat",
+                  ),
+                )),
+            Flexible(
+                flex: 1,
+                fit: FlexFit.tight,
+                child: Center(
+                  child: Text(
+                    "${widget.loc}",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontFamily: "Montserrat",
+                    ),
+                  ),
+                )),
+            SizedBox(
+              width: 145,
+                child: Center(
+                  child: Text(
+                    "${widget.phn}",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontFamily: "Montserrat",
+                    ),
+                  ),
+                ),),
+                const SizedBox(width: 50,child: Icon(Icons.more_horiz_rounded, color: Colors.black45,),)
+          ],
+        ),
       ),
     );
   }

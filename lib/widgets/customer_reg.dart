@@ -305,11 +305,13 @@ class _CustomerregState extends State<Customerreg> {
                                 phn1controller.text = value!;
                               },
                               validator: (value) {
-                                if (value!.isEmpty) {
-                                  return ("Please enter the Phone Number 1");
-                                }
-                                return null;
-                              },
+        if (value!.isEmpty) {
+          return ("Phone Number feild can't be empty");
+        } else if (value.length != 10) {
+          return ("invalid Phone Number");
+        }
+        return null;
+      },
                               decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10))),
@@ -412,10 +414,16 @@ class _CustomerregState extends State<Customerreg> {
     String upDate = DateFormat('d MMM y').format(now);
     String upTime = DateFormat('kk:mm').format(now);
 
+    var capitalizedValue =
+        namecontroller.text.substring(0, 1).toUpperCase();
+        print(capitalizedValue);
+
     if (_formkey.currentState!.validate()) {
       setState(() {
         _loading = true;
       });
+
+      final docname = namecontroller.text.toLowerCase() + phn1controller.text.toLowerCase();
 
       Customer custm = Customer(
         name: namecontroller.text,
@@ -425,7 +433,7 @@ class _CustomerregState extends State<Customerreg> {
         phn2: phn2controller.text,
         upDate: upDate,
         upTime: upTime,
-        docname: "${namecontroller.text}${phn1controller.text}",
+        docname: docname,
         prospec: prospeccontroller.text,
         instadate: instadatecontroller.text,
       );
@@ -449,7 +457,7 @@ class _CustomerregState extends State<Customerreg> {
 
       await firebaseFirestore
           .collection("Customer")
-          .doc("${namecontroller.text}${phn1controller.text}")
+          .doc(docname)
           .set(custm.toMap())
           .then((value) {
         // firebaseFirestore.collection("history").doc(formattedDate).set(history.toMap());
