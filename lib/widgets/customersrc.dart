@@ -1,12 +1,9 @@
-import 'package:firestore_search/firestore_search.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:test2/services/customer_data_model.dart';
 
-import 'package:test2/widgets/customerlist.dart';
-import 'package:test2/widgets/customer_reg.dart';
-
-import 'package:test2/services/customer_data_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:test2/componets/customer_list_card.dart';
+import 'package:test2/componets/search_box.dart';
 
 class Customersrc extends StatefulWidget {
   const Customersrc({Key? key}) : super(key: key);
@@ -17,90 +14,48 @@ class Customersrc extends StatefulWidget {
 
 class _CustomersrcState extends State<Customersrc> {
   String textquery = '';
-  bool searchmod = false;
+
+  List _allcustomer = [];
+  List resultc = [];
+
+  final Stream<QuerySnapshot> studentsStream =
+      FirebaseFirestore.instance.collection('Customer').snapshots();
+
+  final controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     Size s = MediaQuery.of(context).size;
-
-    // return FirestoreSearchScaffold(
-    //   firestoreCollectionName: 'Customer',
-    //   searchBy: 'docname',
-    //   scaffoldBody: Center(
-    //     child: Container(width: 199, height: 10, color: bluebg,),
-    //   ),
-    //   dataListFromSnapshot: CustomerDataModel().dataListFromSnapshot,
-    //   builder: (context, snapshot) {
-    //     if (snapshot.hasData) {
-    //       final List<CustomerDataModel>? dataList = snapshot.data;
-    //       if (dataList!.isEmpty) {
-    //         return const Center(
-    //           child: Text('No Results Returned'),
-    //         );
-    //       }
-    //       return ListView.builder(
-    //           itemCount: dataList.length,
-    //           itemBuilder: (context, index) {
-    //             final CustomerDataModel data = dataList[index];
-
-    //             return Column(
-    //               mainAxisSize: MainAxisSize.min,
-    //               mainAxisAlignment: MainAxisAlignment.center,
-    //               crossAxisAlignment: CrossAxisAlignment.start,
-    //               children: [
-    //                 Padding(
-    //                   padding: const EdgeInsets.all(8.0),
-    //                   child: Text(
-    //                     '${data.name}',
-    //                     style: Theme.of(context).textTheme.headline6,
-    //                   ),
-    //                 ),
-    //                 Padding(
-    //                   padding: const EdgeInsets.only(
-    //                       bottom: 8.0, left: 8.0, right: 8.0),
-    //                   child: Text('${data.address}',
-    //                       style: Theme.of(context).textTheme.bodyText1),
-    //                 )
-    //               ],
-    //             );
-    //           });
-    //     }
-
-    //     if (snapshot.connectionState == ConnectionState.done) {
-    //       if (!snapshot.hasData) {
-    //         return const Center(
-    //           child: Text('No Results Returned'),
-    //         );
-    //       }
-    //     }
-    //     return const Center(
-    //       child: CircularProgressIndicator(),
-    //     );
-    //   },
-    // );
+    const styleActive = TextStyle(color: Colors.black);
+    const styleHint = TextStyle(color: Colors.black54);
+    final style = controller.text.isEmpty ? styleHint : styleActive;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Padding(
-              padding: EdgeInsets.only(left: 30, top: 20),
-              child: Text(
-                "Customer Details",
-                style: TextStyle(
-                  fontFamily: "Nunito",
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+        const Padding(
+          padding: EdgeInsets.only(left: 30, top: 20),
+          child: Text(
+            "Customer Details",
+            style: TextStyle(
+              fontFamily: "Nunito",
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
             ),
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Row(
+          children: [
             Flexible(
               flex: 1,
               fit: FlexFit.tight,
-              child:  Padding(
-                padding:  EdgeInsets.only(left: s.width * 0.1,right: s.width * 0.1, top: 10),
-                child: searchmod ? Container(
+              child: Padding(
+                padding: EdgeInsets.only(
+                    left: s.width * 0.1, right: s.width * 0.15, top: 10),
+                child: Container(
                   height: 40,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
@@ -112,35 +67,40 @@ class _CustomersrcState extends State<Customersrc> {
                             color: Colors.black.withOpacity(0.1),
                             offset: const Offset(0, 5))
                       ]),
-                ): null,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 20, right: 30),
-              child: InkWell(
-                onTap: () => setState(() {
-                  searchmod = !searchmod;
-                }),
-                child: Container(
-                  padding: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: white,
-                      boxShadow: [
-                        BoxShadow(
-                            blurRadius: 3,
-                            spreadRadius: 2,
-                            color: Colors.black.withOpacity(0.1),
-                            offset: const Offset(0, 4))
-                      ]),
-                  child: const Icon(Icons.search),
+                  child: Container(
+                    height: double.infinity,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    child: TextField(
+                      controller: controller,
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.search, color: style.color),
+                        suffixIcon: controller.text.isNotEmpty
+                            ? GestureDetector(
+                                child: Icon(Icons.close, color: style.color),
+                                onTap: () {
+                                  controller.clear();
+                                  searchcustomer('');
+                                  FocusScope.of(context)
+                                      .requestFocus(FocusNode());
+                                },
+                              )
+                            : null,
+                        hintText: "Search",
+                        hintStyle: style,
+                        border: InputBorder.none,
+                      ),
+                      style: style,
+                      onChanged: searchcustomer,
+                    ),
+                  ),
                 ),
               ),
             ),
           ],
         ),
         const SizedBox(
-          height: 10,
+          height: 15,
         ),
         Expanded(
           child: Padding(
@@ -232,7 +192,56 @@ class _CustomersrcState extends State<Customersrc> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Customerlist(),
+                      child: SingleChildScrollView(
+                          physics: const BouncingScrollPhysics(),
+                          child: StreamBuilder<QuerySnapshot>(
+                              stream: studentsStream,
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                if (snapshot.hasError) {
+                                  print('Something went Wrong');
+                                }
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(
+                                      color: cheryred,
+                                    ),
+                                  );
+                                }
+
+                                _allcustomer.clear();
+                                snapshot.data!.docs
+                                    .map((DocumentSnapshot document) {
+                                  Map a =
+                                      document.data() as Map<String, dynamic>;
+                                  _allcustomer.add(a);
+                                  a['uid'] = document.id;
+                                }).toList();
+
+                                if (controller.text.isEmpty) {
+                                  resultc = _allcustomer;
+                                }
+
+                                return Column(
+                                  children: [
+                                    const SizedBox(
+                                      width: 30,
+                                    ),
+                                    for (var i = 0;
+                                        i < resultc.length;
+                                        i++) ...[
+                                      CustomerListCard(
+                                        name: resultc[i]["name"],
+                                        address: resultc[i]["address"],
+                                        loc: resultc[i]["loc"],
+                                        phn: resultc[i]["phn1"],
+                                        docname: resultc[i]["docname"],
+                                      )
+                                    ]
+                                  ],
+                                );
+                              })),
                     ),
                   ],
                 ),
@@ -242,5 +251,25 @@ class _CustomersrcState extends State<Customersrc> {
         )
       ],
     );
+  }
+
+  void searchcustomer(String query) {
+    setState(() {
+      resultc = _allcustomer.where((pgm) {
+        final nameLower = pgm["name"]!.toLowerCase();
+        final addressLower = pgm["address"]!.toLowerCase();
+        final locLower = pgm["loc"]!.toLowerCase();
+        final phn1umber = pgm["phn1"]!;
+        final phn2umber = pgm["phn2"]!;
+        final searchquery = query.toLowerCase();
+
+        return nameLower.contains(searchquery) ||
+            addressLower.contains(searchquery) ||
+            locLower.contains(searchquery) ||
+            phn1umber.contains(searchquery) ||
+            phn2umber.contains(searchquery);
+      }).toList();
+    });
+    // searching is postponed
   }
 }
