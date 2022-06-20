@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:test2/componets/assign_pgm_card.dart';
 import 'package:test2/constants/constants.dart';
-import 'package:test2/componets/search_box.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 
+// ignore: must_be_immutable
 class Assignpgmwidget extends StatefulWidget {
   String? uid;
   String? username;
@@ -18,16 +18,24 @@ class Assignpgmwidget extends StatefulWidget {
 }
 
 class _AssignpgmwidgetState extends State<Assignpgmwidget> {
-  @override
   String textquery = '';
   List pgm = [];
   List _allpgm = [];
+
   List pendingpgm = [];
   List assignpgm = [];
+
+  final controller = TextEditingController();
+
   final Stream<QuerySnapshot> programstream =
       FirebaseFirestore.instance.collection('Programs').snapshots();
 
+  @override
   Widget build(BuildContext context) {
+    const styleActive = TextStyle(color: Colors.black);
+    const styleHint = TextStyle(color: Colors.black54);
+    final style = controller.text.isEmpty ? styleHint : styleActive;
+
     return Column(
       children: [
         const SizedBox(
@@ -47,7 +55,33 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
               ),
             ],
           ),
-          child: buildSearch(),
+          child: Container(
+                    height: double.infinity,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                    child: TextField(
+                      controller: controller,
+                      decoration: InputDecoration(
+                        icon: Icon(Icons.search, color: style.color),
+                        suffixIcon: controller.text.isNotEmpty
+                            ? GestureDetector(
+                                child: Icon(Icons.close, color: style.color),
+                                onTap: () {
+                                  controller.clear();
+                                  searchpgm('');
+                                  FocusScope.of(context)
+                                      .requestFocus(FocusNode());
+                                },
+                              )
+                            : null,
+                        hintText: "Name or Phone number",
+                        hintStyle: style,
+                        border: InputBorder.none,
+                      ),
+                      style: style,
+                      onChanged: searchpgm,
+                    ),
+                  ),
         ),
         const SizedBox(
           height: 30,
@@ -87,6 +121,10 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
                           .where((i) => i['status'] == 'pending')
                           .toList();
 
+                          if(controller.text.isEmpty){
+                            pendingpgm = assignpgm;
+                          }
+
                       return Column(
                         children: [
                           const SizedBox(
@@ -122,12 +160,6 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
       ],
     );
   }
-
-  Widget buildSearch() => SearchWidget(
-        text: textquery,
-        hintText: 'Name or Phone number',
-        onChanged: searchpgm,
-      );
 
   void searchpgm(String query) {
     setState(() {

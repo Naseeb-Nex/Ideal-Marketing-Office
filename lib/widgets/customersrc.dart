@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:test2/componets/customer_list_card.dart';
-import 'package:test2/componets/search_box.dart';
 
 class Customersrc extends StatefulWidget {
   const Customersrc({Key? key}) : super(key: key);
