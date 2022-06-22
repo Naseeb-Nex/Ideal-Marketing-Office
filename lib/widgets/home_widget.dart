@@ -592,7 +592,8 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
             height: 60,
             width: double.infinity,
             decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(bottomRight: Radius.circular(5)),
+              borderRadius:
+                  const BorderRadius.only(bottomRight: Radius.circular(5)),
               color: white,
               boxShadow: [
                 BoxShadow(
@@ -671,13 +672,17 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                         const SizedBox(
                           height: 35,
                         ),
-                        const SizedBox(
-                          height: 200,
-                          width: 200,
+                        SizedBox(
+                          height: 160,
+                          width: 160,
                           child: CircleAvatar(
-                            backgroundColor: Colors.red,
-                            backgroundImage:
-                                AssetImage("assets/icons/avataricon.png"),
+                            radius: 80,
+                            backgroundColor: Colors.transparent,
+                            child: ClipOval(
+                              child: Image.asset("assets/icons/avataricon.png"),
+                            ),
+                            // backgroundImage:
+                            //     AssetImage("assets/icons/avataricon.png" ),
                           ),
                         ),
                         const SizedBox(
