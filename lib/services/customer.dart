@@ -37,7 +37,7 @@ class Customer {
       docname: map['docname'],
       prospec: map['prospec'],
       instadate: map['instadate'],
-    );
+    );  
   }
 
   // sending data to our server

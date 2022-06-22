@@ -231,11 +231,16 @@ class _CustomersrcState extends State<Customersrc> {
                                         i < resultc.length;
                                         i++) ...[
                                       CustomerListCard(
-                                        name: resultc[i]["name"],
-                                        address: resultc[i]["address"],
-                                        loc: resultc[i]["loc"],
-                                        phn: resultc[i]["phn1"],
-                                        docname: resultc[i]["docname"],
+                                        name: resultc[i]['name'],
+                                        address: resultc[i]['address'],
+                                        loc: resultc[i]['loc'],
+                                        phn1: resultc[i]['phn1'],
+                                        phn2: resultc[i]['phn2'],
+                                        upDate: resultc[i]['upDate'],
+                                        upTime: resultc[i]['upTime'],
+                                        docname: resultc[i]['docname'],
+                                        prospec: resultc[i]['prospec'],
+                                        instadate: resultc[i]['instadate'],
                                       )
                                     ]
                                   ],

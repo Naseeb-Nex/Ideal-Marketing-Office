@@ -1,21 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:test2/constants/constants.dart';
+import 'package:test2/screens/customer_profile.dart';
+import 'package:test2/services/customer.dart';
 
 // ignore: must_be_immutable
 class CustomerListCard extends StatefulWidget {
   String? name;
   String? address;
   String? loc;
-  String? phn;
+  String? phn1;
+  String? phn2;
+  String? upDate;
+  String? upTime;
   String? docname;
+  String? prospec;
+  String? instadate;
 
   CustomerListCard({
     Key? key,
     this.name,
     this.address,
     this.loc,
-    this.phn,
+    this.phn1,
+    this.phn2,
+    this.upDate,
+    this.upTime,
     this.docname,
+    this.prospec,
+    this.instadate,
   }) : super(key: key);
 
   @override
@@ -26,6 +38,19 @@ class CustomerListCardState extends State<CustomerListCard> {
   bool vis = false;
   @override
   Widget build(BuildContext context) {
+    final cust = Customer(
+      name: widget.name,
+      address: widget.address,
+      loc: widget.loc,
+      phn1: widget.phn1,
+      phn2: widget.phn2,
+      upDate: widget.upDate,
+      upTime: widget.upTime,
+      docname: widget.docname,
+      prospec: widget.prospec,
+      instadate: widget.instadate,
+    );
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Container(
@@ -86,16 +111,31 @@ class CustomerListCardState extends State<CustomerListCard> {
                 )),
             SizedBox(
               width: 145,
-                child: Center(
-                  child: Text(
-                    "${widget.phn}",
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontFamily: "Montserrat",
-                    ),
+              child: Center(
+                child: Text(
+                  "${widget.phn1}",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontFamily: "Montserrat",
                   ),
-                ),),
-                const SizedBox(width: 50,child: Icon(Icons.more_horiz_rounded, color: Colors.black45,),)
+                ),
+              ),
+            ),
+            InkWell(
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => CustomerProfilesrc(
+                              docname: widget.docname,
+                              cust: cust,
+                            ))),
+                child: const SizedBox(
+                  width: 50,
+                  child: Icon(
+                    Icons.more_horiz_rounded,
+                    color: Colors.black45,
+                  ),
+                ))
           ],
         ),
       ),

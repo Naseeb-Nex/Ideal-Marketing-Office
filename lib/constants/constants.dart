@@ -7,3 +7,4 @@ const secondtechbg = Color(0xFF6200ED);
 const bluebg = Color.fromRGBO(55, 48, 255, 1);
 const newbg = Color(0xFFF1F2F6);
 const white = Colors.white;
+const black = Colors.black;

@@ -95,7 +95,7 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
                 scrollDirection: Axis.vertical,
                 child: StreamBuilder<QuerySnapshot>(
                     stream: programstream,
-                    builder: (BuildContext context,
+                      builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (snapshot.hasError) {
                         print('Something went Wrong');

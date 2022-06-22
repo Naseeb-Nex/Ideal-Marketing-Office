@@ -145,7 +145,22 @@ class _CompletedpgmcardState extends State<Completedpgmcard> {
                             fontSize: 15,
                           ),
                         ),
-                        
+                      Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 5),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: bluebg),
+                          child: const Text(
+                            "Completed",
+                            style: TextStyle(
+                              fontFamily: "Montserrat",
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: white,
+                            ),
+                          ),
+                        ),  
                       ],
                     ),
                   ],
@@ -172,35 +187,12 @@ class _CompletedpgmcardState extends State<Completedpgmcard> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 5),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: bluebg),
-                          child: const Text(
-                            "Completed",
-                            style: TextStyle(
-                              fontFamily: "Montserrat",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: white,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          "Date : ${widget.cdate}",
-                          style: const TextStyle(
-                            fontFamily: "Montserrat",
-                            fontSize: 15,
-                          ),
-                        ),
-                      ],
+                    Text(
+                      "Date : ${widget.cdate}",
+                      style: const TextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: 15,
+                      ),
                     ),
                     Row(
                       children: [

@@ -19,10 +19,10 @@ class Statussrc extends StatefulWidget {
 
 class StatussrcState extends State<Statussrc> {
   String _currentsw = "Assign";
+    final ScrollController controller = ScrollController();
   @override
   Widget build(BuildContext context) {
-    final ScrollController controller = ScrollController();
-    return Container(
+    return SizedBox(
       height: double.infinity,
       width: double.infinity,
       child: Column(
@@ -50,7 +50,7 @@ class StatussrcState extends State<Statussrc> {
           const SizedBox(
             height: 20,
           ),
-          Container(
+          SizedBox(
             height: 50,
             width: double.infinity,
             child: ScrollConfiguration(
@@ -61,7 +61,7 @@ class StatussrcState extends State<Statussrc> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       InkWell(
