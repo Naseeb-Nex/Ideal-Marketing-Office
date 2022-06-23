@@ -681,8 +681,6 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                             child: ClipOval(
                               child: Image.asset("assets/icons/avataricon.png"),
                             ),
-                            // backgroundImage:
-                            //     AssetImage("assets/icons/avataricon.png" ),
                           ),
                         ),
                         const SizedBox(

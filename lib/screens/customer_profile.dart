@@ -106,8 +106,8 @@ class StatussrcState extends State<CustomerProfilesrc> {
                             children: [
                               Center(
                                 child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 10),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
                                   child: Container(
                                     width: 100,
                                     height: 100,
@@ -117,7 +117,8 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                           BoxShadow(
                                             spreadRadius: 3,
                                             blurRadius: 5,
-                                            color: Colors.black.withOpacity(0.09),
+                                            color:
+                                                Colors.black.withOpacity(0.09),
                                             offset: const Offset(-2, 2),
                                           )
                                         ]),
@@ -154,16 +155,6 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 17.0),
-                                child: Container(
-                                  width: 145,
-                                  height: 2,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(2),
-                                      color: Colors.black),
                                 ),
                               ),
                               const SizedBox(
@@ -256,7 +247,8 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                       child: widget.cust.phn2.isNotEmpty
                                           ? Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceBetween,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
@@ -311,9 +303,10 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                 height: s.height * 0.1,
                                                 decoration: BoxDecoration(
                                                     borderRadius:
-                                                        BorderRadius.circular(10),
-                                                    color:
-                                                        const Color(0xffEAF0FF)),
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    color: const Color(
+                                                        0xffEAF0FF)),
                                                 child: const Icon(
                                                   Icons
                                                       .production_quantity_limits_rounded,
@@ -322,7 +315,8 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                             Flexible(
                                               flex: 1,
                                               child: Padding(
-                                                padding: const EdgeInsets.all(10),
+                                                padding:
+                                                    const EdgeInsets.all(10),
                                                 child: Text(
                                                   "${widget.cust.prospec}",
                                                   style: const TextStyle(
@@ -343,13 +337,14 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                     const Text(
                                       "Installation Date",
                                       style: TextStyle(
-                                        fontFamily: "Montserrat",
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black38
-                                      ),
+                                          fontFamily: "Montserrat",
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black38),
                                     ),
-                                    const SizedBox(height: 5,),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
                                     Text(
                                       "${widget.cust.instadate}",
                                       style: const TextStyle(
@@ -357,24 +352,30 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                         fontSize: 17,
                                       ),
                                     ),
-                                    const SizedBox(height: 10,),
-                                    Container(
-                                      alignment: Alignment.centerRight,
-                                      child: Text("${widget.cust.upDate}",style: const TextStyle(
-                                        fontFamily: "Nunito",
-                                        fontSize: 12,
-                                        color: Colors.black54,
-                                      ),),
-
+                                    const SizedBox(
+                                      height: 10,
                                     ),
                                     Container(
                                       alignment: Alignment.centerRight,
-                                      child: Text("${widget.cust.upTime}",style: const TextStyle(
-                                        fontFamily: "Nunito",
-                                        fontSize: 12,
-                                        color: Colors.black54,
-                                      ),),
-
+                                      child: Text(
+                                        "${widget.cust.upDate}",
+                                        style: const TextStyle(
+                                          fontFamily: "Nunito",
+                                          fontSize: 12,
+                                          color: Colors.black54,
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      alignment: Alignment.centerRight,
+                                      child: Text(
+                                        "${widget.cust.upTime}",
+                                        style: const TextStyle(
+                                          fontFamily: "Nunito",
+                                          fontSize: 12,
+                                          color: Colors.black54,
+                                        ),
+                                      ),
                                     )
                                   ],
                                 ),
@@ -392,6 +393,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                   child: Container(
                     padding: const EdgeInsets.only(top: 8, bottom: 8, right: 8),
                     child: Container(
+                      height: s.height - 80,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: white,
@@ -401,6 +403,41 @@ class StatussrcState extends State<CustomerProfilesrc> {
                             blurRadius: 20,
                             color: secondbg.withOpacity(0.20),
                           ),
+                        ],
+                      ),
+                      child: Stack(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20, right: 18),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: () {},
+                                  child: Container(
+                                    width: 50,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: bluebg,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          spreadRadius: 2,
+                                          blurRadius: 3,
+                                          color: black.withOpacity(0.1),
+                                          offset: const Offset(0, 5),
+                                        ),
+                                      ],
+                                    ),
+                                    child: const Icon(
+                                      Icons.add,
+                                      color: white,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
                         ],
                       ),
                     ),

@@ -35,7 +35,6 @@ class CustomerListCard extends StatefulWidget {
 }
 
 class CustomerListCardState extends State<CustomerListCard> {
-  bool vis = false;
   @override
   Widget build(BuildContext context) {
     final cust = Customer(
@@ -71,7 +70,6 @@ class CustomerListCardState extends State<CustomerListCard> {
           children: [
             const Icon(
               Icons.account_circle_outlined,
-              // color: Colors.black45,
               color: bluebg,
             ),
             Flexible(
