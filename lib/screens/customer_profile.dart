@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:test2/constants/constants.dart';
 import 'package:test2/services/customer.dart';
+import 'package:test2/widgets/customer_history_widget.dart';
+import 'package:test2/widgets/customer_pgm_registration.dart';
 
 // ignore: must_be_immutable
 class CustomerProfilesrc extends StatefulWidget {
@@ -17,6 +19,7 @@ class CustomerProfilesrc extends StatefulWidget {
 class StatussrcState extends State<CustomerProfilesrc> {
   FirebaseFirestore fb = FirebaseFirestore.instance;
   Customer C_profile = Customer();
+  String current_scr = "history";
 
   @override
   Widget build(BuildContext context) {
@@ -41,34 +44,67 @@ class StatussrcState extends State<CustomerProfilesrc> {
               ],
             ),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(left: 30),
-                  child: InkWell(
-                    onTap: () => Navigator.pop(context),
-                    child: Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: bluebg),
-                      child: const Icon(
-                        Icons.arrow_back,
-                        size: 20,
-                        color: Colors.white,
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 30),
+                      child: InkWell(
+                        onTap: () => Navigator.pop(context),
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: bluebg),
+                          child: const Icon(
+                            Icons.arrow_back,
+                            size: 20,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    const Padding(
+                      padding: EdgeInsets.only(
+                        left: 20,
+                      ),
+                      child: Center(
+                        child: Image(
+                          image: AssetImage("assets/icons/imaicon.png"),
+                          height: 45,
+                          filterQuality: FilterQuality.high,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(
-                    left: 20,
-                  ),
-                  child: Center(
-                    child: Image(
-                      image: AssetImage("assets/icons/imaicon.png"),
-                      height: 45,
-                      filterQuality: FilterQuality.high,
+                Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: InkWell(
+                    onTap: () =>setState(() {
+                      current_scr = "reg";
+                    }),
+                    child: Container(
+                      width: 50,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: white,
+                        boxShadow: [
+                          BoxShadow(
+                            spreadRadius: 2,
+                            blurRadius: 3,
+                            color: black.withOpacity(0.1),
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: const Icon(
+                        Icons.add,
+                        color: bluebg,
+                      ),
                     ),
                   ),
                 )
@@ -393,54 +429,19 @@ class StatussrcState extends State<CustomerProfilesrc> {
                   child: Container(
                     padding: const EdgeInsets.only(top: 8, bottom: 8, right: 8),
                     child: Container(
-                      height: s.height - 80,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: white,
-                        boxShadow: [
-                          BoxShadow(
-                            offset: const Offset(0, 5),
-                            blurRadius: 20,
-                            color: secondbg.withOpacity(0.20),
-                          ),
-                        ],
-                      ),
-                      child: Stack(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20, right: 18),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                InkWell(
-                                  onTap: () {},
-                                  child: Container(
-                                    width: 50,
-                                    height: 40,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: bluebg,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          spreadRadius: 2,
-                                          blurRadius: 3,
-                                          color: black.withOpacity(0.1),
-                                          offset: const Offset(0, 5),
-                                        ),
-                                      ],
-                                    ),
-                                    child: const Icon(
-                                      Icons.add,
-                                      color: white,
-                                    ),
-                                  ),
-                                )
-                              ],
+                        height: s.height - 80,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: white,
+                          boxShadow: [
+                            BoxShadow(
+                              offset: const Offset(0, 5),
+                              blurRadius: 20,
+                              color: secondbg.withOpacity(0.20),
                             ),
-                          )
-                        ],
-                      ),
-                    ),
+                          ],
+                        ),
+                        child: CustomerViewWrappaer()),
                   ),
                 )
               ],
@@ -465,5 +466,19 @@ class StatussrcState extends State<CustomerProfilesrc> {
     } catch (e) {
       print(e);
     }
+  }
+}
+
+class CustomerViewWrappaer extends StatelessWidget {
+  String? src;
+  CustomerViewWrappaer({Key? key, this.src})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (src == 'history') {
+      return CustomerHistory();
+    }
+    return CustomerpgmReg();
   }
 }
