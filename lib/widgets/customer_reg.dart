@@ -148,9 +148,11 @@ class _CustomerregState extends State<Customerreg> {
                 Stack(
                   children: [
                     Center(
-                      child: _loading ? const CircularProgressIndicator(
-                        color: bluebg,
-                      ): null,
+                      child: _loading
+                          ? const CircularProgressIndicator(
+                              color: bluebg,
+                            )
+                          : null,
                     ),
                     Row(
                       children: [
@@ -305,13 +307,13 @@ class _CustomerregState extends State<Customerreg> {
                                 phn1controller.text = value!;
                               },
                               validator: (value) {
-        if (value!.isEmpty) {
-          return ("Phone Number feild can't be empty");
-        } else if (value.length != 10) {
-          return ("invalid Phone Number");
-        }
-        return null;
-      },
+                                if (value!.isEmpty) {
+                                  return ("Phone Number feild can't be empty");
+                                } else if (value.length != 10) {
+                                  return ("invalid Phone Number");
+                                }
+                                return null;
+                              },
                               decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10))),
@@ -370,7 +372,7 @@ class _CustomerregState extends State<Customerreg> {
             ),
             Center(
               child: InkWell(
-                onTap: ()=>uploadData(),
+                onTap: () => uploadData(),
                 child: Container(
                   width: s.width * 0.2,
                   padding: const EdgeInsets.symmetric(
@@ -414,16 +416,16 @@ class _CustomerregState extends State<Customerreg> {
     String upDate = DateFormat('d MMM y').format(now);
     String upTime = DateFormat('kk:mm').format(now);
 
-    var capitalizedValue =
-        namecontroller.text.substring(0, 1).toUpperCase();
-        print(capitalizedValue);
+    var capitalizedValue = namecontroller.text.substring(0, 1).toUpperCase();
+    print(capitalizedValue);
 
     if (_formkey.currentState!.validate()) {
       setState(() {
         _loading = true;
       });
 
-      final docname = namecontroller.text.toLowerCase() + phn1controller.text.toLowerCase();
+      final docname =
+          namecontroller.text.toLowerCase() + phn1controller.text.toLowerCase();
 
       Customer custm = Customer(
         name: namecontroller.text,
