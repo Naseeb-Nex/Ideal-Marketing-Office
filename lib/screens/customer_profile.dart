@@ -19,7 +19,8 @@ class CustomerProfilesrc extends StatefulWidget {
 class StatussrcState extends State<CustomerProfilesrc> {
   FirebaseFirestore fb = FirebaseFirestore.instance;
   Customer C_profile = Customer();
-  String current_scr = "history";
+  // String current_scr = "history";
+  String current_scr = "reg";
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +84,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                 Padding(
                   padding: const EdgeInsets.only(right: 20),
                   child: InkWell(
-                    onTap: () =>setState(() {
+                    onTap: () => setState(() {
                       current_scr = "reg";
                     }),
                     child: Container(
@@ -441,7 +442,10 @@ class StatussrcState extends State<CustomerProfilesrc> {
                             ),
                           ],
                         ),
-                        child: CustomerViewWrappaer()),
+                        child: CustomerViewWrappaer(
+                          src: current_scr,
+                          cust: widget.cust,
+                        )),
                   ),
                 )
               ],
@@ -471,14 +475,14 @@ class StatussrcState extends State<CustomerProfilesrc> {
 
 class CustomerViewWrappaer extends StatelessWidget {
   String? src;
-  CustomerViewWrappaer({Key? key, this.src})
-      : super(key: key);
+  final cust;
+  CustomerViewWrappaer({Key? key, this.src, this.cust}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     if (src == 'history') {
       return CustomerHistory();
     }
-    return CustomerpgmReg();
+    return CustomerpgmReg(cust: cust,);
   }
 }

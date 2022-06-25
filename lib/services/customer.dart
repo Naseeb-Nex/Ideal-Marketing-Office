@@ -7,7 +7,7 @@ class Customer {
   String? upDate;
   String? upTime;
   String? docname;
-  String? prospec;
+  String? prospec ;
   String? instadate;
 
   Customer(

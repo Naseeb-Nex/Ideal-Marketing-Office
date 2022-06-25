@@ -202,9 +202,12 @@ class _CustomersrcState extends State<Customersrc> {
                                 }
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
-                                  return const Center(
-                                    child: CircularProgressIndicator(
-                                      color: cheryred,
+                                  return Padding(
+                                    padding: EdgeInsets.only(top: s.height * 0.24),
+                                    child: const Center(
+                                      child: CircularProgressIndicator(
+                                        color: bluebg,
+                                      ),
                                     ),
                                   );
                                 }
