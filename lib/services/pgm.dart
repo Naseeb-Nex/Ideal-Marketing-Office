@@ -4,6 +4,7 @@ class Pgmdata {
   String? address;
   String? loc;
   String? phn;
+  String? phn2;
   String? pgm;
   String? chrg;
   String? type;
@@ -13,6 +14,7 @@ class Pgmdata {
   String? prospec;
   String? instadate;
   String? status;
+  String? custdocname;
 
   Pgmdata(
       {this.uid,
@@ -20,6 +22,7 @@ class Pgmdata {
       this.address,
       this.loc,
       this.phn,
+      this.phn2,
       this.pgm,
       this.chrg,
       this.type,
@@ -28,7 +31,8 @@ class Pgmdata {
       this.docname,
       this.prospec,
       this.instadate,
-      this.status});
+      this.status,
+      this.custdocname,});
 
   // receiving data from server
   factory Pgmdata.fromMap(map) {
@@ -38,6 +42,7 @@ class Pgmdata {
       address: map['address'],
       loc: map['loc'],
       phn: map['phn'],
+      phn2: map['phn2'],
       pgm: map['pgm'],
       chrg: map['chrg'],
       type: map['type'],
@@ -47,6 +52,7 @@ class Pgmdata {
       prospec: map['prospec'],
       instadate: map['instadate'],
       status: map['status'],
+      custdocname: map['custdocname'],
     );
   }
 
@@ -58,6 +64,7 @@ class Pgmdata {
       'address': address,
       'loc': loc,
       'phn': phn,
+      'phn2': phn2,
       'pgm': pgm,
       'chrg': chrg,
       'type': type,
@@ -67,6 +74,7 @@ class Pgmdata {
       'prospec': prospec,
       'instadate': instadate,
       'status': status,
+      'custdocname': custdocname,
     };
   }
 }

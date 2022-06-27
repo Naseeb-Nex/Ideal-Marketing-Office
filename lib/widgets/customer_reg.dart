@@ -18,8 +18,9 @@ class Customerreg extends StatefulWidget {
 class _CustomerregState extends State<Customerreg> {
   final _formkey = GlobalKey<FormState>();
 
-  bool _loading = false;
+  Customer exist_cust = Customer();
 
+  bool _loading = false;
   TextEditingController namecontroller = TextEditingController();
   TextEditingController addresscontroller = TextEditingController();
   TextEditingController loccontroller = TextEditingController();
@@ -457,41 +458,65 @@ class _CustomerregState extends State<Customerreg> {
       //     ch: "New program added"
       //     );
 
-      await firebaseFirestore
+      firebaseFirestore
           .collection("Customer")
           .doc(docname)
-          .set(custm.toMap())
-          .then((value) {
-        // firebaseFirestore.collection("history").doc(formattedDate).set(history.toMap());
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return const SimpleCustomAlert(
-                  "Customer Registration Completed!", bluebg, "Sucessfull");
-            });
-        setState(() {
-          _loading = false;
-        });
+          .get()
+          .then((value) => {exist_cust = Customer.fromMap(value.data())});
 
-        namecontroller.clear();
-        addresscontroller.clear();
-        loccontroller.clear();
-        phn1controller.clear();
-        phn2controller.clear();
-        prospeccontroller.clear();
-        instadatecontroller.clear();
-      }).catchError((error) {
-        print("Failed to add Program: $error");
+      if (exist_cust.docname == null) {
         showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return const SimpleCustomAlert("Something went Wrong, Try again!",
-                  Colors.redAccent, "Error");
-            });
-        setState(() {
-          _loading = false;
+              context: context,
+              builder: (BuildContext context) {
+                return const SimpleCustomAlert(
+                    "! Customer already Exist !",
+                    Colors.redAccent,
+                    "Error");
+              });
+          setState(() {
+            _loading = false;
+          });
+      }
+      else{
+        await firebaseFirestore
+            .collection("Customer")
+            .doc(docname)
+            .set(custm.toMap())
+            .then((value) {
+          // firebaseFirestore.collection("history").doc(formattedDate).set(history.toMap());
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return const SimpleCustomAlert(
+                    "Customer Registration Completed!", bluebg, "Sucessfull");
+              });
+          setState(() {
+            _loading = false;
+          });
+
+          namecontroller.clear();
+          addresscontroller.clear();
+          loccontroller.clear();
+          phn1controller.clear();
+          phn2controller.clear();
+          prospeccontroller.clear();
+          instadatecontroller.clear();
+        }).catchError((error) {
+          print("Failed to add Program: $error");
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return const SimpleCustomAlert(
+                    "Something went Wrong, Try again!",
+                    Colors.redAccent,
+                    "Error");
+              });
+          setState(() {
+            _loading = false;
+          });
         });
-      });
+        
+      }
     }
   }
 }

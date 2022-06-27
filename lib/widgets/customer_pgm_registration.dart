@@ -1,6 +1,11 @@
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
+import 'package:test2/services/history.dart';
+import 'package:test2/services/pgm.dart';
+
 // ignore: must_be_immutable
 class CustomerpgmReg extends StatefulWidget {
   final cust;
@@ -12,7 +17,6 @@ class CustomerpgmReg extends StatefulWidget {
 
 class _CustomerpgmRegState extends State<CustomerpgmReg> {
   final _formkey = GlobalKey<FormState>();
-
 
   TextEditingController namecontroller = TextEditingController();
   TextEditingController addresscontroller = TextEditingController();
@@ -39,7 +43,6 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
     });
   }
 
-  
   List<DropdownMenuItem<String>> _dropDownItem() {
     List<String> categorylist = [
       "Follow Up Service",
@@ -65,7 +68,6 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
 
   @override
   Widget build(BuildContext context) {
-
     Size s = MediaQuery.of(context).size;
 
     final categoryselector = InputDecorator(
@@ -77,8 +79,8 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
           borderRadius: BorderRadius.circular(10),
         ),
       ),
-      child:  DropdownButtonHideUnderline(
-        child:  DropdownButton(
+      child: DropdownButtonHideUnderline(
+        child: DropdownButton(
           value: _selectedcategory,
           items: _dropDownItem(),
           onChanged: (value) {
@@ -119,271 +121,280 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: s.width * 0.05),
-                child: Wrap(
-                  children: [
-                    Row(
-                      children: [
-                        Flexible(
-                          flex: 1,
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                top: 5.0, bottom: 5.0, right: s.width * 0.05),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "Full Name",
-                                  style: TextStyle(
-                                      fontFamily: "Nunito",
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                TextField(
-                                  autofocus: false,
-                                  controller: namecontroller,
-                                  enabled: false,
-                                  decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: const Color(0XFFD8D8D8),
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10)),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          flex: 1,
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                top: 5.0, bottom: 5.0, left: s.width * 0.05),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "Address",
-                                  style: TextStyle(
-                                      fontFamily: "Nunito",
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                TextField(
-                                  autofocus: false,
-                                  controller: addresscontroller,
-                                  enabled: false,
-                                  decoration: InputDecoration(
-                                      filled: true,
-                                      fillColor: const Color(0XFFD8D8D8),
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8))),
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    Stack(
-                      children: [
-                        Center(
-                          child: _loading
-                              ? const CircularProgressIndicator(
-                                  color: bluebg,
-                                )
-                              : null,
-                        ),
-                        Row(
-                          children: [
-                            Flexible(
-                              flex: 1,
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                    top: 5.0, bottom: 5.0, right: s.width * 0.05),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      "Location",
-                                      style: TextStyle(
-                                          fontFamily: "Nunito",
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    TextField(
-                                      autofocus: false,
-                                      controller: loccontroller,
-                                      enabled: false,
-                                      decoration: InputDecoration(
-                                          filled: true,
-                                          fillColor: const Color(0XFFD8D8D8),
-                                          border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10))),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Flexible(
-                              flex: 1,
-                              fit: FlexFit.tight,
-                              child: Padding(
-                                padding: EdgeInsets.only(
-                                    top: 5.0, bottom: 5.0, left: s.width * 0.05),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Text(
-                                      "Product Specification",
-                                      style: TextStyle(
-                                          fontFamily: "Nunito",
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    TextField(
-                                      autofocus: false,
-                                      controller: prospeccontroller,
-                                      enabled: false,
-                                      decoration: InputDecoration(
-                                          filled: true,
-                                          fillColor: const Color(0XFFD8D8D8),
-                                          border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10))),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Flexible(
-                          flex: 1,
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                top: 5.0, bottom: 5.0, right: s.width * 0.05),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "Installation Date",
-                                  style: TextStyle(
-                                      fontFamily: "Nunito",
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                TextField(
-                                  autofocus: false,
-                                  controller: instadatecontroller,
-                                  enabled: false,
-                                  decoration: InputDecoration(
-                                      filled: true,
-                                      fillColor: const Color(0XFFD8D8D8),
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8))),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          flex: 1,
-                          fit: FlexFit.tight,
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                                top: 5.0, bottom: 5.0, left: s.width * 0.05),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  "Phone Number 1",
-                                  style: TextStyle(
-                                      fontFamily: "Nunito",
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                TextField(
-                                  autofocus: false,
-                                  controller: phn1controller,
-                                  enabled: false,
-                                  decoration: InputDecoration(
-                                      filled: true,
-                                      fillColor: const Color(0XFFD8D8D8),
-                                      border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10))),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const Text(
-                      "Program",
-                      style: TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    TextFormField(
-                      autofocus: false,
-                      maxLines: 7,
-                      minLines: 4,
-                      controller: pgmcontroller,
-                      textInputAction: TextInputAction.next,
-                      onSaved: (value) {
-                        pgmcontroller.text = value!;
-                      },
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return ("Please enter the Program");
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8))),
-                    ),
-                    Row(
+                child: Form(
+                  key: _formkey,
+                  child: Wrap(
+                    children: [
+                      Row(
                         children: [
                           Flexible(
                             flex: 1,
                             child: Padding(
-                             padding: EdgeInsets.only(
-                                top: 5.0, bottom: 5.0, right: s.width * 0.05),
+                              padding: EdgeInsets.only(
+                                  top: 5.0, bottom: 5.0, right: s.width * 0.05),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Full Name",
+                                    style: TextStyle(
+                                        fontFamily: "Nunito",
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  TextField(
+                                    autofocus: false,
+                                    controller: namecontroller,
+                                    enabled: false,
+                                    decoration: InputDecoration(
+                                      filled: true,
+                                      fillColor: const Color(0XFFD8D8D8),
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Flexible(
+                            flex: 1,
+                            fit: FlexFit.tight,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  top: 5.0, bottom: 5.0, left: s.width * 0.05),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Address",
+                                    style: TextStyle(
+                                        fontFamily: "Nunito",
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  TextField(
+                                    autofocus: false,
+                                    controller: addresscontroller,
+                                    enabled: false,
+                                    decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: const Color(0XFFD8D8D8),
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8))),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      Stack(
+                        children: [
+                          Center(
+                            child: _loading
+                                ? const CircularProgressIndicator(
+                                    color: bluebg,
+                                  )
+                                : null,
+                          ),
+                          Row(
+                            children: [
+                              Flexible(
+                                flex: 1,
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      top: 5.0,
+                                      bottom: 5.0,
+                                      right: s.width * 0.05),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        "Location",
+                                        style: TextStyle(
+                                            fontFamily: "Nunito",
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      TextField(
+                                        autofocus: false,
+                                        controller: loccontroller,
+                                        enabled: false,
+                                        decoration: InputDecoration(
+                                            filled: true,
+                                            fillColor: const Color(0XFFD8D8D8),
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10))),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Flexible(
+                                flex: 1,
+                                fit: FlexFit.tight,
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                      top: 5.0,
+                                      bottom: 5.0,
+                                      left: s.width * 0.05),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        "Product Specification",
+                                        style: TextStyle(
+                                            fontFamily: "Nunito",
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      TextField(
+                                        autofocus: false,
+                                        controller: prospeccontroller,
+                                        enabled: false,
+                                        decoration: InputDecoration(
+                                            filled: true,
+                                            fillColor: const Color(0XFFD8D8D8),
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10))),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Flexible(
+                            flex: 1,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  top: 5.0, bottom: 5.0, right: s.width * 0.05),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Installation Date",
+                                    style: TextStyle(
+                                        fontFamily: "Nunito",
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  TextField(
+                                    autofocus: false,
+                                    controller: instadatecontroller,
+                                    enabled: false,
+                                    decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: const Color(0XFFD8D8D8),
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(8))),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Flexible(
+                            flex: 1,
+                            fit: FlexFit.tight,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  top: 5.0, bottom: 5.0, left: s.width * 0.05),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Phone Number 1",
+                                    style: TextStyle(
+                                        fontFamily: "Nunito",
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  TextField(
+                                    autofocus: false,
+                                    controller: phn1controller,
+                                    enabled: false,
+                                    decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: const Color(0XFFD8D8D8),
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10))),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      const Text(
+                        "Program",
+                        style: TextStyle(
+                            fontFamily: "Nunito",
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      TextFormField(
+                        autofocus: false,
+                        maxLines: 7,
+                        minLines: 4,
+                        controller: pgmcontroller,
+                        textInputAction: TextInputAction.next,
+                        onSaved: (value) {
+                          pgmcontroller.text = value!;
+                        },
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return ("Please enter the Program");
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8))),
+                      ),
+                      Row(
+                        children: [
+                          Flexible(
+                            flex: 1,
+                            child: Padding(
+                              padding: EdgeInsets.only(
+                                  top: 5.0, bottom: 5.0, right: s.width * 0.05),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -424,7 +435,7 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
                             fit: FlexFit.tight,
                             child: Padding(
                               padding: EdgeInsets.only(
-                                top: 5.0, bottom: 5.0, left: s.width * 0.05),
+                                  top: 5.0, bottom: 5.0, left: s.width * 0.05),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -445,7 +456,8 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
                           ),
                         ],
                       ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(
@@ -454,34 +466,54 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    height: 40,
-                    width: s.width * 0.1,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: const Color(0xFF1FE31B)),
-                    child: const Center(
-                      child: Text(
-                        "Register",
-                        style: TextStyle(
-                          fontFamily: "Montserrat",
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: white,
+                  InkWell(
+                    onTap: () => uploadData(),
+                    child: Container(
+                      height: 40,
+                      width: s.width * 0.1,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: const Color(0xFF1FE31B),
+                          boxShadow: [
+                            BoxShadow(
+                              spreadRadius: 3,
+                              blurRadius: 5,
+                              color: black.withOpacity(0.1),
+                              offset: const Offset(0, 5),
+                            ),
+                          ],
+                          ),
+                      child: const Center(
+                        child: Text(
+                          "Register",
+                          style: TextStyle(
+                            fontFamily: "Montserrat",
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: white,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    width: 30,
+                   SizedBox(
+                    width: s.width * 0.04,
                   ),
                   Container(
                     height: 40,
                     width: s.width * 0.1,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: const Color(0xFFFF0000),
-                        ),
+                      borderRadius: BorderRadius.circular(20),
+                      color: const Color(0xFFFF0000),
+                      boxShadow: [
+                          BoxShadow(
+                            spreadRadius: 3,
+                            blurRadius: 5,
+                            color: black.withOpacity(0.1),
+                            offset: const Offset(0, 5),
+                          ),
+                        ],
+                    ),
                     child: const Center(
                       child: Text(
                         "Cancel",
@@ -498,6 +530,172 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
               )
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  void uploadData() async {
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('MM d y kk:mm:ss').format(now);
+    String upDate = DateFormat('d MMM y').format(now);
+    String upTime = DateFormat('kk:mm').format(now);
+
+    if (_formkey.currentState!.validate()) {
+      setState(() {
+        _loading = true;
+      });
+
+      Pgmdata pgmr = Pgmdata(
+        name: widget.cust.name,
+        address: widget.cust.address,
+        loc: widget.cust.loc,
+        phn: widget.cust.phn1,
+        phn2: widget.cust.phn2,
+        pgm: pgmcontroller.text,
+        chrg: chrgcontroller.text,
+        type: _selectedcategory,
+        upDate: upDate,
+        upTime: upTime,
+        docname: formattedDate,
+        custdocname: widget.cust.docname,
+        prospec: prospeccontroller.text,
+        instadate: instadatecontroller.text,
+        status: "pending",
+      );
+
+      Pgmhistory history = Pgmhistory(
+          name: widget.cust.name,
+          address: widget.cust.address,
+          loc: widget.cust.loc,
+          phn: widget.cust.phn1,
+          pgm: pgmcontroller.text,
+          chrg: chrgcontroller.text,
+          type: _selectedcategory,
+          upDate: upDate,
+          upTime: upTime,
+          docname: formattedDate,
+          prospec: prospeccontroller.text,
+          instadate: instadatecontroller.text,
+          status: "pending",
+          ch: "New program added");
+
+      await firebaseFirestore
+          .collection("Customer")
+          .doc(widget.cust.docname)
+          .collection("Programs")
+          .doc(formattedDate)
+          .set(pgmr.toMap())
+          .then((value) => print("done"));
+
+      await firebaseFirestore
+          .collection("Programs")
+          .doc(formattedDate)
+          .set(pgmr.toMap())
+          .then((value) {
+        firebaseFirestore
+            .collection("history")
+            .doc(formattedDate)
+            .set(history.toMap());
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return const SimpleCustomAlert(
+                  "Program Registration Completed!", bluebg, "Sucessfull");
+            });
+        setState(() {
+          _loading = false;
+        });
+
+        pgmcontroller.clear();
+        chrgcontroller.clear();
+      }).catchError((error) {
+        print("Failed to add Program: $error");
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return const SimpleCustomAlert("Something went Wrong, Try again!",
+                  Colors.redAccent, "Error");
+            });
+        setState(() {
+          _loading = false;
+        });
+      });
+    }
+  }
+}
+
+class SimpleCustomAlert extends StatelessWidget {
+  final String? titles;
+  final Color colorr;
+  final String? done;
+  const SimpleCustomAlert(this.titles, this.colorr, this.done, {Key? key})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: colorr,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      child: SizedBox(
+        height: 200,
+        width: 450,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.warning_amber_rounded,
+                    color: primarybg,
+                    size: 30,
+                  ),
+                  Text(
+                    done!,
+                    style: const TextStyle(
+                      fontFamily: "Nunito",
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              titles!,
+              style: const TextStyle(
+                fontFamily: "Nunito",
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            const SizedBox(
+              height: 28,
+            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              color: white,
+              child: Text(
+                "Okay",
+                style: TextStyle(
+                  fontFamily: "Nunito",
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: colorr,
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );
