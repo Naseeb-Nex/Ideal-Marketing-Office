@@ -101,21 +101,21 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
 
     return SizedBox(
       width: double.infinity,
-      height: s.height - 100,
+      height: s.height - 150,
       child: Center(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Center(
-                child: Text(
-                  "Program Registration",
-                  style: TextStyle(
-                      fontFamily: "Montserrat",
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
+              // const Center(
+              //   child: Text(
+              //     "Program Registration",
+              //     style: TextStyle(
+              //         fontFamily: "Montserrat",
+              //         fontSize: 20,
+              //         fontWeight: FontWeight.bold),
+              //   ),
+              // ),
               const SizedBox(
                 height: 20,
               ),

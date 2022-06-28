@@ -19,8 +19,8 @@ class CustomerProfilesrc extends StatefulWidget {
 class StatussrcState extends State<CustomerProfilesrc> {
   FirebaseFirestore fb = FirebaseFirestore.instance;
   Customer C_profile = Customer();
-  // String current_scr = "history";
-  String current_scr = "reg";
+  String current_scr = "history";
+  // String current_scr = "reg";
 
   @override
   Widget build(BuildContext context) {
@@ -430,22 +430,70 @@ class StatussrcState extends State<CustomerProfilesrc> {
                   child: Container(
                     padding: const EdgeInsets.only(top: 8, bottom: 8, right: 8),
                     child: Container(
-                        height: s.height - 80,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: white,
-                          boxShadow: [
-                            BoxShadow(
-                              offset: const Offset(0, 5),
-                              blurRadius: 20,
-                              color: secondbg.withOpacity(0.20),
+                      height: s.height - 80,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: white,
+                        boxShadow: [
+                          BoxShadow(
+                            offset: const Offset(0, 5),
+                            blurRadius: 20,
+                            color: secondbg.withOpacity(0.20),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 20,),
+                          Container(
+                            height: 50,
+                            width: s.width * 0.4,
+                            decoration: BoxDecoration(
+                                color: bluebg,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  flex: 1,
+                                  fit: FlexFit.tight,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: white),
+                                      child: Center(
+                                        child: Text(
+                                          "Programs",
+                                          style: TextStyle(
+                                              color: black,
+                                              fontFamily: "Montserrat",
+                                              fontSize: 18),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Flexible(
+                                  flex: 1,
+                                  fit: FlexFit.tight,
+                                  child: Center(
+                                      child: Text(
+                                    "Registration",
+                                    style: TextStyle(
+                                        color: white,
+                                        fontFamily: "Montserrat",
+                                        fontSize: 18),
+                                  )),
+                                )
+                              ],
                             ),
-                          ],
-                        ),
-                        child: CustomerViewWrappaer(
-                          src: current_scr,
-                          cust: widget.cust,
-                        )),
+                          ),
+                          CustomerViewWrappaer(
+                            src: current_scr,
+                            cust: widget.cust,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 )
               ],
@@ -483,6 +531,8 @@ class CustomerViewWrappaer extends StatelessWidget {
     if (src == 'history') {
       return CustomerHistory();
     }
-    return CustomerpgmReg(cust: cust,);
+    return CustomerpgmReg(
+      cust: cust,
+    );
   }
 }
