@@ -19,7 +19,7 @@ class CustomerProfilesrc extends StatefulWidget {
 class StatussrcState extends State<CustomerProfilesrc> {
   FirebaseFirestore fb = FirebaseFirestore.instance;
   Customer C_profile = Customer();
-  String current_scr = "history";
+  String current_scr = "programs";
   // String current_scr = "reg";
 
   @override
@@ -444,7 +444,9 @@ class StatussrcState extends State<CustomerProfilesrc> {
                       ),
                       child: Column(
                         children: [
-                          const SizedBox(height: 20,),
+                          const SizedBox(
+                            height: 20,
+                          ),
                           Container(
                             height: 50,
                             width: s.width * 0.4,
@@ -456,34 +458,92 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                 Flexible(
                                   flex: 1,
                                   fit: FlexFit.tight,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: white),
-                                      child: Center(
-                                        child: Text(
-                                          "Programs",
-                                          style: TextStyle(
-                                              color: black,
+                                  child: InkWell(
+                                    onTap: () => setState(() {
+                                      current_scr = "programs";
+                                    }),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Center(
+                                          child: Text(
+                                            "Programs",
+                                            style: TextStyle(
+                                              color: current_scr == "programs"
+                                                  ? white
+                                                  : const Color(0xFFD9E9E9),
                                               fontFamily: "Montserrat",
-                                              fontSize: 18),
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
                                         ),
-                                      ),
+                                        Container(
+                                          child: current_scr == "programs"
+                                              ? Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5),
+                                                  child: Container(
+                                                    height: 5,
+                                                    width: 40,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        color: white),
+                                                  ),
+                                                )
+                                              : null,
+                                        )
+                                      ],
                                     ),
                                   ),
                                 ),
                                 Flexible(
-                                  flex: 1,
-                                  fit: FlexFit.tight,
-                                  child: Center(
-                                      child: Text(
-                                    "Registration",
-                                    style: TextStyle(
-                                        color: white,
-                                        fontFamily: "Montserrat",
-                                        fontSize: 18),
-                                  )),
-                                )
+                                    flex: 1,
+                                    fit: FlexFit.tight,
+                                    child: InkWell(
+                                      onTap: () => setState(() {
+                                        current_scr = "reg";
+                                      }),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Center(
+                                              child: Text(
+                                            "Registration",
+                                            style: TextStyle(
+                                                color: current_scr == "reg"
+                                                    ? white
+                                                    : const Color(0xFFD9E9E9),
+                                                fontFamily: "Montserrat",
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                          Container(
+                                            child: current_scr == "reg"
+                                                ? Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 5),
+                                                    child: Container(
+                                                      height: 5,
+                                                      width: 40,
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          color: white),
+                                                    ),
+                                                  )
+                                                : null,
+                                          )
+                                        ],
+                                      ),
+                                    ))
                               ],
                             ),
                           ),
@@ -528,8 +588,10 @@ class CustomerViewWrappaer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (src == 'history') {
-      return CustomerHistory();
+    if (src == 'programs') {
+      return CustomerHistory(
+        cust: cust,
+      );
     }
     return CustomerpgmReg(
       cust: cust,
