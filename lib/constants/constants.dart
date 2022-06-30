@@ -8,3 +8,5 @@ const bluebg = Color.fromRGBO(55, 48, 255, 1);
 const newbg = Color(0xFFF1F2F6);
 const white = Colors.white;
 const black = Colors.black;
+const greenbg = Color(0XFFEDF5EB);
+const redbg =  Color(0XFFFDEDEC);
