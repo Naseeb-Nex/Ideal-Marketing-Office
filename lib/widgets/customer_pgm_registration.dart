@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'package:test2/services/customer_history.dart';
 import 'package:test2/services/history.dart';
 import 'package:test2/services/pgm.dart';
+import 'package:test2/widgets/customer_history_widget.dart';
 
 // ignore: must_be_immutable
 class CustomerpgmReg extends StatefulWidget {
@@ -472,17 +474,17 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
                       height: 40,
                       width: s.width * 0.1,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: const Color(0xFF1FE31B),
-                          boxShadow: [
-                            BoxShadow(
-                              spreadRadius: 3,
-                              blurRadius: 5,
-                              color: black.withOpacity(0.1),
-                              offset: const Offset(0, 5),
-                            ),
-                          ],
+                        borderRadius: BorderRadius.circular(20),
+                        color: const Color(0xFF1FE31B),
+                        boxShadow: [
+                          BoxShadow(
+                            spreadRadius: 3,
+                            blurRadius: 5,
+                            color: black.withOpacity(0.1),
+                            offset: const Offset(0, 5),
                           ),
+                        ],
+                      ),
                       child: const Center(
                         child: Text(
                           "Register",
@@ -496,7 +498,7 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
                       ),
                     ),
                   ),
-                   SizedBox(
+                  SizedBox(
                     width: s.width * 0.04,
                   ),
                   Container(
@@ -506,13 +508,13 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
                       borderRadius: BorderRadius.circular(20),
                       color: const Color(0xFFFF0000),
                       boxShadow: [
-                          BoxShadow(
-                            spreadRadius: 3,
-                            blurRadius: 5,
-                            color: black.withOpacity(0.1),
-                            offset: const Offset(0, 5),
-                          ),
-                        ],
+                        BoxShadow(
+                          spreadRadius: 3,
+                          blurRadius: 5,
+                          color: black.withOpacity(0.1),
+                          offset: const Offset(0, 5),
+                        ),
+                      ],
                     ),
                     child: const Center(
                       child: Text(
@@ -565,6 +567,15 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
         status: "pending",
       );
 
+      CustomerPgmHistory custhistory = CustomerPgmHistory(
+          upDate: upDate,
+          upTime: upTime,
+          msg: "Program Registered",
+          status: "pending",
+          docname: formattedDate,
+          custdocname: widget.cust.docname
+          );
+
       Pgmhistory history = Pgmhistory(
           name: widget.cust.name,
           address: widget.cust.address,
@@ -579,7 +590,8 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
           prospec: prospeccontroller.text,
           instadate: instadatecontroller.text,
           status: "pending",
-          ch: "New program added");
+          ch: "New program added",
+          );
 
       await firebaseFirestore
           .collection("Customer")
@@ -594,10 +606,23 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
           .doc(formattedDate)
           .set(pgmr.toMap())
           .then((value) {
+        // history uploading
         firebaseFirestore
             .collection("history")
             .doc(formattedDate)
             .set(history.toMap());
+
+        // customer program history updated
+        firebaseFirestore
+            .collection("Customer")
+            .doc(widget.cust.docname)
+            .collection("Programs")
+            .doc(formattedDate)
+            .collection("History")
+            .doc(formattedDate)
+            .set(custhistory.toMap());
+
+        // popup alert box
         showDialog(
             context: context,
             builder: (BuildContext context) {

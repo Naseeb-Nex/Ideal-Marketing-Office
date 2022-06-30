@@ -35,7 +35,7 @@ class _TechasignState extends State<Techasign> {
                         }
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return Expanded(
+                          return const Expanded(
                             child: Center(
                               child: CircularProgressIndicator(
                                 color: cheryred,
@@ -68,6 +68,8 @@ class _TechasignState extends State<Techasign> {
                                   upDate: _allpgm[i]["upDate"],
                                   upTime: _allpgm[i]["upTime"],
                                   docname: _allpgm[i]["docname"],
+                                  prospec: _allpgm[i]["prospec"],
+                                  instadate: _allpgm[i]["instadate"],
                                 )
                               ]
                             ],

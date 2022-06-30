@@ -145,6 +145,7 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
                               docname: pendingpgm[i]["docname"],
                               prospec: pendingpgm[i]["prospec"],
                               instadate: pendingpgm[i]["instadate"],
+                              custdocname: pendingpgm[i]["custdocname"],
                               techuid: widget.uid,
                               techname: widget.techname,
                               username: widget.username,

@@ -17,6 +17,7 @@ class Assignpgmdata {
   String? techname;
   String? assignedtime;
   String? assigneddate;
+  String? custdocname;
   String? priority;
   
 
@@ -39,6 +40,7 @@ class Assignpgmdata {
       this.techname,
       this.assignedtime,
       this.assigneddate,
+      this.custdocname,
       this.priority,});
 
   // receiving data from server
@@ -55,6 +57,7 @@ class Assignpgmdata {
       upDate: map['upDate'],
       upTime: map['upTime'],
       docname: map['docname'],
+      custdocname: map['custdocname'],
       prospec: map['prospec'],
       instadate: map['instadate'],
       status: map['status'],
@@ -80,6 +83,7 @@ class Assignpgmdata {
       'upDate': upDate,
       'upTime': upTime,
       'docname': docname,
+      'custdocname': custdocname,
       'prospec': prospec,
       'instadate': instadate,
       'status': status,

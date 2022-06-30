@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:test2/componets/customer_history_card.dart';
 import 'package:test2/constants/constants.dart';
 
 // ignore: must_be_immutable
@@ -16,8 +17,8 @@ class Customerpgmview extends StatefulWidget {
   String? prospec;
   String? instadate;
   String? status;
-  String? chrg;
   String? custdocname;
+  String? chrg;
 
   Customerpgmview(
       {Key? key,
@@ -32,8 +33,8 @@ class Customerpgmview extends StatefulWidget {
       this.docname,
       this.prospec,
       this.instadate,
-      this.chrg,
       this.custdocname,
+      this.chrg,
       this.status})
       : super(key: key);
 
@@ -43,7 +44,7 @@ class Customerpgmview extends StatefulWidget {
 
 class _CustomerpgmviewState extends State<Customerpgmview> {
   bool vis = false;
-  List _allcustomer = [];
+  List _pgmhistory = [];
   @override
   Widget build(BuildContext context) {
 
@@ -124,8 +125,7 @@ class _CustomerpgmviewState extends State<Customerpgmview> {
                                   const SizedBox(
                                     width: 10,
                                   ),
-                                  Text(
-                                    "${widget.chrg}",
+                                  Text("${widget.chrg}",
                                     style: const TextStyle(
                                         fontFamily: "Nunito",
                                         fontSize: 15,
@@ -215,6 +215,7 @@ class _CustomerpgmviewState extends State<Customerpgmview> {
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.black45),
                     ),
+                    const SizedBox(height: 10,),
                     StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection('Customer')
@@ -222,6 +223,7 @@ class _CustomerpgmviewState extends State<Customerpgmview> {
                       .collection("Programs")
                       .doc(widget.docname)
                       .collection("History")
+                      .orderBy("docname", descending: true)
                       .snapshots(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -229,20 +231,17 @@ class _CustomerpgmviewState extends State<Customerpgmview> {
                       print('Something went Wrong');
                     }
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Padding(
-                        padding: EdgeInsets.only(top: s.height * 0.24),
-                        child: const Center(
-                          child: CircularProgressIndicator(
-                            color: bluebg,
-                          ),
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: bluebg,
                         ),
                       );
                     }
 
-                    _allcustomer.clear();
+                    _pgmhistory.clear();
                     snapshot.data!.docs.map((DocumentSnapshot document) {
                       Map a = document.data() as Map<String, dynamic>;
-                      _allcustomer.add(a);
+                      _pgmhistory.add(a);
                       a['uid'] = document.id;
                     }).toList();
 
@@ -251,21 +250,14 @@ class _CustomerpgmviewState extends State<Customerpgmview> {
                         const SizedBox(
                           width: 30,
                         ),
-                        for (var i = 0; i < _allcustomer.length; i++) ...[
-                          Customerpgmview(
-                            name: _allcustomer[i]["name"],
-                            address: _allcustomer[i]["address"],
-                            loc: _allcustomer[i]["loc"],
-                            pgm: _allcustomer[i]["pgm"],
-                            phn: _allcustomer[i]["phn"],
-                            type: _allcustomer[i]["type"],
-                            upDate: _allcustomer[i]["upDate"],
-                            upTime: _allcustomer[i]["upTime"],
-                            prospec: _allcustomer[i]["prospec"],
-                            instadate: _allcustomer[i]["instadate"],
-                            docname: _allcustomer[i]["docname"],
-                            status: _allcustomer[i]["status"],
-                            chrg: _allcustomer[i]["chrg"],
+                        for (var i = 0; i < _pgmhistory.length; i++) ...[
+                          CustomerHistorycard(
+                            custdocname: _pgmhistory[i]["custdocname"],
+                            msg: _pgmhistory[i]["msg"],
+                            upDate: _pgmhistory[i]["upDate"],
+                            upTime: _pgmhistory[i]["upTime"],
+                            docname: _pgmhistory[i]["docname"],
+                            status: _pgmhistory[i]["status"],
                           )
                         ]
                       ],

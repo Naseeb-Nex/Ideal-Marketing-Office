@@ -3,6 +3,7 @@ import 'package:test2/constants/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:test2/services/assignedpgmdata.dart';
 import 'package:intl/intl.dart';
+import 'package:test2/services/customer_history.dart';
 import 'package:test2/services/history.dart';
 
 class Assignpgmcard extends StatefulWidget {
@@ -23,6 +24,7 @@ class Assignpgmcard extends StatefulWidget {
   String? techname;
   String? prospec;
   String? instadate;
+  String? custdocname;
 
   Assignpgmcard({
     Key? key,
@@ -42,6 +44,7 @@ class Assignpgmcard extends StatefulWidget {
     this.techname,
     this.prospec,
     this.instadate,
+    this.custdocname,
   }) : super(key: key);
 
   @override
@@ -316,7 +319,16 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
       priority: _controller.text,
       assigneddate: assigneddate,
       assignedtime: assignedtime,
+      custdocname: widget.custdocname,
     );
+
+    CustomerPgmHistory custhistory = CustomerPgmHistory(
+          upDate: assigneddate,
+          upTime: assignedtime,
+          msg: "Program Registered",
+          status: "pending",
+          docname: formattedDate,
+          custdocname: widget.custdocname);
 
     Pgmhistory history = Pgmhistory(
       name: widget.name,
@@ -373,6 +385,18 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
           loading = false;
         });
         fb.collection("history").doc(formattedDate).set(history.toMap());
+
+        
+        // customer program history updated
+        fb
+            .collection("Customer")
+            .doc(widget.docname)
+            .collection("Programs")
+            .doc(formattedDate)
+            .collection("History")
+            .doc(formattedDate)
+            .set(custhistory.toMap());
+
         // _controller.clear();
       }).catchError((error) => print("Failed to assign program : $error"));
     }
