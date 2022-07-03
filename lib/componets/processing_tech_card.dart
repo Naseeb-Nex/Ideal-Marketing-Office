@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:test2/services/customer_history.dart';
 
 import 'package:test2/services/pgm.dart';
+import 'package:intl/intl.dart';
 
 class Protechcard extends StatelessWidget {
   String? uid;
@@ -21,6 +23,7 @@ class Protechcard extends StatelessWidget {
   String? ptime;
   String? pdate;
   String? pdocname;
+  String? custdocname;
 
   Protechcard({
     Key? key,
@@ -40,6 +43,7 @@ class Protechcard extends StatelessWidget {
     this.pdate,
     this.ptime,
     this.pdocname,
+    this.custdocname,
   }) : super(key: key);
 
   @override
@@ -192,6 +196,7 @@ class Protechcard extends StatelessWidget {
                               upTime: upTime,
                               docname: docname,
                               pdocname: pdocname,
+                              custdocname: custdocname,
                             );
                           });
                     },
@@ -286,6 +291,7 @@ class ConfirmBox extends StatelessWidget {
   String? upTime;
   String? docname;
   String? pdocname;
+  String? custdocname;
 
   ConfirmBox({Key? key, 
     this.uid,
@@ -301,6 +307,7 @@ class ConfirmBox extends StatelessWidget {
     this.upTime,
     this.docname,
     this.pdocname,
+    this.custdocname,
   }) : super(key: key);
 
   final TextEditingController pgmController =  TextEditingController();
@@ -462,6 +469,11 @@ class ConfirmBox extends StatelessWidget {
 
   void coverttomain(BuildContext context) async {
     FirebaseFirestore fb = FirebaseFirestore.instance;
+    DateTime now = DateTime.now();
+    String hisdocname = DateFormat('MM d y kk:mm:ss').format(now);
+    String date = DateFormat('d MMM y').format(now);
+    String time = DateFormat('kk:mm').format(now);
+
     if (_formKey.currentState!.validate()) {
       Pgmdata pgmr = Pgmdata(
           uid: uid,
@@ -475,7 +487,18 @@ class ConfirmBox extends StatelessWidget {
           upDate: upDate,
           upTime: upTime,
           docname: docname,
+          custdocname: custdocname,
           status: "pending");
+
+          CustomerPgmHistory custhistory = CustomerPgmHistory(
+        upDate: date,
+        upTime: time,
+        msg: "Continue the program with new Process",
+        status: "pending",
+        docname: hisdocname,
+        custdocname: custdocname);
+        
+        
       await fb
           .collection("Technician")
           .doc(username)
@@ -486,6 +509,17 @@ class ConfirmBox extends StatelessWidget {
         print("Delete from pending list");
       }).catchError(
               (error) => print("Failed to Delete Pending pgm list : $error"));
+
+              // customer program history updated
+        fb
+            .collection("Customer")
+            .doc(custdocname)
+            .collection("Programs")
+            .doc(docname)
+            .collection("History")
+            .doc(hisdocname)
+            .set(custhistory.toMap());
+
 
       await fb
           .collection("Programs")

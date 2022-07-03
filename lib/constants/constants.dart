@@ -10,3 +10,7 @@ const white = Colors.white;
 const black = Colors.black;
 const greenbg = Color(0XFFEDF5EB);
 const redbg =  Color(0XFFFDEDEC);
+const redfg =  Color(0XFFE64639);
+const yellowbg =  Color(0XFFFFF7E6);
+const yellowfg =  Color(0XFFFFC444);
+const vybg =  Color(0XFFF2F4F8);

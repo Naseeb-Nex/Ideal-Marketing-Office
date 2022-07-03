@@ -77,6 +77,7 @@ class _TechpendingState extends State<Techpending> {
                                   instadate: _allpgm[i]["instadate"],
                                   prospec: _allpgm[i]["prospec"],
                                   techname: _allpgm[i]["techname"],
+                                  custdocname: _allpgm[i]["custdocname"],
                                 )
                               ]
                             ],

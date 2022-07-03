@@ -141,7 +141,7 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "${widget.pgm}",
+                          "${widget.pgm}${widget.docname}${widget.custdocname}",
                           style: const TextStyle(
                             fontFamily: "Montserrat",
                             fontSize: 16,
@@ -323,12 +323,13 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
     );
 
     CustomerPgmHistory custhistory = CustomerPgmHistory(
-          upDate: assigneddate,
-          upTime: assignedtime,
-          msg: "Program Registered",
-          status: "pending",
-          docname: formattedDate,
-          custdocname: widget.custdocname);
+        upDate: assigneddate,
+        upTime: assignedtime,
+        msg: "Program Assigned to ${widget.techname}",
+        techname: widget.techname,
+        status: "assigned",
+        docname: formattedDate,
+        custdocname: widget.custdocname);
 
     Pgmhistory history = Pgmhistory(
       name: widget.name,
@@ -353,12 +354,22 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
         loading = true;
       });
 
+// Update the Program status
       fb
           .collection("Programs")
           .doc(widget.docname)
           .update({'status': 'assigned'}).then((value) {
         print("Updated as assigned");
       }).catchError((error) => print("Failed to update program : $error"));
+
+      
+      // Updating the Customer program status
+      fb
+          .collection("Customer")
+          .doc(widget.custdocname)
+          .collection("Programs")
+          .doc(widget.docname)
+          .update({'status': 'assigned'});
 
       fb
           .collection("Programs")
@@ -381,23 +392,21 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
           .doc(widget.docname)
           .set(apgm.toMap())
           .then((value) {
-        setState(() {
-          loading = false;
-        });
         fb.collection("history").doc(formattedDate).set(history.toMap());
 
-        
         // customer program history updated
         fb
             .collection("Customer")
-            .doc(widget.docname)
+            .doc(widget.custdocname)
             .collection("Programs")
-            .doc(formattedDate)
+            .doc(widget.docname)
             .collection("History")
             .doc(formattedDate)
             .set(custhistory.toMap());
 
-        // _controller.clear();
+        setState(() {
+          loading = false;
+        });
       }).catchError((error) => print("Failed to assign program : $error"));
     }
   }

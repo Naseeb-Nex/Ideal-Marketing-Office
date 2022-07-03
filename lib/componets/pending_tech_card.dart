@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:test2/constants/constants.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:test2/services/customer_history.dart';
 
 // import 'package:test2/services/history.dart';
 import 'package:test2/services/pgm.dart';
+import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class PendingTechcard extends StatelessWidget {
@@ -28,6 +30,7 @@ class PendingTechcard extends StatelessWidget {
   String? prospec;
   String? instadate;
   String? techname;
+  String? custdocname;
 
   PendingTechcard(
       {Key? key,
@@ -49,6 +52,7 @@ class PendingTechcard extends StatelessWidget {
       this.pdocname,
       this.prospec,
       this.instadate,
+      this.custdocname,
       this.techname})
       : super(key: key);
 
@@ -102,7 +106,7 @@ class PendingTechcard extends StatelessWidget {
                 Expanded(
                   child: Center(
                     child: Text(
-                      "$pgm",
+                      "$pgm $custdocname ",
                       style: const TextStyle(
                         fontFamily: "Nunito",
                         fontSize: 22,
@@ -205,6 +209,7 @@ class PendingTechcard extends StatelessWidget {
                               prospec: prospec,
                               instadate: instadate,
                               techname: techname,
+                              custdocname: custdocname,
                             );
                           });
                     },
@@ -300,6 +305,7 @@ class ConfirmBox extends StatelessWidget {
   String? prospec;
   String? instadate;
   String? techname;
+  String? custdocname;
 
   ConfirmBox({
     Key? key,
@@ -318,6 +324,7 @@ class ConfirmBox extends StatelessWidget {
     this.pdocname,
     this.prospec,
     this.instadate,
+    this.custdocname,
     this.techname,
   }) : super(key: key);
 
@@ -428,10 +435,10 @@ class ConfirmBox extends StatelessWidget {
 
   void coverttomain(BuildContext context) async {
     FirebaseFirestore fb = FirebaseFirestore.instance;
-    // DateTime now = DateTime.now();
-    // String hisdocname = DateFormat('MM d y kk:mm:ss').format(now);
-    // String date = DateFormat('d MMM y').format(now);
-    // String time = DateFormat('kk:mm').format(now);
+    DateTime now = DateTime.now();
+    String hisdocname = DateFormat('MM d y kk:mm:ss').format(now);
+    String date = DateFormat('d MMM y').format(now);
+    String time = DateFormat('kk:mm').format(now);
     Pgmdata pgmr = Pgmdata(
         uid: uid,
         name: name,
@@ -444,7 +451,16 @@ class ConfirmBox extends StatelessWidget {
         upDate: upDate,
         upTime: upTime,
         docname: docname,
+        custdocname: custdocname,
         status: "pending");
+
+        CustomerPgmHistory custhistory = CustomerPgmHistory(
+        upDate: date,
+        upTime: time,
+        msg: "Program is converted to Mainlist",
+        status: "pending",
+        docname: hisdocname,
+        custdocname: custdocname);
 
     // Pgmhistory history = Pgmhistory(
     //   name: name,
@@ -475,6 +491,16 @@ class ConfirmBox extends StatelessWidget {
             (error) => print("Failed to Delete Pending pgm list : $error"));
 
     // fb.collection("history").doc(hisdocname).set(history.toMap());
+
+    // customer program history updated
+        fb
+            .collection("Customer")
+            .doc(custdocname)
+            .collection("Programs")
+            .doc(docname)
+            .collection("History")
+            .doc(hisdocname)
+            .set(custhistory.toMap());
 
     await fb
         .collection("Programs")

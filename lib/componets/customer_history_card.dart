@@ -82,36 +82,79 @@ class _CustomerHistorycardState extends State<CustomerHistorycard> {
                     ),
                   ],
                 ),
-                Text(
-                  "${widget.msg}",
-                  style: const TextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: 16,
-                  ),
+                Column(
+                  children: [
+                    Text(
+                      "${widget.msg}",
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontFamily: "Montserrat",
+                        fontSize: 16,
+                      ),
+                    ),
+                    Center(
+                      child: widget.remarks == null ? null : Text(
+                      "Remarks : ${widget.remarks}",
+                      style: const TextStyle(
+                        // fontWeight: FontWeight.w500,
+                        fontFamily: "Montserrat",
+                        fontSize: 14,
+                      ),
+                    ),
+                    )
+                  ],
                 ),
                 Row(
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: redbg,
-                          boxShadow: [
-                            BoxShadow(
-                                spreadRadius: 2,
-                                blurRadius: 4,
-                                color: black.withOpacity(0.1),
-                                offset: const Offset(0, 5))
-                          ]),
-                      child: Text(
-                        "${widget.status}",
-                        style: const TextStyle(
-                          fontFamily: "Montserrat",
-                          fontSize: 16,
-                          color: Color(0XFFE64639),
+                    Center(
+                      child: widget.status == "pending" ?
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 5),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: redbg,
+                            boxShadow: [
+                              BoxShadow(
+                                  spreadRadius: 2,
+                                  blurRadius: 4,
+                                  color: black.withOpacity(0.1),
+                                  offset: const Offset(0, 5))
+                            ]),
+                        child: Text(
+                          "${widget.status}",
+                          style: const TextStyle(
+                            fontFamily: "Montserrat",
+                            fontSize: 16,
+                            color: redfg,
+                          ),
                         ),
-                      ),
+                      ) : null,
+                    ),
+                    Center(
+                      child: widget.status == "assigned" ?
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 5),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: yellowbg,
+                            boxShadow: [
+                              BoxShadow(
+                                  spreadRadius: 2,
+                                  blurRadius: 4,
+                                  color: black.withOpacity(0.1),
+                                  offset: const Offset(0, 5))
+                            ]),
+                        child: Text(
+                          "${widget.status}",
+                          style: const TextStyle(
+                            fontFamily: "Montserrat",
+                            fontSize: 16,
+                            color: yellowfg,
+                          ),
+                        ),
+                      ) : null,
                     ),
                   ],
                 ),

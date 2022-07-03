@@ -18,7 +18,6 @@ class _CustomerHistoryState extends State<CustomerHistory> {
 
   @override
   Widget build(BuildContext context) {
-
     Size s = MediaQuery.of(context).size;
     return Column(
       children: [
@@ -90,65 +89,70 @@ class _CustomerHistoryState extends State<CustomerHistory> {
             color: Colors.black38,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection('Customer')
-                    .doc(widget.cust.docname)
-                    .collection("Programs")
-                    .snapshots(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
-                  if (snapshot.hasError) {
-                    print('Something went Wrong');
-                  }
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Padding(
-                      padding: EdgeInsets.only(top: s.height * 0.24),
-                      child: const Center(
-                        child: CircularProgressIndicator(
-                          color: bluebg,
+        const SizedBox(
+          height: 10,
+        ),
+        SizedBox(
+          height: s.height - 240,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: SingleChildScrollView(
+              child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('Customer')
+                      .doc(widget.cust.docname)
+                      .collection("Programs")
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasError) {
+                      print('Something went Wrong');
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Padding(
+                        padding: EdgeInsets.only(top: s.height * 0.24),
+                        child: const Center(
+                          child: CircularProgressIndicator(
+                            color: bluebg,
+                          ),
                         ),
-                      ),
+                      );
+                    }
+
+                    _allcustomer.clear();
+                    snapshot.data!.docs.map((DocumentSnapshot document) {
+                      Map a = document.data() as Map<String, dynamic>;
+                      _allcustomer.add(a);
+                      a['uid'] = document.id;
+                    }).toList();
+
+                    return Column(
+                      children: [
+                        const SizedBox(
+                          width: 30,
+                        ),
+                        for (var i = 0; i < _allcustomer.length; i++) ...[
+                          Customerpgmview(
+                            name: _allcustomer[i]["name"],
+                            address: _allcustomer[i]["address"],
+                            loc: _allcustomer[i]["loc"],
+                            pgm: _allcustomer[i]["pgm"],
+                            phn: _allcustomer[i]["phn"],
+                            type: _allcustomer[i]["type"],
+                            upDate: _allcustomer[i]["upDate"],
+                            upTime: _allcustomer[i]["upTime"],
+                            prospec: _allcustomer[i]["prospec"],
+                            instadate: _allcustomer[i]["instadate"],
+                            docname: _allcustomer[i]["docname"],
+                            status: _allcustomer[i]["status"],
+                            chrg: _allcustomer[i]["chrg"],
+                            custdocname: _allcustomer[i]["custdocname"],
+                          )
+                        ]
+                      ],
                     );
-                  }
-
-                  _allcustomer.clear();
-                  snapshot.data!.docs.map((DocumentSnapshot document) {
-                    Map a = document.data() as Map<String, dynamic>;
-                    _allcustomer.add(a);
-                    a['uid'] = document.id;
-                  }).toList();
-
-                  return Column(
-                    children: [
-                      const SizedBox(
-                        width: 30,
-                      ),
-                      for (var i = 0; i < _allcustomer.length; i++) ...[
-                        Customerpgmview(
-                          name: _allcustomer[i]["name"],
-                          address: _allcustomer[i]["address"],
-                          loc: _allcustomer[i]["loc"],
-                          pgm: _allcustomer[i]["pgm"],
-                          phn: _allcustomer[i]["phn"],
-                          type: _allcustomer[i]["type"],
-                          upDate: _allcustomer[i]["upDate"],
-                          upTime: _allcustomer[i]["upTime"],
-                          prospec: _allcustomer[i]["prospec"],
-                          instadate: _allcustomer[i]["instadate"],
-                          docname: _allcustomer[i]["docname"],
-                          status: _allcustomer[i]["status"],
-                          chrg: _allcustomer[i]["chrg"],
-                          custdocname: _allcustomer[i]["custdocname"],
-                        )
-                      ]
-                    ],
-                  );
-                }),
+                  }),
+            ),
           ),
         ),
       ],

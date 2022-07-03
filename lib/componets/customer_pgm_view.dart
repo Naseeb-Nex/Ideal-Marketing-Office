@@ -138,27 +138,55 @@ class _CustomerpgmviewState extends State<Customerpgmview> {
                 ),
                 Row(
                   children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: redbg,
-                          boxShadow: [
-                            BoxShadow(
-                                spreadRadius: 2,
-                                blurRadius: 4,
-                                color: black.withOpacity(0.1),
-                                offset: const Offset(0, 5))
-                          ]),
-                      child: Text(
-                        "${widget.status}",
-                        style: const TextStyle(
-                          fontFamily: "Montserrat",
-                          fontSize: 16,
-                          color: Color(0XFFE64639),
+                    Center(
+                      child: widget.status == "pending" ?
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 5),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: redbg,
+                            boxShadow: [
+                              BoxShadow(
+                                  spreadRadius: 2,
+                                  blurRadius: 4,
+                                  color: black.withOpacity(0.1),
+                                  offset: const Offset(0, 5))
+                            ]),
+                        child: Text(
+                          "${widget.status}",
+                          style: const TextStyle(
+                            fontFamily: "Montserrat",
+                            fontSize: 16,
+                            color: Color(0XFFE64639),
+                          ),
                         ),
-                      ),
+                      ) : null,
+                    ),
+                    Center(
+                      child: widget.status == "assigned" ?
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 5),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: const Color(0XFFEBF9F4),
+                            boxShadow: [
+                              BoxShadow(
+                                  spreadRadius: 2,
+                                  blurRadius: 4,
+                                  color: black.withOpacity(0.1),
+                                  offset: const Offset(0, 5))
+                            ]),
+                        child: Text(
+                          "${widget.status}",
+                          style: const TextStyle(
+                            fontFamily: "Montserrat",
+                            fontSize: 16,
+                            color: Color(0XFFFFC444),
+                          ),
+                        ),
+                      ) : null,
                     ),
                     const SizedBox(
                       width: 20,
@@ -258,6 +286,7 @@ class _CustomerpgmviewState extends State<Customerpgmview> {
                             upTime: _pgmhistory[i]["upTime"],
                             docname: _pgmhistory[i]["docname"],
                             status: _pgmhistory[i]["status"],
+                            remarks: _pgmhistory[i]["remarks"],
                           )
                         ]
                       ],

@@ -15,6 +15,7 @@ class CustomerListCard extends StatefulWidget {
   String? docname;
   String? prospec;
   String? instadate;
+  String? custdocname;
 
   CustomerListCard({
     Key? key,
@@ -28,6 +29,7 @@ class CustomerListCard extends StatefulWidget {
     this.docname,
     this.prospec,
     this.instadate,
+    this.custdocname,
   }) : super(key: key);
 
   @override

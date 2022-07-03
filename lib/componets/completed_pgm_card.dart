@@ -20,6 +20,7 @@ class Completedpgmcard extends StatefulWidget {
   String? cdate;
   String? camount;
   String? tname;
+  String? custdocname;
 
   Completedpgmcard({
     Key? key,
@@ -38,6 +39,7 @@ class Completedpgmcard extends StatefulWidget {
     this.ctime,
     this.camount,
     this.tname,
+    this.custdocname,
   }) : super(key: key);
 
   @override
