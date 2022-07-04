@@ -102,6 +102,7 @@ class _CustomerHistoryState extends State<CustomerHistory> {
                       .collection('Customer')
                       .doc(widget.cust.docname)
                       .collection("Programs")
+                      .orderBy('docname', descending: true)
                       .snapshots(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {

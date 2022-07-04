@@ -106,7 +106,7 @@ class PendingTechcard extends StatelessWidget {
                 Expanded(
                   child: Center(
                     child: Text(
-                      "$pgm $custdocname ",
+                      "$pgm $custdocname $docname",
                       style: const TextStyle(
                         fontFamily: "Nunito",
                         fontSize: 22,
