@@ -181,6 +181,31 @@ class _CustomerHistorycardState extends State<CustomerHistorycard> {
                         ),
                       ) : null,
                     ),
+                    Center(
+                      child: widget.status == "processing" ?
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 5),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: vybg,
+                            boxShadow: [
+                              BoxShadow(
+                                  spreadRadius: 2,
+                                  blurRadius: 4,
+                                  color: black.withOpacity(0.1),
+                                  offset: const Offset(0, 5))
+                            ]),
+                        child: Text(
+                          "${widget.status}",
+                          style: const TextStyle(
+                            fontFamily: "Montserrat",
+                            fontSize: 16,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ) : null,
+                    ),
                   ],
                 ),
               ],

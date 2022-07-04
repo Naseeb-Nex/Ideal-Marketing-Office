@@ -106,7 +106,7 @@ class PendingTechcard extends StatelessWidget {
                 Expanded(
                   child: Center(
                     child: Text(
-                      "$pgm $custdocname $docname",
+                      "$pgm",
                       style: const TextStyle(
                         fontFamily: "Nunito",
                         fontSize: 22,
@@ -450,6 +450,8 @@ class ConfirmBox extends StatelessWidget {
         type: type,
         upDate: upDate,
         upTime: upTime,
+        prospec: prospec,
+        instadate: instadate,
         docname: docname,
         custdocname: custdocname,
         status: "pending");

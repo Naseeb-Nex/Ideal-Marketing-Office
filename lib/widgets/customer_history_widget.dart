@@ -160,5 +160,3 @@ class _CustomerHistoryState extends State<CustomerHistory> {
     );
   }
 }
-
-class CustomeViewpgmcard {}

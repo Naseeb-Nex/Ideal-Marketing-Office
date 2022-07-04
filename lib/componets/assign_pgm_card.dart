@@ -141,7 +141,7 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "${widget.pgm}${widget.docname}${widget.custdocname}",
+                          "${widget.pgm}",
                           style: const TextStyle(
                             fontFamily: "Montserrat",
                             fontSize: 16,

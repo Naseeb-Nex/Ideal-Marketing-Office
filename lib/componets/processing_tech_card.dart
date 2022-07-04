@@ -21,30 +21,34 @@ class Protechcard extends StatelessWidget {
   String? docname;
   String? remarks;
   String? ptime;
-  String? pdate;
   String? pdocname;
   String? custdocname;
+  String? pdate;
+  String? prospec;
+  String? instadate;
 
-  Protechcard({
-    Key? key,
-    this.uid,
-    this.username,
-    this.name,
-    this.address,
-    this.loc,
-    this.phn,
-    this.type,
-    this.chrg,
-    this.pgm,
-    this.upDate,
-    this.upTime,
-    this.docname,
-    this.remarks,
-    this.pdate,
-    this.ptime,
-    this.pdocname,
-    this.custdocname,
-  }) : super(key: key);
+  Protechcard(
+      {Key? key,
+      this.uid,
+      this.username,
+      this.name,
+      this.address,
+      this.loc,
+      this.phn,
+      this.type,
+      this.chrg,
+      this.pgm,
+      this.upDate,
+      this.upTime,
+      this.docname,
+      this.remarks,
+      this.pdate,
+      this.ptime,
+      this.pdocname,
+      this.custdocname,
+      this.prospec,
+      this.instadate})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -197,6 +201,8 @@ class Protechcard extends StatelessWidget {
                               docname: docname,
                               pdocname: pdocname,
                               custdocname: custdocname,
+                              prospec: prospec,
+                              instadate: instadate,
                             );
                           });
                     },
@@ -206,7 +212,8 @@ class Protechcard extends StatelessWidget {
                           color: Colors.redAccent),
                       child: const Center(
                         child: Padding(
-                          padding:  EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                          padding:
+                              EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                           child: Text(
                             "Set New Program",
                             style: TextStyle(
@@ -292,8 +299,11 @@ class ConfirmBox extends StatelessWidget {
   String? docname;
   String? pdocname;
   String? custdocname;
+  String? prospec;
+  String? instadate;
 
-  ConfirmBox({Key? key, 
+  ConfirmBox({
+    Key? key,
     this.uid,
     this.username,
     this.name,
@@ -308,9 +318,11 @@ class ConfirmBox extends StatelessWidget {
     this.docname,
     this.pdocname,
     this.custdocname,
+    this.prospec,
+    this.instadate,
   }) : super(key: key);
 
-  final TextEditingController pgmController =  TextEditingController();
+  final TextEditingController pgmController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -331,7 +343,7 @@ class ConfirmBox extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 15),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children:const [
+                children: const [
                   Center(
                     child: Text(
                       "Processing Program",
@@ -396,7 +408,8 @@ class ConfirmBox extends StatelessWidget {
                         return null;
                       },
                       decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                        contentPadding:
+                            const EdgeInsets.fromLTRB(20, 15, 20, 15),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
@@ -446,7 +459,7 @@ class ConfirmBox extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.greenAccent),
-                    child:const  Center(
+                    child: const Center(
                       child: Text(
                         "Okay",
                         style: TextStyle(
@@ -488,17 +501,18 @@ class ConfirmBox extends StatelessWidget {
           upTime: upTime,
           docname: docname,
           custdocname: custdocname,
+          instadate: instadate,
+          prospec: prospec,
           status: "pending");
 
-          CustomerPgmHistory custhistory = CustomerPgmHistory(
-        upDate: date,
-        upTime: time,
-        msg: "Continue the program with new Process",
-        status: "pending",
-        docname: hisdocname,
-        custdocname: custdocname);
-        
-        
+      CustomerPgmHistory custhistory = CustomerPgmHistory(
+          upDate: date,
+          upTime: time,
+          msg: "Continue the program with new Process",
+          status: "pending",
+          docname: hisdocname,
+          custdocname: custdocname);
+
       await fb
           .collection("Technician")
           .doc(username)
@@ -510,16 +524,23 @@ class ConfirmBox extends StatelessWidget {
       }).catchError(
               (error) => print("Failed to Delete Pending pgm list : $error"));
 
-              // customer program history updated
-        fb
-            .collection("Customer")
-            .doc(custdocname)
-            .collection("Programs")
-            .doc(docname)
-            .collection("History")
-            .doc(hisdocname)
-            .set(custhistory.toMap());
+      // Updating the Customer program status
+      fb
+          .collection("Customer")
+          .doc(custdocname)
+          .collection("Programs")
+          .doc(docname)
+          .update({'status': 'pending', 'pgm': pgmController.text});
 
+      // customer program history updated
+      fb
+          .collection("Customer")
+          .doc(custdocname)
+          .collection("Programs")
+          .doc(docname)
+          .collection("History")
+          .doc(hisdocname)
+          .set(custhistory.toMap());
 
       await fb
           .collection("Programs")
