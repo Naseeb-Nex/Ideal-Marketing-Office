@@ -54,89 +54,98 @@ class CustomerListCardState extends State<CustomerListCard> {
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              offset: const Offset(0, 2),
-              blurRadius: 5,
-              color: secondbg.withOpacity(0.18),
-            ),
-          ],
-        ),
-        child: Row(
-          children: [
-            const Icon(
-              Icons.account_circle_outlined,
-              color: bluebg,
-            ),
-            Flexible(
-                flex: 2,
-                fit: FlexFit.tight,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
+      child: InkWell(
+        onDoubleTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => CustomerProfilesrc(
+                                docname: widget.docname,
+                                cust: cust,
+                              ))),
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                offset: const Offset(0, 2),
+                blurRadius: 5,
+                color: secondbg.withOpacity(0.18),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.account_circle_outlined,
+                color: bluebg,
+              ),
+              Flexible(
+                  flex: 2,
+                  fit: FlexFit.tight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      "${widget.name}",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontFamily: "Montserrat",
+                      ),
+                    ),
+                  )),
+              Flexible(
+                  fit: FlexFit.tight,
+                  flex: 3,
                   child: Text(
-                    "${widget.name}",
+                    "${widget.address}",
                     style: const TextStyle(
                       fontSize: 16,
                       fontFamily: "Montserrat",
                     ),
-                  ),
-                )),
-            Flexible(
-                fit: FlexFit.tight,
-                flex: 3,
-                child: Text(
-                  "${widget.address}",
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontFamily: "Montserrat",
-                  ),
-                )),
-            Flexible(
-                flex: 1,
-                fit: FlexFit.tight,
+                  )),
+              Flexible(
+                  flex: 1,
+                  fit: FlexFit.tight,
+                  child: Center(
+                    child: Text(
+                      "${widget.loc}",
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontFamily: "Montserrat",
+                      ),
+                    ),
+                  )),
+              SizedBox(
+                width: 145,
                 child: Center(
                   child: Text(
-                    "${widget.loc}",
+                    "${widget.phn1}",
                     style: const TextStyle(
                       fontSize: 16,
                       fontFamily: "Montserrat",
                     ),
-                  ),
-                )),
-            SizedBox(
-              width: 145,
-              child: Center(
-                child: Text(
-                  "${widget.phn1}",
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontFamily: "Montserrat",
                   ),
                 ),
               ),
-            ),
-            InkWell(
-                onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => CustomerProfilesrc(
-                              docname: widget.docname,
-                              cust: cust,
-                            ))),
-                child: const SizedBox(
-                  width: 50,
-                  child: Icon(
-                    Icons.more_horiz_rounded,
-                    color: Colors.black45,
-                  ),
-                ))
-          ],
+              InkWell(
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) => CustomerProfilesrc(
+                                docname: widget.docname,
+                                cust: cust,
+                              ))),
+                  child: const SizedBox(
+                    width: 50,
+                    child: Icon(
+                      Icons.more_horiz_rounded,
+                      color: Colors.black45,
+                    ),
+                  ))
+            ],
+          ),
         ),
       ),
     );

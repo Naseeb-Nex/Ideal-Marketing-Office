@@ -7,25 +7,25 @@ class CustomerHistorycard extends StatefulWidget {
   String? upDate;
   String? upTime;
   String? docname;
-  String? custdocname ;
+  String? custdocname;
   String? status;
   String? msg;
   String? techname;
   String? camount;
   String? remarks;
 
-  CustomerHistorycard(
-      {Key? key,
-      this.techname,
-      this.msg,
-      this.camount,
-      this.remarks,
-      this.upDate,
-      this.upTime,
-      this.docname,
-      this.custdocname,
-      this.status,})
-      : super(key: key);
+  CustomerHistorycard({
+    Key? key,
+    this.techname,
+    this.msg,
+    this.camount,
+    this.remarks,
+    this.upDate,
+    this.upTime,
+    this.docname,
+    this.custdocname,
+    this.status,
+  }) : super(key: key);
 
   @override
   State<CustomerHistorycard> createState() => _CustomerHistorycardState();
@@ -35,7 +35,6 @@ class _CustomerHistorycardState extends State<CustomerHistorycard> {
   List _pgmhistory = [];
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
       child: Container(
@@ -93,118 +92,144 @@ class _CustomerHistorycardState extends State<CustomerHistorycard> {
                       ),
                     ),
                     Center(
-                      child: widget.remarks == null ? null : Text(
-                      "Remarks : ${widget.remarks}",
-                      style: const TextStyle(
-                        // fontWeight: FontWeight.w500,
-                        fontFamily: "Montserrat",
-                        fontSize: 14,
-                      ),
+                      child: widget.remarks == null
+                          ? null
+                          : Text(
+                              "Remarks : ${widget.remarks}",
+                              style: const TextStyle(
+                                // fontWeight: FontWeight.w500,
+                                fontFamily: "Montserrat",
+                                fontSize: 14,
+                              ),
+                            ),
                     ),
+                    const SizedBox(height: 5,),
+                    Center(
+                      child: widget.camount == null
+                          ? null
+                          : Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: limegreen,),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 5, vertical: 2),
+                              child: Text(
+                                "Collection : ${widget.camount}",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontFamily: "Montserrat",
+                                    fontSize: 14,
+                                    color: white),
+                              ),
+                            ),
                     )
                   ],
                 ),
                 Row(
                   children: [
                     Center(
-                      child: widget.status == "pending" ?
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 5),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: redbg,
-                            boxShadow: [
-                              BoxShadow(
-                                  spreadRadius: 2,
-                                  blurRadius: 4,
-                                  color: black.withOpacity(0.1),
-                                  offset: const Offset(0, 5))
-                            ]),
-                        child: Text(
-                          "${widget.status}",
-                          style: const TextStyle(
-                            fontFamily: "Montserrat",
-                            fontSize: 16,
-                            color: redfg,
-                          ),
-                        ),
-                      ) : null,
+                      child: widget.status == "pending"
+                          ? Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: redbg,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        spreadRadius: 2,
+                                        blurRadius: 4,
+                                        color: black.withOpacity(0.1),
+                                        offset: const Offset(0, 5))
+                                  ]),
+                              child: Text(
+                                "${widget.status}",
+                                style: const TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontSize: 16,
+                                  color: redfg,
+                                ),
+                              ),
+                            )
+                          : null,
                     ),
                     Center(
-                      child: widget.status == "completed" ?
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 5),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: greenbg,
-                            boxShadow: [
-                              BoxShadow(
-                                  spreadRadius: 2,
-                                  blurRadius: 4,
-                                  color: black.withOpacity(0.1),
-                                  offset: const Offset(0, 5))
-                            ]),
-                        child: Text(
-                          "${widget.status}",
-                          style: const TextStyle(
-                            fontFamily: "Montserrat",
-                            fontSize: 16,
-                            color: Colors.green,
-                          ),
-                        ),
-                      ) : null,
+                      child: widget.status == "completed"
+                          ? Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: greenbg,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        spreadRadius: 2,
+                                        blurRadius: 4,
+                                        color: black.withOpacity(0.1),
+                                        offset: const Offset(0, 5))
+                                  ]),
+                              child: Text(
+                                "${widget.status}",
+                                style: const TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontSize: 16,
+                                  color: Colors.green,
+                                ),
+                              ),
+                            )
+                          : null,
                     ),
                     Center(
-                      child: widget.status == "assigned" ?
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 5),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: yellowbg,
-                            boxShadow: [
-                              BoxShadow(
-                                  spreadRadius: 2,
-                                  blurRadius: 4,
-                                  color: black.withOpacity(0.1),
-                                  offset: const Offset(0, 5))
-                            ]),
-                        child: Text(
-                          "${widget.status}",
-                          style: const TextStyle(
-                            fontFamily: "Montserrat",
-                            fontSize: 16,
-                            color: yellowfg,
-                          ),
-                        ),
-                      ) : null,
+                      child: widget.status == "assigned"
+                          ? Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: yellowbg,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        spreadRadius: 2,
+                                        blurRadius: 4,
+                                        color: black.withOpacity(0.1),
+                                        offset: const Offset(0, 5))
+                                  ]),
+                              child: Text(
+                                "${widget.status}",
+                                style: const TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontSize: 16,
+                                  color: yellowfg,
+                                ),
+                              ),
+                            )
+                          : null,
                     ),
                     Center(
-                      child: widget.status == "processing" ?
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 5),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: vybg,
-                            boxShadow: [
-                              BoxShadow(
-                                  spreadRadius: 2,
-                                  blurRadius: 4,
-                                  color: black.withOpacity(0.1),
-                                  offset: const Offset(0, 5))
-                            ]),
-                        child: Text(
-                          "${widget.status}",
-                          style: const TextStyle(
-                            fontFamily: "Montserrat",
-                            fontSize: 16,
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ) : null,
+                      child: widget.status == "processing"
+                          ? Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: vybg,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        spreadRadius: 2,
+                                        blurRadius: 4,
+                                        color: black.withOpacity(0.1),
+                                        offset: const Offset(0, 5))
+                                  ]),
+                              child: Text(
+                                "${widget.status}",
+                                style: const TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontSize: 16,
+                                  color: Colors.blue,
+                                ),
+                              ),
+                            )
+                          : null,
                     ),
                   ],
                 ),

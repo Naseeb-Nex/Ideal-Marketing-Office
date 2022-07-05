@@ -11,6 +11,7 @@ class Customerpgmview extends StatefulWidget {
   String? phn;
   String? type;
   String? pgm;
+  String? newpgm;
   String? upDate;
   String? upTime;
   String? docname;
@@ -19,6 +20,7 @@ class Customerpgmview extends StatefulWidget {
   String? status;
   String? custdocname;
   String? chrg;
+  String? camount;
 
   Customerpgmview(
       {Key? key,
@@ -28,6 +30,7 @@ class Customerpgmview extends StatefulWidget {
       this.phn,
       this.type,
       this.pgm,
+      this.newpgm,
       this.upDate,
       this.upTime,
       this.docname,
@@ -35,6 +38,7 @@ class Customerpgmview extends StatefulWidget {
       this.instadate,
       this.custdocname,
       this.chrg,
+      this.camount,
       this.status})
       : super(key: key);
 
@@ -105,13 +109,23 @@ class _CustomerpgmviewState extends State<Customerpgmview> {
                         fontSize: 16,
                       ),
                     ),
+                    Container(
+                      child: widget.newpgm == null ? null : Text(
+                        "Processing program : ${widget.newpgm}",
+                        style: const TextStyle(
+                          fontFamily: "Montserrat",
+                          color: Colors.black87,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
                     const SizedBox(height: 5,),
                     Container(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 7, vertical: 3),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: Colors.blue[400]),
+                                  color: widget.camount == null ? Colors.blue[400] : limegreen),
                               child: Row(
                                 children: [
                                   const Text(
@@ -131,6 +145,15 @@ class _CustomerpgmviewState extends State<Customerpgmview> {
                                         fontSize: 15,
                                         fontWeight: FontWeight.w400,
                                         color: Colors.white),
+                                  ),
+                                  Container(
+                                    child: widget.camount == null ? null : Text(" / ${widget.camount}",
+                                      style: const TextStyle(
+                                          fontFamily: "Nunito",
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.white),
+                                    ),
                                   ),
                                 ],
                               )),
@@ -337,6 +360,7 @@ class _CustomerpgmviewState extends State<Customerpgmview> {
                             docname: _pgmhistory[i]["docname"],
                             status: _pgmhistory[i]["status"],
                             remarks: _pgmhistory[i]["remarks"],
+                            camount: _pgmhistory[i]["camount"],
                           )
                         ]
                       ],

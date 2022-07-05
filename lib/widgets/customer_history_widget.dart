@@ -148,6 +148,8 @@ class _CustomerHistoryState extends State<CustomerHistory> {
                             status: _allcustomer[i]["status"],
                             chrg: _allcustomer[i]["chrg"],
                             custdocname: _allcustomer[i]["custdocname"],
+                            camount: _allcustomer[i]["camount"],
+                            newpgm: _allcustomer[i]["newpgm"],
                           )
                         ]
                       ],

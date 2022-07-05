@@ -6,6 +6,7 @@ import 'package:test2/services/customer_history.dart';
 import 'package:test2/services/pgm.dart';
 import 'package:intl/intl.dart';
 
+// ignore: must_be_immutable
 class Protechcard extends StatelessWidget {
   String? uid;
   String? username;
@@ -361,7 +362,7 @@ class ConfirmBox extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            const Center(
+              const Center(
               child: Text(
                 "Please enter the new Program of this Client",
                 style: TextStyle(
@@ -530,7 +531,7 @@ class ConfirmBox extends StatelessWidget {
           .doc(custdocname)
           .collection("Programs")
           .doc(docname)
-          .update({'status': 'pending', 'pgm': pgmController.text});
+          .set({'status': 'pending', 'newpgm': pgmController.text}, SetOptions(merge: true));
 
       // customer program history updated
       fb
