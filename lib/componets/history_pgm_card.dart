@@ -194,6 +194,7 @@ class _HistorypgmcardState extends State<Historypgmcard> {
                   ],
                 ),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Center(
                       child: widget.status == "assigned"
@@ -358,16 +359,13 @@ class _HistorypgmcardState extends State<Historypgmcard> {
                       width: 10,
                     ),
                     Center(
-                      child: widget.status == "assigned" ||
-                              widget.status == "completed" ||
-                              widget.status == "unresolved" ||
-                              widget.status == "pro"
-                          ? Container(
+                      child: widget.techname == null
+                          ? null
+                          : Container(
                               decoration: BoxDecoration(
                                   color: cheryred,
                                   borderRadius: BorderRadius.circular(20)),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 5, horizontal: 10),
+                              padding: const EdgeInsets.fromLTRB(4, 4, 8, 4),
                               child: Row(
                                 children: [
                                   const Icon(
@@ -380,14 +378,14 @@ class _HistorypgmcardState extends State<Historypgmcard> {
                                   Text(
                                     "${widget.techname}",
                                     style: const TextStyle(
-                                        fontFamily: "Nunito",
-                                        fontSize: 15,
-                                        color: white),
+                                      fontFamily: "Nunito",
+                                      fontSize: 15,
+                                      color: white,
+                                    ),
                                   ),
                                 ],
                               ),
-                            )
-                          : null,
+                            ),
                     ),
                     const SizedBox(
                       width: 10,

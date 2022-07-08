@@ -1,3 +1,4 @@
+import 'package:test2/componets/simplealertbox.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -464,20 +465,20 @@ class _CustomerregState extends State<Customerreg> {
           .get()
           .then((value) => {exist_cust = Customer.fromMap(value.data())});
 
-      if (exist_cust.docname == null) {
-        showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return const SimpleCustomAlert(
-                    "! Customer already Exist !",
-                    Colors.redAccent,
-                    "Error");
-              });
-          setState(() {
-            _loading = false;
-          });
-      }
-      else{
+      // if (exist_cust.docname == null) {
+      //   showDialog(
+      //         context: context,
+      //         builder: (BuildContext context) {
+      //           return const SimpleCustomAlert(
+      //               "! Customer already Exist !",
+      //               Colors.redAccent,
+      //               "Error");
+      //         });
+      //     setState(() {
+      //       _loading = false;
+      //     });
+      // }
+      // else{
         await firebaseFirestore
             .collection("Customer")
             .doc(docname)
@@ -516,7 +517,7 @@ class _CustomerregState extends State<Customerreg> {
           });
         });
         
-      }
+      // }
     }
   }
 }

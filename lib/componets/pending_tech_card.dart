@@ -4,6 +4,7 @@ import 'package:test2/constants/constants.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:test2/services/customer_history.dart';
+import 'package:test2/services/history.dart';
 
 // import 'package:test2/services/history.dart';
 import 'package:test2/services/pgm.dart';
@@ -464,22 +465,23 @@ class ConfirmBox extends StatelessWidget {
         docname: hisdocname,
         custdocname: custdocname);
 
-    // Pgmhistory history = Pgmhistory(
-    //   name: name,
-    //   address: address,
-    //   loc: loc,
-    //   phn: phn,
-    //   pgm: pgm,
-    //   chrg: chrg,
-    //   type: type,
-    //   upDate: date,
-    //   upTime: time,
-    //   docname: hisdocname,
-    //   prospec: prospec,
-    //   instadate: instadate,
-    //   status: "pending",
-    //   ch: "$techname's Pending list to Main list",
-    // );
+    Pgmhistory history = Pgmhistory(
+      name: name,
+      address: address,
+      loc: loc,
+      phn: phn,
+      pgm: pgm,
+      chrg: chrg,
+      type: type,
+      upDate: date,
+      upTime: time,
+      docname: hisdocname,
+      prospec: prospec,
+      instadate: instadate,
+      techname: techname,
+      status: "pending",
+      ch: "Technician's Pending list to Main list",
+    );
 
     await fb
         .collection("Technician")
@@ -492,7 +494,7 @@ class ConfirmBox extends StatelessWidget {
     }).catchError(
             (error) => print("Failed to Delete Pending pgm list : $error"));
 
-    // fb.collection("history").doc(hisdocname).set(history.toMap());
+    fb.collection("history").doc(hisdocname).set(history.toMap());
 
     // customer program history updated
         fb

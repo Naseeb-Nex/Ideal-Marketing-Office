@@ -167,31 +167,6 @@ class _OfficeHomeState extends State<OfficeHome> {
                           ),
                           InkWell(
                             onTap: () => setState(() {
-                              currentscr = 'PgmReg';
-                            }),
-                            child: Container(
-                              height: 50,
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: cheryred),
-                              child: const Text(
-                                "Register Program",
-                                style: TextStyle(
-                                  fontFamily: "Nunito",
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: white,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          InkWell(
-                            onTap: () => setState(() {
                               currentscr = 'customer';
                             }),
                             child: Container(
@@ -282,11 +257,7 @@ class Widgetwrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (src == 'PgmReg') {
-      return Pgmreg(
-        uid: uid!,
-      );
-    } else if (src == 'customer') {
+    if (src == 'customer') {
       return const Customersrc();
     } else if (src == 'customerreg') {
       return const Customerreg();
