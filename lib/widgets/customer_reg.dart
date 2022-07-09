@@ -485,15 +485,15 @@ class _CustomerregState extends State<Customerreg> {
             .set(custm.toMap())
             .then((value) {
           // firebaseFirestore.collection("history").doc(formattedDate).set(history.toMap());
+          setState(() {
+            _loading = false;
+          });
           showDialog(
               context: context,
               builder: (BuildContext context) {
                 return const SimpleCustomAlert(
                     "Customer Registration Completed!", bluebg, "Sucessfull");
               });
-          setState(() {
-            _loading = false;
-          });
 
           namecontroller.clear();
           addresscontroller.clear();
@@ -503,7 +503,9 @@ class _CustomerregState extends State<Customerreg> {
           prospeccontroller.clear();
           instadatecontroller.clear();
         }).catchError((error) {
-          print("Failed to add Program: $error");
+          setState(() {
+            _loading = false;
+          });
           showDialog(
               context: context,
               builder: (BuildContext context) {
@@ -512,9 +514,6 @@ class _CustomerregState extends State<Customerreg> {
                     Colors.redAccent,
                     "Error");
               });
-          setState(() {
-            _loading = false;
-          });
         });
         
       // }
