@@ -548,7 +548,6 @@ class ConfirmBox extends StatelessWidget {
           .doc("$docname")
           .set(pgmr.toMap())
           .then((value) {
-        print("Successfully Program created");
         Navigator.pop(context);
       });
     }
