@@ -31,6 +31,8 @@ class _TechhistoryviewState extends State<Techhistoryview> {
                 .collection('Technician')
                 .doc(widget.username)
                 .collection("History")
+                .limit(50)
+                .orderBy("docname", descending: true)
                 .snapshots(),
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
