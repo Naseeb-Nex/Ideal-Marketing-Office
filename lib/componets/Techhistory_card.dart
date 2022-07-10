@@ -1,37 +1,40 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:test2/constants/constants.dart';
 
 // ignore: must_be_immutable
-class CustomerHistorycard extends StatefulWidget {
+class Techhistorycard extends StatefulWidget {
+  String? name;
+  String? loc;
+  String? pgm;
+  String? chrg;
   String? upDate;
   String? upTime;
   String? docname;
-  String? custdocname;
   String? status;
-  String? msg;
-  String? techname;
-  String? camount;
   String? remarks;
+  String? collection;
+  String? username;
 
-  CustomerHistorycard({
+  Techhistorycard({
     Key? key,
-    this.techname,
-    this.msg,
-    this.camount,
-    this.remarks,
+    this.name,
+    this.loc,
+    this.pgm,
+    this.chrg,
     this.upDate,
     this.upTime,
     this.docname,
-    this.custdocname,
     this.status,
+    this.remarks,
+    this.collection,
+    this.username,
   }) : super(key: key);
 
   @override
-  State<CustomerHistorycard> createState() => _CustomerHistorycardState();
+  State<Techhistorycard> createState() => _TechhistorycardState();
 }
 
-class _CustomerHistorycardState extends State<CustomerHistorycard> {
+class _TechhistorycardState extends State<Techhistorycard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -54,39 +57,43 @@ class _CustomerHistorycardState extends State<CustomerHistorycard> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Text(
-                  "${widget.upDate}",
-                  style: const TextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: 15,
+            Padding(
+              padding: const EdgeInsets.only(right: 5),
+              child: Column(
+                children: [
+                  Text(
+                    "${widget.name}",
+                    style: const TextStyle(
+                      fontFamily: "Montserrat",
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  "${widget.upTime}",
-                  style: const TextStyle(
-                    fontFamily: "Nunito",
-                    fontSize: 15,
+                  const SizedBox(
+                    height: 5,
                   ),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-              ],
+                  Text(
+                    "${widget.loc}",
+                    style: const TextStyle(
+                      fontFamily: "Nunito",
+                      fontSize: 15,
+                    ),
+                  ),
+                ],
+              ),
             ),
             Column(
               children: [
                 Text(
-                  "${widget.msg}",
+                  "${widget.pgm}",
                   style: const TextStyle(
                     fontWeight: FontWeight.w500,
                     fontFamily: "Montserrat",
                     fontSize: 16,
                   ),
+                ),
+                const SizedBox(
+                  height: 5,
                 ),
                 Center(
                   child: widget.remarks == null
@@ -100,18 +107,21 @@ class _CustomerHistorycardState extends State<CustomerHistorycard> {
                           ),
                         ),
                 ),
-                const SizedBox(height: 5,),
+                const SizedBox(
+                  height: 5,
+                ),
                 Center(
-                  child: widget.camount == null
+                  child: widget.collection == null
                       ? null
                       : Container(
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: limegreen,),
+                            borderRadius: BorderRadius.circular(5),
+                            color: limegreen,
+                          ),
                           padding: const EdgeInsets.symmetric(
                               horizontal: 5, vertical: 2),
                           child: Text(
-                            "Collection : ${widget.camount}",
+                            "Collection : ${widget.chrg} / ${widget.collection}",
                             style: const TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontFamily: "Montserrat",
@@ -122,7 +132,7 @@ class _CustomerHistorycardState extends State<CustomerHistorycard> {
                 )
               ],
             ),
-            Row(
+            Column(
               children: [
                 Center(
                   child: widget.status == "pending"
@@ -227,6 +237,26 @@ class _CustomerHistorycardState extends State<CustomerHistorycard> {
                           ),
                         )
                       : null,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "${widget.upDate}",
+                  style: const TextStyle(
+                    fontFamily: "Montserrat",
+                    fontSize: 15,
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  "${widget.upTime}",
+                  style: const TextStyle(
+                    fontFamily: "Nunito",
+                    fontSize: 15,
+                  ),
                 ),
               ],
             ),

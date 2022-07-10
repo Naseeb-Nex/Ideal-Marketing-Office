@@ -1,11 +1,13 @@
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:test2/widgets/Techview/tech_history.dart';
 import 'package:test2/widgets/Techview/techcompleted_pgm.dart';
 import 'package:test2/widgets/Techview/techpending_pgm.dart';
 import 'package:test2/widgets/Techview/techprocessing_pgm.dart';
 import 'Techview/exporttech.dart';
 
+// ignore: must_be_immutable
 class Statussrc extends StatefulWidget {
   String? uid;
   String? username;
@@ -89,7 +91,7 @@ class StatussrcState extends State<Statussrc> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       InkWell(
@@ -118,7 +120,7 @@ class StatussrcState extends State<Statussrc> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       InkWell(
@@ -148,7 +150,7 @@ class StatussrcState extends State<Statussrc> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 20,
                       ),
                       InkWell(
@@ -208,7 +210,7 @@ class StatussrcState extends State<Statussrc> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           // Techview(currentsw: _currentsw, uid: widget.uid, username: widget.username, techname: widget.techname)
@@ -218,12 +220,12 @@ class StatussrcState extends State<Statussrc> {
               child: Container(
                 width: double.infinity,
                 height: double.infinity,
-                padding: EdgeInsets.all(10),
+                padding:const  EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(25),
                     boxShadow: [
                       BoxShadow(
-                        offset: Offset(0, 5),
+                        offset:const  Offset(0, 5),
                         blurRadius: 15,
                         color: secondbg.withOpacity(0.20),
                       ),
@@ -249,6 +251,7 @@ class Horizontalswipe extends MaterialScrollBehavior {
       };
 }
 
+// ignore: must_be_immutable
 class Techview extends StatelessWidget {
   String? currentsw;
   String? uid;
@@ -259,9 +262,15 @@ class Techview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (currentsw == 'Pending') return Techpending(uid: uid, username: username, techname: techname);
-    else if (currentsw == 'pros') return Techprocessing(uid: uid, username: username, techname: techname);
-    else if (currentsw == 'Completed') return Techcompleted(uid: uid, username: username, techname: techname);
+    if (currentsw == 'Pending') {
+      return Techpending(uid: uid, username: username, techname: techname);
+    } else if (currentsw == 'pros') {
+      return Techprocessing(uid: uid, username: username, techname: techname);
+    } else if (currentsw == 'Completed') {
+      return Techcompleted(uid: uid, username: username, techname: techname);
+    } else if (currentsw == 'History') {
+      return Techhistoryview(uid: uid, username: username, techname: techname);
+    }
     return Techasign(uid: uid, username: username, techname: techname);
   }
 }
