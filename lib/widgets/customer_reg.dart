@@ -418,16 +418,16 @@ class _CustomerregState extends State<Customerreg> {
     String upDate = DateFormat('d MMM y').format(now);
     String upTime = DateFormat('kk:mm').format(now);
 
-    var capitalizedValue = namecontroller.text.substring(0, 1).toUpperCase();
-    print(capitalizedValue);
+    final docname =
+        namecontroller.text.toLowerCase() + phn1controller.text.toLowerCase();
+
+    final existance =
+        FirebaseFirestore.instance.collection("Customer").doc(docname);
 
     if (_formkey.currentState!.validate()) {
       setState(() {
         _loading = true;
       });
-
-      final docname =
-          namecontroller.text.toLowerCase() + phn1controller.text.toLowerCase();
 
       Customer custm = Customer(
         name: namecontroller.text,
@@ -459,64 +459,61 @@ class _CustomerregState extends State<Customerreg> {
       //     ch: "New program added"
       //     );
 
-      firebaseFirestore
-          .collection("Customer")
-          .doc(docname)
-          .get()
-          .then((value) => {exist_cust = Customer.fromMap(value.data())});
-
-      // if (exist_cust.docname == null) {
-      //   showDialog(
-      //         context: context,
-      //         builder: (BuildContext context) {
-      //           return const SimpleCustomAlert(
-      //               "! Customer already Exist !",
-      //               Colors.redAccent,
-      //               "Error");
-      //         });
-      //     setState(() {
-      //       _loading = false;
-      //     });
-      // }
-      // else{
-        await firebaseFirestore
-            .collection("Customer")
-            .doc(docname)
-            .set(custm.toMap())
-            .then((value) {
-          // firebaseFirestore.collection("history").doc(formattedDate).set(history.toMap());
-          setState(() {
-            _loading = false;
-          });
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return const SimpleCustomAlert(
-                    "Customer Registration Completed!", bluebg, "Sucessfull");
+      firebaseFirestore.collection("Customer").doc(docname).get().then(
+        (DocumentSnapshot doc) {
+          if (!doc.exists) {
+            firebaseFirestore
+                .collection("Customer")
+                .doc(docname)
+                .set(custm.toMap())
+                .then((value) {
+              // firebaseFirestore.collection("history").doc(formattedDate).set(history.toMap());
+              setState(() {
+                _loading = false;
               });
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return const SimpleCustomAlert(
+                        "Customer Registration Completed!",
+                        bluebg,
+                        "Sucessfull");
+                  });
 
-          namecontroller.clear();
-          addresscontroller.clear();
-          loccontroller.clear();
-          phn1controller.clear();
-          phn2controller.clear();
-          prospeccontroller.clear();
-          instadatecontroller.clear();
-        }).catchError((error) {
-          setState(() {
-            _loading = false;
-          });
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return const SimpleCustomAlert(
-                    "Something went Wrong, Try again!",
-                    Colors.redAccent,
-                    "Error");
+              namecontroller.clear();
+              addresscontroller.clear();
+              loccontroller.clear();
+              phn1controller.clear();
+              phn2controller.clear();
+              prospeccontroller.clear();
+              instadatecontroller.clear();
+            }).catchError((error) {
+              setState(() {
+                _loading = false;
               });
-        });
-        
-      // }
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return const SimpleCustomAlert(
+                        "Something went Wrong, Try again!",
+                        Colors.redAccent,
+                        "Error");
+                  });
+            });
+          } else {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return const SimpleCustomAlert(
+                      "! Customer already Exist !", Colors.redAccent, "Error");
+                });
+            setState(() {
+              _loading = false;
+            });
+          }
+        },
+        onError: (e) => print("Error getting document: $e"),
+      );
     }
   }
 }
