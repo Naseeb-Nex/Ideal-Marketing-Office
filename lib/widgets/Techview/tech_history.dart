@@ -40,8 +40,10 @@ class _TechhistoryviewState extends State<Techhistoryview> {
                 print('Something went Wrong');
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Expanded(
-                  child: Center(
+                return Container(
+                  width: double.infinity,
+                  color: white,
+                  child: const Center(
                     child: CircularProgressIndicator(
                       color: cheryred,
                     ),

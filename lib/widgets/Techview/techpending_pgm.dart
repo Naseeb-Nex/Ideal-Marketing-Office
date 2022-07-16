@@ -22,69 +22,75 @@ class _TechpendingState extends State<Techpending> {
 
   Widget build(BuildContext context) {
     return ScrollConfiguration(
-            behavior: htechassignswipe(),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-                  child: StreamBuilder<QuerySnapshot>(
-                      stream: FirebaseFirestore.instance.collection('Technician').doc(widget.username).collection("Pendingpgm").snapshots(),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<QuerySnapshot> snapshot) {
-                        if (snapshot.hasError) {
-                          print('Something went Wrong');
-                        }
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const Expanded(
-                            child: Center(
-                              child: CircularProgressIndicator(
-                                color: cheryred,
-                              ),
-                            ),
-                          );
-                        }
-                        _allpgm.clear();
-                        snapshot.data!.docs.map((DocumentSnapshot document) {
-                          Map a = document.data() as Map<String, dynamic>;
-                          _allpgm.add(a);
-                          print(a);
-                          a['uid'] = document.id;
-                        }).toList();
-                        
-                        return Container(
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                width: 30,
-                              ),
-                              for (var i = 0; i < _allpgm.length; i++) ...[
-                                PendingTechcard(
-                                  uid: widget.uid,
-                                  username: widget.username,
-                                  name: _allpgm[i]["name"],
-                                  address: _allpgm[i]["address"],
-                                  loc: _allpgm[i]["loc"],
-                                  chrg: _allpgm[i]["chrg"],
-                                  pgm: _allpgm[i]["pgm"],
-                                  phn: _allpgm[i]["phn"],
-                                  type: _allpgm[i]["type"],
-                                  upDate: _allpgm[i]["upDate"],
-                                  upTime: _allpgm[i]["upTime"],
-                                  docname: _allpgm[i]["docname"],
-                                  remarks: _allpgm[i]["remarks"],
-                                  ptime: _allpgm[i]["ptime"],
-                                  pdate: _allpgm[i]["pdate"],
-                                  pdocname: _allpgm[i]["pdocname"],
-                                  instadate: _allpgm[i]["instadate"],
-                                  prospec: _allpgm[i]["prospec"],
-                                  techname: _allpgm[i]["techname"],
-                                  custdocname: _allpgm[i]["custdocname"],
-                                )
-                              ]
-                            ],
-                          ),
-                        );
-                      }),
-            ),);
+      behavior: htechassignswipe(),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection('Technician')
+                .doc(widget.username)
+                .collection("Pendingpgm")
+                .snapshots(),
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasError) {
+                print('Something went Wrong');
+              }
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Container(
+                  width: double.infinity,
+                  color: white,
+                  child: const Center(
+                    child: CircularProgressIndicator(
+                      color: cheryred,
+                    ),
+                  ),
+                );
+              }
+              _allpgm.clear();
+              snapshot.data!.docs.map((DocumentSnapshot document) {
+                Map a = document.data() as Map<String, dynamic>;
+                _allpgm.add(a);
+                print(a);
+                a['uid'] = document.id;
+              }).toList();
+
+              return Container(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: 30,
+                    ),
+                    for (var i = 0; i < _allpgm.length; i++) ...[
+                      PendingTechcard(
+                        uid: widget.uid,
+                        username: widget.username,
+                        name: _allpgm[i]["name"],
+                        address: _allpgm[i]["address"],
+                        loc: _allpgm[i]["loc"],
+                        chrg: _allpgm[i]["chrg"],
+                        pgm: _allpgm[i]["pgm"],
+                        phn: _allpgm[i]["phn"],
+                        type: _allpgm[i]["type"],
+                        upDate: _allpgm[i]["upDate"],
+                        upTime: _allpgm[i]["upTime"],
+                        docname: _allpgm[i]["docname"],
+                        remarks: _allpgm[i]["remarks"],
+                        ptime: _allpgm[i]["ptime"],
+                        pdate: _allpgm[i]["pdate"],
+                        pdocname: _allpgm[i]["pdocname"],
+                        instadate: _allpgm[i]["instadate"],
+                        prospec: _allpgm[i]["prospec"],
+                        techname: _allpgm[i]["techname"],
+                        custdocname: _allpgm[i]["custdocname"],
+                      )
+                    ]
+                  ],
+                ),
+              );
+            }),
+      ),
+    );
   }
 }
 

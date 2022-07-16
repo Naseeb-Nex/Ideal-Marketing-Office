@@ -43,8 +43,10 @@ class _TechcdayState extends State<Techcday> {
                 print('Something went Wrong');
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Expanded(
-                  child: Center(
+                return Container(
+                  width: double.infinity,
+                  color: white,
+                  child: const Center(
                     child: CircularProgressIndicator(
                       color: cheryred,
                     ),
@@ -68,20 +70,20 @@ class _TechcdayState extends State<Techcday> {
                     for (var i = 0; i < _allpgm.length; i++) ...[
                       Completedpgmcard(
                         name: _allpgm[i]["name"],
-                      address: _allpgm[i]["address"],
-                      loc: _allpgm[i]["loc"],
-                      pgm: _allpgm[i]["pgm"],
-                      phn: _allpgm[i]["phn"],
-                      type: _allpgm[i]["type"],
-                      upDate: _allpgm[i]["upDate"],
-                      upTime: _allpgm[i]["upTime"],
-                      docname: _allpgm[i]["docname"],
-                      remarks: _allpgm[i]["remarks"],
-                      cdate: _allpgm[i]["cdate"],
-                      ctime: _allpgm[i]["ctime"],
-                      tname: _allpgm[i]["techname"],
-                      chrg: _allpgm[i]["chrg"],
-                      camount: _allpgm[i]["camount"],
+                        address: _allpgm[i]["address"],
+                        loc: _allpgm[i]["loc"],
+                        pgm: _allpgm[i]["pgm"],
+                        phn: _allpgm[i]["phn"],
+                        type: _allpgm[i]["type"],
+                        upDate: _allpgm[i]["upDate"],
+                        upTime: _allpgm[i]["upTime"],
+                        docname: _allpgm[i]["docname"],
+                        remarks: _allpgm[i]["remarks"],
+                        cdate: _allpgm[i]["cdate"],
+                        ctime: _allpgm[i]["ctime"],
+                        tname: _allpgm[i]["techname"],
+                        chrg: _allpgm[i]["chrg"],
+                        camount: _allpgm[i]["camount"],
                       )
                     ]
                   ],
