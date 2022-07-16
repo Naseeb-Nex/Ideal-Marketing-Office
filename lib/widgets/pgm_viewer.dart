@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:test2/widgets/all_viewer.dart';
 import 'package:test2/widgets/export_widget.dart';
 import 'package:test2/widgets/history_pgm_viewer.dart';
 
@@ -13,7 +12,7 @@ class Pgmviewer extends StatefulWidget {
 }
 
 class _PgmviewerState extends State<Pgmviewer> {
-  String _currentsw = "All";
+  String _currentsw = "Pending";
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -189,15 +188,13 @@ class ViewerWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (currentsw == 'Pending') {
-      return const PendingPgmViewer();
-    } else if (currentsw == 'Assign') {
+    if (currentsw == 'Assign') {
       return Assignedpgmviewer();
     } else if (currentsw == 'Completed') {
       return Completedpgmviewer();
     } else if (currentsw == 'History') {
       return const Historypgmviewer();
     }
-    return const ViewAll();
+    return const PendingPgmViewer();
   }
 }

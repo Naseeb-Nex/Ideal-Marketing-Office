@@ -36,13 +36,15 @@ class _CompletedmonthviewState extends State<Completedmonthview> {
                 print('Something went Wrong');
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Expanded(
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      color: cheryred,
-                    ),
-                  ),
-                );
+                return Container(
+              width: double.infinity,
+              color: white,
+              child: const Center(
+                child: CircularProgressIndicator(
+                  color: cheryred,
+                ),
+              ),
+            );
               }
               _allpgm.clear();
               snapshot.data!.docs.map((DocumentSnapshot document) {
