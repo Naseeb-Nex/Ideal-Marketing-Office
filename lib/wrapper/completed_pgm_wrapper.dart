@@ -107,7 +107,7 @@ class _CompletedpgmwrapperState extends State<Completedpgmwrapper> {
         const SizedBox(
           height: 8,
         ),
-        Container(
+        SizedBox(
           height: 50,
           width: double.infinity,
           child: ScrollConfiguration(

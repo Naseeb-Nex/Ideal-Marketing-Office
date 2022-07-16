@@ -21,6 +21,7 @@ class Pgmwrapper extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Container(
               width: double.infinity,
+              color: white,
               child: const Center(
                 child: CircularProgressIndicator(
                   color: cheryred,

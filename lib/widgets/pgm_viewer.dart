@@ -56,7 +56,7 @@ class _PgmviewerState extends State<Pgmviewer> {
                     ),
                     InkWell(
                       onTap: () => setState(() {
-                        _currentsw = 'All';
+                        _currentsw = 'Pending';
                       }),
                       child: Container(
                         height: 50,
@@ -64,16 +64,16 @@ class _PgmviewerState extends State<Pgmviewer> {
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          color: _currentsw == "All" ? white : cheryred,
+                          color: _currentsw == "Pending" ? white : cheryred,
                           border: Border.all(color: cheryred),
                         ),
                         child: Text(
-                          "View All",
+                          "Pending Programs",
                           style: TextStyle(
                             fontFamily: "Nunito",
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
-                            color: _currentsw == "All" ? cheryred : white,
+                            color: _currentsw == "Pending" ? cheryred : white,
                           ),
                         ),
                       ),
@@ -110,33 +110,6 @@ class _PgmviewerState extends State<Pgmviewer> {
                     ),
                     InkWell(
                       onTap: () => setState(() {
-                        _currentsw = 'Pending';
-                      }),
-                      child: Container(
-                        height: 50,
-                        width: 200,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: _currentsw == "Pending" ? white : cheryred,
-                          border: Border.all(color: cheryred),
-                        ),
-                        child: Text(
-                          "Pending Programs",
-                          style: TextStyle(
-                            fontFamily: "Nunito",
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: _currentsw == "Pending" ? cheryred : white,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    InkWell(
-                      onTap: () => setState(() {
                         _currentsw = 'Completed';
                       }),
                       child: Container(
@@ -154,8 +127,7 @@ class _PgmviewerState extends State<Pgmviewer> {
                             fontFamily: "Nunito",
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
-                            color:
-                                _currentsw == "Completed" ? cheryred : white,
+                            color: _currentsw == "Completed" ? cheryred : white,
                           ),
                         ),
                       ),
