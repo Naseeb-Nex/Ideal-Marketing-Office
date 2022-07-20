@@ -7,8 +7,6 @@ import 'package:intl/intl.dart';
 
 import 'package:test2/services/customer.dart';
 
-import 'export_widget.dart';
-
 class Customerreg extends StatefulWidget {
   const Customerreg({Key? key}) : super(key: key);
 
