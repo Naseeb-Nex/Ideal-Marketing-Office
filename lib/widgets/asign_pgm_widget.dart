@@ -56,32 +56,30 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
             ],
           ),
           child: Container(
-                    height: double.infinity,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                    child: TextField(
-                      controller: controller,
-                      decoration: InputDecoration(
-                        icon: Icon(Icons.search, color: style.color),
-                        suffixIcon: controller.text.isNotEmpty
-                            ? GestureDetector(
-                                child: Icon(Icons.close, color: style.color),
-                                onTap: () {
-                                  controller.clear();
-                                  searchpgm('');
-                                  FocusScope.of(context)
-                                      .requestFocus(FocusNode());
-                                },
-                              )
-                            : null,
-                        hintText: "Name or Phone number",
-                        hintStyle: style,
-                        border: InputBorder.none,
-                      ),
-                      style: style,
-                      onChanged: searchpgm,
-                    ),
-                  ),
+            height: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            child: TextField(
+              controller: controller,
+              decoration: InputDecoration(
+                icon: Icon(Icons.search, color: style.color),
+                suffixIcon: controller.text.isNotEmpty
+                    ? GestureDetector(
+                        child: Icon(Icons.close, color: style.color),
+                        onTap: () {
+                          controller.clear();
+                          searchpgm('');
+                          FocusScope.of(context).requestFocus(FocusNode());
+                        },
+                      )
+                    : null,
+                hintText: "Search here",
+                hintStyle: style,
+                border: InputBorder.none,
+              ),
+              style: style,
+              onChanged: searchpgm,
+            ),
+          ),
         ),
         const SizedBox(
           height: 30,
@@ -95,21 +93,21 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
                 scrollDirection: Axis.vertical,
                 child: StreamBuilder<QuerySnapshot>(
                     stream: programstream,
-                      builder: (BuildContext context,
+                    builder: (BuildContext context,
                         AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (snapshot.hasError) {
                         print('Something went Wrong');
                       }
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Container(
-              width: double.infinity,
-              color: white,
-              child: const Center(
-                child: CircularProgressIndicator(
-                  color: cheryred,
-                ),
-              ),
-            );
+                          width: double.infinity,
+                          color: white,
+                          child: const Center(
+                            child: CircularProgressIndicator(
+                              color: cheryred,
+                            ),
+                          ),
+                        );
                       }
                       _allpgm.clear();
                       snapshot.data!.docs.map((DocumentSnapshot document) {
@@ -123,9 +121,9 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
                           .where((i) => i['status'] == 'pending')
                           .toList();
 
-                          if(controller.text.isEmpty){
-                            pendingpgm = assignpgm;
-                          }
+                      if (controller.text.isEmpty) {
+                        pendingpgm = assignpgm;
+                      }
 
                       return Column(
                         children: [
@@ -168,10 +166,15 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
     setState(() {
       pendingpgm = assignpgm.where((pgm) {
         final nameLower = pgm["name"]!.toLowerCase();
+        final addressLower = pgm["address"]!.toLowerCase();
+        final locLower = pgm["loc"]!.toLowerCase();
+
         final phnumber = pgm["phn"]!;
         final searchquery = query.toLowerCase();
 
         return nameLower.contains(searchquery) ||
+            addressLower.contains(searchquery) ||
+            locLower.contains(searchquery) ||
             phnumber.contains(searchquery);
       }).toList();
     });

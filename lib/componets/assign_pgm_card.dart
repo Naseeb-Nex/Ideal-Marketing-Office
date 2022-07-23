@@ -61,6 +61,7 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
 
   @override
   Widget build(BuildContext context) {
+    Size s = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
       child: Container(
@@ -140,11 +141,20 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "${widget.pgm}",
-                          style: const TextStyle(
-                            fontFamily: "Montserrat",
-                            fontSize: 16,
+                        Container(
+                          width: s.width * 0.45,
+                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                          child: Flexible(
+                            child: Center(
+                              child: Text(
+                                "${widget.pgm}",
+                                style: const TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                         const SizedBox(

@@ -165,9 +165,9 @@ class _LoginSrcState extends State<LoginSrc> {
       });
       try {
         await _auth
-            .signInWithEmailAndPassword(email: email, password: password)
-            // .signInWithEmailAndPassword(
-            //     email: "o@gmail.com", password: "12345678")
+            // .signInWithEmailAndPassword(email: email, password: password)
+            .signInWithEmailAndPassword(
+                email: "o@gmail.com", password: "12345678")
             .then((uid) => {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => const OfficeHome())),
