@@ -101,13 +101,85 @@ class _CustomersrcState extends State<Customersrc> {
         const SizedBox(
           height: 15,
         ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+          child: Container(
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+                color: bluebg),
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
+            child: Row(
+              children: const [
+                SizedBox(
+                  width: 18,
+                ),
+                Flexible(
+                    flex: 2,
+                    fit: FlexFit.tight,
+                    child: Center(
+                      child: Text(
+                        "Name",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: "Montserrat",
+                            fontWeight: FontWeight.bold,
+                            color: white),
+                      ),
+                    )),
+                Flexible(
+                    fit: FlexFit.tight,
+                    flex: 3,
+                    child: Text(
+                      "Address",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontFamily: "Montserrat",
+                          fontWeight: FontWeight.bold,
+                          color: white),
+                    )),
+                Flexible(
+                    flex: 1,
+                    fit: FlexFit.tight,
+                    child: Center(
+                      child: Text(
+                        "Location",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: "Montserrat",
+                            fontWeight: FontWeight.bold,
+                            color: white),
+                      ),
+                    )),
+                SizedBox(
+                  width: 145,
+                  child: Center(
+                    child: Text(
+                      "Phone Number",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontFamily: "Montserrat",
+                          fontWeight: FontWeight.bold,
+                          color: white),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 60,
+                )
+              ],
+            ),
+          ),
+        ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20)),
                   color: white,
                   boxShadow: [
                     BoxShadow(
@@ -118,139 +190,68 @@ class _CustomersrcState extends State<Customersrc> {
                   ]),
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 10),
-                child: Column(
-                  children: [
-                    Container(
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20)),
-                          color: bluebg),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 10),
-                      child: Row(
-                        children: const [
-                          SizedBox(
-                            width: 18,
-                          ),
-                          Flexible(
-                              flex: 2,
-                              fit: FlexFit.tight,
-                              child: Center(
-                                child: Text(
-                                  "Name",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontFamily: "Montserrat",
-                                      fontWeight: FontWeight.bold,
-                                      color: white),
-                                ),
-                              )),
-                          Flexible(
-                              fit: FlexFit.tight,
-                              flex: 3,
-                              child: Text(
-                                "Address",
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontFamily: "Montserrat",
-                                    fontWeight: FontWeight.bold,
-                                    color: white),
-                              )),
-                          Flexible(
-                              flex: 1,
-                              fit: FlexFit.tight,
-                              child: Center(
-                                child: Text(
-                                  "Location",
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontFamily: "Montserrat",
-                                      fontWeight: FontWeight.bold,
-                                      color: white),
-                                ),
-                              )),
-                          SizedBox(
-                            width: 145,
-                            child: Center(
-                              child: Text(
-                                "Phone Number",
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    fontFamily: "Montserrat",
-                                    fontWeight: FontWeight.bold,
-                                    color: white),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 60,
-                          )
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: SingleChildScrollView(
-                          physics: const BouncingScrollPhysics(),
-                          child: StreamBuilder<QuerySnapshot>(
-                              stream: studentsStream,
-                              builder: (BuildContext context,
-                                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                                if (snapshot.hasError) {
-                                  print('Something went Wrong');
-                                }
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return Padding(
-                                    padding: EdgeInsets.only(top: s.height * 0.24),
-                                    child: const Center(
-                                      child: CircularProgressIndicator(
-                                        color: bluebg,
-                                      ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: double.infinity,
+                    child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        child: StreamBuilder<QuerySnapshot>(
+                            stream: studentsStream,
+                            builder: (BuildContext context,
+                                AsyncSnapshot<QuerySnapshot> snapshot) {
+                              if (snapshot.hasError) {
+                                print('Something went Wrong');
+                              }
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return Padding(
+                                  padding:
+                                      EdgeInsets.only(top: s.height * 0.24),
+                                  child: const Center(
+                                    child: CircularProgressIndicator(
+                                      color: bluebg,
                                     ),
-                                  );
-                                }
-
-                                _allcustomer.clear();
-                                snapshot.data!.docs
-                                    .map((DocumentSnapshot document) {
-                                  Map a =
-                                      document.data() as Map<String, dynamic>;
-                                  _allcustomer.add(a);
-                                  a['uid'] = document.id;
-                                }).toList();
-
-                                if (controller.text.isEmpty) {
-                                  resultc = _allcustomer;
-                                }
-
-                                return Column(
-                                  children: [
-                                    const SizedBox(
-                                      width: 30,
-                                    ),
-                                    for (var i = 0;
-                                        i < resultc.length;
-                                        i++) ...[
-                                      CustomerListCard(
-                                        name: resultc[i]['name'],
-                                        address: resultc[i]['address'],
-                                        loc: resultc[i]['loc'],
-                                        phn1: resultc[i]['phn1'],
-                                        phn2: resultc[i]['phn2'],
-                                        upDate: resultc[i]['upDate'],
-                                        upTime: resultc[i]['upTime'],
-                                        docname: resultc[i]['docname'],
-                                        prospec: resultc[i]['prospec'],
-                                        instadate: resultc[i]['instadate'],
-                                      )
-                                    ]
-                                  ],
+                                  ),
                                 );
-                              })),
-                    ),
-                  ],
+                              }
+
+                              _allcustomer.clear();
+                              snapshot.data!.docs
+                                  .map((DocumentSnapshot document) {
+                                Map a = document.data() as Map<String, dynamic>;
+                                _allcustomer.add(a);
+                                a['uid'] = document.id;
+                              }).toList();
+
+                              if (controller.text.isEmpty) {
+                                resultc = _allcustomer;
+                              }
+
+                              return Column(
+                                children: [
+                                  const SizedBox(
+                                    width: 30,
+                                  ),
+                                  for (var i = 0; i < resultc.length; i++) ...[
+                                    CustomerListCard(
+                                      name: resultc[i]['name'],
+                                      address: resultc[i]['address'],
+                                      loc: resultc[i]['loc'],
+                                      phn1: resultc[i]['phn1'],
+                                      phn2: resultc[i]['phn2'],
+                                      upDate: resultc[i]['upDate'],
+                                      upTime: resultc[i]['upTime'],
+                                      docname: resultc[i]['docname'],
+                                      prospec: resultc[i]['prospec'],
+                                      instadate: resultc[i]['instadate'],
+                                    )
+                                  ]
+                                ],
+                              );
+                            })),
+                  ),
                 ),
               ),
             ),

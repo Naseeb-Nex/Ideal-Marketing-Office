@@ -144,15 +144,13 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
                         Container(
                           width: s.width * 0.45,
                           padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: Flexible(
-                            child: Center(
-                              child: Text(
-                                "${widget.pgm}",
-                                style: const TextStyle(
-                                  fontFamily: "Montserrat",
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.normal,
-                                ),
+                          child: Center(
+                            child: Text(
+                              "${widget.pgm}",
+                              style: const TextStyle(
+                                fontFamily: "Montserrat",
+                                fontSize: 15,
+                                fontWeight: FontWeight.normal,
                               ),
                             ),
                           ),
