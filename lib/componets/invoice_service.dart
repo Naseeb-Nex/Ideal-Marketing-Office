@@ -1,6 +1,4 @@
 import 'dart:typed_data';
-
-///Dart imports
 import 'dart:async';
 import 'dart:convert';
 import 'dart:html';

@@ -94,6 +94,9 @@ class _TechasignState extends State<Techasign> {
                           final data = await invoice.createInvoice(
                               _allpgm, "${widget.techname}");
                           invoice.savePdfFile("invoice", data);
+                          setState(() {
+                            downloading = false;
+                          });
                         },
                         child: Container(
                           width: 40,
