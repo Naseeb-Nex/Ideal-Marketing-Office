@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test2/componets/assign_pgm_card.dart';
+import 'package:test2/componets/invoice_service.dart';
 import 'package:test2/componets/view_pgm_card.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,9 +19,11 @@ class Techasign extends StatefulWidget {
 }
 
 class _TechasignState extends State<Techasign> {
-  @override
   List _allpgm = [];
+  bool downloading = false;
+  final PdfInvoiceService invoice = PdfInvoiceService();
 
+  @override
   Widget build(BuildContext context) {
     return ScrollConfiguration(
       behavior: htechassignswipe(),
@@ -52,33 +55,77 @@ class _TechasignState extends State<Techasign> {
               snapshot.data!.docs.map((DocumentSnapshot document) {
                 Map a = document.data() as Map<String, dynamic>;
                 _allpgm.add(a);
-                print(a);
                 a['uid'] = document.id;
               }).toList();
 
-              return Container(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      width: 30,
-                    ),
-                    for (var i = 0; i < _allpgm.length; i++) ...[
-                      Viewpgmcard(
-                        name: _allpgm[i]["name"],
-                        address: _allpgm[i]["address"],
-                        loc: _allpgm[i]["loc"],
-                        pgm: _allpgm[i]["pgm"],
-                        phn: _allpgm[i]["phn"],
-                        type: _allpgm[i]["type"],
-                        upDate: _allpgm[i]["upDate"],
-                        upTime: _allpgm[i]["upTime"],
-                        docname: _allpgm[i]["docname"],
-                        prospec: _allpgm[i]["prospec"],
-                        instadate: _allpgm[i]["instadate"],
+              return Stack(
+                children: [
+                  Column(
+                    children: [
+                      const SizedBox(
+                        width: 30,
+                      ),
+                      for (var i = 0; i < _allpgm.length; i++) ...[
+                        Viewpgmcard(
+                          name: _allpgm[i]["name"],
+                          address: _allpgm[i]["address"],
+                          loc: _allpgm[i]["loc"],
+                          pgm: _allpgm[i]["pgm"],
+                          phn: _allpgm[i]["phn"],
+                          type: _allpgm[i]["type"],
+                          upDate: _allpgm[i]["upDate"],
+                          upTime: _allpgm[i]["upTime"],
+                          docname: _allpgm[i]["docname"],
+                          prospec: _allpgm[i]["prospec"],
+                          instadate: _allpgm[i]["instadate"],
+                        )
+                      ]
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      InkWell(
+                        onTap: () async {
+                          setState(() {
+                            downloading = true;
+                          });
+                          final data = await invoice.createInvoice(_allpgm);
+                          invoice.savePdfFile("invoice", data);
+                          setState(() {
+                            downloading = false;
+                          });
+                        },
+                        child: Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: bluebg,
+                          ),
+                          child: Stack(
+                            children: [
+                              const Center(
+                                  child: Icon(Icons.download, color: white)),
+                              Positioned(
+                                  right: 0,
+                                  top: 0,
+                                  child: SizedBox(
+                                    height: 10,
+                                    width: 10,
+                                    child: downloading
+                                        ? const CircularProgressIndicator(
+                                            color: Color(0XFF219ebc),
+                                          )
+                                        : null,
+                                  ))
+                            ],
+                          ),
+                        ),
                       )
-                    ]
-                  ],
-                ),
+                    ],
+                  ),
+                ],
               );
             }),
       ),

@@ -39,6 +39,7 @@ dependencies:
   cloud_firestore: ^3.1.4
   firebase_core_web: ^1.5.2
   firestore_search: ^0.1.9
+  pdf: ^3.8.1
 
 dev_dependencies:
   flutter_test:
