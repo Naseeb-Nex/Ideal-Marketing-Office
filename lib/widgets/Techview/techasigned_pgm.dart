@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:test2/componets/assign_pgm_card.dart';
 import 'package:test2/componets/invoice_service.dart';
 import 'package:test2/componets/view_pgm_card.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 
+// ignore: must_be_immutable
 class Techasign extends StatefulWidget {
   String? uid;
   String? username;
@@ -57,6 +57,7 @@ class _TechasignState extends State<Techasign> {
                 _allpgm.add(a);
                 a['uid'] = document.id;
               }).toList();
+              _allpgm.sort((a, b) => a["priority"].compareTo(b["priority"]));
 
               return Stack(
                 children: [
@@ -90,11 +91,9 @@ class _TechasignState extends State<Techasign> {
                           setState(() {
                             downloading = true;
                           });
-                          final data = await invoice.createInvoice(_allpgm);
+                          final data = await invoice.createInvoice(
+                              _allpgm, "${widget.techname}");
                           invoice.savePdfFile("invoice", data);
-                          setState(() {
-                            downloading = false;
-                          });
                         },
                         child: Container(
                           width: 40,

@@ -7,6 +7,7 @@ import 'dart:html';
 import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:intl/intl.dart';
 
 class PdfInvoiceService {
   Future<Uint8List> createHelloWorld() {
@@ -25,7 +26,7 @@ class PdfInvoiceService {
     return pdf.save();
   }
 
-  Future<Uint8List> createInvoice(List programs) async {
+  Future<Uint8List> createInvoice(List programs, String name) async {
     final pdf = pw.Document();
     var image = pw.MemoryImage(
       (await rootBundle.load('assets/icons/imaicon.png')).buffer.asUint8List(),
@@ -35,6 +36,15 @@ class PdfInvoiceService {
       pw.Page(
         pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) {
+          print(programs.length);
+          int len = 0;
+          if (programs.length > 8) {
+            len = 8;
+          } else {
+            len = programs.length;
+          }
+          DateTime now = DateTime.now();
+          String cDate = DateFormat('d MM y').format(now);
           return pw.Column(
             children: [
               pw.Row(
@@ -51,7 +61,9 @@ class PdfInvoiceService {
                             fontWeight: pw.FontWeight.bold,
                             color: PdfColors.red),
                       ),
-                      pw.Text("Market Road, Karunagappally-690518",
+                      pw.Text("H.O pulliman jn karunagappally",
+                          style: const pw.TextStyle(fontSize: 11)),
+                      pw.Text("Br.Market road,Karunagappally",
                           style: const pw.TextStyle(fontSize: 11)),
                       pw.Text("Ph: 9526194200, 9847781005",
                           style: const pw.TextStyle(fontSize: 11)),
@@ -75,15 +87,15 @@ class PdfInvoiceService {
               pw.Row(
                   mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                   children: [
-                    pw.Text("NAME: SURESH",
+                    pw.Text("NAME: $name",
                         style: pw.TextStyle(
                             fontSize: 10, fontWeight: pw.FontWeight.bold)),
-                    pw.Text("DATE: 30/06/2022",
+                    pw.Text("DATE: $cDate",
                         style: pw.TextStyle(
                             fontSize: 10, fontWeight: pw.FontWeight.bold)),
                   ]),
               pw.SizedBox(height: 20),
-              itemColumn(programs),
+              itemColumn(programs, 0, len),
               pw.SizedBox(height: 15),
               pw.Table(
                   border: pw.TableBorder.all(color: PdfColors.black, width: 1),
@@ -373,10 +385,85 @@ class PdfInvoiceService {
         },
       ),
     );
+    if (programs.length > 9) {
+      pdf.addPage(
+        pw.Page(
+            pageFormat: PdfPageFormat.a4,
+            build: (pw.Context context) {
+              DateTime now = DateTime.now();
+          String cDate = DateFormat('d MM y').format(now);
+              return pw.Column(
+                children: [
+                  pw.Row(
+                    mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                    children: [
+                      pw.Column(
+                        mainAxisAlignment: pw.MainAxisAlignment.start,
+                        crossAxisAlignment: pw.CrossAxisAlignment.start,
+                        children: [
+                          pw.Text(
+                            "IDEAL MARKETING ASSOCIATES",
+                            style: pw.TextStyle(
+                                fontSize: 16,
+                                fontWeight: pw.FontWeight.bold,
+                                color: PdfColors.red),
+                          ),
+                          pw.Text("H.O pulliman jn karunagappally",
+                              style: const pw.TextStyle(fontSize: 11)),
+                          pw.Text("Br.Market road,Karunagappally",
+                              style: const pw.TextStyle(fontSize: 11)),
+                          pw.Text("Ph: 9526194200, 9847781005",
+                              style: const pw.TextStyle(fontSize: 11)),
+                          pw.Text("E-mail: idealkply@gmail.com",
+                              style: const pw.TextStyle(fontSize: 11)),
+                        ],
+                      ),
+                      pw.SizedBox(
+                          width: 120, height: 50, child: pw.Image(image))
+                    ],
+                  ),
+                  pw.Divider(color: PdfColors.red),
+                  pw.SizedBox(height: 5),
+                  pw.Center(
+                    child: pw.Text("PROGRAM SHEET",
+                        style: pw.TextStyle(
+                            fontSize: 12, fontWeight: pw.FontWeight.bold)),
+                  ),
+                  pw.Center(
+                    child:
+                        pw.SizedBox(width: 100, child: pw.Divider(height: 5)),
+                  ),
+                  pw.Row(
+                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                      children: [
+                        pw.Text("NAME: $name",
+                            style: pw.TextStyle(
+                                fontSize: 10, fontWeight: pw.FontWeight.bold)),
+                        pw.Text("Date: $cDate",
+                            style: pw.TextStyle(
+                                fontSize: 10, fontWeight: pw.FontWeight.bold)),
+                      ]),
+                  pw.SizedBox(height: 20),
+                  itemColumn(programs, 8, programs.length),
+                  pw.Text('Page : 2',
+                            style: pw.TextStyle(
+                                fontSize: 8, fontWeight: pw.FontWeight.bold)),
+                  pw.Row(
+                      mainAxisAlignment: pw.MainAxisAlignment.end,
+                      children: [
+                        pw.Text('Authorised Signatory',
+                            style: pw.TextStyle(
+                                fontSize: 8, fontWeight: pw.FontWeight.bold)),
+                      ])
+                ],
+              );
+            }),
+      );
+    }
     return pdf.save();
   }
 
-  pw.Expanded itemColumn(List elements) {
+  pw.Expanded itemColumn(List elements, int start, int end) {
     return pw.Expanded(
       child: pw.Column(
         children: [
@@ -426,7 +513,7 @@ class PdfInvoiceService {
               ),
             ],
           ),
-          for (var i = 0; i < elements.length; i++) ...[
+          for (var i = start; i < end; i++) ...[
             pw.Container(
               decoration: pw.BoxDecoration(
                 border: pw.Border.all(color: PdfColors.black),
@@ -447,8 +534,8 @@ class PdfInvoiceService {
                     flex: 11,
                     fit: pw.FlexFit.tight,
                     child: pw.Container(
-                      padding:
-                  const pw.EdgeInsets.symmetric(vertical: 4, horizontal: 5),
+                        padding: const pw.EdgeInsets.symmetric(
+                            vertical: 4, horizontal: 5),
                         decoration: const pw.BoxDecoration(
                           border: pw.Border(
                               left: pw.BorderSide(
@@ -479,7 +566,9 @@ class PdfInvoiceService {
                                   style: const pw.TextStyle(fontSize: 10)),
                               pw.TextSpan(
                                   text: " ${elements[i]["phn"]}",
-                                  style: pw.TextStyle(fontSize: 11, fontWeight: pw.FontWeight.bold)),
+                                  style: pw.TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: pw.FontWeight.bold)),
                               pw.TextSpan(
                                   text: "\n${elements[i]["pgm"]}",
                                   style: pw.TextStyle(

@@ -304,7 +304,7 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
     FirebaseFirestore fb = FirebaseFirestore.instance;
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('MM d y kk:mm:ss').format(now);
-    String assigneddate = DateFormat('d MMM y').format(now);
+    String assigneddate = DateFormat('d MM y').format(now);
     String assignedtime = DateFormat('kk:mm').format(now);
 
     Assignpgmdata apgm = Assignpgmdata(
