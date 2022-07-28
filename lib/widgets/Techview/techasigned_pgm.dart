@@ -5,6 +5,8 @@ import 'package:test2/constants/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 
+import '../../componets/simplealertbox.dart';
+
 // ignore: must_be_immutable
 class Techasign extends StatefulWidget {
   String? uid;
@@ -88,6 +90,12 @@ class _TechasignState extends State<Techasign> {
                     children: [
                       InkWell(
                         onTap: () async {
+                          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return const SimpleCustomAlert("Downloading in Progress Please Wait!",
+                  Color(0XFFbbd0ff), "Progressing");
+            });
                           setState(() {
                             downloading = true;
                           });

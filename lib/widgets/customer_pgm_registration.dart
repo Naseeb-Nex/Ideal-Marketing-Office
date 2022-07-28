@@ -636,7 +636,6 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
         pgmcontroller.clear();
         chrgcontroller.clear();
       }).catchError((error) {
-        print("Failed to add Program: $error");
         showDialog(
             context: context,
             builder: (BuildContext context) {
