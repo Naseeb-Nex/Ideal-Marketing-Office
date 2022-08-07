@@ -414,7 +414,7 @@ class _CustomerregState extends State<Customerreg> {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     DateTime now = DateTime.now();
     String upDate = DateFormat('d MMM y').format(now);
-    String upTime = DateFormat('kk:mm').format(now);
+    String upTime = DateFormat('h:mma').format(now);
 
     final docname =
         namecontroller.text.toLowerCase() + phn1controller.text.toLowerCase();

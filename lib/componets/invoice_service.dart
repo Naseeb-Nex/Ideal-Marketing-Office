@@ -5,7 +5,6 @@ import 'dart:html';
 import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:intl/intl.dart';
 
 class PdfInvoiceService {
   Future<Uint8List> createHelloWorld() {
@@ -24,7 +23,7 @@ class PdfInvoiceService {
     return pdf.save();
   }
 
-  Future<Uint8List> createInvoice(List programs, String name) async {
+  Future<Uint8List> createInvoice(List programs, String name, String date) async {
     final pdf = pw.Document();
     var image = pw.MemoryImage(
       (await rootBundle.load('assets/icons/imaicon.png')).buffer.asUint8List(),
@@ -34,15 +33,12 @@ class PdfInvoiceService {
       pw.Page(
         pageFormat: PdfPageFormat.a4,
         build: (pw.Context context) {
-          print(programs.length);
           int len = 0;
           if (programs.length > 8) {
             len = 8;
           } else {
             len = programs.length;
           }
-          DateTime now = DateTime.now();
-          String cDate = DateFormat('d MM y').format(now);
           return pw.Column(
             children: [
               pw.Row(
@@ -88,7 +84,7 @@ class PdfInvoiceService {
                     pw.Text("NAME: $name",
                         style: pw.TextStyle(
                             fontSize: 10, fontWeight: pw.FontWeight.bold)),
-                    pw.Text("DATE: $cDate",
+                    pw.Text("DATE: $date",
                         style: pw.TextStyle(
                             fontSize: 10, fontWeight: pw.FontWeight.bold)),
                   ]),
@@ -388,8 +384,6 @@ class PdfInvoiceService {
         pw.Page(
             pageFormat: PdfPageFormat.a4,
             build: (pw.Context context) {
-              DateTime now = DateTime.now();
-          String cDate = DateFormat('d MM y').format(now);
               return pw.Column(
                 children: [
                   pw.Row(
@@ -437,7 +431,7 @@ class PdfInvoiceService {
                         pw.Text("NAME: $name",
                             style: pw.TextStyle(
                                 fontSize: 10, fontWeight: pw.FontWeight.bold)),
-                        pw.Text("Date: $cDate",
+                        pw.Text("Date: $date",
                             style: pw.TextStyle(
                                 fontSize: 10, fontWeight: pw.FontWeight.bold)),
                       ]),

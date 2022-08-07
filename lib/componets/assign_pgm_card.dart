@@ -305,7 +305,7 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('MM d y kk:mm:ss').format(now);
     String assigneddate = DateFormat('d MM y').format(now);
-    String assignedtime = DateFormat('kk:mm').format(now);
+    String assignedtime = DateFormat('h:mma').format(now);
 
     Assignpgmdata apgm = Assignpgmdata(
       uid: widget.uid,
@@ -321,7 +321,7 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
       docname: widget.docname,
       prospec: widget.prospec,
       instadate: widget.instadate,
-      status: "pending",
+      status: "assigned",
       username: widget.username,
       techname: widget.techname,
       priority: _controller.text,
@@ -330,92 +330,24 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
       custdocname: widget.custdocname,
     );
 
-    CustomerPgmHistory custhistory = CustomerPgmHistory(
-        upDate: assigneddate,
-        upTime: assignedtime,
-        msg: "Program Assigned to ${widget.techname}",
-        techname: widget.techname,
-        status: "assigned",
-        docname: formattedDate,
-        custdocname: widget.custdocname);
-
-    Pgmhistory history = Pgmhistory(
-      name: widget.name,
-      address: widget.address,
-      loc: widget.loc,
-      phn: widget.phn,
-      pgm: widget.pgm,
-      chrg: widget.chrg,
-      type: widget.type,
-      upDate: assigneddate,
-      upTime: assignedtime,
-      docname: formattedDate,
-      prospec: widget.prospec,
-      instadate: widget.instadate,
-      status: "assigned",
-      ch: "Program Assigned",
-      techname: widget.techname,
-    );
 
     if (_priorityKey.currentState!.validate()) {
       setState(() {
         loading = true;
       });
 
-// Update the Program status
       fb
-          .collection("Programs")
-          .doc(widget.docname)
-          .update({'status': 'assigned'}).then((value) {
-        print("Updated as assigned");
-      }).catchError((error) => print("Failed to update program : $error"));
-
-      
-      // Updating the Customer program status
-      fb
-          .collection("Customer")
-          .doc(widget.custdocname)
-          .collection("Programs")
-          .doc(widget.docname)
-          .update({'status': 'assigned'});
-
-      fb
-          .collection("Programs")
-          .doc(widget.docname)
-          .collection("AssignedPgm")
-          .doc("Technician")
+          .collection("ConfirmList")
+          .doc(formattedDate)
           .set(apgm.toMap())
           .then((value) {
-        print("Updated as assigned in program");
         setState(() {
           _up = true;
+          loading = false;
         });
       }).catchError((error) =>
               print("Failed to update program in program field : $error"));
 
-      fb
-          .collection("Technician")
-          .doc(widget.username)
-          .collection("Assignedpgm")
-          .doc(widget.docname)
-          .set(apgm.toMap())
-          .then((value) {
-        fb.collection("history").doc(formattedDate).set(history.toMap());
-
-        // customer program history updated
-        fb
-            .collection("Customer")
-            .doc(widget.custdocname)
-            .collection("Programs")
-            .doc(widget.docname)
-            .collection("History")
-            .doc(formattedDate)
-            .set(custhistory.toMap());
-
-        setState(() {
-          loading = false;
-        });
-      }).catchError((error) => print("Failed to assign program : $error"));
     }
   }
 }

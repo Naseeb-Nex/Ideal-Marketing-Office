@@ -23,12 +23,11 @@ class Techasign extends StatefulWidget {
 class _TechasignState extends State<Techasign> {
   List _allpgm = [];
   bool downloading = false;
-  final PdfInvoiceService invoice = PdfInvoiceService();
 
   @override
   Widget build(BuildContext context) {
     return ScrollConfiguration(
-      behavior: htechassignswipe(),
+      behavior: Htechassignswipe(),
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: StreamBuilder<QuerySnapshot>(
@@ -91,20 +90,13 @@ class _TechasignState extends State<Techasign> {
                       InkWell(
                         onTap: () async {
                           showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return const SimpleCustomAlert("Downloading in Progress Please Wait!",
-                  Color(0XFFbbd0ff), "Progressing");
-            });
-                          setState(() {
-                            downloading = true;
-                          });
-                          final data = await invoice.createInvoice(
-                              _allpgm, "${widget.techname}");
-                          invoice.savePdfFile("invoice", data);
-                          setState(() {
-                            downloading = false;
-                          });
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Datepicker(
+                                  programs: _allpgm,
+                                  techname: widget.techname,
+                                );
+                              });
                         },
                         child: Container(
                           width: 40,
@@ -143,7 +135,7 @@ class _TechasignState extends State<Techasign> {
   }
 }
 
-class htechassignswipe extends MaterialScrollBehavior {
+class Htechassignswipe extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices
   @override
   Set<PointerDeviceKind> get dragDevices => {
@@ -151,4 +143,200 @@ class htechassignswipe extends MaterialScrollBehavior {
         PointerDeviceKind.mouse,
         // etc.
       };
+}
+
+class Datepicker extends StatelessWidget {
+  List programs;
+  String? techname;
+  final PdfInvoiceService invoice = PdfInvoiceService();
+
+  Datepicker({
+    Key? key,
+    required this.programs,
+    required this.techname,
+  }) : super(key: key);
+
+  final TextEditingController dateConroller = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    Size s = MediaQuery.of(context).size;
+    return Dialog(
+      backgroundColor: white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+      child: Container(
+        height: s.height * 0.4,
+        width: s.width * 0.35,
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Center(
+                  child: Text(
+                    "Date Picker",
+                    style: TextStyle(
+                      fontFamily: "Nunito",
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Center(
+              child: Text(
+                "Please enter the Date to the Program",
+                style: TextStyle(
+                  fontFamily: "Nunito",
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black26,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 12,
+            ),
+            Form(
+              key: _formKey,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Date : ",
+                    style: TextStyle(
+                      fontFamily: "Nunito",
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black26,
+                    ),
+                  ),
+                  SizedBox(
+                    width: s.width * 0.20,
+                    child: TextFormField(
+                      autofocus: false,
+                      controller: dateConroller,
+                      maxLines: 1,
+                      keyboardType: TextInputType.datetime,
+                      onSaved: (value) {
+                        dateConroller.text = value!;
+                      },
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return ("Date Feild Cannot be empty");
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        contentPadding:
+                            const EdgeInsets.fromLTRB(20, 15, 20, 15),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Container(
+                    height: 60,
+                    width: 130,
+                    decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              spreadRadius: 3,
+                              blurRadius: 5,
+                              color: black.withOpacity(0.2),
+                              offset: const Offset(5, 10))
+                        ],
+                        color: cheryred,
+                        borderRadius: BorderRadius.circular(20)),
+                    child: const Center(
+                      child: Text(
+                        "Cancel",
+                        style: TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 30,
+                ),
+                InkWell(
+                  onTap: () => pdfconverter(context),
+                  child: Container(
+                    height: 60,
+                    width: 130,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                              spreadRadius: 3,
+                              blurRadius: 5,
+                              color: black.withOpacity(0.2),
+                              offset: const Offset(5, 10))
+                        ],
+                        color: limegreen),
+                    child: const Center(
+                      child: Text(
+                        "Okay",
+                        style: TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  void pdfconverter(BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      Navigator.pop(context);
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const SimpleCustomAlert(
+                "Downloading in Progress Please Wait!",
+                Color(0XFFbbd0ff),
+                "Progressing");
+          });
+      final data = await invoice.createInvoice(
+          programs, "$techname", dateConroller.text);
+      invoice.savePdfFile("$techname ${dateConroller.text}", data);
+    }
+  }
 }

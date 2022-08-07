@@ -439,7 +439,7 @@ class ConfirmBox extends StatelessWidget {
     DateTime now = DateTime.now();
     String hisdocname = DateFormat('MM d y kk:mm:ss').format(now);
     String date = DateFormat('d MMM y').format(now);
-    String time = DateFormat('kk:mm').format(now);
+    String time = DateFormat('h:mma').format(now);
     Pgmdata pgmr = Pgmdata(
         uid: uid,
         name: name,

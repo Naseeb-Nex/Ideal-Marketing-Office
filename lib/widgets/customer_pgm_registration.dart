@@ -542,7 +542,7 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('MM d y kk:mm:ss').format(now);
     String upDate = DateFormat('d MMM y').format(now);
-    String upTime = DateFormat('kk:mm').format(now);
+    String upTime = DateFormat('h:mma').format(now);
 
     if (_formkey.currentState!.validate()) {
       setState(() {
