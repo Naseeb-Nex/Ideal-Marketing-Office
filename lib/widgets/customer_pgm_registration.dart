@@ -529,7 +529,8 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
                     ),
                   ),
                 ],
-              )
+              ),
+              const SizedBox(height: 20,)
             ],
           ),
         ),

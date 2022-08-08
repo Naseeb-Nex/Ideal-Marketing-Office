@@ -37,6 +37,7 @@ class _ViewpgmcardState extends State<Viewpgmcard> {
   bool vis = false;
   @override
   Widget build(BuildContext context) {
+    Size s = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
       child: Container(
@@ -62,23 +63,29 @@ class _ViewpgmcardState extends State<Viewpgmcard> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "${widget.name}",
-                      style: const TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: 22,
-                        fontWeight: FontWeight.w500,
+                    SizedBox(
+                      width: s.width * 0.13,
+                      child: Text(
+                        "${widget.name}",
+                        style: const TextStyle(
+                          fontFamily: "Montserrat",
+                          fontSize: 22,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                     const SizedBox(
                       height: 4,
                     ),
-                    Text(
-                      "${widget.address}",
-                      style: const TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 16,
-                          color: Colors.black54),
+                    SizedBox(
+                      width: s.width * 0.13,
+                      child: Text(
+                        "${widget.address}",
+                        style: const TextStyle(
+                            fontFamily: "Nunito",
+                            fontSize: 16,
+                            color: Colors.black54),
+                      ),
                     ),
                     Text(
                       "${widget.loc}",
@@ -93,11 +100,15 @@ class _ViewpgmcardState extends State<Viewpgmcard> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "${widget.pgm}",
-                      style: const TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: 16,
+                    SizedBox(
+                      width: s.width * 0.41,
+                      child: Text(
+                        "${widget.pgm}",
+                        style: const TextStyle(
+                          fontFamily: "Montserrat",
+                          fontSize: 16,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                     const SizedBox(

@@ -37,6 +37,7 @@ class Techhistorycard extends StatefulWidget {
 class _TechhistorycardState extends State<Techhistorycard> {
   @override
   Widget build(BuildContext context) {
+    Size s = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
       child: Container(
@@ -60,13 +61,18 @@ class _TechhistorycardState extends State<Techhistorycard> {
             Padding(
               padding: const EdgeInsets.only(right: 5),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    "${widget.name}",
-                    style: const TextStyle(
-                      fontFamily: "Montserrat",
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                  SizedBox(
+                    width: s.width * 0.15,
+                    child: Text(
+                      "${widget.name}",
+                      style: const TextStyle(
+                        fontFamily: "Montserrat",
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -84,12 +90,16 @@ class _TechhistorycardState extends State<Techhistorycard> {
             ),
             Column(
               children: [
-                Text(
-                  "${widget.pgm}",
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontFamily: "Montserrat",
-                    fontSize: 16,
+                SizedBox(
+                  width: s.width * 0.4,
+                  child: Text(
+                    "${widget.pgm}",
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontFamily: "Montserrat",
+                      fontSize: 16,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 const SizedBox(
@@ -245,17 +255,17 @@ class _TechhistorycardState extends State<Techhistorycard> {
                   "${widget.upDate}",
                   style: const TextStyle(
                     fontFamily: "Montserrat",
-                    fontSize: 15,
+                    fontSize: 13,
                   ),
                 ),
                 const SizedBox(
-                  height: 5,
+                  height: 2,
                 ),
                 Text(
                   "${widget.upTime}",
                   style: const TextStyle(
                     fontFamily: "Nunito",
-                    fontSize: 15,
+                    fontSize: 13,
                   ),
                 ),
               ],

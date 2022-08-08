@@ -35,7 +35,6 @@ class PendingPgmWrapper extends StatelessWidget {
           snapshot.data!.docs.map((DocumentSnapshot document) {
             Map a = document.data() as Map<String, dynamic>;
             _allpgm.add(a);
-            print(a);
             a['uid'] = document.id;
           }).toList();
           List pendingpgm =

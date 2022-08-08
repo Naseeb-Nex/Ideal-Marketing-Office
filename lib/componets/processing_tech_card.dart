@@ -53,12 +53,12 @@ class Protechcard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size s = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
       child: Container(
-        height: 220,
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
           color: Colors.white,
@@ -66,7 +66,7 @@ class Protechcard extends StatelessWidget {
             BoxShadow(
               offset: const Offset(0, 2),
               blurRadius: 5,
-              color: secondbg.withOpacity(0.18),
+              color: secondbg.withOpacity(0.15),
             ),
           ],
         ),
@@ -74,37 +74,42 @@ class Protechcard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              children: [
-                const SizedBox(
-                  width: 20,
-                ),
-                Column(
-                  children: [
-                    Text(
+            Text(
                       "$name",
                       style: const TextStyle(
                         fontFamily: "Nunito",
-                        fontSize: 25,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      "$address",
-                      style: const TextStyle(
-                        fontFamily: "Nunito",
-                        fontSize: 18,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: s.width * 0.1,
+                      child: Text(
+                        "$address",
+                        style: const TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 16,
+                        ),
+                        textAlign: TextAlign.left,
                       ),
                     ),
                   ],
                 ),
-                Expanded(
+                SizedBox(
+                    width: s.width * 0.5,
                   child: Center(
                     child: Text(
                       "$pgm",
                       style: const TextStyle(
                         fontFamily: "Nunito",
-                        fontSize: 22,
+                        fontSize: 16,
                         fontWeight: FontWeight.w500,
                         color: Color(0xFF666666),
                       ),
@@ -112,19 +117,20 @@ class Protechcard extends StatelessWidget {
                   ),
                 ),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
                       "$upDate",
                       style: const TextStyle(
                         fontFamily: "Nunito",
-                        fontSize: 17,
+                        fontSize: 14,
                       ),
                     ),
                     Text(
                       "$upTime",
                       style: const TextStyle(
                         fontFamily: "Nunito",
-                        fontSize: 17,
+                        fontSize: 14,
                       ),
                     ),
                   ],
@@ -146,7 +152,7 @@ class Protechcard extends StatelessWidget {
                         "  $loc",
                         style: const TextStyle(
                           fontFamily: "Nunito",
-                          fontSize: 20,
+                          fontSize: 15,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -159,7 +165,7 @@ class Protechcard extends StatelessWidget {
                           "Type : $type",
                           style: const TextStyle(
                             fontFamily: "Nunito",
-                            fontSize: 20,
+                            fontSize: 15,
                             color: Color(0xFF0e2f44),
                           ),
                         ),
@@ -175,7 +181,7 @@ class Protechcard extends StatelessWidget {
                         "  $phn",
                         style: const TextStyle(
                           fontFamily: "Nunito",
-                          fontSize: 20,
+                          fontSize: 16,
                           fontWeight: FontWeight.normal,
                           color: Color(0xFF008080),
                         ),
@@ -241,7 +247,7 @@ class Protechcard extends StatelessWidget {
                       "Remarks : ",
                       style: TextStyle(
                         fontFamily: "Nunito",
-                        fontSize: 18,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -252,7 +258,7 @@ class Protechcard extends StatelessWidget {
                       "$remarks",
                       style: const TextStyle(
                         fontFamily: "Nunito",
-                        fontSize: 18,
+                        fontSize: 15,
                       ),
                     ),
                   ],
@@ -263,14 +269,14 @@ class Protechcard extends StatelessWidget {
                       "Completed Date : $ptime",
                       style: const TextStyle(
                         fontFamily: "Nunito",
-                        fontSize: 17,
+                        fontSize: 14,
                       ),
                     ),
                     Text(
                       "Completed Time :  $pdate",
                       style: const TextStyle(
                         fontFamily: "Nunito",
-                        fontSize: 17,
+                        fontSize: 14,
                       ),
                     ),
                   ],

@@ -303,7 +303,6 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
   void uploadpgmdata() async {
     FirebaseFirestore fb = FirebaseFirestore.instance;
     DateTime now = DateTime.now();
-    String formattedDate = DateFormat('MM d y kk:mm:ss').format(now);
     String assigneddate = DateFormat('d MM y').format(now);
     String assignedtime = DateFormat('h:mma').format(now);
 
@@ -338,7 +337,7 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
 
       fb
           .collection("ConfirmList")
-          .doc(formattedDate)
+          .doc(widget.docname)
           .set(apgm.toMap())
           .then((value) {
         setState(() {

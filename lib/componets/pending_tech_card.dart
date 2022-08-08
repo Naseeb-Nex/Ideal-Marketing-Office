@@ -59,12 +59,12 @@ class PendingTechcard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size s = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
       child: Container(
-        height: 220,
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
           color: Colors.white,
@@ -86,33 +86,43 @@ class PendingTechcard extends StatelessWidget {
                   width: 20,
                 ),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       "$name",
                       style: const TextStyle(
                         fontFamily: "Nunito",
-                        fontSize: 25,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
+                      textAlign: TextAlign.left,
                     ),
-                    Text(
-                      "$address",
-                      style: const TextStyle(
-                        fontFamily: "Nunito",
-                        fontSize: 18,
+                    SizedBox(
+                      width: s.width * 0.1,
+                      child: Text(
+                        "$address",
+                        style: const TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 15,
+                        ),
+                        textAlign: TextAlign.left,
                       ),
                     ),
                   ],
                 ),
                 Expanded(
                   child: Center(
-                    child: Text(
-                      "$pgm",
-                      style: const TextStyle(
-                        fontFamily: "Nunito",
-                        fontSize: 22,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF666666),
+                    child: SizedBox(
+                      width: s.width * 0.4,
+                      child: Text(
+                        "$pgm",
+                        style: const TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF666666),
+                        ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
@@ -123,14 +133,14 @@ class PendingTechcard extends StatelessWidget {
                       "$upDate",
                       style: const TextStyle(
                         fontFamily: "Nunito",
-                        fontSize: 17,
+                        fontSize: 14,
                       ),
                     ),
                     Text(
                       "$upTime",
                       style: const TextStyle(
                         fontFamily: "Nunito",
-                        fontSize: 17,
+                        fontSize: 14,
                       ),
                     ),
                   ],
@@ -152,7 +162,7 @@ class PendingTechcard extends StatelessWidget {
                         "  $loc",
                         style: const TextStyle(
                           fontFamily: "Nunito",
-                          fontSize: 20,
+                          fontSize: 15,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -165,7 +175,7 @@ class PendingTechcard extends StatelessWidget {
                           "Type : $type",
                           style: const TextStyle(
                             fontFamily: "Nunito",
-                            fontSize: 20,
+                            fontSize: 15,
                             color: Color(0xFF0e2f44),
                           ),
                         ),
@@ -181,7 +191,7 @@ class PendingTechcard extends StatelessWidget {
                         "  $phn",
                         style: const TextStyle(
                           fontFamily: "Nunito",
-                          fontSize: 20,
+                          fontSize: 16,
                           fontWeight: FontWeight.normal,
                           color: Color(0xFF008080),
                         ),
@@ -246,7 +256,7 @@ class PendingTechcard extends StatelessWidget {
                       "Remarks : ",
                       style: TextStyle(
                         fontFamily: "Nunito",
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -257,7 +267,7 @@ class PendingTechcard extends StatelessWidget {
                       "$remarks",
                       style: const TextStyle(
                         fontFamily: "Nunito",
-                        fontSize: 18,
+                        fontSize: 16,
                       ),
                     ),
                   ],
@@ -268,14 +278,14 @@ class PendingTechcard extends StatelessWidget {
                       "Completed Date : $ptime",
                       style: const TextStyle(
                         fontFamily: "Nunito",
-                        fontSize: 17,
+                        fontSize: 14,
                       ),
                     ),
                     Text(
                       "Completed Time :  $pdate",
                       style: const TextStyle(
                         fontFamily: "Nunito",
-                        fontSize: 17,
+                        fontSize: 14,
                       ),
                     ),
                   ],

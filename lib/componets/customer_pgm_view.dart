@@ -51,7 +51,6 @@ class _CustomerpgmviewState extends State<Customerpgmview> {
   List _pgmhistory = [];
   @override
   Widget build(BuildContext context) {
-
     Size s = MediaQuery.of(context).size;
 
     return Padding(
@@ -102,164 +101,180 @@ class _CustomerpgmviewState extends State<Customerpgmview> {
                 ),
                 Column(
                   children: [
-                    Text(
-                      "${widget.pgm}",
-                      style: const TextStyle(
-                        fontFamily: "Montserrat",
-                        fontSize: 16,
-                      ),
+                    SizedBox(
+                      width: s.width * 0.43,
+                      child: Text("${widget.pgm}",
+                          style: const TextStyle(
+                            fontFamily: "Montserrat",
+                            fontSize: 16,
+                          ),
+                          textAlign: TextAlign.center),
                     ),
                     Container(
-                      child: widget.newpgm == null ? null : Text(
-                        "Processing program : ${widget.newpgm}",
-                        style: const TextStyle(
-                          fontFamily: "Montserrat",
-                          color: Colors.black87,
-                          fontSize: 15,
-                        ),
-                      ),
+                      child: widget.newpgm == null
+                          ? null
+                          : Text(
+                              "Processing program : ${widget.newpgm}",
+                              style: const TextStyle(
+                                fontFamily: "Montserrat",
+                                color: Colors.black87,
+                                fontSize: 15,
+                              ),
+                            ),
                     ),
-                    const SizedBox(height: 5,),
+                    const SizedBox(
+                      height: 5,
+                    ),
                     Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 7, vertical: 3),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: widget.camount == null ? Colors.blue[400] : limegreen),
-                              child: Row(
-                                children: [
-                                  const Text(
-                                    "Collection : ",
-                                    style: TextStyle(
-                                      fontFamily: "Montserrat",
-                                      fontSize: 14,
-                                      color: white,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text("${widget.chrg}",
-                                    style: const TextStyle(
-                                        fontFamily: "Nunito",
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.white),
-                                  ),
-                                  Container(
-                                    child: widget.camount == null ? null : Text(" / ${widget.camount}",
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 7, vertical: 3),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: widget.camount == null
+                                ? Colors.blue[400]
+                                : limegreen),
+                        child: Row(
+                          children: [
+                            const Text(
+                              "Collection : ",
+                              style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontSize: 14,
+                                color: white,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "${widget.chrg}",
+                              style: const TextStyle(
+                                  fontFamily: "Nunito",
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.white),
+                            ),
+                            Container(
+                              child: widget.camount == null
+                                  ? null
+                                  : Text(
+                                      " / ${widget.camount}",
                                       style: const TextStyle(
                                           fontFamily: "Nunito",
                                           fontSize: 15,
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white),
                                     ),
-                                  ),
-                                ],
-                              )),
+                            ),
+                          ],
+                        )),
                   ],
                 ),
                 Row(
                   children: [
                     Center(
-                      child: widget.status == "pending" ?
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 5),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: redbg,
-                            boxShadow: [
-                              BoxShadow(
-                                  spreadRadius: 2,
-                                  blurRadius: 4,
-                                  color: black.withOpacity(0.1),
-                                  offset: const Offset(0, 5))
-                            ]),
-                        child: Text(
-                          "${widget.status}",
-                          style: const TextStyle(
-                            fontFamily: "Montserrat",
-                            fontSize: 16,
-                            color: Color(0XFFE64639),
-                          ),
-                        ),
-                      ) : null,
+                      child: widget.status == "pending"
+                          ? Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: redbg,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        spreadRadius: 2,
+                                        blurRadius: 4,
+                                        color: black.withOpacity(0.1),
+                                        offset: const Offset(0, 5))
+                                  ]),
+                              child: Text(
+                                "${widget.status}",
+                                style: const TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontSize: 16,
+                                  color: Color(0XFFE64639),
+                                ),
+                              ),
+                            )
+                          : null,
                     ),
                     Center(
-                      child: widget.status == "processing" ?
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 5),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: vybg,
-                            boxShadow: [
-                              BoxShadow(
-                                  spreadRadius: 2,
-                                  blurRadius: 4,
-                                  color: black.withOpacity(0.1),
-                                  offset: const Offset(0, 5))
-                            ]),
-                        child: Text(
-                          "${widget.status}",
-                          style: const TextStyle(
-                            fontFamily: "Montserrat",
-                            fontSize: 16,
-                            color: Colors.blue,
-                          ),
-                        ),
-                      ) : null,
+                      child: widget.status == "processing"
+                          ? Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: vybg,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        spreadRadius: 2,
+                                        blurRadius: 4,
+                                        color: black.withOpacity(0.1),
+                                        offset: const Offset(0, 5))
+                                  ]),
+                              child: Text(
+                                "${widget.status}",
+                                style: const TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontSize: 16,
+                                  color: Colors.blue,
+                                ),
+                              ),
+                            )
+                          : null,
                     ),
                     Center(
-                      child: widget.status == "assigned" ?
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 5),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: const Color(0XFFEBF9F4),
-                            boxShadow: [
-                              BoxShadow(
-                                  spreadRadius: 2,
-                                  blurRadius: 4,
-                                  color: black.withOpacity(0.1),
-                                  offset: const Offset(0, 5))
-                            ]),
-                        child: Text(
-                          "${widget.status}",
-                          style: const TextStyle(
-                            fontFamily: "Montserrat",
-                            fontSize: 16,
-                            color: Color(0XFFFFC444),
-                          ),
-                        ),
-                      ) : null,
+                      child: widget.status == "assigned"
+                          ? Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: const Color(0XFFEBF9F4),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        spreadRadius: 2,
+                                        blurRadius: 4,
+                                        color: black.withOpacity(0.1),
+                                        offset: const Offset(0, 5))
+                                  ]),
+                              child: Text(
+                                "${widget.status}",
+                                style: const TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontSize: 16,
+                                  color: Color(0XFFFFC444),
+                                ),
+                              ),
+                            )
+                          : null,
                     ),
                     Center(
-                      child: widget.status == "completed" ?
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 5),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: greenbg,
-                            boxShadow: [
-                              BoxShadow(
-                                  spreadRadius: 2,
-                                  blurRadius: 4,
-                                  color: black.withOpacity(0.1),
-                                  offset: const Offset(0, 5))
-                            ]),
-                        child: Text(
-                          "${widget.status}",
-                          style: const TextStyle(
-                            fontFamily: "Montserrat",
-                            fontSize: 16,
-                            color: Colors.green,
-                          ),
-                        ),
-                      ) : null,
+                      child: widget.status == "completed"
+                          ? Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: greenbg,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        spreadRadius: 2,
+                                        blurRadius: 4,
+                                        color: black.withOpacity(0.1),
+                                        offset: const Offset(0, 5))
+                                  ]),
+                              child: Text(
+                                "${widget.status}",
+                                style: const TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontSize: 16,
+                                  color: Colors.green,
+                                ),
+                              ),
+                            )
+                          : null,
                     ),
                     const SizedBox(
                       width: 20,
@@ -295,7 +310,11 @@ class _CustomerpgmviewState extends State<Customerpgmview> {
             Visibility(
               visible: vis,
               child: Padding(
-                padding: const EdgeInsets.only(top: 10, left: 15, right: 15,),
+                padding: const EdgeInsets.only(
+                  top: 10,
+                  left: 15,
+                  right: 15,
+                ),
                 child: Column(
                   children: [
                     const Text(
@@ -316,56 +335,59 @@ class _CustomerpgmviewState extends State<Customerpgmview> {
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.black45),
                     ),
-                    const SizedBox(height: 10,),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance
-                      .collection('Customer')
-                      .doc(widget.custdocname)
-                      .collection("Programs")
-                      .doc(widget.docname)
-                      .collection("History")
-                      .orderBy("docname", descending: true)
-                      .snapshots(),
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.hasError) {
-                      print('Something went Wrong');
-                    }
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(
-                        child: CircularProgressIndicator(
-                          color: bluebg,
-                        ),
-                      );
-                    }
+                        stream: FirebaseFirestore.instance
+                            .collection('Customer')
+                            .doc(widget.custdocname)
+                            .collection("Programs")
+                            .doc(widget.docname)
+                            .collection("History")
+                            .orderBy("docname", descending: true)
+                            .snapshots(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<QuerySnapshot> snapshot) {
+                          if (snapshot.hasError) {
+                            print('Something went Wrong');
+                          }
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                              child: CircularProgressIndicator(
+                                color: bluebg,
+                              ),
+                            );
+                          }
 
-                    _pgmhistory.clear();
-                    snapshot.data!.docs.map((DocumentSnapshot document) {
-                      Map a = document.data() as Map<String, dynamic>;
-                      _pgmhistory.add(a);
-                      a['uid'] = document.id;
-                    }).toList();
+                          _pgmhistory.clear();
+                          snapshot.data!.docs.map((DocumentSnapshot document) {
+                            Map a = document.data() as Map<String, dynamic>;
+                            _pgmhistory.add(a);
+                            a['uid'] = document.id;
+                          }).toList();
 
-                    return Column(
-                      children: [
-                        const SizedBox(
-                          width: 30,
-                        ),
-                        for (var i = 0; i < _pgmhistory.length; i++) ...[
-                          CustomerHistorycard(
-                            custdocname: _pgmhistory[i]["custdocname"],
-                            msg: _pgmhistory[i]["msg"],
-                            upDate: _pgmhistory[i]["upDate"],
-                            upTime: _pgmhistory[i]["upTime"],
-                            docname: _pgmhistory[i]["docname"],
-                            status: _pgmhistory[i]["status"],
-                            remarks: _pgmhistory[i]["remarks"],
-                            camount: _pgmhistory[i]["camount"],
-                          )
-                        ]
-                      ],
-                    );
-                  })
+                          return Column(
+                            children: [
+                              const SizedBox(
+                                width: 30,
+                              ),
+                              for (var i = 0; i < _pgmhistory.length; i++) ...[
+                                CustomerHistorycard(
+                                  custdocname: _pgmhistory[i]["custdocname"],
+                                  msg: _pgmhistory[i]["msg"],
+                                  upDate: _pgmhistory[i]["upDate"],
+                                  upTime: _pgmhistory[i]["upTime"],
+                                  docname: _pgmhistory[i]["docname"],
+                                  status: _pgmhistory[i]["status"],
+                                  remarks: _pgmhistory[i]["remarks"],
+                                  camount: _pgmhistory[i]["camount"],
+                                )
+                              ]
+                            ],
+                          );
+                        })
                   ],
                 ),
               ),
