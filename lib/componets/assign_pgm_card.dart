@@ -89,10 +89,8 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // SizedBox(
-                        Container(
-                          color: bluebg,
-                      width: s.width * 0.14,
+                        SizedBox(
+                      width: s.width * 0.12,
                       child: Text(
                         "${widget.name}",
                         style: const TextStyle(
@@ -100,6 +98,7 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
                           fontSize: 16,
                         ),
                         textAlign: TextAlign.left,
+                        softWrap: true,
                       ),
                     ),
                     SizedBox(
@@ -108,30 +107,39 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
                         "${widget.address}",
                         style: const TextStyle(
                           fontFamily: "Nunito",
-                          fontSize: 15,
+                          fontSize: 14,
                         ),
                         textAlign: TextAlign.left,
+                        softWrap: true,
                       ),
                     ),
-                        SizedBox(
-                          width: s.width * 0.11,
-                          child: Text(
-                            "${widget.loc}",
-                            style: const TextStyle(
-                                fontFamily: "Montserrat",
-                                fontSize: 15,
-                                color: Colors.black45,
-                                fontWeight: FontWeight.w500),
-                                textAlign: TextAlign.left,
-                                softWrap: true,
-                          ),
+                    const SizedBox(height: 5,),
+                        Row(
+                          children: [
+                            const Icon(Icons.pin_drop_outlined, color: cheryred, size: 20,),
+                            const SizedBox(height: 5,),
+                            SizedBox(
+                              width: s.width * 0.11,
+                              child: Text(
+                                "${widget.loc}",
+                                style: const TextStyle(
+                                    fontFamily: "Montserrat",
+                                    fontSize: 15,
+                                    color: Colors.black45,
+                                    fontWeight: FontWeight.w500),
+                                    textAlign: TextAlign.left,
+                                    softWrap: true,
+                              ),
+                            ),
+                          ],
                         ),
+                        const SizedBox(height: 8,),
                         Container(
                               decoration: BoxDecoration(
                                   color: bluebg,
                                   borderRadius: BorderRadius.circular(20)),
                               padding: const EdgeInsets.symmetric(
-                                  vertical: 5, horizontal: 10),
+                                  vertical: 3, horizontal: 8),
                               child: Text(
                                 "${widget.type}",
                                 style: const TextStyle(
@@ -178,18 +186,28 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
                             const SizedBox(
                               width: 20,
                             ),
-                            Text(
-                              "${widget.prospec}",
-                              style: const TextStyle(
-                                  fontFamily: "Montserrat", fontSize: 17),
+                            Row(
+                              children: [
+                                const Icon( Icons.production_quantity_limits_rounded, color: bluebg, size: 20,),
+                                Text(
+                                  "${widget.prospec}",
+                                  style: const TextStyle(
+                                      fontFamily: "Montserrat", fontSize: 13),
+                                ),
+                              ],
                             ),
                             const SizedBox(
                               width: 20,
                             ),
-                            Text(
-                              "${widget.instadate}",
-                              style: const TextStyle(
-                                  fontFamily: "Montserrat", fontSize: 17),
+                            Row(
+                              children: [
+                                const Icon( Icons.date_range_rounded, color: Color(0XFFe56b6f), size: 20,),
+                                Text(
+                                  "${widget.instadate}",
+                                  style: const TextStyle(
+                                      fontFamily: "Montserrat", fontSize: 13),
+                                ),
+                              ],
                             )
                           ],
                         ),
