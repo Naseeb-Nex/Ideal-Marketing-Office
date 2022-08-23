@@ -89,38 +89,44 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "${widget.name}",
-                          style: const TextStyle(
-                            fontFamily: "Montserrat",
-                            fontSize: 22,
-                            fontWeight: FontWeight.w500,
+                        // SizedBox(
+                        Container(
+                          color: bluebg,
+                      width: s.width * 0.14,
+                      child: Text(
+                        "${widget.name}",
+                        style: const TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 16,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                    SizedBox(
+                      width: s.width * 0.1,
+                      child: Text(
+                        "${widget.address}",
+                        style: const TextStyle(
+                          fontFamily: "Nunito",
+                          fontSize: 15,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                        SizedBox(
+                          width: s.width * 0.11,
+                          child: Text(
+                            "${widget.loc}",
+                            style: const TextStyle(
+                                fontFamily: "Montserrat",
+                                fontSize: 15,
+                                color: Colors.black45,
+                                fontWeight: FontWeight.w500),
+                                textAlign: TextAlign.left,
+                                softWrap: true,
                           ),
                         ),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          "${widget.address}",
-                          style: const TextStyle(
-                              fontFamily: "Nunito",
-                              fontSize: 16,
-                              color: Colors.black54),
-                        ),
-                        Row(
-                          children: [
-                            Text(
-                              "${widget.loc}",
-                              style: const TextStyle(
-                                  fontFamily: "Montserrat",
-                                  fontSize: 15,
-                                  color: Colors.black45,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Container(
+                        Container(
                               decoration: BoxDecoration(
                                   color: bluebg,
                                   borderRadius: BorderRadius.circular(20)),
@@ -134,8 +140,6 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
                                     color: white),
                               ),
                             ),
-                          ],
-                        )
                       ],
                     ),
                     Column(
