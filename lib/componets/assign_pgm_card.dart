@@ -101,17 +101,24 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
                         softWrap: true,
                       ),
                     ),
-                    SizedBox(
-                      width: s.width * 0.1,
-                      child: Text(
-                        "${widget.address}",
-                        style: const TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 14,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Icon(Icons.add_business_rounded, color: Color(0XFF9b5de5), size: 20,),
+                            const SizedBox(height: 5,),
+                        SizedBox(
+                          width: s.width * 0.1,
+                          child: Text(
+                            "${widget.address}",
+                            style: const TextStyle(
+                              fontFamily: "Nunito",
+                              fontSize: 14,
+                            ),
+                            textAlign: TextAlign.left,
+                            softWrap: true,
+                          ),
                         ),
-                        textAlign: TextAlign.left,
-                        softWrap: true,
-                      ),
+                      ],
                     ),
                     const SizedBox(height: 5,),
                         Row(
