@@ -530,7 +530,9 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
                   ),
                 ],
               ),
-              const SizedBox(height: 20,)
+              const SizedBox(
+                height: 20,
+              )
             ],
           ),
         ),
@@ -574,26 +576,26 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
           msg: "Program Registered",
           status: "pending",
           docname: formattedDate,
-          custdocname: widget.cust.docname
-          );
+          custdocname: widget.cust.docname);
 
       Pgmhistory history = Pgmhistory(
-          name: widget.cust.name,
-          address: widget.cust.address,
-          loc: widget.cust.loc,
-          phn: widget.cust.phn1,
-          pgm: pgmcontroller.text,
-          chrg: chrgcontroller.text,
-          type: _selectedcategory,
-          upDate: upDate,
-          upTime: upTime,
-          docname: formattedDate,
-          prospec: prospeccontroller.text,
-          instadate: instadatecontroller.text,
-          status: "pending",
-          ch: "New program added",
-          );
+        name: widget.cust.name,
+        address: widget.cust.address,
+        loc: widget.cust.loc,
+        phn: widget.cust.phn1,
+        pgm: pgmcontroller.text,
+        chrg: chrgcontroller.text,
+        type: _selectedcategory,
+        upDate: upDate,
+        upTime: upTime,
+        docname: formattedDate,
+        prospec: prospeccontroller.text,
+        instadate: instadatecontroller.text,
+        status: "pending",
+        ch: "New program added",
+      );
 
+      // customer pgm view 
       await firebaseFirestore
           .collection("Customer")
           .doc(widget.cust.docname)
@@ -602,6 +604,7 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
           .set(pgmr.toMap())
           .then((value) => print("done"));
 
+      // Upload to the main list 
       await firebaseFirestore
           .collection("Programs")
           .doc(formattedDate)
