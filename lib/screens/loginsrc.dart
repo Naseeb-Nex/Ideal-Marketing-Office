@@ -159,15 +159,15 @@ class _LoginSrcState extends State<LoginSrc> {
   // login function
   void signIn(String email, String password) async {
     // firebase
-    if (_formKey.currentState!.validate()) {
+    // if (_formKey.currentState!.validate()) {
       setState(() {
         load = true;
       });
       try {
         await _auth
-            .signInWithEmailAndPassword(email: email, password: password)
-            // .signInWithEmailAndPassword(
-            //     email: "o@gmail.com", password: "12345678")
+            // .signInWithEmailAndPassword(email: email, password: password)
+            .signInWithEmailAndPassword(
+                email: "o@gmail.com", password: "12345678")
             .then((uid) => {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (context) => const OfficeHome())),
@@ -182,7 +182,7 @@ class _LoginSrcState extends State<LoginSrc> {
               return const SimpleCustomAlert("Email or Password is incorrect!");
             });
       }
-    }
+    // }
   }
 }
 
