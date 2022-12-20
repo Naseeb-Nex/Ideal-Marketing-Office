@@ -1,16 +1,9 @@
-# test2
 
-A new Flutter project.
+# Ideal Marketing Office Website
 
-## Getting Started
+Ideal Marketing  Office Website is a technician management  Office Website.
 
-This project is a starting point for a Flutter application.
+The goal of the Technician Service Management  Office Website is to help organizations effectively schedule and manage their technicians' tasks and assignments. By using this  Office Website, organizations can ensure that their technicians are properly utilized and that service assignments are completed efficiently and on time. This helps to improve overall productivity and customer satisfaction.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+> [<Img src="https://i.ibb.co/NySvWks/email.png" width=50 height=50>](mailto:muhammednaseeb02@gmail.com)
