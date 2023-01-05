@@ -39,4 +39,14 @@ The Technician Service Management Office Website is designed to assist organizat
 <img src="readme-assets\ss3.png" >
 <img src="readme-assets\ss4.png" >
 
-![Gif](readme-assets\comingsoon.gif)
+<div align="center">
+
+<img src="readme-assets\comingsoon.gif?raw=true" width="200px">
+
+ </div>
+ 
+ <br>
+  
+## Support
+
+If you have any issues or questions, please don't hesitate to reach out at [muhammednaseeb02@gmail.com](mailto:muhammednaseeb02@gmail.com). You can also find additional resources and support for using Firebase in our [Firebase documentation](https://firebase.google.com/docs/).
