@@ -8,8 +8,7 @@ Ideal Marketing  Office Website is a technician management  Office Website.
 
 The Technician Service Management Office Website is designed to assist organizations in effectively organizing and managing their technicians' tasks and assignments. Through the use of this web-based tool, organizations can optimize the utilization of their technicians and ensure that service assignments are completed efficiently and in a timely manner. This enhances overall productivity and customer satisfaction.
 
->Please note that this version of the Technician Service Web application is tailored specifically for use by a single organization and is not intended for use by multiple organizations or for the general public. However, in the future it is intended to be open to all.
-
+> ### ℹ️ **Note:** The application solution was developed for [Ideal Marketing Associates](https://idealassociate.com/), a private company. It is used to manage their technicians and was custom-built to meet their specific requirements. Currently, the company is using the product.
 
 ## Tech Stack
 
