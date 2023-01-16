@@ -7,6 +7,7 @@ import 'package:test2/screens/homesrc.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/gestures.dart';
 import 'package:test2/componets/vscroll.dart';
+import 'package:test2/widgets/vehicle_grage_src.dart';
 
 // ignore: must_be_immutable
 class Homewidget extends StatefulWidget {
@@ -892,6 +893,36 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                         const SizedBox(
                           height: 20,
                         ),
+                        InkWell(
+                          onTap: () => setState(() {
+                            _currentsrc = 'Vehicles';
+                          }),
+                          child: Container(
+                            height: 55,
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color:
+                                  _currentsrc == "Vehicles" ? white : Colors.blue,
+                              border: Border.all(color: Colors.blue),
+                            ),
+                            child: Text(
+                              "Vehicle Grage",
+                              style: TextStyle(
+                                fontFamily: "Nunito",
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: _currentsrc == "Vehicles"
+                                    ? Colors.blue
+                                    : white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
                       ],
                     ),
                   ),
@@ -995,6 +1026,8 @@ class Techsrcwrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     if (src == 'Status') {
       return Statussrc(uid: uid, username: username, techname: name);
+    }else if (src == 'Vehicles') {
+      return VehicleGrage();
     }
     return Assignpgmwidget(uid: uid, username: username, techname: name);
   }
