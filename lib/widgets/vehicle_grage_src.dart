@@ -22,7 +22,6 @@ class _VehicleGrageState extends State<VehicleGrage> {
 
     return Column(
       children: [
-        
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(10),
@@ -34,7 +33,7 @@ class _VehicleGrageState extends State<VehicleGrage> {
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }

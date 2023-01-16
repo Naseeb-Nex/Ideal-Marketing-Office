@@ -1027,7 +1027,7 @@ class Techsrcwrapper extends StatelessWidget {
     if (src == 'Status') {
       return Statussrc(uid: uid, username: username, techname: name);
     }else if (src == 'Vehicles') {
-      return VehicleGrage();
+      return VehicleGrage(username: username, techname: name);
     }
     return Assignpgmwidget(uid: uid, username: username, techname: name);
   }
