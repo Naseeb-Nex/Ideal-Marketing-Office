@@ -52,14 +52,15 @@ class _VechicleInfoCardState extends State<VechicleInfoCard> {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            offset: const Offset(0, 10),
-            blurRadius: 20,
-            color: secondbg.withOpacity(0.23),
+            offset: const Offset(3, 2),
+            spreadRadius: 1.5,
+            blurRadius: 4,
+            color: secondbg.withOpacity(0.13),
           ),
         ],
       ),
       child: Padding(
-        padding: EdgeInsets.all(s.width * 0.03),
+        padding: EdgeInsets.all(s.width * 0.008),
         child: Stack(
           children: [
             Column(
@@ -74,8 +75,8 @@ class _VechicleInfoCardState extends State<VechicleInfoCard> {
                           builder: ((context) => VehiclelogDialog(
                               type: widget.type, name: widget.name, docname: widget.vdocname))),
                       child: Container(
-                        width: s.width * 0.2,
-                        height: s.width * 0.2,
+                        width: s.width * 0.05,
+                        height: s.width * 0.05,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             color: vybg),
@@ -101,7 +102,7 @@ class _VechicleInfoCardState extends State<VechicleInfoCard> {
                                   fit: FlexFit.tight,
                                   child: Text(
                                     "${widget.name}",
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontFamily: "Montserrat",
                                       fontSize: 16,
                                     ),
@@ -110,7 +111,7 @@ class _VechicleInfoCardState extends State<VechicleInfoCard> {
                                 VStatuswrapper(status: widget.status),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Row(
@@ -122,7 +123,7 @@ class _VechicleInfoCardState extends State<VechicleInfoCard> {
                                   fit: FlexFit.tight,
                                   child: Text(
                                     "${widget.desc}",
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontFamily: "Montserrat",
                                       fontSize: 12,
                                     ),
@@ -139,9 +140,9 @@ class _VechicleInfoCardState extends State<VechicleInfoCard> {
                 Visibility(
                   visible: _isviz,
                   child: Padding(
-                    padding: EdgeInsets.only(top: 10),
+                    padding: const EdgeInsets.only(top: 10),
                     child: Container(
-                      padding: EdgeInsets.all(s.width * 0.03),
+                      padding: EdgeInsets.all(s.width * 0.008),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: white,
@@ -150,14 +151,14 @@ class _VechicleInfoCardState extends State<VechicleInfoCard> {
                             spreadRadius: 2,
                             blurRadius: 3,
                             color: black.withOpacity(.05),
-                            offset: Offset(1, 1),
+                            offset: const Offset(1, 1),
                           ),
                         ],
                       ),
                       child: Column(
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 5),
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 5),
                             child: Text(
                               "More Option",
                               style: TextStyle(
@@ -168,37 +169,37 @@ class _VechicleInfoCardState extends State<VechicleInfoCard> {
                             ),
                           ),
                           Container(
-                            width: s.width * 0.15,
+                            width: s.width * 0.05,
                             height: 2,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: Color(0xff828a96),
+                              color: const Color(0xff828a96),
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Container(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 8, vertical: 5),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
-                                  color: Color(0XFFf2f4f8),
+                                  color: const Color(0XFFf2f4f8),
                                 ),
                                 child: Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.person_outline_rounded,
                                       color: Color(0XFF224c84),
                                       size: 25,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 5,
                                     ),
                                     Text(
                                       "${widget.techname}",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontFamily: "Montserrat",
                                         fontWeight: FontWeight.w600,
                                         fontSize: 13,
@@ -216,7 +217,7 @@ class _VechicleInfoCardState extends State<VechicleInfoCard> {
                               InkWell(
                                 onTap: () => recall(context, widget.vdocname),
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       vertical: 5, horizontal: 8),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
@@ -226,11 +227,11 @@ class _VechicleInfoCardState extends State<VechicleInfoCard> {
                                         spreadRadius: 1,
                                         blurRadius: 1,
                                         color: black.withOpacity(.05),
-                                        offset: Offset(1, 1),
+                                        offset: const Offset(1, 1),
                                       ),
                                     ],
                                   ),
-                                  child: Text(
+                                  child: const Text(
                                     "Recall",
                                     style: TextStyle(
                                       fontFamily: "Montserrat",
@@ -265,7 +266,7 @@ class _VechicleInfoCardState extends State<VechicleInfoCard> {
                                   _isviz = !_isviz;
                                 }),
                                 child: Container(
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       vertical: 2, horizontal: 4),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
@@ -275,11 +276,11 @@ class _VechicleInfoCardState extends State<VechicleInfoCard> {
                                         spreadRadius: 1,
                                         blurRadius: 1,
                                         color: black.withOpacity(.05),
-                                        offset: Offset(1, 1),
+                                        offset: const Offset(1, 1),
                                       ),
                                     ],
                                   ),
-                                  child: Icon(Iconsax.arrow_down_1,
+                                  child: const Icon(Iconsax.arrow_down_1,
                                       color: Colors.blueGrey),
                                 ),
                               ),
@@ -299,7 +300,7 @@ class _VechicleInfoCardState extends State<VechicleInfoCard> {
     DateTime now = DateTime.now();
     String techvdoc = DateFormat('MM d').format(now);
 
-    showDialog(context: context, builder: ((context) => LoadingDialog()));
+    showDialog(context: context, builder: ((context) => const LoadingDialog()));
     await fb
         .collection("Technician")
         .doc(widget.username)
@@ -314,16 +315,17 @@ class _VechicleInfoCardState extends State<VechicleInfoCard> {
 
     Navigator.of(context).pop();
     Navigator.pop(context);
+    // ignore: use_build_context_synchronously
     MotionToast.success(
       title: Text(
         "Vehicle Recalled from ${widget.techname}",
-        style: TextStyle(
+        style: const TextStyle(
           fontFamily: "Montserrat",
           fontSize: 16,
           fontWeight: FontWeight.w500,
         ),
       ),
-      description: Text(
+      description: const Text(
         "Successfully vehicle Impounded",
         style: TextStyle(
           fontFamily: "Montserrat",
@@ -341,7 +343,7 @@ class VehiclelogDialog extends StatefulWidget {
   String? name;
   String? docname;
 
-  VehiclelogDialog({this.type, this.name, this.docname});
+  VehiclelogDialog({Key? key, this.type, this.name, this.docname}) : super(key: key);
 
   @override
   State<VehiclelogDialog> createState() => _VehiclelogDialogState();
@@ -357,7 +359,7 @@ class _VehiclelogDialogState extends State<VehiclelogDialog> {
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           Container(
             width: double.infinity,
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               color: white,
@@ -366,7 +368,7 @@ class _VehiclelogDialogState extends State<VehiclelogDialog> {
                   spreadRadius: 2,
                   blurRadius: 3,
                   color: black.withOpacity(.2),
-                  offset: Offset(0.5, 1),
+                  offset: const Offset(0.5, 1),
                 ),
               ],
             ),
@@ -382,24 +384,24 @@ class _VehiclelogDialogState extends State<VehiclelogDialog> {
                           spreadRadius: 3,
                           blurRadius: 4,
                           color: black.withOpacity(.2),
-                          offset: Offset(1, 1),
+                          offset: const Offset(1, 1),
                         ),
                       ],
                       color: vybg),
                   clipBehavior: Clip.hardEdge,
                   child: Vehicleimagewrapper(widget.type),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
                   "${widget.name}",
-                  style: TextStyle(
+                  style:const  TextStyle(
                     fontFamily: "Montserrat",
                     fontWeight: FontWeight.w600,
                     fontSize: 20,
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(height: 15,),
+               const  SizedBox(height: 15,),
                 Container(
               height: s.height * 0.5,
               width: double.infinity,
@@ -416,13 +418,13 @@ class _VehiclelogDialogState extends State<VehiclelogDialog> {
                 children: [
                   Container(
                     width: double.infinity,
-                    padding: EdgeInsets.all(5),
-                    decoration: BoxDecoration(
+                    padding: const EdgeInsets.all(5),
+                    decoration:const  BoxDecoration(
                         color: bluebg,
                         borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(15),
                             topRight: Radius.circular(15))),
-                    child: Center(
+                    child:const  Center(
                       child: Text(
                         "Vehicle Log",
                         style: TextStyle(
@@ -447,7 +449,7 @@ class _VehiclelogDialogState extends State<VehiclelogDialog> {
 // ignore: must_be_immutable
 class Vehicleimagewrapper extends StatelessWidget {
   String? type;
-  Vehicleimagewrapper(this.type);
+  Vehicleimagewrapper(this.type, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -477,7 +479,7 @@ class Vehicleimagewrapper extends StatelessWidget {
 // ignore: must_be_immutable
 class VStatuswrapper extends StatelessWidget {
   String? status;
-  VStatuswrapper({this.status});
+  VStatuswrapper({Key? key, this.status}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -492,12 +494,12 @@ class VStatuswrapper extends StatelessWidget {
               spreadRadius: 1,
               blurRadius: 1,
               color: black.withOpacity(.05),
-              offset: Offset(1, 1),
+              offset: const Offset(1, 1),
             ),
           ],
         ),
         child: Text(
-          "${status}",
+          "$status",
           style: const TextStyle(
             fontFamily: "Montserrat",
             fontSize: 14,
@@ -517,12 +519,12 @@ class VStatuswrapper extends StatelessWidget {
             spreadRadius: 1,
             blurRadius: 1,
             color: black.withOpacity(.05),
-            offset: Offset(1, 1),
+            offset: const Offset(1, 1),
           ),
         ],
       ),
       child: Text(
-        "${status}",
+        "$status",
         style: const TextStyle(
           fontFamily: "Montserrat",
           fontSize: 14,
