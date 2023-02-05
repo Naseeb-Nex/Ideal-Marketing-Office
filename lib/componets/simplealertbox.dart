@@ -54,11 +54,11 @@ class SimpleCustomAlert extends StatelessWidget {
             const SizedBox(
               height: 28,
             ),
-            RaisedButton(
+            ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              color: white,
+              style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(white),),
               child: Text(
                 "Okay",
                 style: TextStyle(

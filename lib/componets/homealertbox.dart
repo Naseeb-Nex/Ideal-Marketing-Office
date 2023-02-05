@@ -55,11 +55,11 @@ class Homealertbox extends StatelessWidget {
             const SizedBox(
               height: 28,
             ),
-            RaisedButton(
+            ElevatedButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const OfficeHome()));
               },
-              color: white,
+              style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(white),),
               child: Text(
                 "Okay",
                 style: TextStyle(
