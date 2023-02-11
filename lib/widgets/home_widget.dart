@@ -7,7 +7,7 @@ import 'package:test2/screens/homesrc.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/gestures.dart';
 import 'package:test2/componets/vscroll.dart';
-import 'package:test2/widgets/vehicle_grage_src.dart';
+import 'package:test2/widgets/vehicleportal_widget.dart';
 
 // ignore: must_be_immutable
 class Homewidget extends StatefulWidget {
@@ -1027,7 +1027,7 @@ class Techsrcwrapper extends StatelessWidget {
     if (src == 'Status') {
       return Statussrc(uid: uid, username: username, techname: name);
     }else if (src == 'Vehicles') {
-      return VehicleGrage(username: username, techname: name);
+      return VehiclePortalWidget(username: username, techname: name);
     }
     return Assignpgmwidget(uid: uid, username: username, techname: name);
   }

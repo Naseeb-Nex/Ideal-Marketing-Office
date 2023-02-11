@@ -10,20 +10,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:iconsax/iconsax.dart';
 // loading_indicator
 import 'package:loading_indicator/loading_indicator.dart';
-import 'package:motion_toast/motion_toast.dart';
 
 // ignore: must_be_immutable
-class VehicleGrage extends StatefulWidget {
+class VehiclePortalWidget extends StatefulWidget {
   String? username;
   String? techname;
 
-  VehicleGrage({Key? key, this.username, this.techname}) : super(key: key);
+  VehiclePortalWidget({Key? key, this.username, this.techname}) : super(key: key);
 
   @override
-  _VehicleGrageState createState() => _VehicleGrageState();
+  // ignore: library_private_types_in_public_api
+  _VehiclePortalWidgetState createState() => _VehiclePortalWidgetState();
 }
 
-class _VehicleGrageState extends State<VehicleGrage> {
+class _VehiclePortalWidgetState extends State<VehiclePortalWidget> {
   FirebaseFirestore fb = FirebaseFirestore.instance;
 
   @override
