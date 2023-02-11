@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:test2/componets/vehicleinfocard.dart';
+import 'package:test2/componets/vusagehistorycard.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:intl/intl.dart';
 
@@ -55,21 +56,20 @@ class _VehiclePortalWidgetState extends State<VehiclePortalWidget> {
                       ),
                       const SizedBox(height: 3,),
                        Text(
-                        "Its a Grage! For managing vehicles",
+                        "Its a Grage! for managing vehicles",
                         style: TextStyle(
                             fontFamily: "Montserrat",
                             fontSize: 13,
                             fontWeight: FontWeight.w400,
                             color: Colors.blueGrey.shade500,),
                       ),
-                      // SizedBox(height: s.height * 0.04,),
                       const Divider(),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Flexible(
                             fit: FlexFit.tight,
-                            flex: 5,
+                            flex: 3,
                             child: Container(
                               padding: EdgeInsets.all(s.width * 0.01),
                               decoration: BoxDecoration(
@@ -225,6 +225,73 @@ class _VehiclePortalWidgetState extends State<VehiclePortalWidget> {
                                       const Divider(
                                         color: Color(0XFFadb5bd),
                                       ),
+                                      StreamBuilder<QuerySnapshot>(
+                              stream: fb
+                                  .collection("GarageUsage")
+                                  .orderBy('docname', descending: true)
+                                  .limit(8)
+                                  .snapshots(),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                if (snapshot.hasError) {}
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: s.width * 0.1,
+                                      height: s.width * 0.1,
+                                      child: const LoadingIndicator(
+                                        indicatorType:
+                                            Indicator.ballClipRotateMultiple,
+                                        colors: [bluebg],
+                                      ),
+                                    ),
+                                  );
+                                }
+
+                                final List vehicle = [];
+                                snapshot.data!.docs
+                                    .map((DocumentSnapshot document) {
+                                  Map a =
+                                      document.data() as Map<String, dynamic>;
+                                  vehicle.add(a);
+                                  // a['uid'] = document.id;
+                                }).toList();
+                                return Column(
+                                  children: [
+                                    Container(
+                                        child: vehicle.isEmpty
+                                            ? Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: s.width * 0.005),
+                                                child: Image.asset(
+                                                    "assets/icons/no_result.png"),
+                                              )
+                                            : null),
+                                    for (var i = 0;
+                                        i < vehicle.length;
+                                        i++) ...[
+                                      Padding(
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 5.0),
+                                        child: Vusagehistorycard(
+                                          name: vehicle[i]['name'],
+                                          desc: vehicle[i]['description'],
+                                          type: vehicle[i]['type'],
+                                          status: vehicle[i]['status'],
+                                          techname: vehicle[i]['techname'],
+                                          username: vehicle[i]['username'],
+                                          docname: vehicle[i]['docname'],
+                                          upDate: vehicle[i]['upDate'],
+                                          upTime: vehicle[i]['upTime'],
+                                          start: vehicle[i]['start'],
+                                          end: vehicle[i]['end'],
+                                        ),
+                                      )
+                                    ]
+                                  ],
+                                );
+                              }),
                                     ],
                                   ),
                                 ),
