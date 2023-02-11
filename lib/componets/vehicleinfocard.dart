@@ -73,7 +73,9 @@ class _VechicleInfoCardState extends State<VechicleInfoCard> {
                       onTap: () => showDialog(
                           context: context,
                           builder: ((context) => VehiclelogDialog(
-                              type: widget.type, name: widget.name, docname: widget.vdocname))),
+                              type: widget.type,
+                              name: widget.name,
+                              docname: widget.vdocname))),
                       child: Container(
                         width: s.width * 0.05,
                         height: s.width * 0.05,
@@ -89,7 +91,7 @@ class _VechicleInfoCardState extends State<VechicleInfoCard> {
                       fit: FlexFit.tight,
                       child: Padding(
                         padding:
-                            EdgeInsets.symmetric(horizontal: s.width * 0.02),
+                            EdgeInsets.symmetric(horizontal: s.width * 0.01),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -254,7 +256,7 @@ class _VechicleInfoCardState extends State<VechicleInfoCard> {
             Center(
               child: widget.status == "Ongoing"
                   ? Container(
-                      height: s.width * 0.2,
+                      height: 80,
                       alignment: Alignment.bottomRight,
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -265,23 +267,30 @@ class _VechicleInfoCardState extends State<VechicleInfoCard> {
                                 onTap: () => setState(() {
                                   _isviz = !_isviz;
                                 }),
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 2, horizontal: 4),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        spreadRadius: 1,
-                                        blurRadius: 1,
-                                        color: black.withOpacity(.05),
-                                        offset: const Offset(1, 1),
-                                      ),
-                                    ],
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.only(right: s.width * 0.01),
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 2, horizontal: 4),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          spreadRadius: 1,
+                                          blurRadius: 1,
+                                          color: black.withOpacity(.05),
+                                          offset: const Offset(1, 1),
+                                        ),
+                                      ],
+                                    ),
+                                    child: _isviz
+                                        ? const Icon(Icons.close,
+                                            color: cheryred)
+                                        : const Icon(Iconsax.arrow_down_1,
+                                            color: Colors.blueGrey),
                                   ),
-                                  child: const Icon(Iconsax.arrow_down_1,
-                                      color: Colors.blueGrey),
                                 ),
                               ),
                             ),
@@ -343,7 +352,8 @@ class VehiclelogDialog extends StatefulWidget {
   String? name;
   String? docname;
 
-  VehiclelogDialog({Key? key, this.type, this.name, this.docname}) : super(key: key);
+  VehiclelogDialog({Key? key, this.type, this.name, this.docname})
+      : super(key: key);
 
   @override
   State<VehiclelogDialog> createState() => _VehiclelogDialogState();
@@ -394,49 +404,50 @@ class _VehiclelogDialogState extends State<VehiclelogDialog> {
                 const SizedBox(height: 10),
                 Text(
                   "${widget.name}",
-                  style:const  TextStyle(
+                  style: const TextStyle(
                     fontFamily: "Montserrat",
                     fontWeight: FontWeight.w600,
                     fontSize: 20,
                   ),
                   textAlign: TextAlign.center,
                 ),
-               const  SizedBox(height: 15,),
+                const SizedBox(
+                  height: 15,
+                ),
                 Container(
-              height: s.height * 0.5,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18),
-                color: white,
-                border: Border.all(
-                color: bluebg,
-                width: 2,
-              ),
-               
-              ),
-              child: Column(
-                children: [
-                  Container(
+                    height: s.height * 0.5,
                     width: double.infinity,
-                    padding: const EdgeInsets.all(5),
-                    decoration:const  BoxDecoration(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(18),
+                      color: white,
+                      border: Border.all(
                         color: bluebg,
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15))),
-                    child:const  Center(
-                      child: Text(
-                        "Vehicle Log",
-                        style: TextStyle(
-                            fontFamily: "Montserrat",
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                            color: white),
+                        width: 2,
                       ),
                     ),
-                  ),
-                ],
-              )),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          padding: const EdgeInsets.all(5),
+                          decoration: const BoxDecoration(
+                              color: bluebg,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(15))),
+                          child: const Center(
+                            child: Text(
+                              "Vehicle Log",
+                              style: TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w500,
+                                  color: white),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
               ],
             ),
           ),
