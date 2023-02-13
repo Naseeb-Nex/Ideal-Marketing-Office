@@ -22,9 +22,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginSrc(),
+      theme: ThemeData(
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            primary: const Color.fromRGBO(55, 48, 255, 1),
+            secondary: Colors.white,
+          ),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+      home: const LoginSrc(),
+      
     );
   }
 }
