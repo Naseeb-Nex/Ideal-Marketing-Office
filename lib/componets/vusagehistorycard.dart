@@ -94,7 +94,7 @@ class _VusagehistorycardState extends State<Vusagehistorycard> {
                               fit: FlexFit.tight,
                               child: Text(
                                 "${widget.name}",
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontFamily: "Montserrat",
                                   fontWeight: FontWeight.w500,
                                   fontSize: 16,
@@ -104,7 +104,7 @@ class _VusagehistorycardState extends State<Vusagehistorycard> {
                             VStatuswrapper(status: widget.status),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         Row(
@@ -115,7 +115,7 @@ class _VusagehistorycardState extends State<Vusagehistorycard> {
                               flex: 1,
                               fit: FlexFit.loose,
                               child: Container(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     vertical: 3, horizontal: 10),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
@@ -131,12 +131,12 @@ class _VusagehistorycardState extends State<Vusagehistorycard> {
                                       height: 20,
                                       width: 20,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
                                     Text(
                                       "${widget.techname}",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontFamily: "Montserrat",
                                         fontWeight: FontWeight.w600,
                                         color: white,
@@ -181,12 +181,12 @@ class _VusagehistorycardState extends State<Vusagehistorycard> {
               child: widget.status == "Usage Report" ||
                       widget.status == "Usage Report (Edited)"
                   ? Padding(
-                      padding: EdgeInsets.only(top: 10),
+                      padding: const EdgeInsets.only(top: 10),
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Divider(),
-                            Center(
+                           const  Divider(),
+                           const  Center(
                               child: Text(
                                 "Usage Details",
                                 style: TextStyle(
@@ -196,11 +196,11 @@ class _VusagehistorycardState extends State<Vusagehistorycard> {
                                 ),
                               ),
                             ),
-                            Divider(),
+                           const  Divider(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Text(
+                               const  Text(
                                   "Distance Covered : ",
                                   style: TextStyle(
                                     fontFamily: "Montserrat",
@@ -210,14 +210,14 @@ class _VusagehistorycardState extends State<Vusagehistorycard> {
                                 ),
                                 Text(
                                   "$dis",
-                                  style: TextStyle(
+                                  style:const  TextStyle(
                                     fontFamily: "Montserrat",
                                     fontSize: 17,
                                     fontWeight: FontWeight.w600,
                                   ),
                                   textAlign: TextAlign.start,
                                 ),
-                                Text(
+                              const   Text(
                                   " Km",
                                   style: TextStyle(
                                     fontFamily: "Montserrat",
@@ -238,17 +238,17 @@ class _VusagehistorycardState extends State<Vusagehistorycard> {
                                       child: Image.asset(
                                           "assets/icons/scooter_icon.png"),
                                     ),
-                                    SizedBox(height: 3),
+                                    const SizedBox(height: 3),
                                     Container(
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           color: greenbg),
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       child: Text(
                                         "${widget.start}",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontFamily: "Montserrat",
                                           fontWeight: FontWeight.w500,
                                           color: Colors.green,
@@ -264,7 +264,7 @@ class _VusagehistorycardState extends State<Vusagehistorycard> {
                                     height: 1,
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(2),
-                                        gradient: LinearGradient(colors: [
+                                        gradient: const LinearGradient(colors: [
                                           Colors.green,
                                           Colors.orangeAccent,
                                           Colors.redAccent
@@ -279,17 +279,17 @@ class _VusagehistorycardState extends State<Vusagehistorycard> {
                                       child: Image.asset(
                                           "assets/icons/scooter_icon.png"),
                                     ),
-                                    SizedBox(height: 3),
+                                   const  SizedBox(height: 3),
                                     Container(
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           color: redbg),
-                                      padding: EdgeInsets.symmetric(
+                                      padding: const EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 5),
                                       child: Text(
                                         "${widget.end}",
-                                        style: TextStyle(
+                                        style:const  TextStyle(
                                           fontFamily: "Montserrat",
                                           fontWeight: FontWeight.w500,
                                           color: redfg,
@@ -314,7 +314,7 @@ class _VusagehistorycardState extends State<Vusagehistorycard> {
 // ignore: must_be_immutable
 class Vehicleimagewrapper extends StatelessWidget {
   String? type;
-  Vehicleimagewrapper(this.type);
+  Vehicleimagewrapper(this.type, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -344,7 +344,7 @@ class Vehicleimagewrapper extends StatelessWidget {
 // ignore: must_be_immutable
 class VStatuswrapper extends StatelessWidget {
   String? status;
-  VStatuswrapper({this.status});
+  VStatuswrapper({Key? key, this.status}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -360,12 +360,12 @@ class VStatuswrapper extends StatelessWidget {
               spreadRadius: 1,
               blurRadius: 1,
               color: black.withOpacity(.05),
-              offset: Offset(1, 1),
+              offset: const Offset(1, 1),
             ),
           ],
         ),
         child: Text(
-          "${status}",
+          "$status",
           style: const TextStyle(
             fontFamily: "Montserrat",
             fontSize: 14,
@@ -387,7 +387,7 @@ class VStatuswrapper extends StatelessWidget {
               spreadRadius: 1,
               blurRadius: 1,
               color: black.withOpacity(.05),
-              offset: Offset(1, 1),
+              offset: const Offset(1, 1),
             ),
           ],
         ),
@@ -414,12 +414,12 @@ class VStatuswrapper extends StatelessWidget {
               spreadRadius: 1,
               blurRadius: 1,
               color: black.withOpacity(.05),
-              offset: Offset(1, 1),
+              offset:const  Offset(1, 1),
             ),
           ],
         ),
         child: Text(
-          "${status}",
+          "$status",
           style: const TextStyle(
             fontFamily: "Montserrat",
             fontSize: 14,
@@ -441,12 +441,12 @@ class VStatuswrapper extends StatelessWidget {
               spreadRadius: 1,
               blurRadius: 1,
               color: black.withOpacity(.05),
-              offset: Offset(1, 1),
+              offset:const  Offset(1, 1),
             ),
           ],
         ),
         child: Text(
-          "${status}",
+          "$status",
           style: const TextStyle(
             fontFamily: "Montserrat",
             fontSize: 14,
@@ -466,12 +466,12 @@ class VStatuswrapper extends StatelessWidget {
             spreadRadius: 1,
             blurRadius: 1,
             color: black.withOpacity(.05),
-            offset: Offset(1, 1),
+            offset: const Offset(1, 1),
           ),
         ],
       ),
       child: Text(
-        "${status}",
+        "$status",
         style: const TextStyle(
           fontFamily: "Montserrat",
           fontSize: 14,
