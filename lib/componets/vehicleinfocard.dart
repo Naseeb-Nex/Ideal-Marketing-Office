@@ -314,27 +314,11 @@ class _VechicleInfoCardState extends State<VechicleInfoCard> {
         {"status": "Available", "techname": "none", "username": "none"},
         SetOptions(merge: true));
 
-    Navigator.of(context).pop();
+    // Navigator.of(context).pop();
     Navigator.pop(context);
-    // ignore: use_build_context_synchronously
-    MotionToast.success(
-      title: Text(
-        "Vehicle Recalled from ${widget.techname}",
-        style: const TextStyle(
-          fontFamily: "Montserrat",
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-      description: const Text(
-        "Successfully vehicle Impounded",
-        style: TextStyle(
-          fontFamily: "Montserrat",
-          fontSize: 12,
-          fontWeight: FontWeight.w300,
-        ),
-      ),
-    ).show(context);
+    setState(() {
+      _isviz = false;
+    });
   }
 }
 
