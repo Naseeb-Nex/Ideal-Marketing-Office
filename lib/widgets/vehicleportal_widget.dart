@@ -3,7 +3,6 @@ import 'package:flutter/gestures.dart';
 import 'package:test2/componets/vehicleinfocard.dart';
 import 'package:test2/componets/vusagehistorycard.dart';
 import 'package:test2/constants/constants.dart';
-import 'package:intl/intl.dart';
 
 // firebase firestore
 import 'package:cloud_firestore/cloud_firestore.dart';
