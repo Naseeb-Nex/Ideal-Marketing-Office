@@ -6,6 +6,7 @@ import 'package:test2/componets/assignvehiclecard.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
+// ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
@@ -18,10 +19,12 @@ class Assignpgmwidget extends StatefulWidget {
       : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _AssignpgmwidgetState createState() => _AssignpgmwidgetState();
 }
 
 class _AssignpgmwidgetState extends State<Assignpgmwidget> {
+  FirebaseFirestore fb = FirebaseFirestore.instance;
   String textquery = '';
   List pgm = [];
   List _allpgm = [];
@@ -44,6 +47,9 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
 
     // Size
     Size s = MediaQuery.of(context).size;
+    // Tech vehicle docname
+    DateTime now = DateTime.now();
+    String techvdoc = DateFormat('MM d').format(now);
 
     return Column(
       children: [
@@ -134,25 +140,289 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(right: 5),
-                            child: AnimatedContainer(
-                              width: animSize,
-                              height: animSize,
-                              duration: const Duration(milliseconds: 1200),
-                              curve: Curves.fastOutSlowIn,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: bluebg,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      spreadRadius: 2,
-                                      blurRadius: 7,
-                                      color: bluebg.withOpacity(0.25),
-                                      offset: const Offset(0, 4),
-                                    )
-                                  ]),
-                              child: const Icon(
-                                Icons.directions_bike_rounded,
-                                color: white,
+                            child: InkWell(
+                              onTap: () => showDialog(
+                                  context: context,
+                                  builder: (context) => Dialog(
+                                        insetPadding: EdgeInsets.symmetric(
+                                            horizontal: s.width * 0.35),
+                                        child: FutureBuilder<DocumentSnapshot>(
+                                          future: fb
+                                              .collection("Technician")
+                                              .doc(widget.username)
+                                              .collection("Vehicle")
+                                              .doc(techvdoc)
+                                              .get(),
+                                          builder: (BuildContext context,
+                                              AsyncSnapshot<DocumentSnapshot>
+                                                  snapshot) {
+                                            if (snapshot.hasError) {
+                                              return const Text(
+                                                  "Something went wrong");
+                                            }
+
+                                            if (snapshot.hasData &&
+                                                !snapshot.data!.exists) {
+                                              return Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Container(
+                                                    padding:
+                                                        const EdgeInsets.all(5),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              25),
+                                                      color: white,
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          offset: const Offset(
+                                                              2, 4),
+                                                          blurRadius: 20,
+                                                          color: secondbg
+                                                              .withOpacity(
+                                                                  0.23),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    clipBehavior: Clip.hardEdge,
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: s
+                                                                      .width *
+                                                                  0.02,
+                                                              vertical:
+                                                                  s.width *
+                                                                      0.02),
+                                                      child: Column(
+                                                        children: [
+                                                          Image.asset(
+                                                              "assets/icons/no_vehicle.png",
+                                                              width: s.height *
+                                                                  0.33,
+                                                              height: s.height *
+                                                                  0.33),
+                                                           Text(
+                                                            "No Vehicle Assigned",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Montserrat",
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color: Colors
+                                                                    .blueGrey.shade700,),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+                                            }
+
+                                            if (snapshot.connectionState ==
+                                                ConnectionState.done) {
+                                              Map<String, dynamic> data =
+                                                  snapshot.data!.data()
+                                                      as Map<String, dynamic>;
+                                              return Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                  vertical: s.height * 0.03,
+                                                ),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    const Text(
+                                                      "Vehicle Status",
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            "Montserrat",
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.w800,
+                                                        // color:
+                                                        //     Color(0XFF767777),
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Container(
+                                                      height: 2,
+                                                      width: 20,
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(5),
+                                                          color: Colors.blueGrey
+                                                              .shade400),
+                                                    ),
+                                                    const SizedBox(height: 10),
+                                                    Container(
+                                                      height: s.height * 0.31,
+                                                      clipBehavior:
+                                                          Clip.hardEdge,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(15),
+                                                        color: redbg,
+                                                      ),
+                                                      child: Image.asset(
+                                                        'assets/images/delivery.gif',
+                                                        width: s.height * 0.33,
+                                                        height: s.height * 0.33,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Stack(
+                                                      children: [
+                                                        Center(
+                                                          child: Text(
+                                                            "${data["name"]}",
+                                                            style:
+                                                                const TextStyle(
+                                                              fontFamily:
+                                                                  "Montserrat",
+                                                              fontSize: 18,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  right: 10),
+                                                          child: Row(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .end,
+                                                            children: [
+                                                              Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .end,
+                                                                children: [
+                                                                  Text(
+                                                                    "${data["upTime"]}",
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      fontFamily:
+                                                                          "Montserrt",
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      color: Color(
+                                                                          0XFF767777),
+                                                                    ),
+                                                                  ),
+                                                                  Text(
+                                                                    "${data["upDate"]}",
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      fontFamily:
+                                                                          "Montserrt",
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w400,
+                                                                      color: Color(
+                                                                          0XFF767777),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              )
+                                                            ],
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            }
+
+                                            return Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Container(
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            25),
+                                                    color: white,
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                        offset:
+                                                            const Offset(0, 10),
+                                                        blurRadius: 20,
+                                                        color: secondbg
+                                                            .withOpacity(0.23),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            vertical:
+                                                                s.width * 0.1),
+                                                    child: Center(
+                                                      child: SizedBox(
+                                                        width: s.height * 0.15,
+                                                        height: s.height * 0.15,
+                                                        child:
+                                                            const LoadingIndicator(
+                                                          indicatorType: Indicator
+                                                              .ballClipRotateMultiple,
+                                                          colors: [bluebg],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        ),
+                                      )),
+                              child: AnimatedContainer(
+                                width: animSize,
+                                height: animSize,
+                                duration: const Duration(milliseconds: 1200),
+                                curve: Curves.fastOutSlowIn,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: bluebg,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        spreadRadius: 2,
+                                        blurRadius: 7,
+                                        color: bluebg.withOpacity(0.25),
+                                        offset: const Offset(0, 4),
+                                      )
+                                    ]),
+                                child: const Icon(
+                                  Icons.directions_bike_rounded,
+                                  color: white,
+                                ),
                               ),
                             ),
                           ),
@@ -453,7 +723,7 @@ class _AddvehicleDialogState extends State<AddvehicleDialog> {
                     if (snapshot.hasError) {
                       return const Text("Something went wrong");
                     }
-                  
+
                     if (snapshot.hasData && !snapshot.data!.exists) {
                       return Column(
                         mainAxisSize: MainAxisSize.min,
@@ -480,7 +750,7 @@ class _AddvehicleDialogState extends State<AddvehicleDialog> {
                                       ),
                                     );
                                   }
-                            
+
                                   final List vehicle = [];
                                   snapshot.data!.docs
                                       .map((DocumentSnapshot document) {
@@ -488,7 +758,7 @@ class _AddvehicleDialogState extends State<AddvehicleDialog> {
                                         document.data() as Map<String, dynamic>;
                                     vehicle.add(a);
                                   }).toList();
-                            
+
                                   List avaliableVehicles = vehicle
                                       .where((i) => i['status'] == 'Available')
                                       .toList();
@@ -498,7 +768,8 @@ class _AddvehicleDialogState extends State<AddvehicleDialog> {
                                           child: avaliableVehicles.isEmpty
                                               ? Padding(
                                                   padding: EdgeInsets.symmetric(
-                                                      horizontal: s.width * 0.01),
+                                                      horizontal:
+                                                          s.width * 0.01),
                                                   child: Column(
                                                     children: [
                                                       Image.asset(
@@ -509,8 +780,8 @@ class _AddvehicleDialogState extends State<AddvehicleDialog> {
                                                             fontFamily:
                                                                 "Montserrat",
                                                             fontSize: 15,
-                                                            color:
-                                                                Colors.blueGrey),
+                                                            color: Colors
+                                                                .blueGrey),
                                                       )
                                                     ],
                                                   ),
@@ -520,8 +791,8 @@ class _AddvehicleDialogState extends State<AddvehicleDialog> {
                                           i < avaliableVehicles.length;
                                           i++) ...[
                                         Padding(
-                                          padding:
-                                             const EdgeInsets.symmetric(vertical: 5.0),
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5.0),
                                           child: Assignvehiclecard(
                                             name: avaliableVehicles[i]['name'],
                                             desc: avaliableVehicles[i]
@@ -549,7 +820,7 @@ class _AddvehicleDialogState extends State<AddvehicleDialog> {
                         ],
                       );
                     }
-                  
+
                     if (snapshot.connectionState == ConnectionState.done) {
                       Map<String, dynamic> data =
                           snapshot.data!.data() as Map<String, dynamic>;
@@ -604,7 +875,7 @@ class _AddvehicleDialogState extends State<AddvehicleDialog> {
                         ],
                       );
                     }
-                  
+
                     return Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -622,13 +893,15 @@ class _AddvehicleDialogState extends State<AddvehicleDialog> {
                             ],
                           ),
                           child: Padding(
-                            padding: EdgeInsets.symmetric(vertical: s.width * 0.1),
+                            padding:
+                                EdgeInsets.symmetric(vertical: s.width * 0.1),
                             child: Center(
                               child: SizedBox(
                                 width: s.width * 0.15,
                                 height: s.width * 0.15,
                                 child: const LoadingIndicator(
-                                  indicatorType: Indicator.ballClipRotateMultiple,
+                                  indicatorType:
+                                      Indicator.ballClipRotateMultiple,
                                   colors: [bluebg],
                                 ),
                               ),
