@@ -7,6 +7,8 @@ import 'package:test2/constants/constants.dart';
 import 'package:intl/intl.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:motion_toast/motion_toast.dart';
+import 'package:test2/services/techvehicle.dart';
+import 'package:test2/services/vehicleusagehistory.dart';
 
 // ignore: must_be_immutable
 class Assignvehiclecard extends StatefulWidget {
@@ -52,108 +54,127 @@ class _AssignvehiclecardState extends State<Assignvehiclecard> {
         showDialog(
             context: context,
             builder: (context) => Dialog(
+                  insetPadding: EdgeInsets.symmetric(horizontal: s.width * 0.3),
                   child: Padding(
                     padding: EdgeInsets.all(s.height * 0.01),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Icon(
-                                Iconsax.warning_2,
-                                color: yellowfg,
-                                size: 30,
+                            padding: const EdgeInsets.symmetric(vertical: 15),
+                            child: Center(
+                              child: Image.asset(
+                                "assets/images/delivery.jpg",
+                                width: s.height * 0.2,
+                                height: s.height * 0.2,
                               ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "Are you sure?",
-                                style: const TextStyle(
-                                  fontFamily: "Nunito",
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
+                            )),
                         const SizedBox(
                           height: 5,
                         ),
                         RichText(
                           textAlign: TextAlign.center,
                           text: TextSpan(
-                              text: 'Do you really want to ',
-                              style: TextStyle(
+                              text: 'Do you really want to Assign',
+                              style: const TextStyle(
                                 fontFamily: "Montserrat",
                                 fontSize: 15,
-                                color: black,
-                                // fontWeight: FontWeight.bold,
+                                color: Color(0XFF676767),
+                                fontWeight: FontWeight.w400,
                               ),
                               children: <TextSpan>[
                                 TextSpan(
-                                  text: 'Assign ${widget.name}',
-                                  style: TextStyle(
+                                  text: ' ${widget.name}',
+                                  style: const TextStyle(
                                     fontFamily: "Montserrat",
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
+                                    color: Color(0XFF676767),
                                   ),
                                 ),
-                                TextSpan(
+                                const TextSpan(
                                   text: ' to ',
                                   style: TextStyle(
                                     fontFamily: "Montserrat",
                                     fontSize: 15,
+                                    color: Color(0XFF676767),
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                                 TextSpan(
                                   text: '${widget.techname} ?',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontFamily: "Montserrat",
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
+                                    color: Color(0XFF676767),
                                   ),
                                 ),
                               ]),
                         ),
-                        const SizedBox(
-                          height: 10,
+                        SizedBox(
+                          height: s.height * 0.03,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            ElevatedButton(
-                              onPressed: () {
+                            InkWell(
+                              onTap: () {
                                 Navigator.of(context).pop();
                               },
-                              child: Text(
-                                "Cancel",
-                                style: TextStyle(
-                                  fontFamily: "Nunito",
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
+                              child: Container(
+                                width: s.width * 0.1,
+                                height: s.height * 0.05,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: const Color(0XFFE7E7E7),
+                                  ),
+                                  borderRadius: BorderRadius.circular(7),
                                   color: white,
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    "Cancel",
+                                    style: TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0XFF323233),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                            ElevatedButton(
-                              onPressed: () => assignvehicle(context),
-                              child: Text(
-                                "Okay",
-                                style: TextStyle(
-                                  fontFamily: "Nunito",
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  color: white,
+                            InkWell(
+                              onTap: () => assignvehicle(context),
+                              child: Container(
+                                width: s.width * 0.1,
+                                height: s.height * 0.05,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: const Color(0XFFE7E7E7),
+                                  ),
+                                  borderRadius: BorderRadius.circular(7),
+                                  color: const Color(0XFFF2F3F3),
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    "Okay",
+                                    style: TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0XFF323233),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
                           ],
-                        )
+                        ),
+                        SizedBox(
+                          height: s.height * 0.03,
+                        ),
                       ],
                     ),
                   ),
@@ -196,17 +217,17 @@ class _AssignvehiclecardState extends State<Assignvehiclecard> {
                     children: [
                       Text(
                         "${widget.name}",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: "Montserrat",
                           fontSize: 16,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Text(
                         "${widget.desc}",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: "Montserrat",
                           fontSize: 12,
                         ),
@@ -224,107 +245,110 @@ class _AssignvehiclecardState extends State<Assignvehiclecard> {
 
   // upload asssigned details
   Future<void> assignvehicle(BuildContext context) async {
-    // DateTime now = DateTime.now();
-    // String update = DateFormat('d MM y').format(now);
-    // String uptime = DateFormat('h:mma').format(now);
+    DateTime now = DateTime.now();
+    String update = DateFormat('d MM y').format(now);
+    String uptime = DateFormat('h:mma').format(now);
 
-    // // Report
-    // String day = DateFormat('d').format(now);
-    // String month = DateFormat('MM').format(now);
-    // String year = DateFormat('y').format(now);
-    // String techvdoc = DateFormat('MM d').format(now);
-    // String doc_name = DateFormat('kk:mm:ss').format(now);
-    // String usagedocname = DateFormat('MM d y kk:mm:ss').format(now);
+    // Report
+    String day = DateFormat('d').format(now);
+    String month = DateFormat('MM').format(now);
+    String year = DateFormat('y').format(now);
+    String techvdoc = DateFormat('MM d').format(now);
+    String docName = DateFormat('kk:mm:ss').format(now);
+    String usagedocname = DateFormat('MM d y kk:mm:ss').format(now);
 
-    // Techvehicle techv = Techvehicle(
-    //   name: widget.name,
-    //   upDate: update,
-    //   upTime: uptime,
-    //   username: widget.username,
-    //   vdocname: widget.docname,
-    //   docname: doc_name,
-    //   type: widget.type,
-    //   techname: widget.techname,
-    // );
+    Techvehicle techv = Techvehicle(
+      name: widget.name,
+      upDate: update,
+      upTime: uptime,
+      username: widget.username,
+      vdocname: widget.docname,
+      docname: docName,
+      type: widget.type,
+      techname: widget.techname,
+    );
 
-    // // Vehicle Usage history detials 
-    // VehicleUsageHistory vusage = VehicleUsageHistory(
-    //   name: widget.name,
-    //   upDate: update,
-    //   upTime: uptime,
-    //   username: widget.username,
-    //   docname: usagedocname,
-    //   techname: widget.techname,
-    //   type: widget.type,
-    //   status: "Assigned"
-    // );
+    // Vehicle Usage history detials
+    VehicleUsageHistory vusage = VehicleUsageHistory(
+      name: widget.name,
+      upDate: update,
+      upTime: uptime,
+      username: widget.username,
+      docname: usagedocname,
+      techname: widget.techname,
+      type: widget.type,
+      status: "Assigned"
+    );
 
-    // showDialog(context: context, builder: (context)=> LoadingDialog());
+    showDialog(context: context, builder: (context)=> const LoadingDialog());
 
-    // // Profile vehicle updated
-    // await fb
-    //     .collection("Technician")
-    //     .doc(widget.username)
-    //     .collection("Vehicle")
-    //     .doc(techvdoc)
-    //     .set(techv.toMap())
-    //     .then((v) => print("profile updated"));
+    // Profile vehicle updated
+    await fb
+        .collection("Technician")
+        .doc(widget.username)
+        .collection("Vehicle")
+        .doc(techvdoc)
+        .set(techv.toMap())
+        .then((v) => print("profile updated"));
 
-    // // report added
-    // await fb
-    //     .collection("Reports")
-    //     .doc(year)
-    //     .collection("Month")
-    //     .doc(month)
-    //     .collection(day)
-    //     .doc("Tech")
-    //     .collection("Reports")
-    //     .doc("${widget.username}")
-    //     .collection("vehicle")
-    //     .doc(doc_name)
-    //     .set(techv.toMap());
+    // report added
+    await fb
+        .collection("Reports")
+        .doc(year)
+        .collection("Month")
+        .doc(month)
+        .collection(day)
+        .doc("Tech")
+        .collection("Reports")
+        .doc("${widget.username}")
+        .collection("vehicle")
+        .doc(docName)
+        .set(techv.toMap());
 
-    // // status change
-    // await fb.collection("Garage").doc(widget.docname).set({
-    //   "status": "Ongoing",
-    //   "techname": widget.techname,
-    //   "username": widget.username
-    // }, SetOptions(merge: true));
+    // status change
+    await fb.collection("Garage").doc(widget.docname).set({
+      "status": "Ongoing",
+      "techname": widget.techname,
+      "username": widget.username
+    }, SetOptions(merge: true));
 
-    // // history added
-    // await fb
-    //     .collection("GarageUsage")
-    //     .doc(usagedocname)
-    //     .set(vusage.toMap())
-    //     .then((v) => print("Vehicle assigned history added"));
+    // history added
+    await fb
+        .collection("GarageUsage")
+        .doc(usagedocname)
+        .set(vusage.toMap())
+        .then((v) => print("Vehicle assigned history added"));
 
-    // Navigator.of(context).pop();
-    // Navigator.pop(context);
-    // MotionToast.success(
-    //   title: Text(
-    //     "Vehicle assigned to ${widget.techname}",
-    //     style: TextStyle(
-    //       fontFamily: "Montserrat",
-    //       fontSize: 16,
-    //       fontWeight: FontWeight.w500,
-    //     ),
-    //   ),
-    //   description: Text(
-    //     "Successfully vehicle assigned",
-    //     style: TextStyle(
-    //       fontFamily: "Montserrat",
-    //       fontSize: 12,
-    //       fontWeight: FontWeight.w300,
-    //     ),
-    //   ),
-    // ).show(context);
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pop();
+    // ignore: use_build_context_synchronously
+    Navigator.pop(context);
+    // ignore: use_build_context_synchronously
+    MotionToast.success(
+      title: Text(
+        "Vehicle assigned to ${widget.techname}",
+        style: const TextStyle(
+          fontFamily: "Montserrat",
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      description: const Text(
+        "Successfully vehicle assigned",
+        style: TextStyle(
+          fontFamily: "Montserrat",
+          fontSize: 12,
+          fontWeight: FontWeight.w300,
+        ),
+      ),
+    ).show(context);
   }
 }
 
 // ignore: must_be_immutable
 class Vehicleimagewrapper extends StatelessWidget {
   String? type;
-  Vehicleimagewrapper(this.type);
+  Vehicleimagewrapper(this.type, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
