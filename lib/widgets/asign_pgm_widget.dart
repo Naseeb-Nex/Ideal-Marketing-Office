@@ -116,25 +116,31 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(right: 5),
-                            child: AnimatedContainer(
-                              width: animSize,
-                              height: animSize,
-                              duration: const Duration(milliseconds: 1400),
-                              curve: Curves.fastOutSlowIn,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: bluebg,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      spreadRadius: 2,
-                                      blurRadius: 7,
-                                      color: bluebg.withOpacity(0.25),
-                                      offset: const Offset(0, 4),
-                                    )
-                                  ]),
-                              child: const Icon(
-                                Iconsax.tag_cross,
-                                color: white,
+                            child: InkWell(
+                              onTap: () =>showDialog(
+                    context: context,
+                    builder: (context) => RemoveVehicleDialog(
+                        techname: widget.techname, username: widget.username, name: widget.techname,)),
+                              child: AnimatedContainer(
+                                width: animSize,
+                                height: animSize,
+                                duration: const Duration(milliseconds: 1400),
+                                curve: Curves.fastOutSlowIn,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: bluebg,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        spreadRadius: 2,
+                                        blurRadius: 7,
+                                        color: bluebg.withOpacity(0.25),
+                                        offset: const Offset(0, 4),
+                                      )
+                                    ]),
+                                child: const Icon(
+                                  Iconsax.tag_cross,
+                                  color: white,
+                                ),
                               ),
                             ),
                           ),
@@ -918,5 +924,333 @@ class _AddvehicleDialogState extends State<AddvehicleDialog> {
         ),
       ),
     );
+  }
+}
+
+
+// ignore: must_be_immutable
+class RemoveVehicleDialog extends StatefulWidget {
+  String? techname;
+  String? username;
+  String? name;
+
+  RemoveVehicleDialog({Key? key, this.techname, this.username, this.name}) : super(key: key);
+
+  @override
+  State<RemoveVehicleDialog> createState() => _RemoveVehicleDialogState();
+}
+
+class _RemoveVehicleDialogState extends State<RemoveVehicleDialog> {
+  FirebaseFirestore fb = FirebaseFirestore.instance;
+  @override
+  Widget build(BuildContext context) {
+    Size s = MediaQuery.of(context).size;
+    DateTime now = DateTime.now();
+    String techvdoc = DateFormat('MM d').format(now);
+    return Dialog(
+      insetPadding: EdgeInsets.symmetric(
+                                            horizontal: s.width * 0.25),
+      child: FutureBuilder<DocumentSnapshot>(
+        future: fb
+            .collection("Technician")
+            .doc(widget.username)
+            .collection("Vehicle")
+            .doc(techvdoc)
+            .get(),
+        builder:
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return  const Text("Something went wrong");
+          }
+
+          if (snapshot.hasData && !snapshot.data!.exists) {
+            return Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Container(
+                                                    padding:
+                                                        const EdgeInsets.all(5),
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              25),
+                                                      color: white,
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          offset: const Offset(
+                                                              2, 4),
+                                                          blurRadius: 20,
+                                                          color: secondbg
+                                                              .withOpacity(
+                                                                  0.23),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    clipBehavior: Clip.hardEdge,
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: s
+                                                                      .width *
+                                                                  0.02,
+                                                              vertical:
+                                                                  s.width *
+                                                                      0.02),
+                                                      child: Column(
+                                                        children: [
+                                                          Image.asset(
+                                                              "assets/icons/no_vehicle.png",
+                                                              width: s.height *
+                                                                  0.33,
+                                                              height: s.height *
+                                                                  0.33),
+                                                           Text(
+                                                            "No Assigned Vehicle To Impound",
+                                                            style: TextStyle(
+                                                                fontFamily:
+                                                                    "Montserrat",
+                                                                fontSize: 18,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color: Colors
+                                                                    .blueGrey.shade700,),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+          }
+
+          if (snapshot.connectionState == ConnectionState.done) {
+            Map<String, dynamic> data =
+                snapshot.data!.data() as Map<String, dynamic>;
+            return Padding(
+                    padding: EdgeInsets.all(s.height * 0.01),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 15),
+                            child: Center(
+                              child: Image.asset(
+                                "assets/images/delivery.jpg",
+                                width: s.height * 0.2,
+                                height: s.height * 0.2,
+                              ),
+                            )),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                              text: 'Do you really want to Impound ',
+                              style: const TextStyle(
+                                fontFamily: "Montserrat",
+                                fontSize: 15,
+                                color: Color(0XFF676767),
+                                fontWeight: FontWeight.w400,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: '${data["name"]}',
+                                  style: const TextStyle(
+                                    fontFamily: "Montserrat",
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0XFF676767),
+                                  ),
+                                ),
+                                const TextSpan(
+                                  text: ' from ',
+                                  style: TextStyle(
+                                    fontFamily: "Montserrat",
+                                    fontSize: 15,
+                                    color: Color(0XFF676767),
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: '${widget.techname} ?',
+                                  style: const TextStyle(
+                                    fontFamily: "Montserrat",
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color(0XFF676767),
+                                  ),
+                                ),
+                              ]),
+                        ),
+                        SizedBox(
+                          height: s.height * 0.03,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Container(
+                                width: s.width * 0.1,
+                                height: s.height * 0.05,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: const Color(0XFFE7E7E7),
+                                  ),
+                                  borderRadius: BorderRadius.circular(7),
+                                  color: white,
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    "Cancel",
+                                    style: TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0XFF323233),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () => removeV(context, data["vdocname"],data["type"], data["name"] ),
+                              child: Container(
+                                width: s.width * 0.1,
+                                height: s.height * 0.05,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: const Color(0XFFE7E7E7),
+                                  ),
+                                  borderRadius: BorderRadius.circular(7),
+                                  color: cheryred.withOpacity(0.1),
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    "Okay",
+                                    style: TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w700,
+                                      color: Color(0XFF323233),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: s.height * 0.03,
+                        ),
+                      ],
+                    ),
+                  );
+           
+          }
+
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  color: white,
+                  boxShadow: [
+                    BoxShadow(
+                      offset: const Offset(0, 10),
+                      blurRadius: 20,
+                      color: secondbg.withOpacity(0.23),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: s.width * 0.1),
+                  child: Center(
+                    child: SizedBox(
+                      width: s.width * 0.15,
+                      height: s.width * 0.15,
+                      child:  const LoadingIndicator(
+                        indicatorType: Indicator.ballClipRotateMultiple,
+                        colors:[bluebg],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Future<void> removeV(BuildContext context, String? docname, String? type, String? name) async {
+    // DateTime now = DateTime.now();
+    // String techvdoc = DateFormat('MM d').format(now);
+    // String usagedocname = DateFormat('MM d y kk:mm:ss').format(now);
+
+    // // Vehicle usage history
+    // String update = DateFormat('d MM y').format(now);
+    // String uptime = DateFormat('h:mma').format(now);
+
+    // // Vehicle history class is added
+    // VehicleUsageHistory vusage = VehicleUsageHistory(
+    //   name: name,
+    //   upDate: update,
+    //   upTime: uptime,
+    //   username: widget.username,
+    //   docname: usagedocname,
+    //   techname: widget.techname,
+    //   type: type,
+    //   status: "Impounded"
+    // );
+    
+    // showDialog(context: context, builder: ((context) => LoadingDialog()));
+    // await fb
+    //     .collection("Technician")
+    //     .doc(widget.username)
+    //     .collection("Vehicle")
+    //     .doc(techvdoc)
+    //     .delete()
+    //     .then((value) => (print("data deleted suscessfully")));
+
+    // // status change
+    // await fb.collection("Garage").doc(docname).set(
+    //     {"status": "Available", "techname": "none", "username": "none"},
+    //     SetOptions(merge: true));
+
+    // // history added
+    // await fb
+    //     .collection("GarageUsage")
+    //     .doc(usagedocname)
+    //     .set(vusage.toMap())
+    //     .then((v) => print("Vehicle assigned history added"));
+
+    // Navigator.of(context).pop();
+    // Navigator.pop(context);
+    // MotionToast.success(
+    //   title: Text(
+    //     "Vehicle impounded from ${widget.techname}",
+    //     style: TextStyle(
+    //       fontFamily: "Montserrat",
+    //       fontSize: 16,
+    //       fontWeight: FontWeight.w500,
+    //     ),
+    //   ),
+    //   description: Text(
+    //     "Successfully vehicle Impounded",
+    //     style: TextStyle(
+    //       fontFamily: "Montserrat",
+    //       fontSize: 12,
+    //       fontWeight: FontWeight.w300,
+    //     ),
+    //   ),
+    // ).show(context);
   }
 }
