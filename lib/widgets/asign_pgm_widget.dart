@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:loading_indicator/loading_indicator.dart';
+import 'package:motion_toast/motion_toast.dart';
 import 'package:test2/componets/assign_pgm_card.dart';
 import 'package:test2/componets/assignvehiclecard.dart';
+import 'package:test2/componets/loadingDialog.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 // ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
+import 'package:test2/services/vehicleusagehistory.dart';
 
 // ignore: must_be_immutable
 class Assignpgmwidget extends StatefulWidget {
@@ -117,10 +120,13 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
                           Padding(
                             padding: const EdgeInsets.only(right: 5),
                             child: InkWell(
-                              onTap: () =>showDialog(
-                    context: context,
-                    builder: (context) => RemoveVehicleDialog(
-                        techname: widget.techname, username: widget.username, name: widget.techname,)),
+                              onTap: () => showDialog(
+                                  context: context,
+                                  builder: (context) => RemoveVehicleDialog(
+                                        techname: widget.techname,
+                                        username: widget.username,
+                                        name: widget.techname,
+                                      )),
                               child: AnimatedContainer(
                                 width: animSize,
                                 height: animSize,
@@ -209,17 +215,19 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
                                                                   0.33,
                                                               height: s.height *
                                                                   0.33),
-                                                           Text(
+                                                          Text(
                                                             "No Vehicle Assigned",
                                                             style: TextStyle(
-                                                                fontFamily:
-                                                                    "Montserrat",
-                                                                fontSize: 18,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                color: Colors
-                                                                    .blueGrey.shade700,),
+                                                              fontFamily:
+                                                                  "Montserrat",
+                                                              fontSize: 18,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              color: Colors
+                                                                  .blueGrey
+                                                                  .shade700,
+                                                            ),
                                                           ),
                                                         ],
                                                       ),
@@ -776,20 +784,44 @@ class _AddvehicleDialogState extends State<AddvehicleDialog> {
                                                   padding: EdgeInsets.symmetric(
                                                       horizontal:
                                                           s.width * 0.01),
-                                                  child: Column(
-                                                    children: [
-                                                      Image.asset(
-                                                          "assets/icons/not_asigned.jpg"),
-                                                      const Text(
-                                                        "No Vehicle Available",
-                                                        style: TextStyle(
+                                                  child: SizedBox(
+                                                    width: double.infinity,
+                                                    height: s.height * 0.5,
+                                                    child: Column(
+                                                      mainAxisAlignment: MainAxisAlignment.end,
+                                                      children: [
+                                                        Image.asset(
+                                                            "assets/icons/no_vehicle.png",
+                                                            width:
+                                                                s.height * 0.33,
+                                                            height:
+                                                                s.height * 0.33),
+                                                        Text(
+                                                          "No Vehicle Available",
+                                                          style: TextStyle(
                                                             fontFamily:
                                                                 "Montserrat",
-                                                            fontSize: 15,
-                                                            color: Colors
-                                                                .blueGrey),
-                                                      )
-                                                    ],
+                                                            fontSize: 18,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            color: Colors.blueGrey
+                                                                .shade600,
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          "Recall if the vehicles session is exprired",
+                                                          style: TextStyle(
+                                                            fontFamily:
+                                                                "Montserrat",
+                                                            fontSize: 12,
+                                                            fontWeight:
+                                                                FontWeight.w300,
+                                                            color: Colors.blueGrey
+                                                                .shade300,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
                                                 )
                                               : null),
@@ -927,14 +959,14 @@ class _AddvehicleDialogState extends State<AddvehicleDialog> {
   }
 }
 
-
 // ignore: must_be_immutable
 class RemoveVehicleDialog extends StatefulWidget {
   String? techname;
   String? username;
   String? name;
 
-  RemoveVehicleDialog({Key? key, this.techname, this.username, this.name}) : super(key: key);
+  RemoveVehicleDialog({Key? key, this.techname, this.username, this.name})
+      : super(key: key);
 
   @override
   State<RemoveVehicleDialog> createState() => _RemoveVehicleDialogState();
@@ -948,8 +980,7 @@ class _RemoveVehicleDialogState extends State<RemoveVehicleDialog> {
     DateTime now = DateTime.now();
     String techvdoc = DateFormat('MM d').format(now);
     return Dialog(
-      insetPadding: EdgeInsets.symmetric(
-                                            horizontal: s.width * 0.25),
+      insetPadding: EdgeInsets.symmetric(horizontal: s.width * 0.25),
       child: FutureBuilder<DocumentSnapshot>(
         future: fb
             .collection("Technician")
@@ -960,197 +991,178 @@ class _RemoveVehicleDialogState extends State<RemoveVehicleDialog> {
         builder:
             (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.hasError) {
-            return  const Text("Something went wrong");
+            return const Text("Something went wrong");
           }
 
           if (snapshot.hasData && !snapshot.data!.exists) {
             return Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Container(
-                                                    padding:
-                                                        const EdgeInsets.all(5),
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              25),
-                                                      color: white,
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          offset: const Offset(
-                                                              2, 4),
-                                                          blurRadius: 20,
-                                                          color: secondbg
-                                                              .withOpacity(
-                                                                  0.23),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    clipBehavior: Clip.hardEdge,
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: s
-                                                                      .width *
-                                                                  0.02,
-                                                              vertical:
-                                                                  s.width *
-                                                                      0.02),
-                                                      child: Column(
-                                                        children: [
-                                                          Image.asset(
-                                                              "assets/icons/no_vehicle.png",
-                                                              width: s.height *
-                                                                  0.33,
-                                                              height: s.height *
-                                                                  0.33),
-                                                           Text(
-                                                            "No Assigned Vehicle To Impound",
-                                                            style: TextStyle(
-                                                                fontFamily:
-                                                                    "Montserrat",
-                                                                fontSize: 18,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                color: Colors
-                                                                    .blueGrey.shade700,),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              );
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: white,
+                    boxShadow: [
+                      BoxShadow(
+                        offset: const Offset(2, 4),
+                        blurRadius: 20,
+                        color: secondbg.withOpacity(0.23),
+                      ),
+                    ],
+                  ),
+                  clipBehavior: Clip.hardEdge,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: s.width * 0.02, vertical: s.width * 0.02),
+                    child: Column(
+                      children: [
+                        Image.asset("assets/icons/no_vehicle.png",
+                            width: s.height * 0.33, height: s.height * 0.33),
+                        Text(
+                          "No Assigned Vehicle To Impound",
+                          style: TextStyle(
+                            fontFamily: "Montserrat",
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.blueGrey.shade700,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            );
           }
 
           if (snapshot.connectionState == ConnectionState.done) {
             Map<String, dynamic> data =
                 snapshot.data!.data() as Map<String, dynamic>;
             return Padding(
-                    padding: EdgeInsets.all(s.height * 0.01),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 15),
-                            child: Center(
-                              child: Image.asset(
-                                "assets/images/delivery.jpg",
-                                width: s.height * 0.2,
-                                height: s.height * 0.2,
-                              ),
-                            )),
-                        const SizedBox(
-                          height: 5,
+              padding: EdgeInsets.all(s.height * 0.01),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      child: Center(
+                        child: Image.asset(
+                          "assets/images/delivery.jpg",
+                          width: s.height * 0.2,
+                          height: s.height * 0.2,
                         ),
-                        RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                              text: 'Do you really want to Impound ',
-                              style: const TextStyle(
+                      )),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                        text: 'Do you really want to Impound ',
+                        style: const TextStyle(
+                          fontFamily: "Montserrat",
+                          fontSize: 15,
+                          color: Color(0XFF676767),
+                          fontWeight: FontWeight.w400,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: '${data["name"]}',
+                            style: const TextStyle(
+                              fontFamily: "Montserrat",
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0XFF676767),
+                            ),
+                          ),
+                          const TextSpan(
+                            text: ' from ',
+                            style: TextStyle(
+                              fontFamily: "Montserrat",
+                              fontSize: 15,
+                              color: Color(0XFF676767),
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '${widget.techname} ?',
+                            style: const TextStyle(
+                              fontFamily: "Montserrat",
+                              fontSize: 15,
+                              fontWeight: FontWeight.w500,
+                              color: Color(0XFF676767),
+                            ),
+                          ),
+                        ]),
+                  ),
+                  SizedBox(
+                    height: s.height * 0.03,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Container(
+                          width: s.width * 0.1,
+                          height: s.height * 0.05,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: const Color(0XFFE7E7E7),
+                            ),
+                            borderRadius: BorderRadius.circular(7),
+                            color: white,
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "Cancel",
+                              style: TextStyle(
                                 fontFamily: "Montserrat",
-                                fontSize: 15,
-                                color: Color(0XFF676767),
-                                fontWeight: FontWeight.w400,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text: '${data["name"]}',
-                                  style: const TextStyle(
-                                    fontFamily: "Montserrat",
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0XFF676767),
-                                  ),
-                                ),
-                                const TextSpan(
-                                  text: ' from ',
-                                  style: TextStyle(
-                                    fontFamily: "Montserrat",
-                                    fontSize: 15,
-                                    color: Color(0XFF676767),
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: '${widget.techname} ?',
-                                  style: const TextStyle(
-                                    fontFamily: "Montserrat",
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0XFF676767),
-                                  ),
-                                ),
-                              ]),
-                        ),
-                        SizedBox(
-                          height: s.height * 0.03,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Container(
-                                width: s.width * 0.1,
-                                height: s.height * 0.05,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: const Color(0XFFE7E7E7),
-                                  ),
-                                  borderRadius: BorderRadius.circular(7),
-                                  color: white,
-                                ),
-                                child: const Center(
-                                  child: Text(
-                                    "Cancel",
-                                    style: TextStyle(
-                                      fontFamily: "Montserrat",
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color(0XFF323233),
-                                    ),
-                                  ),
-                                ),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: Color(0XFF323233),
                               ),
                             ),
-                            InkWell(
-                              onTap: () => removeV(context, data["vdocname"],data["type"], data["name"] ),
-                              child: Container(
-                                width: s.width * 0.1,
-                                height: s.height * 0.05,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: const Color(0XFFE7E7E7),
-                                  ),
-                                  borderRadius: BorderRadius.circular(7),
-                                  color: cheryred.withOpacity(0.1),
-                                ),
-                                child: const Center(
-                                  child: Text(
-                                    "Okay",
-                                    style: TextStyle(
-                                      fontFamily: "Montserrat",
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color(0XFF323233),
-                                    ),
-                                  ),
-                                ),
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () => removeV(context, data["vdocname"],
+                            data["type"], data["name"]),
+                        child: Container(
+                          width: s.width * 0.1,
+                          height: s.height * 0.05,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: const Color(0XFFE7E7E7),
+                            ),
+                            borderRadius: BorderRadius.circular(7),
+                            color: cheryred.withOpacity(0.1),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "Okay",
+                              style: TextStyle(
+                                fontFamily: "Montserrat",
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: Color(0XFF323233),
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                        SizedBox(
-                          height: s.height * 0.03,
-                        ),
-                      ],
-                    ),
-                  );
-           
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: s.height * 0.03,
+                  ),
+                ],
+              ),
+            );
           }
 
           return Column(
@@ -1175,9 +1187,9 @@ class _RemoveVehicleDialogState extends State<RemoveVehicleDialog> {
                     child: SizedBox(
                       width: s.width * 0.15,
                       height: s.width * 0.15,
-                      child:  const LoadingIndicator(
+                      child: const LoadingIndicator(
                         indicatorType: Indicator.ballClipRotateMultiple,
-                        colors:[bluebg],
+                        colors: [bluebg],
                       ),
                     ),
                   ),
@@ -1190,67 +1202,70 @@ class _RemoveVehicleDialogState extends State<RemoveVehicleDialog> {
     );
   }
 
-  Future<void> removeV(BuildContext context, String? docname, String? type, String? name) async {
-    // DateTime now = DateTime.now();
-    // String techvdoc = DateFormat('MM d').format(now);
-    // String usagedocname = DateFormat('MM d y kk:mm:ss').format(now);
+  Future<void> removeV(
+      BuildContext context, String? docname, String? type, String? name) async {
+    DateTime now = DateTime.now();
+    String techvdoc = DateFormat('MM d').format(now);
+    String usagedocname = DateFormat('MM d y kk:mm:ss').format(now);
 
-    // // Vehicle usage history
-    // String update = DateFormat('d MM y').format(now);
-    // String uptime = DateFormat('h:mma').format(now);
+    // Vehicle usage history
+    String update = DateFormat('d MM y').format(now);
+    String uptime = DateFormat('h:mma').format(now);
 
-    // // Vehicle history class is added
-    // VehicleUsageHistory vusage = VehicleUsageHistory(
-    //   name: name,
-    //   upDate: update,
-    //   upTime: uptime,
-    //   username: widget.username,
-    //   docname: usagedocname,
-    //   techname: widget.techname,
-    //   type: type,
-    //   status: "Impounded"
-    // );
-    
-    // showDialog(context: context, builder: ((context) => LoadingDialog()));
-    // await fb
-    //     .collection("Technician")
-    //     .doc(widget.username)
-    //     .collection("Vehicle")
-    //     .doc(techvdoc)
-    //     .delete()
-    //     .then((value) => (print("data deleted suscessfully")));
+    // Vehicle history class is added
+    VehicleUsageHistory vusage = VehicleUsageHistory(
+        name: name,
+        upDate: update,
+        upTime: uptime,
+        username: widget.username,
+        docname: usagedocname,
+        techname: widget.techname,
+        type: type,
+        status: "Impounded");
 
-    // // status change
-    // await fb.collection("Garage").doc(docname).set(
-    //     {"status": "Available", "techname": "none", "username": "none"},
-    //     SetOptions(merge: true));
+    showDialog(context: context, builder: ((context) => const LoadingDialog()));
+    await fb
+        .collection("Technician")
+        .doc(widget.username)
+        .collection("Vehicle")
+        .doc(techvdoc)
+        .delete()
+        .then((value) => (print("data deleted suscessfully")));
 
-    // // history added
-    // await fb
-    //     .collection("GarageUsage")
-    //     .doc(usagedocname)
-    //     .set(vusage.toMap())
-    //     .then((v) => print("Vehicle assigned history added"));
+    // status change
+    await fb.collection("Garage").doc(docname).set(
+        {"status": "Available", "techname": "none", "username": "none"},
+        SetOptions(merge: true));
 
-    // Navigator.of(context).pop();
-    // Navigator.pop(context);
-    // MotionToast.success(
-    //   title: Text(
-    //     "Vehicle impounded from ${widget.techname}",
-    //     style: TextStyle(
-    //       fontFamily: "Montserrat",
-    //       fontSize: 16,
-    //       fontWeight: FontWeight.w500,
-    //     ),
-    //   ),
-    //   description: Text(
-    //     "Successfully vehicle Impounded",
-    //     style: TextStyle(
-    //       fontFamily: "Montserrat",
-    //       fontSize: 12,
-    //       fontWeight: FontWeight.w300,
-    //     ),
-    //   ),
-    // ).show(context);
+    // history added
+    await fb
+        .collection("GarageUsage")
+        .doc(usagedocname)
+        .set(vusage.toMap())
+        .then((v) => print("Vehicle assigned history added"));
+
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pop();
+    // ignore: use_build_context_synchronously
+    Navigator.pop(context);
+    // ignore: use_build_context_synchronously
+    MotionToast.success(
+      title: Text(
+        "Vehicle impounded from ${widget.techname}",
+        style: const TextStyle(
+          fontFamily: "Montserrat",
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      description: const Text(
+        "Successfully vehicle Impounded",
+        style: TextStyle(
+          fontFamily: "Montserrat",
+          fontSize: 12,
+          fontWeight: FontWeight.w300,
+        ),
+      ),
+    ).show(context);
   }
 }
