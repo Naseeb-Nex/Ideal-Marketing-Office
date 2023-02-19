@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:test2/services/user_model.dart';
+import 'package:test2/widgets/Reportsrcwidget.dart';
 import 'package:test2/widgets/export_widget.dart';
 import 'package:test2/widgets/vehicleportal_widget.dart';
 
@@ -238,6 +239,31 @@ class _OfficeHomeState extends State<OfficeHome> {
                               ),
                             ),
                           ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          InkWell(
+                            onTap: () => setState(() {
+                              currentscr = 'report';
+                            }),
+                            child: Container(
+                              height: 50,
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: cheryred),
+                              child: const Text(
+                                "Report",
+                                style: TextStyle(
+                                  fontFamily: "Nunito",
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: white,
+                                ),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -291,6 +317,8 @@ class Widgetwrapper extends StatelessWidget {
       return const Pgmviewer();
     } else if (src == 'vehicleportal') {
       return  VehiclePortalWidget();
+    } else if (src == 'report') {
+      return  Reportsrcwidget();
     }
     return Homewidget(
       uid: uid,
