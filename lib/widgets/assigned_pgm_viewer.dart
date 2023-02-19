@@ -15,12 +15,12 @@ class Assignedpgmviewer extends StatelessWidget {
         child: Container(
           width: double.infinity,
           height: double.infinity,
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(25),
               boxShadow: [
                 BoxShadow(
-                  offset: Offset(0, 5),
+                  offset: const Offset(0, 5),
                   blurRadius: 15,
                   color: secondbg.withOpacity(0.20),
                 ),
