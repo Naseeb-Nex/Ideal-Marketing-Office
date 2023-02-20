@@ -19,6 +19,12 @@ class Reportsrcwidget extends StatefulWidget {
 }
 
 class ReportsrcwidgetState extends State<Reportsrcwidget> {
+  @override
+  void initState() {
+    super.initState();
+    overviewLoader();
+  }
+
   FirebaseFirestore fb = FirebaseFirestore.instance;
   int p = 0, c = 0;
   int touchedIndex = 0;
@@ -82,8 +88,7 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
-                        padding:
-                            EdgeInsets.only(left: s.width * 0.03),
+                        padding: EdgeInsets.only(left: s.width * 0.03),
                         child: Container(
                           padding: EdgeInsets.symmetric(
                               horizontal: s.width * 0.02,
@@ -100,13 +105,25 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                "OVERVIEW",
-                                style: TextStyle(
-                                    color: bluebg,
-                                    fontFamily: "Montserrat",
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    "OVERVIEW",
+                                    style: TextStyle(
+                                        color: bluebg,
+                                        fontFamily: "Montserrat",
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  IconButton(
+                                      onPressed: () => overviewLoader(),
+                                      icon:  Icon(
+                                        Icons.refresh,
+                                        color: Colors.blueGrey.shade300,
+                                      ))
+                                ],
                               ),
                               const Divider(
                                 endIndent: 10,
@@ -115,7 +132,7 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                                 height: 10,
                               ),
                               AspectRatio(
-                                aspectRatio: 1.3,
+                                aspectRatio: 1.5,
                                 child: AspectRatio(
                                   aspectRatio: 1,
                                   child: rpstatus
@@ -498,6 +515,40 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
           throw 'Oh no';
       }
     });
+  }
+
+// Overview Setup loader
+  overviewLoader() {
+    DateTime now = DateTime.now();
+
+    // Report
+    String day = DateFormat('d').format(now);
+    String month = DateFormat('MM').format(now);
+    String year = DateFormat('y').format(now);
+
+    // Check report is initailized or not
+    fb
+        .collection("Reports")
+        .doc(year)
+        .collection("Month")
+        .doc(month)
+        .collection(day)
+        .doc("Counter")
+        .get()
+        .then(
+      (DocumentSnapshot doc) {
+        if (!doc.exists) {
+          setState(() {
+            rpstatus = false;
+          });
+        } else {
+          setState(() {
+            rpstatus = true;
+          });
+        }
+      },
+      onError: (e) => print("Error in RPStatus: $e"),
+    );
   }
 }
 
