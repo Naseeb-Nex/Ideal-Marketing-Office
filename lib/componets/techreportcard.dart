@@ -7,11 +7,12 @@ import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
+// ignore: must_be_immutable
 class Techreportcard extends StatefulWidget {
   String? name;
   String? username;
 
-  Techreportcard({this.username, this.name});
+  Techreportcard({Key? key, this.username, this.name}) : super(key: key);
 
   @override
   State<Techreportcard> createState() => _TechreportcardState();
@@ -25,7 +26,7 @@ class _TechreportcardState extends State<Techreportcard> {
   int c = 0;
   int pro = 0;
 
-  bool is_sub = false;
+  bool isSub = false;
 
   @override
   void initState() {
@@ -56,7 +57,7 @@ class _TechreportcardState extends State<Techreportcard> {
       children: [
         Container(
             width: double.infinity,
-            padding: EdgeInsets.all(10),
+            padding: const  EdgeInsets.all(10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
               color: white,
@@ -71,7 +72,7 @@ class _TechreportcardState extends State<Techreportcard> {
               children: [
                 Row(
                   children: [
-                    Container(
+                    SizedBox(
                       width: s.height * 0.1,
                       height: s.height * 0.1,
                       child: Image.asset(
@@ -88,7 +89,7 @@ class _TechreportcardState extends State<Techreportcard> {
                       children: [
                         Text(
                           "${widget.name}",
-                          style: TextStyle(
+                          style: const  TextStyle(
                               fontFamily: "Montserrat",
                               fontSize: 16,
                               fontWeight: FontWeight.w400),
@@ -117,7 +118,7 @@ class _TechreportcardState extends State<Techreportcard> {
                                     child: LoadingIndicator(
                                       indicatorType:
                                           Indicator.ballClipRotateMultiple,
-                                      colors: const [bluebg],
+                                      colors:  [bluebg],
                                     ),
                                   ),
                                 );
@@ -161,19 +162,19 @@ class _TechreportcardState extends State<Techreportcard> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
-                                    child: pendingpgms.length == 0 &&
-                                            processingpgm.length == 0 &&
-                                            assigned.length == 0 &&
-                                            completedpgm.length == 0
+                                    child: pendingpgms.isEmpty &&
+                                            processingpgm.isEmpty &&
+                                            assigned.isEmpty &&
+                                            completedpgm.isEmpty
                                         ? Container(
-                                            padding: EdgeInsets.symmetric(
+                                            padding: const  EdgeInsets.symmetric(
                                                 vertical: 2, horizontal: 10),
                                             decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(10),
-                                              color: Color(0XFFf25c54),
+                                              color:  const Color(0XFFf25c54),
                                             ),
-                                            child: Center(
+                                            child: const  Center(
                                                 child: Text(
                                               "No work",
                                               style: TextStyle(
@@ -186,15 +187,15 @@ class _TechreportcardState extends State<Techreportcard> {
                                         : Column(
                                             children: [
                                               Container(
-                                                padding: EdgeInsets.symmetric(
+                                                padding:  const EdgeInsets.symmetric(
                                                     vertical: 1,
                                                     horizontal: 10),
                                                 decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),
-                                                    color: Color(0XFF72b01d)),
-                                                child: Center(
+                                                    color:  const Color(0XFF72b01d)),
+                                                child:  const Center(
                                                     child: Text(
                                                   "Active",
                                                   style: TextStyle(
@@ -207,14 +208,14 @@ class _TechreportcardState extends State<Techreportcard> {
                                                   textAlign: TextAlign.center,
                                                 )),
                                               ),
-                                              SizedBox(
+                                               const SizedBox(
                                                 height: 3,
                                               ),
                                               Row(
                                                 children: [
                                                   // const SizedBox(width: 4,),
                                                   Container(
-                                                    decoration: BoxDecoration(
+                                                    decoration:  const BoxDecoration(
                                                       shape: BoxShape.circle,
                                                       color:
                                                           Color(0xFFffd500),
@@ -225,7 +226,7 @@ class _TechreportcardState extends State<Techreportcard> {
                                                               .all(5.0),
                                                       child: Text(
                                                         "${assigned.length}",
-                                                        style: TextStyle(
+                                                        style:  const TextStyle(
                                                             fontFamily:
                                                                 "Montserrat",
                                                             fontWeight:
@@ -239,7 +240,7 @@ class _TechreportcardState extends State<Techreportcard> {
                                                     width: 2,
                                                   ),
                                                   Container(
-                                                    decoration: BoxDecoration(
+                                                    decoration: const  BoxDecoration(
                                                       shape: BoxShape.circle,
                                                       color:
                                                           Color(0XFF70e000),
@@ -250,7 +251,7 @@ class _TechreportcardState extends State<Techreportcard> {
                                                               .all(5.0),
                                                       child: Text(
                                                         "${completedpgm.length}",
-                                                        style: TextStyle(
+                                                        style:  const TextStyle(
                                                             fontFamily:
                                                                 "Montserrat",
                                                             fontWeight:
@@ -264,7 +265,7 @@ class _TechreportcardState extends State<Techreportcard> {
                                                     width: 2,
                                                   ),
                                                   Container(
-                                                    decoration: BoxDecoration(
+                                                    decoration: const  BoxDecoration(
                                                       shape: BoxShape.circle,
                                                       color:
                                                           Color(0xFFd62839),
@@ -275,7 +276,7 @@ class _TechreportcardState extends State<Techreportcard> {
                                                               .all(5.0),
                                                       child: Text(
                                                         "${pendingpgms.length}",
-                                                        style: TextStyle(
+                                                        style: const  TextStyle(
                                                             fontFamily:
                                                                 "Montserrat",
                                                             fontWeight:
@@ -289,7 +290,7 @@ class _TechreportcardState extends State<Techreportcard> {
                                                     width: 2,
                                                   ),
                                                   Container(
-                                                    decoration: BoxDecoration(
+                                                    decoration:  const BoxDecoration(
                                                       shape: BoxShape.circle,
                                                       color:
                                                           Color(0xFF1e96fc),
@@ -300,7 +301,7 @@ class _TechreportcardState extends State<Techreportcard> {
                                                               .all(5.0),
                                                       child: Text(
                                                         "${processingpgm.length}",
-                                                        style: TextStyle(
+                                                        style:  const TextStyle(
                                                           fontFamily:
                                                               "Montserrat",
                                                           fontWeight:
@@ -323,7 +324,7 @@ class _TechreportcardState extends State<Techreportcard> {
                   ],
                 ),
                 Visibility(
-                  visible: is_sub,
+                  visible: isSub,
                   child: Positioned(
                       left: s.width * 0.15,
                       bottom: 0,
@@ -339,6 +340,7 @@ class _TechreportcardState extends State<Techreportcard> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Future<void> submit_validator() async {
     // Report side
     DateTime now = DateTime.now();
@@ -359,10 +361,10 @@ class _TechreportcardState extends State<Techreportcard> {
         .then((DocumentSnapshot doc) {
       if (doc.exists) {
         try {
-          bool nested = doc.get(FieldPath(['submit']));
+          bool nested = doc.get(FieldPath(const ['submit']));
           if (nested) {
             setState(() {
-              is_sub = true;
+              isSub = true;
             });
           }
         } on StateError catch (e) {
