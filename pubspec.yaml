@@ -44,6 +44,7 @@ dependencies:
   iconsax: ^0.0.8
   motion_toast: ^2.6.4
   loading_indicator: ^3.1.0
+  fl_chart: ^0.60.0
 
 dependency_overrides:
   firebase_core_platform_interface: 4.5.1

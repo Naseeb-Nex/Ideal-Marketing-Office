@@ -1,3 +1,5 @@
+import 'package:loading_indicator/loading_indicator.dart';
+import 'package:test2/componets/techreportcard.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -44,19 +46,19 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            children:  [
-               Padding(
-                 padding: EdgeInsets.symmetric(horizontal: s.width * 0.03 ),
-                 child: const Text(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: s.width * 0.03),
+                child: const Text(
                   "Report",
                   style: TextStyle(
                     fontFamily: "Montserrat",
                     fontSize: 25,
                     fontWeight: FontWeight.w800,
-                    color:  bluebg,
+                    color: bluebg,
                   ),
-                             ),
-               ),
+                ),
+              ),
             ],
           ),
           // Container(
@@ -71,15 +73,17 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
             height: 5,
           ),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Flexible(
                   flex: 4,
                   fit: FlexFit.tight,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
                         padding:
-                            EdgeInsets.symmetric(horizontal: s.width * 0.03),
+                            EdgeInsets.only(left: s.width * 0.03),
                         child: Container(
                           padding: EdgeInsets.symmetric(
                               horizontal: s.width * 0.02,
@@ -96,7 +100,7 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                               const Text(
+                              const Text(
                                 "OVERVIEW",
                                 style: TextStyle(
                                     color: bluebg,
@@ -104,7 +108,7 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold),
                               ),
-                              const  Divider(
+                              const Divider(
                                 endIndent: 10,
                               ),
                               const SizedBox(
@@ -131,7 +135,7 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                                               return Text(
                                                   'Error = ${snapshot.error}');
                                             }
-    
+
                                             if (snapshot.hasData) {
                                               var output =
                                                   snapshot.data!.data();
@@ -139,7 +143,7 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                                                   c = 0,
                                                   pro = 0,
                                                   p = 0;
-    
+
                                               if (output != null) {
                                                 var assigned =
                                                     output['assigned'];
@@ -148,25 +152,25 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                                                 var pending = output['pending'];
                                                 var processing =
                                                     output['processing'];
-    
+
                                                 if (assigned != null) {
                                                   a = assigned.toDouble();
                                                 } else {
                                                   a = 0;
                                                 }
-    
+
                                                 if (pending != null) {
                                                   p = pending.toDouble();
                                                 } else {
                                                   p = 0;
                                                 }
-    
+
                                                 if (processing != null) {
                                                   pro = processing.toDouble();
                                                 } else {
                                                   pro = 0;
                                                 }
-    
+
                                                 if (competed != null) {
                                                   c = competed.toDouble();
                                                 } else {
@@ -184,8 +188,8 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                                                         a, p, c, pro)),
                                               );
                                             }
-    
-                                            return  const Center(
+
+                                            return const Center(
                                                 child:
                                                     CircularProgressIndicator());
                                           },
@@ -221,14 +225,14 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                                             Container(
                                               width: 10,
                                               height: 10,
-                                              color: const  Color(0xFF70e000),
+                                              color: const Color(0xFF70e000),
                                             ),
                                             SizedBox(
                                               width: s.width * 0.02,
                                             ),
-                                            const  Text(
+                                            const Text(
                                               "Completed",
-                                              style:  TextStyle(
+                                              style: TextStyle(
                                                 fontFamily: "Montserrat",
                                                 fontSize: 13,
                                                 // color: Color(0xff70e000),
@@ -243,14 +247,14 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                                             Container(
                                               width: 10,
                                               height: 10,
-                                              color: const  Color(0xFFd62839),
+                                              color: const Color(0xFFd62839),
                                             ),
                                             SizedBox(
                                               width: s.width * 0.02,
                                             ),
-                                           const   Text(
+                                            const Text(
                                               "Pending",
-                                              style:  TextStyle(
+                                              style: TextStyle(
                                                 fontFamily: "Montserrat",
                                                 fontSize: 13,
                                                 // color: Color(0xffd62839),
@@ -265,14 +269,14 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                                             Container(
                                               width: 10,
                                               height: 10,
-                                              color: const  Color(0xFF1e96fc),
+                                              color: const Color(0xFF1e96fc),
                                             ),
                                             SizedBox(
                                               width: s.width * 0.02,
                                             ),
-                                            const  Text(
+                                            const Text(
                                               "Processing",
-                                              style:  TextStyle(
+                                              style: TextStyle(
                                                 fontFamily: "Montserrat",
                                                 fontSize: 13,
                                                 // color: Color(0xffd62839),
@@ -287,14 +291,14 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                                             Container(
                                               width: 10,
                                               height: 10,
-                                              color: const  Color(0xFFffd500),
+                                              color: const Color(0xFFffd500),
                                             ),
                                             SizedBox(
                                               width: s.width * 0.02,
                                             ),
-                                             const Text(
+                                            const Text(
                                               "Assigned",
-                                              style:  TextStyle(
+                                              style: TextStyle(
                                                 fontFamily: "Montserrat",
                                                 fontSize: 13,
                                                 // color: Color(0xffd62839),
@@ -307,15 +311,17 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: 3,),
+                              const SizedBox(
+                                height: 3,
+                              ),
                               Text(
-                               "*Today's Summary",
-                               style:  TextStyle(
-                                 fontFamily: "Montserrat",
-                                 fontSize: 10,
-                                 color: Colors.grey.shade400,
-                               ),
-                                  ),
+                                "*Today's Summary",
+                                style: TextStyle(
+                                  fontFamily: "Montserrat",
+                                  fontSize: 10,
+                                  color: Colors.grey.shade400,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -326,11 +332,84 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                     ],
                   )),
               Flexible(
-                  flex: 2,
-                  fit: FlexFit.tight,
+                flex: 3,
+                fit: FlexFit.tight,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: s.height * 0.03),
                   child: Container(
-                    color: redbg,
-                  ))
+                    padding: EdgeInsets.symmetric(
+                        horizontal: s.height * 0.03, vertical: s.height * 0.02),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: white,
+                        boxShadow: [
+                          BoxShadow(
+                              spreadRadius: 2,
+                              blurRadius: 5,
+                              color: black.withOpacity(0.1))
+                        ]),
+                    child: Column(
+                      children: [
+                        const Text(
+                          "REPORT",
+                          style: TextStyle(
+                              color: bluebg,
+                              fontFamily: "Montserrat",
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        const Divider(
+                          endIndent: 10,
+                        ),
+                        StreamBuilder<QuerySnapshot>(
+                            stream: fb.collection("Employee").snapshots(),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<QuerySnapshot> snapshot) {
+                              if (snapshot.hasError) {}
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: s.height * 0.1,
+                                    height: s.height * 0.1,
+                                    child: const LoadingIndicator(
+                                      indicatorType:
+                                          Indicator.ballClipRotateMultiple,
+                                      colors: [bluebg],
+                                    ),
+                                  ),
+                                );
+                              }
+
+                              final List techprofile = [];
+                              snapshot.data!.docs
+                                  .map((DocumentSnapshot document) {
+                                Map a = document.data() as Map<String, dynamic>;
+                                techprofile.add(a);
+                                // a['uid'] = document.id;
+                              }).toList();
+                              return Column(
+                                children: [
+                                  for (var i = 0;
+                                      i < techprofile.length;
+                                      i++) ...[
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 5.0),
+                                      child: Techreportcard(
+                                        name: techprofile[i]['name'],
+                                        username: techprofile[i]['username'],
+                                      ),
+                                    )
+                                  ]
+                                ],
+                              );
+                            }),
+                      ],
+                    ),
+                  ),
+                ),
+              )
             ],
           )
         ],
