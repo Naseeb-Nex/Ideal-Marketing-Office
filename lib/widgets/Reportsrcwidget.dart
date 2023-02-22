@@ -1,3 +1,4 @@
+import 'package:iconsax/iconsax.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:test2/componets/techreportcard.dart';
 import 'package:test2/constants/constants.dart';
@@ -16,6 +17,9 @@ class Reportsrcwidget extends StatefulWidget {
 
   @override
   ReportsrcwidgetState createState() => ReportsrcwidgetState();
+
+  static ReportsrcwidgetState? of(BuildContext context) =>
+    context.findAncestorStateOfType<ReportsrcwidgetState>();
 }
 
 class ReportsrcwidgetState extends State<Reportsrcwidget> {
@@ -25,10 +29,15 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
     overviewLoader();
   }
 
+  String _username = "Akhil";
+
+  set string(String value) => setState(() => _username = value);
+
   FirebaseFirestore fb = FirebaseFirestore.instance;
   int p = 0, c = 0;
   int touchedIndex = 0;
   bool rpstatus = false;
+  bool visChat = true;
 
   @override
   Widget build(BuildContext context) {
@@ -78,22 +87,416 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
           const SizedBox(
             height: 5,
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          Stack(
             children: [
-              Flexible(
-                  flex: 4,
-                  fit: FlexFit.tight,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: s.width * 0.03),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: s.width * 0.02,
-                              vertical: s.height * 0.03),
-                          decoration: BoxDecoration(
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    child: visChat
+                        ? null
+                        : Flexible(
+                            flex: 4,
+                            fit: FlexFit.tight,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(left: s.width * 0.03),
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: s.width * 0.02,
+                                        vertical: s.height * 0.03),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: white,
+                                        boxShadow: [
+                                          BoxShadow(
+                                              spreadRadius: 2,
+                                              blurRadius: 5,
+                                              color: black.withOpacity(0.1))
+                                        ]),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            const Text(
+                                              "OVERVIEW",
+                                              style: TextStyle(
+                                                  color: bluebg,
+                                                  fontFamily: "Montserrat",
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            IconButton(
+                                                onPressed: () =>
+                                                    overviewLoader(),
+                                                icon: Icon(
+                                                  Icons.refresh,
+                                                  color:
+                                                      Colors.blueGrey.shade300,
+                                                ))
+                                          ],
+                                        ),
+                                        const Divider(
+                                          endIndent: 10,
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        AspectRatio(
+                                          aspectRatio: 1.5,
+                                          child: AspectRatio(
+                                            aspectRatio: 1,
+                                            child: rpstatus
+                                                ? StreamBuilder<
+                                                    DocumentSnapshot<
+                                                        Map<String, dynamic>>>(
+                                                    stream: fb
+                                                        .collection("Reports")
+                                                        .doc(year)
+                                                        .collection("Month")
+                                                        .doc(month)
+                                                        .collection(day)
+                                                        .doc("Counter")
+                                                        .snapshots(),
+                                                    builder: (_, snapshot) {
+                                                      if (snapshot.hasError) {
+                                                        return Text(
+                                                            'Error = ${snapshot.error}');
+                                                      }
+
+                                                      if (snapshot.hasData) {
+                                                        var output = snapshot
+                                                            .data!
+                                                            .data();
+                                                        double a = 0,
+                                                            c = 0,
+                                                            pro = 0,
+                                                            p = 0;
+
+                                                        if (output != null) {
+                                                          var assigned = output[
+                                                              'assigned'];
+                                                          var competed = output[
+                                                              'completed'];
+                                                          var pending =
+                                                              output['pending'];
+                                                          var processing =
+                                                              output[
+                                                                  'processing'];
+
+                                                          if (assigned !=
+                                                              null) {
+                                                            a = assigned
+                                                                .toDouble();
+                                                          } else {
+                                                            a = 0;
+                                                          }
+
+                                                          if (pending != null) {
+                                                            p = pending
+                                                                .toDouble();
+                                                          } else {
+                                                            p = 0;
+                                                          }
+
+                                                          if (processing !=
+                                                              null) {
+                                                            pro = processing
+                                                                .toDouble();
+                                                          } else {
+                                                            pro = 0;
+                                                          }
+
+                                                          if (competed !=
+                                                              null) {
+                                                            c = competed
+                                                                .toDouble();
+                                                          } else {
+                                                            c = 0;
+                                                          }
+                                                        }
+                                                        return PieChart(
+                                                          PieChartData(
+                                                              borderData:
+                                                                  FlBorderData(
+                                                                show: false,
+                                                              ),
+                                                              sectionsSpace: 0,
+                                                              centerSpaceRadius:
+                                                                  0,
+                                                              sections:
+                                                                  showingSections(
+                                                                      a,
+                                                                      p,
+                                                                      c,
+                                                                      pro)),
+                                                        );
+                                                      }
+
+                                                      return const Center(
+                                                          child:
+                                                              CircularProgressIndicator());
+                                                    },
+                                                  )
+                                                : Container(
+                                                    clipBehavior: Clip.hardEdge,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(30)),
+                                                    child: Image.asset(
+                                                      'assets/images/emptyreport.gif',
+                                                      fit: BoxFit.fill,
+                                                    ),
+                                                  ),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 15),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Container(
+                                                        width: 10,
+                                                        height: 10,
+                                                        color: const Color(
+                                                            0xFF70e000),
+                                                      ),
+                                                      SizedBox(
+                                                        width: s.width * 0.02,
+                                                      ),
+                                                      const Text(
+                                                        "Completed",
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              "Montserrat",
+                                                          fontSize: 13,
+                                                          // color: Color(0xff70e000),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Container(
+                                                        width: 10,
+                                                        height: 10,
+                                                        color: const Color(
+                                                            0xFFd62839),
+                                                      ),
+                                                      SizedBox(
+                                                        width: s.width * 0.02,
+                                                      ),
+                                                      const Text(
+                                                        "Pending",
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              "Montserrat",
+                                                          fontSize: 13,
+                                                          // color: Color(0xffd62839),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Container(
+                                                        width: 10,
+                                                        height: 10,
+                                                        color: const Color(
+                                                            0xFF1e96fc),
+                                                      ),
+                                                      SizedBox(
+                                                        width: s.width * 0.02,
+                                                      ),
+                                                      const Text(
+                                                        "Processing",
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              "Montserrat",
+                                                          fontSize: 13,
+                                                          // color: Color(0xffd62839),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Container(
+                                                        width: 10,
+                                                        height: 10,
+                                                        color: const Color(
+                                                            0xFFffd500),
+                                                      ),
+                                                      SizedBox(
+                                                        width: s.width * 0.02,
+                                                      ),
+                                                      const Text(
+                                                        "Assigned",
+                                                        style: TextStyle(
+                                                          fontFamily:
+                                                              "Montserrat",
+                                                          fontSize: 13,
+                                                          // color: Color(0xffd62839),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 3,
+                                        ),
+                                        Text(
+                                          "*Today's Summary",
+                                          style: TextStyle(
+                                            fontFamily: "Montserrat",
+                                            fontSize: 10,
+                                            color: Colors.grey.shade400,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                              ],
+                            )),
+                  ),
+                  Flexible(
+                    flex: visChat ? 2 : 3,
+                    fit: FlexFit.tight,
+                    child: Padding(
+                      padding:
+                          EdgeInsets.only(left : s.height * 0.03),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: s.height * 0.03,
+                            vertical: s.height * 0.02),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: white,
+                            boxShadow: [
+                              BoxShadow(
+                                  spreadRadius: 2,
+                                  blurRadius: 5,
+                                  color: black.withOpacity(0.1))
+                            ]),
+                        child: Column(
+                          children: [
+                            const Text(
+                              "REPORT",
+                              style: TextStyle(
+                                  color: bluebg,
+                                  fontFamily: "Montserrat",
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            const Divider(
+                              endIndent: 10,
+                            ),
+                            StreamBuilder<QuerySnapshot>(
+                                stream: fb.collection("Employee").snapshots(),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  if (snapshot.hasError) {}
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return SizedBox(
+                                      height: s.height * 0.7,
+                                      child: Center(
+                                        child: SizedBox(
+                                          width: s.height * 0.1,
+                                          height: s.height * 0.1,
+                                          child: const LoadingIndicator(
+                                            indicatorType:
+                                                Indicator.ballClipRotateMultiple,
+                                            colors: [bluebg],
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }
+
+                                  final List techprofile = [];
+                                  snapshot.data!.docs
+                                      .map((DocumentSnapshot document) {
+                                    Map a =
+                                        document.data() as Map<String, dynamic>;
+                                    techprofile.add(a);
+                                    // a['uid'] = document.id;
+                                  }).toList();
+                                  return Column(
+                                    children: [
+                                      for (var i = 0;
+                                          i < techprofile.length;
+                                          i++) ...[
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 5.0),
+                                          child: Techreportcard(
+                                            name: techprofile[i]['name'],
+                                            username: techprofile[i]
+                                                ['username'],
+                                                callback: (val) => setState(() => _username = val),
+                                                selectedUser: _username,
+                                          ),
+                                        )
+                                      ]
+                                    ],
+                                  );
+                                }),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    child: visChat
+                        ? Flexible(
+                            flex: 4,
+                            fit: FlexFit.tight,
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: s.height * 0.03),
+                              child: AnimatedContainer(
+                                  duration: const Duration(
+                                    milliseconds: 2000,
+                                  ),
+                                  padding: EdgeInsets.symmetric(
+                              horizontal: s.height * 0.03,
+                              vertical: s.height * 0.02),
+                                                    decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: white,
                               boxShadow: [
@@ -102,331 +505,44 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                                     blurRadius: 5,
                                     color: black.withOpacity(0.1))
                               ]),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text(
-                                    "OVERVIEW",
-                                    style: TextStyle(
-                                        color: bluebg,
-                                        fontFamily: "Montserrat",
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  IconButton(
-                                      onPressed: () => overviewLoader(),
-                                      icon:  Icon(
-                                        Icons.refresh,
-                                        color: Colors.blueGrey.shade300,
-                                      ))
-                                ],
-                              ),
-                              const Divider(
-                                endIndent: 10,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              AspectRatio(
-                                aspectRatio: 1.5,
-                                child: AspectRatio(
-                                  aspectRatio: 1,
-                                  child: rpstatus
-                                      ? StreamBuilder<
-                                          DocumentSnapshot<
-                                              Map<String, dynamic>>>(
-                                          stream: fb
-                                              .collection("Reports")
-                                              .doc(year)
-                                              .collection("Month")
-                                              .doc(month)
-                                              .collection(day)
-                                              .doc("Counter")
-                                              .snapshots(),
-                                          builder: (_, snapshot) {
-                                            if (snapshot.hasError) {
-                                              return Text(
-                                                  'Error = ${snapshot.error}');
-                                            }
-
-                                            if (snapshot.hasData) {
-                                              var output =
-                                                  snapshot.data!.data();
-                                              double a = 0,
-                                                  c = 0,
-                                                  pro = 0,
-                                                  p = 0;
-
-                                              if (output != null) {
-                                                var assigned =
-                                                    output['assigned'];
-                                                var competed =
-                                                    output['completed'];
-                                                var pending = output['pending'];
-                                                var processing =
-                                                    output['processing'];
-
-                                                if (assigned != null) {
-                                                  a = assigned.toDouble();
-                                                } else {
-                                                  a = 0;
-                                                }
-
-                                                if (pending != null) {
-                                                  p = pending.toDouble();
-                                                } else {
-                                                  p = 0;
-                                                }
-
-                                                if (processing != null) {
-                                                  pro = processing.toDouble();
-                                                } else {
-                                                  pro = 0;
-                                                }
-
-                                                if (competed != null) {
-                                                  c = competed.toDouble();
-                                                } else {
-                                                  c = 0;
-                                                }
-                                              }
-                                              return PieChart(
-                                                PieChartData(
-                                                    borderData: FlBorderData(
-                                                      show: false,
-                                                    ),
-                                                    sectionsSpace: 0,
-                                                    centerSpaceRadius: 0,
-                                                    sections: showingSections(
-                                                        a, p, c, pro)),
-                                              );
-                                            }
-
-                                            return const Center(
-                                                child:
-                                                    CircularProgressIndicator());
-                                          },
-                                        )
-                                      : Container(
-                                          clipBehavior: Clip.hardEdge,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(30)),
-                                          child: Image.asset(
-                                            'assets/images/emptyreport.gif',
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 15),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              width: 10,
-                                              height: 10,
-                                              color: const Color(0xFF70e000),
-                                            ),
-                                            SizedBox(
-                                              width: s.width * 0.02,
-                                            ),
-                                            const Text(
-                                              "Completed",
-                                              style: TextStyle(
-                                                fontFamily: "Montserrat",
-                                                fontSize: 13,
-                                                // color: Color(0xff70e000),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              width: 10,
-                                              height: 10,
-                                              color: const Color(0xFFd62839),
-                                            ),
-                                            SizedBox(
-                                              width: s.width * 0.02,
-                                            ),
-                                            const Text(
-                                              "Pending",
-                                              style: TextStyle(
-                                                fontFamily: "Montserrat",
-                                                fontSize: 13,
-                                                // color: Color(0xffd62839),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              width: 10,
-                                              height: 10,
-                                              color: const Color(0xFF1e96fc),
-                                            ),
-                                            SizedBox(
-                                              width: s.width * 0.02,
-                                            ),
-                                            const Text(
-                                              "Processing",
-                                              style: TextStyle(
-                                                fontFamily: "Montserrat",
-                                                fontSize: 13,
-                                                // color: Color(0xffd62839),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              width: 10,
-                                              height: 10,
-                                              color: const Color(0xFFffd500),
-                                            ),
-                                            SizedBox(
-                                              width: s.width * 0.02,
-                                            ),
-                                            const Text(
-                                              "Assigned",
-                                              style: TextStyle(
-                                                fontFamily: "Montserrat",
-                                                fontSize: 13,
-                                                // color: Color(0xffd62839),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 3,
-                              ),
-                              Text(
-                                "*Today's Summary",
-                                style: TextStyle(
-                                  fontFamily: "Montserrat",
-                                  fontSize: 10,
-                                  color: Colors.grey.shade400,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                    ],
-                  )),
-              Flexible(
-                flex: 3,
-                fit: FlexFit.tight,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: s.height * 0.03),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: s.height * 0.03, vertical: s.height * 0.02),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: white,
-                        boxShadow: [
-                          BoxShadow(
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              color: black.withOpacity(0.1))
-                        ]),
-                    child: Column(
-                      children: [
-                        const Text(
-                          "REPORT",
-                          style: TextStyle(
-                              color: bluebg,
-                              fontFamily: "Montserrat",
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        const Divider(
-                          endIndent: 10,
-                        ),
-                        StreamBuilder<QuerySnapshot>(
-                            stream: fb.collection("Employee").snapshots(),
-                            builder: (BuildContext context,
-                                AsyncSnapshot<QuerySnapshot> snapshot) {
-                              if (snapshot.hasError) {}
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: s.height * 0.1,
-                                    height: s.height * 0.1,
-                                    child: const LoadingIndicator(
-                                      indicatorType:
-                                          Indicator.ballClipRotateMultiple,
-                                      colors: [bluebg],
-                                    ),
-                                  ),
-                                );
-                              }
-
-                              final List techprofile = [];
-                              snapshot.data!.docs
-                                  .map((DocumentSnapshot document) {
-                                Map a = document.data() as Map<String, dynamic>;
-                                techprofile.add(a);
-                                // a['uid'] = document.id;
-                              }).toList();
-                              return Column(
-                                children: [
-                                  for (var i = 0;
-                                      i < techprofile.length;
-                                      i++) ...[
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 5.0),
-                                      child: Techreportcard(
-                                        name: techprofile[i]['name'],
-                                        username: techprofile[i]['username'],
-                                      ),
-                                    )
-                                  ]
-                                ],
-                              );
-                            }),
-                      ],
-                    ),
+                                  child: Column(children: [
+                                    Text(_username)
+                                  ]) ,),
+                            ),
+                          )
+                        : null,
                   ),
-                ),
-              )
+                ],
+              ),
+              Container(
+                  child: visChat
+                      ? Positioned(
+                        left: s.height * 0.04,
+                        top: 8,
+                          child: InkWell(
+                            onTap: () => setState(() {
+                              visChat = !visChat;
+                            }),
+                            child: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    spreadRadius: 1,
+                                    blurRadius: 3,
+                                    color: black.withOpacity(0.1),
+                                    offset: const Offset(0, 1),
+                                  )
+                                ]),
+                          
+                                child: const  Icon(Iconsax.arrow_left, color: bluebg,),
+                                                  ),
+                          ),
+                        )
+                      : null)
             ],
           )
         ],
