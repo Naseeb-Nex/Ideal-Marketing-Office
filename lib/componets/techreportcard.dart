@@ -9,7 +9,6 @@ import 'package:loading_indicator/loading_indicator.dart';
 import 'package:test2/widgets/Reportsrcwidget.dart';
 
 typedef void StringCallback(String val);
-typedef void BoolCallback(bool active);
 
 // ignore: must_be_immutable
 class Techreportcard extends StatefulWidget {
@@ -17,8 +16,15 @@ class Techreportcard extends StatefulWidget {
   String? username;
   String? selectedUser;
   final StringCallback? callback;
+  final StringCallback? technamecallback;
 
-  Techreportcard({Key? key, this.username, this.name, this.callback, this.selectedUser})
+  Techreportcard(
+      {Key? key,
+      this.username,
+      this.name,
+      this.callback,
+      this.selectedUser,
+      this.technamecallback})
       : super(key: key);
 
   @override
@@ -61,7 +67,10 @@ class _TechreportcardState extends State<Techreportcard> {
 
     Size s = MediaQuery.of(context).size;
     return InkWell(
-      onTap: () => Reportsrcwidget.of(context)?.string = "${widget.username}",
+      onTap: () {
+        Reportsrcwidget.of(context)?.string = "${widget.username}";
+        Reportsrcwidget.of(context)?.techname = "${widget.name}";
+      },
       child: Stack(
         children: [
           Container(
@@ -70,7 +79,9 @@ class _TechreportcardState extends State<Techreportcard> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 // color: widget.username == widget.selectedUser ? Color(0XFFFAFBFB) : white,
-                color: widget.username == widget.selectedUser ? Colors.red.shade50 : white,
+                color: widget.username == widget.selectedUser
+                    ? Colors.red.shade50
+                    : white,
                 boxShadow: [
                   BoxShadow(
                       spreadRadius: 1,
@@ -178,7 +189,7 @@ class _TechreportcardState extends State<Techreportcard> {
                                               completedpgm.isEmpty
                                           ? Container(
                                               padding:
-                                                   const EdgeInsets.symmetric(
+                                                  const EdgeInsets.symmetric(
                                                       vertical: 2,
                                                       horizontal: 10),
                                               decoration: BoxDecoration(

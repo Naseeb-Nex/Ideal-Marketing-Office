@@ -30,8 +30,10 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
   }
 
   String _username = "Akhil";
+  String _techname = "Akhil mohanan";
 
   set string(String value) => setState(() => _username = value);
+  set techname(String value) => setState(() => _techname = value);
 
   FirebaseFirestore fb = FirebaseFirestore.instance;
   int p = 0, c = 0;
@@ -493,23 +495,25 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: s.height * 0.03),
                               child: AnimatedContainer(
-                                duration: const Duration(
-                                  milliseconds: 2000,
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: s.height * 0.03,
-                                    vertical: s.height * 0.02),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                          spreadRadius: 2,
-                                          blurRadius: 5,
-                                          color: black.withOpacity(0.1))
-                                    ]),
-                                child: TechReportstatus(username: _username,)
-                              ),
+                                  duration: const Duration(
+                                    milliseconds: 2000,
+                                  ),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: s.height * 0.03,
+                                      vertical: s.height * 0.02),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                            spreadRadius: 2,
+                                            blurRadius: 5,
+                                            color: black.withOpacity(0.1))
+                                      ]),
+                                  child: TechReportstatus(
+                                    username: _username,
+                                    techname: _techname,
+                                  )),
                             ),
                           )
                         : null,
@@ -721,7 +725,8 @@ class _Badge extends StatelessWidget {
 // ignore: must_be_immutable
 class TechReportstatus extends StatefulWidget {
   String? username;
-   TechReportstatus({Key? key, this.username}) : super(key: key);
+  String? techname;
+  TechReportstatus({Key? key, this.username, this.techname}) : super(key: key);
 
   @override
   State<TechReportstatus> createState() => _TechReportstatusState();
@@ -732,125 +737,124 @@ class _TechReportstatusState extends State<TechReportstatus> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Flexible(
-                                        flex: 1,
-                                        fit: FlexFit.loose,
-                                        child: InkWell(
-                                          onTap: () => setState(() {
-                                            selectedRprt = "Daily";
-                                          }),
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                "Daily Report",
-                                                style: TextStyle(
-                                                  color: selectedRprt == "Daily"
-                                                      ? bluebg
-                                                      : black,
-                                                  fontFamily: "Montserrat",
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w700,
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                height: 10,
-                                              ),
-                                              Divider(
-                                                height: 3,
-                                                thickness: 3,
-                                                color: selectedRprt == "Daily"
-                                                    ? bluebg
-                                                    : const Color(0XFFECEDEC),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Flexible(
-                                        flex: 1,
-                                        fit: FlexFit.loose,
-                                        child: InkWell(
-                                          onTap: () => setState(() {
-                                            selectedRprt = "Search";
-                                          }),
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                "Search",
-                                                style: TextStyle(
-                                                    color:
-                                                        selectedRprt == "Search"
-                                                            ? bluebg
-                                                            : black,
-                                                    fontFamily: "Montserrat",
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.w700),
-                                              ),
-                                              const SizedBox(
-                                                height: 10,
-                                              ),
-                                              Divider(
-                                                height: 3,
-                                                thickness: 3,
-                                                color: selectedRprt == "Search"
-                                                    ? bluebg
-                                                    : const Color(0XFFECEDEC),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      Flexible(
-                                        flex: 1,
-                                        fit: FlexFit.loose,
-                                        child: InkWell(
-                                          onTap: () => setState(() {
-                                            selectedRprt = "Monthly";
-                                          }),
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                "Monthly Report",
-                                                style: TextStyle(
-                                                    color: selectedRprt ==
-                                                            "Monthly"
-                                                        ? bluebg
-                                                        : black,
-                                                    fontFamily: "Montserrat",
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.w700),
-                                              ),
-                                              const SizedBox(
-                                                height: 10,
-                                              ),
-                                              Divider(
-                                                height: 3,
-                                                thickness: 3,
-                                                color: selectedRprt == "Monthly"
-                                                    ? bluebg
-                                                    : const Color(0XFFECEDEC),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Techreportstatuswarpper(),
-                                ]);
+      Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Flexible(
+            flex: 1,
+            fit: FlexFit.loose,
+            child: InkWell(
+              onTap: () => setState(() {
+                selectedRprt = "Daily";
+              }),
+              child: Column(
+                children: [
+                  Text(
+                    "Daily Report",
+                    style: TextStyle(
+                      color: selectedRprt == "Daily" ? bluebg : black,
+                      fontFamily: "Montserrat",
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Divider(
+                    height: 3,
+                    thickness: 3,
+                    color: selectedRprt == "Daily"
+                        ? bluebg
+                        : const Color(0XFFECEDEC),
+                  )
+                ],
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 1,
+            fit: FlexFit.loose,
+            child: InkWell(
+              onTap: () => setState(() {
+                selectedRprt = "Search";
+              }),
+              child: Column(
+                children: [
+                  Text(
+                    "Search",
+                    style: TextStyle(
+                        color: selectedRprt == "Search" ? bluebg : black,
+                        fontFamily: "Montserrat",
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Divider(
+                    height: 3,
+                    thickness: 3,
+                    color: selectedRprt == "Search"
+                        ? bluebg
+                        : const Color(0XFFECEDEC),
+                  )
+                ],
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 1,
+            fit: FlexFit.loose,
+            child: InkWell(
+              onTap: () => setState(() {
+                selectedRprt = "Monthly";
+              }),
+              child: Column(
+                children: [
+                  Text(
+                    "Monthly Report",
+                    style: TextStyle(
+                        color: selectedRprt == "Monthly" ? bluebg : black,
+                        fontFamily: "Montserrat",
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Divider(
+                    height: 3,
+                    thickness: 3,
+                    color: selectedRprt == "Monthly"
+                        ? bluebg
+                        : const Color(0XFFECEDEC),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+      Text("${widget.techname} ${widget.username}"),
+      Techreportstatuswarpper(
+        username: widget.username,
+        selectedRprt: selectedRprt,
+      ),
+    ]);
   }
 }
 
+// ignore: must_be_immutable
 class Techreportstatuswarpper extends StatelessWidget {
-  const Techreportstatuswarpper();
+  String? selectedRprt;
+  String? username;
+  Techreportstatuswarpper({Key? key, this.username, this.selectedRprt})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if (selectedRprt == "Daily") {}
     return Container();
   }
 }
