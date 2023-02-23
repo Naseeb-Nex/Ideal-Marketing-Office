@@ -19,7 +19,7 @@ class Reportsrcwidget extends StatefulWidget {
   ReportsrcwidgetState createState() => ReportsrcwidgetState();
 
   static ReportsrcwidgetState? of(BuildContext context) =>
-    context.findAncestorStateOfType<ReportsrcwidgetState>();
+      context.findAncestorStateOfType<ReportsrcwidgetState>();
 }
 
 class ReportsrcwidgetState extends State<Reportsrcwidget> {
@@ -38,6 +38,8 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
   int touchedIndex = 0;
   bool rpstatus = false;
   bool visChat = true;
+  // Selected tech report view
+  String selectedRprt = "Daily";
 
   @override
   Widget build(BuildContext context) {
@@ -398,8 +400,7 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                     flex: visChat ? 2 : 3,
                     fit: FlexFit.tight,
                     child: Padding(
-                      padding:
-                          EdgeInsets.only(left : s.height * 0.03),
+                      padding: EdgeInsets.only(left: s.height * 0.03),
                       child: Container(
                         padding: EdgeInsets.symmetric(
                             horizontal: s.height * 0.03,
@@ -440,8 +441,8 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                                           width: s.height * 0.1,
                                           height: s.height * 0.1,
                                           child: const LoadingIndicator(
-                                            indicatorType:
-                                                Indicator.ballClipRotateMultiple,
+                                            indicatorType: Indicator
+                                                .ballClipRotateMultiple,
                                             colors: [bluebg],
                                           ),
                                         ),
@@ -469,8 +470,9 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                                             name: techprofile[i]['name'],
                                             username: techprofile[i]
                                                 ['username'],
-                                                callback: (val) => setState(() => _username = val),
-                                                selectedUser: _username,
+                                            callback: (val) =>
+                                                setState(() => _username = val),
+                                            selectedUser: _username,
                                           ),
                                         )
                                       ]
@@ -488,26 +490,26 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                             flex: 4,
                             fit: FlexFit.tight,
                             child: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: s.height * 0.03),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: s.height * 0.03),
                               child: AnimatedContainer(
-                                  duration: const Duration(
-                                    milliseconds: 2000,
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                              horizontal: s.height * 0.03,
-                              vertical: s.height * 0.02),
-                                                    decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: white,
-                              boxShadow: [
-                                BoxShadow(
-                                    spreadRadius: 2,
-                                    blurRadius: 5,
-                                    color: black.withOpacity(0.1))
-                              ]),
-                                  child: Column(children: [
-                                    Text(_username)
-                                  ]) ,),
+                                duration: const Duration(
+                                  milliseconds: 2000,
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: s.height * 0.03,
+                                    vertical: s.height * 0.02),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          spreadRadius: 2,
+                                          blurRadius: 5,
+                                          color: black.withOpacity(0.1))
+                                    ]),
+                                child: TechReportstatus(username: _username,)
+                              ),
                             ),
                           )
                         : null,
@@ -517,29 +519,31 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
               Container(
                   child: visChat
                       ? Positioned(
-                        left: s.height * 0.04,
-                        top: 8,
+                          left: s.height * 0.04,
+                          top: 8,
                           child: InkWell(
                             onTap: () => setState(() {
                               visChat = !visChat;
                             }),
                             child: Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: white,
-                                boxShadow: [
-                                  BoxShadow(
-                                    spreadRadius: 1,
-                                    blurRadius: 3,
-                                    color: black.withOpacity(0.1),
-                                    offset: const Offset(0, 1),
-                                  )
-                                ]),
-                          
-                                child: const  Icon(Iconsax.arrow_left, color: bluebg,),
-                                                  ),
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      spreadRadius: 1,
+                                      blurRadius: 3,
+                                      color: black.withOpacity(0.1),
+                                      offset: const Offset(0, 1),
+                                    )
+                                  ]),
+                              child: const Icon(
+                                Iconsax.arrow_left,
+                                color: bluebg,
+                              ),
+                            ),
                           ),
                         )
                       : null)
@@ -711,5 +715,142 @@ class _Badge extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+// ignore: must_be_immutable
+class TechReportstatus extends StatefulWidget {
+  String? username;
+   TechReportstatus({Key? key, this.username}) : super(key: key);
+
+  @override
+  State<TechReportstatus> createState() => _TechReportstatusState();
+}
+
+class _TechReportstatusState extends State<TechReportstatus> {
+  String selectedRprt = "Daily";
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Flexible(
+                                        flex: 1,
+                                        fit: FlexFit.loose,
+                                        child: InkWell(
+                                          onTap: () => setState(() {
+                                            selectedRprt = "Daily";
+                                          }),
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                "Daily Report",
+                                                style: TextStyle(
+                                                  color: selectedRprt == "Daily"
+                                                      ? bluebg
+                                                      : black,
+                                                  fontFamily: "Montserrat",
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              Divider(
+                                                height: 3,
+                                                thickness: 3,
+                                                color: selectedRprt == "Daily"
+                                                    ? bluebg
+                                                    : const Color(0XFFECEDEC),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Flexible(
+                                        flex: 1,
+                                        fit: FlexFit.loose,
+                                        child: InkWell(
+                                          onTap: () => setState(() {
+                                            selectedRprt = "Search";
+                                          }),
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                "Search",
+                                                style: TextStyle(
+                                                    color:
+                                                        selectedRprt == "Search"
+                                                            ? bluebg
+                                                            : black,
+                                                    fontFamily: "Montserrat",
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.w700),
+                                              ),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              Divider(
+                                                height: 3,
+                                                thickness: 3,
+                                                color: selectedRprt == "Search"
+                                                    ? bluebg
+                                                    : const Color(0XFFECEDEC),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Flexible(
+                                        flex: 1,
+                                        fit: FlexFit.loose,
+                                        child: InkWell(
+                                          onTap: () => setState(() {
+                                            selectedRprt = "Monthly";
+                                          }),
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                "Monthly Report",
+                                                style: TextStyle(
+                                                    color: selectedRprt ==
+                                                            "Monthly"
+                                                        ? bluebg
+                                                        : black,
+                                                    fontFamily: "Montserrat",
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.w700),
+                                              ),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              Divider(
+                                                height: 3,
+                                                thickness: 3,
+                                                color: selectedRprt == "Monthly"
+                                                    ? bluebg
+                                                    : const Color(0XFFECEDEC),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Techreportstatuswarpper(),
+                                ]);
+  }
+}
+
+class Techreportstatuswarpper extends StatelessWidget {
+  const Techreportstatuswarpper();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

@@ -178,7 +178,7 @@ class _TechreportcardState extends State<Techreportcard> {
                                               completedpgm.isEmpty
                                           ? Container(
                                               padding:
-                                                  const EdgeInsets.symmetric(
+                                                   const EdgeInsets.symmetric(
                                                       vertical: 2,
                                                       horizontal: 10),
                                               decoration: BoxDecoration(
