@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:test2/widgets/TechReport/Dailyreportwidget.dart';
 
 // ignore: must_be_immutable
 class Reportsrcwidget extends StatefulWidget {
@@ -836,10 +837,10 @@ class _TechReportstatusState extends State<TechReportstatus> {
           ),
         ],
       ),
-      Text("${widget.techname} ${widget.username}"),
       Techreportstatuswarpper(
         username: widget.username,
         selectedRprt: selectedRprt,
+        techname: widget.techname,
       ),
     ]);
   }
@@ -849,12 +850,16 @@ class _TechReportstatusState extends State<TechReportstatus> {
 class Techreportstatuswarpper extends StatelessWidget {
   String? selectedRprt;
   String? username;
-  Techreportstatuswarpper({Key? key, this.username, this.selectedRprt})
+  String? techname;
+  Techreportstatuswarpper(
+      {Key? key, this.username, this.selectedRprt, this.techname})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (selectedRprt == "Daily") {}
+    if (selectedRprt == "Daily") {
+     return DailyReportwidget(username: username, techname: techname,);
+    }
     return Container();
   }
 }
