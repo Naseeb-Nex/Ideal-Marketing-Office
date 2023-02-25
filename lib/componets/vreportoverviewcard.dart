@@ -4,6 +4,7 @@ import 'package:test2/constants/constants.dart';
 import 'package:iconsax/iconsax.dart';
 // package
 import 'package:cloud_firestore/cloud_firestore.dart';
+// ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 import 'package:motion_toast/motion_toast.dart';
 
@@ -93,7 +94,7 @@ class _VreportoverviewcardState extends State<Vreportoverviewcard> {
                               fit: FlexFit.tight,
                               child: Text(
                                 "${widget.name}",
-                                style: TextStyle(
+                                style: const  TextStyle(
                                   fontFamily: "Montserrat",
                                   fontSize: 16,
                                 ),
@@ -109,14 +110,14 @@ class _VreportoverviewcardState extends State<Vreportoverviewcard> {
                       children: [
                         Text(
                           "${widget.uptime}",
-                          style: TextStyle(
+                          style:  const TextStyle(
                               fontFamily: "Montserrat",
                               fontSize: 13,
                               color: Colors.grey),
                         ),
                         Text(
                           "${widget.update}",
-                          style: TextStyle(
+                          style: const  TextStyle(
                               fontFamily: "Montserrat",
                               fontSize: 13,
                               color: Colors.grey),
@@ -125,13 +126,13 @@ class _VreportoverviewcardState extends State<Vreportoverviewcard> {
                     ),
                   ],
                 ),
-                SizedBox(
+                 const SizedBox(
                   height: 10,
                 ),
                 Center(
                   child: widget.end == null
                       ? Padding(
-                          padding: EdgeInsets.only(top: 10),
+                          padding: const  EdgeInsets.only(top: 10),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -152,7 +153,7 @@ class _VreportoverviewcardState extends State<Vreportoverviewcard> {
                                         spreadRadius: 2,
                                         blurRadius: 3,
                                         color: black.withOpacity(.05),
-                                        offset: Offset(1, 1),
+                                        offset: const  Offset(1, 1),
                                       ),
                                     ],
                                   ),
@@ -162,12 +163,12 @@ class _VreportoverviewcardState extends State<Vreportoverviewcard> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        Icon(
+                                         const Icon(
                                           Iconsax.add,
                                           color: white,
                                           size: 20,
                                         ),
-                                        SizedBox(
+                                         const SizedBox(
                                           width: 10,
                                         ),
                                         Text(
@@ -192,7 +193,7 @@ class _VreportoverviewcardState extends State<Vreportoverviewcard> {
                   child: widget.end != null
                       ? Padding(
                           padding:
-                              EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                              const  EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                           child: Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
@@ -212,7 +213,7 @@ class _VreportoverviewcardState extends State<Vreportoverviewcard> {
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Center(
+                                  const  Center(
                                     child: Text(
                                       "Usage Details",
                                       style: TextStyle(
@@ -222,12 +223,12 @@ class _VreportoverviewcardState extends State<Vreportoverviewcard> {
                                       ),
                                     ),
                                   ),
-                                  Divider(),
+                                  const  Divider(),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
                                     children: [
-                                      Text(
+                                      const  Text(
                                         "Distance Covered : ",
                                         style: TextStyle(
                                           fontFamily: "Montserrat",
@@ -237,14 +238,14 @@ class _VreportoverviewcardState extends State<Vreportoverviewcard> {
                                       ),
                                       Text(
                                         "$dis",
-                                        style: TextStyle(
+                                        style: const  TextStyle(
                                           fontFamily: "Montserrat",
                                           fontSize: 17,
                                           fontWeight: FontWeight.w600,
                                         ),
                                         textAlign: TextAlign.start,
                                       ),
-                                      Text(
+                                      const  Text(
                                         " Km",
                                         style: TextStyle(
                                           fontFamily: "Montserrat",
@@ -265,17 +266,17 @@ class _VreportoverviewcardState extends State<Vreportoverviewcard> {
                                             child: Image.asset(
                                                 "assets/icons/scooter_icon.png"),
                                           ),
-                                          SizedBox(height: 3),
+                                          const  SizedBox(height: 3),
                                           Container(
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
                                                 color: greenbg),
-                                            padding: EdgeInsets.symmetric(
+                                            padding: const  EdgeInsets.symmetric(
                                                 horizontal: 10, vertical: 5),
                                             child: Text(
                                               "${widget.start}",
-                                              style: TextStyle(
+                                              style:  const TextStyle(
                                                 fontFamily: "Montserrat",
                                                 fontWeight: FontWeight.w500,
                                                 color: Colors.green,
@@ -292,7 +293,7 @@ class _VreportoverviewcardState extends State<Vreportoverviewcard> {
                                           decoration: BoxDecoration(
                                               borderRadius:
                                                   BorderRadius.circular(2),
-                                              gradient: LinearGradient(colors: [
+                                              gradient:  const LinearGradient(colors: [
                                                 Colors.green,
                                                 Colors.orangeAccent,
                                                 Colors.redAccent
@@ -307,17 +308,17 @@ class _VreportoverviewcardState extends State<Vreportoverviewcard> {
                                             child: Image.asset(
                                                 "assets/icons/scooter_icon.png"),
                                           ),
-                                          SizedBox(height: 3),
+                                          const  SizedBox(height: 3),
                                           Container(
                                             decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
                                                 color: redbg),
-                                            padding: EdgeInsets.symmetric(
+                                            padding:  const EdgeInsets.symmetric(
                                                 horizontal: 10, vertical: 5),
                                             child: Text(
                                               "${widget.end}",
-                                              style: TextStyle(
+                                              style:  const TextStyle(
                                                 fontFamily: "Montserrat",
                                                 fontWeight: FontWeight.w500,
                                                 color: redfg,
@@ -328,12 +329,12 @@ class _VreportoverviewcardState extends State<Vreportoverviewcard> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 15,),
+                                   const SizedBox(height: 15,),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(
+                                   const     Text(
                                             "Discription : ",
                                             style: TextStyle(
                                               fontFamily: "Montserrat",
@@ -343,7 +344,7 @@ class _VreportoverviewcardState extends State<Vreportoverviewcard> {
                                           ),
                                           Expanded(child: 
                                           Text("${widget.desc}",
-                                        style: TextStyle(
+                                        style: const  TextStyle(
                                           fontFamily: "Montserrat",
                                           fontSize: 15,
                                           fontWeight: FontWeight.w300,
@@ -369,10 +370,10 @@ class VehicleinfoDialog extends StatefulWidget {
   String? username;
   String? docname;
 
-  VehicleinfoDialog({
+  VehicleinfoDialog({Key? key, 
     this.username,
     this.docname,
-  });
+  }) : super(key: key);
 
   @override
   State<VehicleinfoDialog> createState() => _VehicleinfoDialogState();
@@ -380,6 +381,7 @@ class VehicleinfoDialog extends StatefulWidget {
 
 class _VehicleinfoDialogState extends State<VehicleinfoDialog> {
   // Form Key
+  // ignore: non_constant_identifier_names
   final form_key = GlobalKey<FormState>();
 
   // Text editor controller
@@ -392,7 +394,7 @@ class _VehicleinfoDialogState extends State<VehicleinfoDialog> {
     Size s = MediaQuery.of(context).size;
     return Dialog(
       insetAnimationCurve: Curves.easeInCubic,
-      insetAnimationDuration: Duration(milliseconds: 300),
+      insetAnimationDuration:  const Duration(milliseconds: 300),
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: s.height * 0.03,
@@ -406,7 +408,7 @@ class _VehicleinfoDialogState extends State<VehicleinfoDialog> {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
+                  children:  const [
                     Text(
                       "Vehicle Usage Info",
                       style: TextStyle(
@@ -420,7 +422,7 @@ class _VehicleinfoDialogState extends State<VehicleinfoDialog> {
                 SizedBox(
                   height: s.height * 0.02,
                 ),
-                Text(
+                 const Text(
                   "Starting KM",
                   style: TextStyle(
                     fontFamily: "Montserrat",
@@ -446,14 +448,14 @@ class _VehicleinfoDialogState extends State<VehicleinfoDialog> {
                   },
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                    suffixIcon: Icon(Icons.stacked_line_chart),
+                    suffixIcon: const  Icon(Icons.stacked_line_chart),
                     contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
                     hintText: "Starting Km",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  style: TextStyle(
+                  style:  const TextStyle(
                     fontFamily: "Montserrat",
                     fontSize: 15,
                   ),
@@ -461,7 +463,7 @@ class _VehicleinfoDialogState extends State<VehicleinfoDialog> {
                 SizedBox(
                   height: s.height * 0.01,
                 ),
-                Text(
+                const  Text(
                   "Closing KM",
                   style: TextStyle(
                     fontFamily: "Montserrat",
@@ -487,14 +489,14 @@ class _VehicleinfoDialogState extends State<VehicleinfoDialog> {
                   },
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                    suffixIcon: Icon(Icons.stacked_line_chart),
+                    suffixIcon:  const Icon(Icons.stacked_line_chart),
                     contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
                     hintText: "Closing Km",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  style: TextStyle(
+                  style:  const TextStyle(
                     fontFamily: "Montserrat",
                     fontSize: 15,
                   ),
@@ -502,7 +504,7 @@ class _VehicleinfoDialogState extends State<VehicleinfoDialog> {
                 SizedBox(
                   height: s.height * 0.01,
                 ),
-                Text(
+                 const Text(
                   "Description",
                   style: TextStyle(
                     fontFamily: "Montserrat",
@@ -535,7 +537,7 @@ class _VehicleinfoDialogState extends State<VehicleinfoDialog> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  style: TextStyle(
+                  style:  const TextStyle(
                     fontFamily: "Montserrat",
                     fontSize: 15,
                   ),
@@ -557,8 +559,8 @@ class _VehicleinfoDialogState extends State<VehicleinfoDialog> {
                                   vertical: s.height * 0.01),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: Color(0XFFeef1f7)),
-                              child: Center(
+                                  color: const  Color(0XFFeef1f7)),
+                              child:  const Center(
                                   child: Text(
                                 "Cancel",
                                 style: TextStyle(
@@ -569,7 +571,7 @@ class _VehicleinfoDialogState extends State<VehicleinfoDialog> {
                               ))),
                         ),
                       ),
-                      SizedBox(
+                       const SizedBox(
                         width: 10,
                       ),
                       Flexible(
@@ -582,7 +584,7 @@ class _VehicleinfoDialogState extends State<VehicleinfoDialog> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: bluebg),
-                              child: Center(
+                              child:  const Center(
                                   child: Text(
                                 "Add",
                                 style: TextStyle(
@@ -602,6 +604,7 @@ class _VehicleinfoDialogState extends State<VehicleinfoDialog> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Future<void> vehicle_usage(BuildContext context) async {
     FirebaseFirestore fb = FirebaseFirestore.instance;
 
@@ -635,7 +638,7 @@ class _VehicleinfoDialogState extends State<VehicleinfoDialog> {
         Navigator.of(context).pop();
         Navigator.pop(context);
         MotionToast.success(
-          title: Text(
+          title:  const Text(
             "Vehicle Usage Updated",
             style: TextStyle(
               fontFamily: "Montserrat",
@@ -643,7 +646,7 @@ class _VehicleinfoDialogState extends State<VehicleinfoDialog> {
               fontWeight: FontWeight.w600,
             ),
           ),
-          description: Text(
+          description: const  Text(
             "Updated successfully",
             style: TextStyle(
               fontFamily: "Montserrat",
@@ -665,13 +668,13 @@ class EditVehicleusage extends StatefulWidget {
   String? end;
   String? desc;
 
-  EditVehicleusage({
+  EditVehicleusage({Key? key, 
     this.username,
     this.docname,
     this.start,
     this.end,
     this.desc,
-  });
+  }) : super(key: key);
 
   @override
   State<EditVehicleusage> createState() => _EditVehicleusageState();
@@ -679,6 +682,7 @@ class EditVehicleusage extends StatefulWidget {
 
 class _EditVehicleusageState extends State<EditVehicleusage> {
   // Form Key
+  // ignore: non_constant_identifier_names
   final form_key = GlobalKey<FormState>();
 
   // Text editor controller
@@ -700,7 +704,7 @@ class _EditVehicleusageState extends State<EditVehicleusage> {
     Size s = MediaQuery.of(context).size;
     return Dialog(
       insetAnimationCurve: Curves.easeInCubic,
-      insetAnimationDuration: Duration(milliseconds: 300),
+      insetAnimationDuration:  const Duration(milliseconds: 300),
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: s.height * 0.03,
@@ -714,7 +718,7 @@ class _EditVehicleusageState extends State<EditVehicleusage> {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
+                  children:  const [
                     Text(
                       "Edit Vehicle Usage Info",
                       style: TextStyle(
@@ -728,7 +732,7 @@ class _EditVehicleusageState extends State<EditVehicleusage> {
                 SizedBox(
                   height: s.height * 0.02,
                 ),
-                Text(
+                 const Text(
                   "Starting KM",
                   style: TextStyle(
                     fontFamily: "Montserrat",
@@ -754,14 +758,14 @@ class _EditVehicleusageState extends State<EditVehicleusage> {
                   },
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                    suffixIcon: Icon(Icons.stacked_line_chart),
+                    suffixIcon:  const Icon(Icons.stacked_line_chart),
                     contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
                     hintText: "Starting Km",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  style: TextStyle(
+                  style:  const TextStyle(
                     fontFamily: "Montserrat",
                     fontSize: 15,
                   ),
@@ -769,7 +773,7 @@ class _EditVehicleusageState extends State<EditVehicleusage> {
                 SizedBox(
                   height: s.height * 0.01,
                 ),
-                Text(
+                const  Text(
                   "Closing KM",
                   style: TextStyle(
                     fontFamily: "Montserrat",
@@ -795,14 +799,14 @@ class _EditVehicleusageState extends State<EditVehicleusage> {
                   },
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                    suffixIcon: Icon(Icons.stacked_line_chart),
+                    suffixIcon:  const Icon(Icons.stacked_line_chart),
                     contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
                     hintText: "Closing Km",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  style: TextStyle(
+                  style:  const TextStyle(
                     fontFamily: "Montserrat",
                     fontSize: 15,
                   ),
@@ -810,7 +814,7 @@ class _EditVehicleusageState extends State<EditVehicleusage> {
                 SizedBox(
                   height: s.height * 0.01,
                 ),
-                Text(
+                const  Text(
                   "Description",
                   style: TextStyle(
                     fontFamily: "Montserrat",
@@ -843,7 +847,7 @@ class _EditVehicleusageState extends State<EditVehicleusage> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  style: TextStyle(
+                  style:  const TextStyle(
                     fontFamily: "Montserrat",
                     fontSize: 15,
                   ),
@@ -852,7 +856,7 @@ class _EditVehicleusageState extends State<EditVehicleusage> {
                   height: s.height * 0.02,
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  padding: const  EdgeInsets.symmetric(horizontal: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -865,8 +869,8 @@ class _EditVehicleusageState extends State<EditVehicleusage> {
                                   vertical: s.height * 0.01),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: Color(0XFFeef1f7)),
-                              child: Center(
+                                  color:  const Color(0XFFeef1f7)),
+                              child:  const Center(
                                   child: Text(
                                 "Cancel",
                                 style: TextStyle(
@@ -877,7 +881,7 @@ class _EditVehicleusageState extends State<EditVehicleusage> {
                               ))),
                         ),
                       ),
-                      SizedBox(
+                       const SizedBox(
                         width: 10,
                       ),
                       Flexible(
@@ -890,7 +894,7 @@ class _EditVehicleusageState extends State<EditVehicleusage> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: bluebg),
-                              child: Center(
+                              child:  const Center(
                                   child: Text(
                                 "Update",
                                 style: TextStyle(
@@ -910,6 +914,7 @@ class _EditVehicleusageState extends State<EditVehicleusage> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Future<void> vehicle_usage(BuildContext context) async {
     FirebaseFirestore fb = FirebaseFirestore.instance;
 
@@ -919,7 +924,7 @@ class _EditVehicleusageState extends State<EditVehicleusage> {
     String month = DateFormat('MM').format(now);
     String year = DateFormat('y').format(now);
     if (form_key.currentState!.validate()) {
-      showDialog(context: context, builder: (context) => LoadingDialog());
+      showDialog(context: context, builder: (context) =>  const LoadingDialog());
 
       // report Update
       await fb
@@ -943,7 +948,7 @@ class _EditVehicleusageState extends State<EditVehicleusage> {
         Navigator.of(context).pop();
         Navigator.pop(context);
         MotionToast.success(
-          title: Text(
+          title: const  Text(
             "Vehicle Usage Updated",
             style: TextStyle(
               fontFamily: "Montserrat",
@@ -951,7 +956,7 @@ class _EditVehicleusageState extends State<EditVehicleusage> {
               fontWeight: FontWeight.w600,
             ),
           ),
-          description: Text(
+          description: const  Text(
             "Updated successfully",
             style: TextStyle(
               fontFamily: "Montserrat",
