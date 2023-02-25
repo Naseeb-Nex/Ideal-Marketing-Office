@@ -356,7 +356,7 @@ class _TechreportcardState extends State<Techreportcard> {
                   Visibility(
                     visible: isSub,
                     child: Positioned(
-                        left: s.width * 0.15,
+                        left: s.height * 0.061,
                         bottom: 0,
                         child: Image.asset(
                           "assets/icons/check.png",
