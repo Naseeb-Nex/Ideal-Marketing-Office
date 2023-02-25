@@ -304,11 +304,10 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                     const Text(
                       "Todays's Recap",
                       style: TextStyle(
-                        fontFamily: "Montserrat",
-                        fontWeight: FontWeight.bold,
-                        fontSize: 19,
-                        color: bluebg
-                      ),
+                          fontFamily: "Montserrat",
+                          fontWeight: FontWeight.bold,
+                          fontSize: 19,
+                          color: bluebg),
                     ),
                     SizedBox(
                       height: s.height * 0.015,
@@ -661,405 +660,419 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
               SizedBox(
                 height: 10,
               ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                    horizontal: s.height * 0.025, vertical: 15),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: white,
-                  boxShadow: [
-                    BoxShadow(
-                      spreadRadius: 2,
-                      blurRadius: 4,
-                      color: black.withOpacity(.1),
-                      offset: Offset(5, 7),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Daily Activity",
-                          style: TextStyle(
-                            fontFamily: "Montserrat",
-                            fontWeight: FontWeight.w600,
-                            fontSize: 17,
-                            color: bluebg,
-                          ),
-                        ),
-                      ],
-                    ),
-                    Divider(),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    // Daily Activity
-                    StreamBuilder<QuerySnapshot>(
-                      stream: fb
-                          .collection("Reports")
-                          .doc(year)
-                          .collection("Month")
-                          .doc(month)
-                          .collection(day)
-                          .doc("Tech")
-                          .collection("Reports")
-                          .doc("${widget.username}")
-                          .collection("Activity")
-                          .snapshots(),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<QuerySnapshot> snapshot) {
-                        if (snapshot.hasError) {
-                          return Column(
-                            children: [
-                              Container(
-                                width: double.infinity,
-                                height: s.height * 0.27,
-                                child: Image.asset(
-                                  "assets/icons/noprograms.jpg",
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 10),
-                                child: Text(
-                                  "No Programs Found !",
-                                  style: TextStyle(
-                                    fontFamily: "Montserrat",
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        }
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Center(
-                            child: Padding(
-                              padding: EdgeInsets.only(top: s.height * 0.03),
-                              child: SizedBox(
-                                width: s.height * 0.25,
-                                height: s.height * 0.25,
-                                child: LoadingIndicator(
-                                  indicatorType:
-                                      Indicator.ballClipRotateMultiple,
-                                  colors: const [bluebg],
-                                ),
-                              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(
+                    s.height * 0.03, 0, s.height * 0.03, s.height * 0.02),
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: s.height * 0.025, vertical: 15),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: white,
+                    boxShadow: [
+                      BoxShadow(
+                        spreadRadius: 2,
+                        blurRadius: 4,
+                        color: black.withOpacity(.1),
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Daily Activity",
+                            style: TextStyle(
+                              fontFamily: "Montserrat",
+                              fontWeight: FontWeight.w600,
+                              fontSize: 17,
+                              color: bluebg,
                             ),
-                          );
-                        }
-
-                        final List activityrp = [];
-                        List filtered_activity = [];
-                        snapshot.data!.docs.map((DocumentSnapshot document) {
-                          Map a = document.data() as Map<String, dynamic>;
-                          activityrp.add(a);
-                        }).toList();
-
-                        if (daily_activity_filter == "all") {
-                          filtered_activity = activityrp;
-                        } else {
-                          filtered_activity = activityrp
-                              .where(
-                                  (i) => i['status'] == daily_activity_filter)
-                              .toList();
-                        }
-
-                        return Column(
-                          children: [
-                            Container(
-                              child: activityrp.length == 0
-                                  ? Column(
-                                      children: [
-                                        Container(
-                                          width: double.infinity,
-                                          height: s.height * 0.27,
-                                          child: Image.asset(
+                          ),
+                        ],
+                      ),
+                      Divider(),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      // Daily Activity
+                      StreamBuilder<QuerySnapshot>(
+                        stream: fb
+                            .collection("Reports")
+                            .doc(year)
+                            .collection("Month")
+                            .doc(month)
+                            .collection(day)
+                            .doc("Tech")
+                            .collection("Reports")
+                            .doc("${widget.username}")
+                            .collection("Activity")
+                            .snapshots(),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<QuerySnapshot> snapshot) {
+                          if (snapshot.hasError) {
+                            return Column(
+                              children: [
+                                Image.asset(
                                             "assets/icons/noprograms.jpg",
-                                            fit: BoxFit.cover,
+                                            width: double.infinity,
+                                            height: s.height * 0.3,
+                                            fit: BoxFit.contain,
                                           ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 10),
-                                          child: Text(
+                                          const Text(
                                             "No Programs Found !",
                                             style: TextStyle(
                                               fontFamily: "Montserrat",
+                                              fontWeight: FontWeight.w600
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    )
-                                  : Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SingleChildScrollView(
-                                          scrollDirection: Axis.horizontal,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              InkWell(
-                                                onTap: () => setState(() {
-                                                  daily_activity_filter = "all";
-                                                }),
-                                                child: Container(
-                                                  width: s.height * 0.15,
-                                                  padding: EdgeInsets.symmetric(
-                                                    vertical: s.height * 0.015,
-                                                  ),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      color:
-                                                          daily_activity_filter ==
-                                                                  "all"
-                                                              ? bluebg
-                                                              : nonactivebg),
-                                                  child: Center(
-                                                    child: Text(
-                                                      "All",
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              "Montserrat",
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color:
-                                                              daily_activity_filter ==
-                                                                      "all"
-                                                                  ? white
-                                                                  : nonactivetxt),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(width: s.height * 0.03),
-                                              InkWell(
-                                                onTap: () => setState(() {
-                                                  daily_activity_filter =
-                                                      "assigned";
-                                                }),
-                                                child: Container(
-                                                  width: s.height * 0.25,
-                                                  padding: EdgeInsets.symmetric(
-                                                    vertical: s.height * 0.015,
-                                                  ),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      color:
-                                                          daily_activity_filter ==
-                                                                  "assigned"
-                                                              ? bluebg
-                                                              : nonactivebg),
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Assigned",
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              "Montserrat",
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color:
-                                                              daily_activity_filter ==
-                                                                      "assigned"
-                                                                  ? white
-                                                                  : nonactivetxt),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(width: s.height * 0.03),
-                                              InkWell(
-                                                onTap: () => setState(() {
-                                                  daily_activity_filter =
-                                                      "pending";
-                                                }),
-                                                child: Container(
-                                                  width: s.height * 0.25,
-                                                  padding: EdgeInsets.symmetric(
-                                                    vertical: s.height * 0.015,
-                                                  ),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      color:
-                                                          daily_activity_filter ==
-                                                                  "pending"
-                                                              ? bluebg
-                                                              : nonactivebg),
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Pending",
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              "Montserrat",
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color:
-                                                              daily_activity_filter ==
-                                                                      "pending"
-                                                                  ? white
-                                                                  : nonactivetxt),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(width: s.height * 0.03),
-                                              InkWell(
-                                                onTap: () => setState(() {
-                                                  daily_activity_filter =
-                                                      "completed";
-                                                }),
-                                                child: Container(
-                                                  width: s.height * 0.25,
-                                                  padding: EdgeInsets.symmetric(
-                                                    vertical: s.height * 0.015,
-                                                  ),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      color:
-                                                          daily_activity_filter ==
-                                                                  "completed"
-                                                              ? bluebg
-                                                              : nonactivebg),
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Completed",
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              "Montserrat",
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: daily_activity_filter ==
-                                                                  "completed"
-                                                              ? white
-                                                              : nonactivetxt),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(width: s.height * 0.03),
-                                              InkWell(
-                                                onTap: () => setState(() {
-                                                  daily_activity_filter =
-                                                      "processing";
-                                                }),
-                                                child: Container(
-                                                  width: s.height * 0.25,
-                                                  padding: EdgeInsets.symmetric(
-                                                    vertical: s.height * 0.015,
-                                                  ),
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      color:
-                                                          daily_activity_filter ==
-                                                                  "processing"
-                                                              ? bluebg
-                                                              : nonactivebg),
-                                                  child: Center(
-                                                    child: Text(
-                                                      "Processing",
-                                                      style: TextStyle(
-                                                          fontFamily:
-                                                              "Montserrat",
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          color: daily_activity_filter ==
-                                                                  "processing"
-                                                              ? white
-                                                              : nonactivetxt),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
+                                          const SizedBox(
+                                            height: 20,
+                                          )
+                              ],
+                            );
+                          }
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(
+                              child: Padding(
+                                padding: EdgeInsets.only(top: s.height * 0.03),
+                                child: SizedBox(
+                                  width: s.height * 0.25,
+                                  height: s.height * 0.25,
+                                  child: LoadingIndicator(
+                                    indicatorType:
+                                        Indicator.ballClipRotateMultiple,
+                                    colors: const [bluebg],
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+
+                          final List activityrp = [];
+                          List filteredActivity = [];
+                          snapshot.data!.docs.map((DocumentSnapshot document) {
+                            Map a = document.data() as Map<String, dynamic>;
+                            activityrp.add(a);
+                          }).toList();
+
+                          if (daily_activity_filter == "all") {
+                            filteredActivity = activityrp;
+                          } else {
+                            filteredActivity = activityrp
+                                .where(
+                                    (i) => i['status'] == daily_activity_filter)
+                                .toList();
+                          }
+
+                          return Column(
+                            children: [
+                              Container(
+                                child: activityrp.isEmpty
+                                    ? Column(
+                                        children: [
+                                          Image.asset(
+                                            "assets/icons/noprograms.jpg",
+                                            width: double.infinity,
+                                            height: s.height * 0.3,
+                                            fit: BoxFit.contain,
                                           ),
-                                        ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                      ],
-                                    ),
-                            ),
-                            Container(
-                              child: activityrp.length == 0
-                                  ? null
-                                  : Container(
-                                      child: filtered_activity.length == 0
-                                          ? Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: s.height * 0.1),
-                                              child: SizedBox(
-                                                  height: s.height * 0.4,
-                                                  width: s.height * 0.4,
-                                                  child: Image.asset(
-                                                      "assets/icons/no_result.png")),
-                                            )
-                                          : null),
-                            ),
-                            for (var i = 0;
-                                i < filtered_activity.length;
-                                i++) ...[
-                              Activitywrapper(
-                                name: filtered_activity[i]['name'],
-                                address: filtered_activity[i]['address'],
-                                loc: filtered_activity[i]['loc'],
-                                phn: filtered_activity[i]['phn'],
-                                pgm: filtered_activity[i]['pgm'],
-                                chrg: filtered_activity[i]['chrg'],
-                                type: filtered_activity[i]['type'],
-                                upDate: filtered_activity[i]['upDate'],
-                                upTime: filtered_activity[i]['upTime'],
-                                docname: filtered_activity[i]['docname'],
-                                status: filtered_activity[i]['status'],
-                                username: filtered_activity[i]['username'],
-                                techname: filtered_activity[i]['techname'],
-                                assignedtime: filtered_activity[i]
-                                    ['assignedtime'],
-                                assigneddate: filtered_activity[i]
-                                    ['assigneddate'],
-                                priority: filtered_activity[i]['priority'],
-                                camount: filtered_activity[i]['camount'],
-                                remarks: filtered_activity[i]['remarks'],
-                                cdate: filtered_activity[i]['cdate'],
-                                ctime: filtered_activity[i]['ctime'],
-                                ccollname: filtered_activity[i]['ccollname'],
-                                cdocname: filtered_activity[i]['cdocname'],
-                                custdocname: filtered_activity[i]
-                                    ['custdocname'],
-                                rpdocname: filtered_activity[i]['rpdocname'],
+                                          const Text(
+                                            "No Programs Found !",
+                                            style: TextStyle(
+                                              fontFamily: "Montserrat",
+                                              fontWeight: FontWeight.w600
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 20,
+                                          )
+                                        ],
+                                      )
+                                    : Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SingleChildScrollView(
+                                            scrollDirection: Axis.horizontal,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                InkWell(
+                                                  onTap: () => setState(() {
+                                                    daily_activity_filter =
+                                                        "all";
+                                                  }),
+                                                  child: Container(
+                                                    width: s.height * 0.15,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                      vertical:
+                                                          s.height * 0.015,
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        color:
+                                                            daily_activity_filter ==
+                                                                    "all"
+                                                                ? bluebg
+                                                                : nonactivebg),
+                                                    child: Center(
+                                                      child: Text(
+                                                        "All",
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Montserrat",
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: daily_activity_filter ==
+                                                                    "all"
+                                                                ? white
+                                                                : nonactivetxt),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                    width: s.height * 0.03),
+                                                InkWell(
+                                                  onTap: () => setState(() {
+                                                    daily_activity_filter =
+                                                        "assigned";
+                                                  }),
+                                                  child: Container(
+                                                    width: s.height * 0.25,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                      vertical:
+                                                          s.height * 0.015,
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        color:
+                                                            daily_activity_filter ==
+                                                                    "assigned"
+                                                                ? bluebg
+                                                                : nonactivebg),
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Assigned",
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Montserrat",
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: daily_activity_filter ==
+                                                                    "assigned"
+                                                                ? white
+                                                                : nonactivetxt),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                    width: s.height * 0.03),
+                                                InkWell(
+                                                  onTap: () => setState(() {
+                                                    daily_activity_filter =
+                                                        "pending";
+                                                  }),
+                                                  child: Container(
+                                                    width: s.height * 0.25,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                      vertical:
+                                                          s.height * 0.015,
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        color:
+                                                            daily_activity_filter ==
+                                                                    "pending"
+                                                                ? bluebg
+                                                                : nonactivebg),
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Pending",
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Montserrat",
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: daily_activity_filter ==
+                                                                    "pending"
+                                                                ? white
+                                                                : nonactivetxt),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                    width: s.height * 0.03),
+                                                InkWell(
+                                                  onTap: () => setState(() {
+                                                    daily_activity_filter =
+                                                        "completed";
+                                                  }),
+                                                  child: Container(
+                                                    width: s.height * 0.25,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                      vertical:
+                                                          s.height * 0.015,
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        color:
+                                                            daily_activity_filter ==
+                                                                    "completed"
+                                                                ? bluebg
+                                                                : nonactivebg),
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Completed",
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Montserrat",
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: daily_activity_filter ==
+                                                                    "completed"
+                                                                ? white
+                                                                : nonactivetxt),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                    width: s.height * 0.03),
+                                                InkWell(
+                                                  onTap: () => setState(() {
+                                                    daily_activity_filter =
+                                                        "processing";
+                                                  }),
+                                                  child: Container(
+                                                    width: s.height * 0.25,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                      vertical:
+                                                          s.height * 0.015,
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        color:
+                                                            daily_activity_filter ==
+                                                                    "processing"
+                                                                ? bluebg
+                                                                : nonactivebg),
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Processing",
+                                                        style: TextStyle(
+                                                            fontFamily:
+                                                                "Montserrat",
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: daily_activity_filter ==
+                                                                    "processing"
+                                                                ? white
+                                                                : nonactivetxt),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                        ],
+                                      ),
                               ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                            ],
-                            Container(
+                              Container(
                                 child: activityrp.length == 0
                                     ? null
                                     : Container(
-                                        child: filtered_activity.length == 0
-                                            ? SizedBox(height: s.height * 0.12)
-                                            : SizedBox(height: s.height * 0.05),
-                                      ))
-                          ],
-                        );
-                      },
-                    ),
-                  ],
+                                        child: filteredActivity.length == 0
+                                            ? Padding(
+                                                padding: EdgeInsets.only(
+                                                    top: s.height * 0.1),
+                                                child: SizedBox(
+                                                    height: s.height * 0.4,
+                                                    width: s.height * 0.4,
+                                                    child: Image.asset(
+                                                        "assets/icons/no_result.png")),
+                                              )
+                                            : null),
+                              ),
+                              for (var i = 0;
+                                  i < filteredActivity.length;
+                                  i++) ...[
+                                Activitywrapper(
+                                  name: filteredActivity[i]['name'],
+                                  address: filteredActivity[i]['address'],
+                                  loc: filteredActivity[i]['loc'],
+                                  phn: filteredActivity[i]['phn'],
+                                  pgm: filteredActivity[i]['pgm'],
+                                  chrg: filteredActivity[i]['chrg'],
+                                  type: filteredActivity[i]['type'],
+                                  upDate: filteredActivity[i]['upDate'],
+                                  upTime: filteredActivity[i]['upTime'],
+                                  docname: filteredActivity[i]['docname'],
+                                  status: filteredActivity[i]['status'],
+                                  username: filteredActivity[i]['username'],
+                                  techname: filteredActivity[i]['techname'],
+                                  assignedtime: filteredActivity[i]
+                                      ['assignedtime'],
+                                  assigneddate: filteredActivity[i]
+                                      ['assigneddate'],
+                                  priority: filteredActivity[i]['priority'],
+                                  camount: filteredActivity[i]['camount'],
+                                  remarks: filteredActivity[i]['remarks'],
+                                  cdate: filteredActivity[i]['cdate'],
+                                  ctime: filteredActivity[i]['ctime'],
+                                  ccollname: filteredActivity[i]['ccollname'],
+                                  cdocname: filteredActivity[i]['cdocname'],
+                                  custdocname: filteredActivity[i]
+                                      ['custdocname'],
+                                  rpdocname: filteredActivity[i]['rpdocname'],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                              ],
+                              Container(
+                                  child: activityrp.length == 0
+                                      ? null
+                                      : Container(
+                                          child: filteredActivity.length == 0
+                                              ? SizedBox(
+                                                  height: s.height * 0.12)
+                                              : SizedBox(
+                                                  height: s.height * 0.05),
+                                        ))
+                            ],
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
