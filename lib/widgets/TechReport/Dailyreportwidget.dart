@@ -23,7 +23,6 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
   int c = 0;
   int pro = 0;
   
-  bool r = false;
 // Images
   var random = Random();
   List<String> techimg = [
@@ -142,11 +141,10 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     Container(
-                                      // child: pendingpgms.isEmpty &&
-                                      //         processingpgm.isEmpty &&
-                                      //         assigned.isEmpty &&
-                                      //         completedpgm.isEmpty
-                                      child: r
+                                      child: pendingpgms.isEmpty &&
+                                              processingpgm.isEmpty &&
+                                              assigned.isEmpty &&
+                                              completedpgm.isEmpty
                                           ? Container(
                                               padding:
                                                   const EdgeInsets.symmetric(
