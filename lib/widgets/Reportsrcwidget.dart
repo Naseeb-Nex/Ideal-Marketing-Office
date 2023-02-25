@@ -493,8 +493,9 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                             flex: 4,
                             fit: FlexFit.tight,
                             child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: s.height * 0.03),
+                              padding: EdgeInsets.only(
+                                  right: s.height * 0.03,
+                                  left: s.height * 0.02),
                               child: AnimatedContainer(
                                   duration: const Duration(
                                     milliseconds: 2000,
@@ -858,7 +859,10 @@ class Techreportstatuswarpper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (selectedRprt == "Daily") {
-     return DailyReportwidget(username: username, techname: techname,);
+      return DailyReportwidget(
+        username: username,
+        techname: techname,
+      );
     }
     return Container();
   }
