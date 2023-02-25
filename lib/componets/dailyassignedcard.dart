@@ -115,7 +115,8 @@ class _DailyassignedcardState extends State<Dailyassignedcard> {
                   children: [
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: s.height * 0.03, vertical: s.height * 0.03),
+                          horizontal: s.height * 0.015,
+                          vertical: s.height * 0.015),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -125,49 +126,45 @@ class _DailyassignedcardState extends State<Dailyassignedcard> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Container(
-                                width: s.height * 0.2,
-                                height: s.height * 0.2,
+                                width: s.height * 0.1,
+                                height: s.height * 0.1,
                                 clipBehavior: Clip.hardEdge,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: redbg,
                                 ),
-                                child: Image.asset("${custimg[loc]}"),
+                                child: Image.asset(custimg[loc]),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(left: s.height * 0.03),
-                                child: Container(
-                                  width: s.height * 0.6,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      SizedBox(
-                                        height: s.height * 0.08,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    SizedBox(
+                                      height: s.height * 0.01,
+                                    ),
+                                    Text(
+                                      "${widget.name}",
+                                      style: TextStyle(
+                                        fontFamily: "Nunito",
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                      Text(
-                                        "${widget.name}",
-                                        style: TextStyle(
-                                          fontFamily: "Nunito",
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        softWrap: true,
+                                      softWrap: true,
+                                    ),
+                                    Text(
+                                      "${widget.address}",
+                                      style: TextStyle(
+                                        fontFamily: "Nunito",
+                                        fontSize: 13,
+                                        color: Colors.black,
                                       ),
-                                      Text(
-                                        "${widget.address}",
-                                        style: TextStyle(
-                                          fontFamily: "Nunito",
-                                          fontSize: 12,
-                                          color: Colors.black,
-                                        ),
-                                        softWrap: true,
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ],
-                                  ),
+                                      softWrap: true,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
@@ -179,16 +176,16 @@ class _DailyassignedcardState extends State<Dailyassignedcard> {
                             "Program",
                             style: const TextStyle(
                               fontFamily: "Montserrat",
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                           Text(
                             "${widget.pgm}",
                             style: const TextStyle(
                               fontFamily: "Montserrat",
-                              fontSize: 15,
-                              fontWeight: FontWeight.normal,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           Padding(
@@ -201,7 +198,7 @@ class _DailyassignedcardState extends State<Dailyassignedcard> {
                                     Icon(
                                       Iconsax.location,
                                       color: cheryred,
-                                      size: s.height * 0.04,
+                                      size: 25,
                                     ),
                                     SizedBox(width: s.height * 0.01),
                                     SizedBox(
@@ -210,7 +207,7 @@ class _DailyassignedcardState extends State<Dailyassignedcard> {
                                         "${widget.loc}",
                                         style: const TextStyle(
                                           fontFamily: "Nunito",
-                                          fontSize: 15,
+                                          fontSize: 13,
                                           fontWeight: FontWeight.w500,
                                         ),
                                         overflow: TextOverflow.ellipsis,
@@ -227,14 +224,22 @@ class _DailyassignedcardState extends State<Dailyassignedcard> {
                     Visibility(
                       visible: _isviz,
                       child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                        padding: EdgeInsets.fromLTRB(s.height * 0.015, 0,
+                            s.height * 0.015, s.height * 0.01),
                         child: Container(
                           width: double.infinity,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              // color: Color(0XFFe1ecf7),),
-                              color: yellowbg,),
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                  spreadRadius: 2,
+                                  blurRadius: 3,
+                                  color: Colors.black.withOpacity(0.09),
+                                  offset: const Offset(0, 3))
+                            ],
+                            // color: Color(0XFFe1ecf7),),
+                            color: yellowbg,
+                          ),
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 20),
                           child: Column(
@@ -249,12 +254,16 @@ class _DailyassignedcardState extends State<Dailyassignedcard> {
                                   color: yellowfg,
                                 ),
                               ),
+                              const Divider(
+                                thickness: 2,
+                                height: 5,
+                                color: yellowfg,
+                              ),
                               const SizedBox(
-                                height: 8,
+                                height: 5,
                               ),
                               Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
                                     "Address :",
@@ -284,8 +293,7 @@ class _DailyassignedcardState extends State<Dailyassignedcard> {
                                 height: 5,
                               ),
                               Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
                                     child: Text(
@@ -313,8 +321,7 @@ class _DailyassignedcardState extends State<Dailyassignedcard> {
                                 height: 5,
                               ),
                               Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
                                     "Program :",
@@ -343,8 +350,7 @@ class _DailyassignedcardState extends State<Dailyassignedcard> {
                                 height: 5,
                               ),
                               Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
                                     "Phone :",
@@ -370,8 +376,7 @@ class _DailyassignedcardState extends State<Dailyassignedcard> {
                                 height: 5,
                               ),
                               Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
                                     child: Text(
@@ -399,8 +404,7 @@ class _DailyassignedcardState extends State<Dailyassignedcard> {
                                 height: 5,
                               ),
                               Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
                                     child: Text(
@@ -424,11 +428,9 @@ class _DailyassignedcardState extends State<Dailyassignedcard> {
                                   ),
                                 ],
                               ),
-                              
                               const SizedBox(height: 5),
                               Row(
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
                                     child: Text(
@@ -467,7 +469,8 @@ class _DailyassignedcardState extends State<Dailyassignedcard> {
                   children: [
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: s.height * 0.03, vertical: s.height * 0.03),
+                          horizontal: s.height * 0.02,
+                          vertical: s.height * 0.02),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 3),

@@ -57,7 +57,6 @@ class Dailycompltedcard extends StatefulWidget {
 }
 
 class _DailycompltedcardState extends State<Dailycompltedcard> {
-  
   bool _isviz = false;
 
   var random = Random();
@@ -110,7 +109,8 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                   children: [
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: s.height * 0.03, vertical: s.height * 0.03),
+                          horizontal: s.height * 0.015,
+                          vertical: s.height * 0.015),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -120,49 +120,45 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Container(
-                                width: s.height * 0.2,
-                                height: s.height * 0.2,
+                                width: s.height * 0.1,
+                                height: s.height * 0.1,
                                 clipBehavior: Clip.hardEdge,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: greenbg,
                                 ),
-                                child: Image.asset("${custimg[loc]}"),
+                                child: Image.asset(custimg[loc]),
                               ),
                               Padding(
                                 padding: EdgeInsets.only(left: s.height * 0.03),
-                                child: Container(
-                                  width: s.height * 0.6,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      SizedBox(
-                                        height: s.height * 0.08,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    SizedBox(
+                                      height: s.height * 0.01,
+                                    ),
+                                    Text(
+                                      "${widget.name}",
+                                      style: TextStyle(
+                                        fontFamily: "Nunito",
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                      Text(
-                                        "${widget.name}",
-                                        style: TextStyle(
-                                          fontFamily: "Nunito",
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        softWrap: true,
+                                      softWrap: true,
+                                    ),
+                                    Text(
+                                      "${widget.address}",
+                                      style: TextStyle(
+                                        fontFamily: "Nunito",
+                                        fontSize: 13,
+                                        color: Colors.black,
                                       ),
-                                      Text(
-                                        "${widget.address}",
-                                        style: TextStyle(
-                                          fontFamily: "Nunito",
-                                          fontSize: 12,
-                                          color: Colors.black,
-                                        ),
-                                        softWrap: true,
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ],
-                                  ),
+                                      softWrap: true,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
@@ -174,16 +170,16 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                             "Program",
                             style: const TextStyle(
                               fontFamily: "Montserrat",
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                           Text(
                             "${widget.pgm}",
                             style: const TextStyle(
                               fontFamily: "Montserrat",
-                              fontSize: 15,
-                              fontWeight: FontWeight.normal,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                           Padding(
@@ -196,7 +192,7 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                                     Icon(
                                       Iconsax.location,
                                       color: cheryred,
-                                      size: s.height * 0.04,
+                                      size: 25,
                                     ),
                                     SizedBox(width: s.height * 0.01),
                                     SizedBox(
@@ -205,7 +201,7 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                                         "${widget.loc}",
                                         style: const TextStyle(
                                           fontFamily: "Nunito",
-                                          fontSize: 15,
+                                          fontSize: 13,
                                           fontWeight: FontWeight.w500,
                                         ),
                                         overflow: TextOverflow.ellipsis,
@@ -229,20 +225,20 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                  width: s.height * 0.2,
-                                  child: Text(
-                                    "Remarks :",
-                                    style: const TextStyle(
-                                      fontFamily: "Nunito",
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.green,
-                                    ),
+                                const Text(
+                                  "Remarks :",
+                                  style: const TextStyle(
+                                    fontFamily: "Nunito",
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.green,
                                   ),
                                 ),
-                                Container(
-                                  width: s.height * 0.59,
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Flexible(
+                                  flex: 1,
                                   child: Text(
                                     "${widget.remarks}",
                                     style: const TextStyle(
@@ -262,13 +258,20 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                     Visibility(
                       visible: _isviz,
                       child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                        padding: EdgeInsets.fromLTRB(s.height * 0.015, 0,
+                            s.height * 0.015, s.height * 0.01),
                         child: Container(
                           width: double.infinity,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: greenbg,
+                            boxShadow: [
+                              BoxShadow(
+                                  spreadRadius: 2,
+                                  blurRadius: 3,
+                                  color: Colors.black.withOpacity(0.09),
+                                  offset: const Offset(0, 3))
+                            ],
                           ),
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 20),
@@ -284,8 +287,13 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                                   color: limegreen,
                                 ),
                               ),
+                              const Divider(
+                                thickness: 2,
+                                height: 5,
+                                color: limegreen,
+                              ),
                               const SizedBox(
-                                height: 8,
+                                height: 5,
                               ),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -500,6 +508,7 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                                     ),
                                   ),
                                   Flexible(
+                                    flex: 1,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 5),
@@ -555,7 +564,8 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                   children: [
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: s.height * 0.03, vertical: s.height * 0.03),
+                          horizontal: s.height * 0.02,
+                          vertical: s.height * 0.02),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 10, vertical: 3),

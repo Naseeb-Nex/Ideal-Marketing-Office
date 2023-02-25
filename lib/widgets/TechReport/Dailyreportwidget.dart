@@ -848,7 +848,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                                         "assigned";
                                                   }),
                                                   child: Container(
-                                                    width: s.height * 0.25,
+                                                    width: s.height * 0.2,
                                                     padding:
                                                         EdgeInsets.symmetric(
                                                       vertical:
@@ -887,7 +887,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                                         "pending";
                                                   }),
                                                   child: Container(
-                                                    width: s.height * 0.25,
+                                                    width: s.height * 0.2,
                                                     padding:
                                                         EdgeInsets.symmetric(
                                                       vertical:
@@ -926,7 +926,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                                         "completed";
                                                   }),
                                                   child: Container(
-                                                    width: s.height * 0.25,
+                                                    width: s.height * 0.2,
                                                     padding:
                                                         EdgeInsets.symmetric(
                                                       vertical:
@@ -965,7 +965,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                                         "processing";
                                                   }),
                                                   child: Container(
-                                                    width: s.height * 0.25,
+                                                    width: s.height * 0.2,
                                                     padding:
                                                         EdgeInsets.symmetric(
                                                       vertical:
