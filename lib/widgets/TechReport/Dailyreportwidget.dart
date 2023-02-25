@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+// ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 import 'package:test2/componets/dailyassignedcard.dart';
 import 'package:test2/componets/dailycompletedcard.dart';
@@ -10,10 +11,11 @@ import 'package:test2/constants/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
+// ignore: must_be_immutable
 class DailyReportwidget extends StatefulWidget {
   String? username;
   String? techname;
-  DailyReportwidget({this.username, this.techname});
+  DailyReportwidget({Key? key, this.username, this.techname}) : super(key: key);
 
   @override
   State<DailyReportwidget> createState() => _DailyReportwidgetState();
@@ -27,9 +29,11 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
   int c = 0;
   int pro = 0;
 
+  // ignore: non_constant_identifier_names
   bool is_sub = true;
 
   // Daily activity filter
+  // ignore: non_constant_identifier_names
   String daily_activity_filter = "all";
 
 // Images
@@ -39,15 +43,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
     "assets/icons/tech_avatar2.png",
     "assets/icons/tech_avatar3.png",
   ];
-
-  @override
-  void initState() {
-    super.initState();
-    if (!mounted) {
-      submit_validator();
-    }
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     Size s = MediaQuery.of(context).size;
@@ -152,15 +148,6 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                           List assigned = rpactivity
                               .where((i) => i['status'] == 'assigned')
                               .toList();
-
-                          initState() {
-                            setState(() {
-                              a = assigned.length;
-                              p = pendingpgms.length;
-                              pro = processingpgm.length;
-                              c = completedpgm.length;
-                            });
-                          }
 
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -350,7 +337,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                       ]),
                   child: Column(children: [
                     Row(
-                      children: [
+                      children:  const [
                         Text(
                           "Summary Report",
                           style: TextStyle(
@@ -362,8 +349,8 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                         ),
                       ],
                     ),
-                    Divider(),
-                    SizedBox(
+                     const Divider(),
+                     const SizedBox(
                       height: 10,
                     ),
                     FutureBuilder<DocumentSnapshot>(
@@ -380,7 +367,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                       builder: (BuildContext context,
                           AsyncSnapshot<DocumentSnapshot> snapshot) {
                         if (snapshot.hasError) {
-                          return Text("Something went wrong");
+                          return  const Text("Something went wrong");
                         }
 
                         if (snapshot.hasData && !snapshot.data!.exists) {
@@ -395,8 +382,6 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                         }
 
                         if (snapshot.connectionState == ConnectionState.done) {
-                          Map<String, dynamic> data =
-                              snapshot.data!.data() as Map<String, dynamic>;
                           return Column(
                             children: [
                               Container(
@@ -425,7 +410,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                           width: s.height * 0.08,
                                           height: s.height * 0.08,
                                         ),
-                                        SizedBox(
+                                         const SizedBox(
                                           width: 10,
                                         ),
                                         const Text(
@@ -438,7 +423,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(height: 5),
+                                     const SizedBox(height: 5),
                                     StreamBuilder<QuerySnapshot>(
                                         stream: fb
                                             .collection("Reports")
@@ -542,7 +527,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                   ],
                                 ),
                               ),
-                              SizedBox(
+                             const   SizedBox(
                                 height: 15,
                               ),
                               Container(
@@ -557,7 +542,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                         spreadRadius: 2,
                                         blurRadius: 4,
                                         color: black.withOpacity(.1),
-                                        offset: Offset(1, 2),
+                                        offset: const  Offset(1, 2),
                                       ),
                                     ]),
                                 child: Column(
@@ -572,10 +557,10 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                           width: s.height * 0.08,
                                           height: s.height * 0.08,
                                         ),
-                                        SizedBox(
+                                         const SizedBox(
                                           width: 10,
                                         ),
-                                        Text(
+                                        const  Text(
                                           "Expense Details",
                                           style: TextStyle(
                                             fontFamily: "Montserrat",
@@ -585,8 +570,8 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                         ),
                                       ],
                                     ),
-                                    Divider(),
-                                    SizedBox(height: 5),
+                                     const Divider(),
+                                    const  SizedBox(height: 5),
                                     FutureBuilder<DocumentSnapshot>(
                                       future: fb
                                           .collection("Reports")
@@ -602,12 +587,12 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                           AsyncSnapshot<DocumentSnapshot>
                                               snapshot) {
                                         if (snapshot.hasError) {
-                                          return Text("Something went wrong");
+                                          return  const Text("Something went wrong");
                                         }
 
                                         if (snapshot.hasData &&
                                             !snapshot.data!.exists) {
-                                          return Padding(
+                                          return  const Padding(
                                             padding: EdgeInsets.symmetric(
                                                 vertical: 40),
                                             child: Text(
@@ -633,7 +618,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                                   Expanded(
                                                     child: Text(
                                                       "${data['expense']}",
-                                                      style: TextStyle(
+                                                      style: const  TextStyle(
                                                         fontFamily:
                                                             "Montserrat",
                                                         fontSize: 15,
@@ -671,10 +656,10 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                               child: SizedBox(
                                                 width: s.height * 0.15,
                                                 height: s.height * 0.15,
-                                                child: LoadingIndicator(
+                                                child:  const LoadingIndicator(
                                                   indicatorType: Indicator
                                                       .ballClipRotateMultiple,
-                                                  colors: const [black],
+                                                  colors:  [black],
                                                 ),
                                               ),
                                             ),
@@ -722,7 +707,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                   ]),
                 ),
               ),
-              SizedBox(
+              const  SizedBox(
                 height: 10,
               ),
               Padding(
@@ -747,7 +732,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
+                        children:  const [
                           Text(
                             "Daily Activity",
                             style: TextStyle(
@@ -759,8 +744,8 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                           ),
                         ],
                       ),
-                      Divider(),
-                      SizedBox(
+                      const  Divider(),
+                      const  SizedBox(
                         height: 8,
                       ),
                       // Daily Activity
@@ -807,10 +792,10 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                 child: SizedBox(
                                   width: s.height * 0.25,
                                   height: s.height * 0.25,
-                                  child: LoadingIndicator(
+                                  child:  const LoadingIndicator(
                                     indicatorType:
                                         Indicator.ballClipRotateMultiple,
-                                    colors: const [bluebg],
+                                    colors:  [bluebg],
                                   ),
                                 ),
                               ),
@@ -1062,17 +1047,17 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                               ],
                                             ),
                                           ),
-                                          SizedBox(
+                                           const SizedBox(
                                             height: 15,
                                           ),
                                         ],
                                       ),
                               ),
                               Container(
-                                child: activityrp.length == 0
+                                child: activityrp.isEmpty
                                     ? null
                                     : Container(
-                                        child: filteredActivity.length == 0
+                                        child: filteredActivity.isEmpty
                                             ? Padding(
                                                 padding: EdgeInsets.only(
                                                     top: s.height * 0.1),
@@ -1116,15 +1101,15 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                       ['custdocname'],
                                   rpdocname: filteredActivity[i]['rpdocname'],
                                 ),
-                                SizedBox(
+                                 const SizedBox(
                                   height: 10,
                                 ),
                               ],
                               Container(
-                                  child: activityrp.length == 0
+                                  child: activityrp.isEmpty
                                       ? null
                                       : Container(
-                                          child: filteredActivity.length == 0
+                                          child: filteredActivity.isEmpty
                                               ? SizedBox(
                                                   height: s.height * 0.12)
                                               : SizedBox(
@@ -1141,40 +1126,6 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
             ],
           ),
         ));
-  }
-
-  Future<void> submit_validator() async {
-    print("Wokring");
-    // Report side
-    DateTime now = DateTime.now();
-    String day = DateFormat('d').format(now);
-    String month = DateFormat('MM').format(now);
-    String year = DateFormat('y').format(now);
-
-    await fb
-        .collection("Reports")
-        .doc(year)
-        .collection("Month")
-        .doc(month)
-        .collection(day)
-        .doc("Tech")
-        .collection("Reports")
-        .doc(widget.username)
-        .get()
-        .then((DocumentSnapshot doc) {
-      if (doc.exists) {
-        try {
-          bool nested = doc.get(FieldPath(['submit']));
-          if (nested) {
-            setState(() {
-              is_sub = true;
-            });
-          }
-        } on StateError catch (e) {
-          print('Feild is not exist error!');
-        }
-      }
-    });
   }
 }
 
