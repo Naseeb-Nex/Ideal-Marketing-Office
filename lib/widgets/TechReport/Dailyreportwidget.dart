@@ -27,7 +27,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
   int c = 0;
   int pro = 0;
 
-  bool is_sub = false;
+  bool is_sub = true;
 
   // Daily activity filter
   String daily_activity_filter = "all";
@@ -39,6 +39,14 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
     "assets/icons/tech_avatar2.png",
     "assets/icons/tech_avatar3.png",
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    if (!mounted) {
+      submit_validator();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -358,193 +366,81 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                     SizedBox(
                       height: 10,
                     ),
-                    Center(
-                      child: is_sub
-                          ? Column(
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: s.height * 0.02, vertical: 5),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          spreadRadius: 2,
-                                          blurRadius: 4,
-                                          color: black.withOpacity(.05),
-                                          offset: Offset(1, 2),
-                                        ),
-                                      ]),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Image.asset(
-                                        "assets/icons/scooter.png",
-                                        width: 40,
-                                        height: 40,
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      Text(
-                                        "Vehicle Details",
-                                        style: TextStyle(
-                                          fontFamily: "Montserrat",
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 15,
-                                        ),
-                                      ),
-                                      SizedBox(height: 5),
-                                      StreamBuilder<QuerySnapshot>(
-                                          stream: fb
-                                              .collection("Reports")
-                                              .doc(year)
-                                              .collection("Month")
-                                              .doc(month)
-                                              .collection(day)
-                                              .doc("Tech")
-                                              .collection("Reports")
-                                              .doc("${widget.username}")
-                                              .collection("vehicle")
-                                              .snapshots(),
-                                          builder: (BuildContext context,
-                                              AsyncSnapshot<QuerySnapshot>
-                                                  snapshot) {
-                                            if (snapshot.hasError) {}
-                                            if (snapshot.connectionState ==
-                                                ConnectionState.waiting) {
-                                              return Center(
-                                                child: SizedBox(
-                                                  width: s.height * 0.25,
-                                                  height: s.height * 0.25,
-                                                  child: LoadingIndicator(
-                                                    indicatorType: Indicator
-                                                        .ballClipRotateMultiple,
-                                                    colors: const [bluebg],
-                                                  ),
-                                                ),
-                                              );
-                                            }
+                    FutureBuilder<DocumentSnapshot>(
+                      future: fb
+                          .collection("Reports")
+                          .doc(year)
+                          .collection("Month")
+                          .doc(month)
+                          .collection(day)
+                          .doc("Tech")
+                          .collection("Reports")
+                          .doc(widget.username)
+                          .get(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<DocumentSnapshot> snapshot) {
+                        if (snapshot.hasError) {
+                          return Text("Something went wrong");
+                        }
 
-                                            final List vehicle = [];
-                                            snapshot.data!.docs.map(
-                                                (DocumentSnapshot document) {
-                                              Map a = document.data()
-                                                  as Map<String, dynamic>;
-                                              vehicle.add(a);
-                                              // a['uid'] = document.id;
-                                            }).toList();
-                                            return Column(
-                                              children: [
-                                                Container(
-                                                    child: vehicle.length == 0
-                                                        ? Padding(
-                                                            padding: EdgeInsets
-                                                                .symmetric(
-                                                                    horizontal:
-                                                                        s.height *
-                                                                            0.01),
-                                                            child: Column(
-                                                              children: [
-                                                                Image.asset(
-                                                                  "assets/icons/warning.png",
-                                                                  height:
-                                                                      s.height *
-                                                                          0.12,
-                                                                ),
-                                                                Text(
-                                                                  "No Vehicle Used !",
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontFamily:
-                                                                        "Montserrat",
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    fontSize:
-                                                                        17,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          )
-                                                        : null),
-                                                for (var i = 0;
-                                                    i < vehicle.length;
-                                                    i++) ...[
-                                                  Padding(
-                                                    padding:
-                                                        EdgeInsets.symmetric(
-                                                            vertical: 5.0),
-                                                    child: Vreportoverviewcard(
-                                                      name: vehicle[i]['name'],
-                                                      vdocname: vehicle[i]
-                                                          ['vdocname'],
-                                                      docname: vehicle[i]
-                                                          ['docname'],
-                                                      username: vehicle[i]
-                                                          ['username'],
-                                                      update: vehicle[i]
-                                                          ['upDate'],
-                                                      start: vehicle[i]
-                                                          ['start'],
-                                                      end: vehicle[i]['end'],
-                                                      desc: vehicle[i]['desc'],
-                                                      uptime: vehicle[i]
-                                                          ['upTime'],
-                                                    ),
-                                                  )
-                                                ]
-                                              ],
-                                            );
-                                          }),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: s.height * 0.02,
-                                      vertical: s.height * 0.05),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          spreadRadius: 2,
-                                          blurRadius: 4,
-                                          color: black.withOpacity(.1),
-                                          offset: Offset(1, 2),
+                        if (snapshot.hasData && !snapshot.data!.exists) {
+                          return SizedBox(
+                            width: double.infinity,
+                            height: s.height * 0.27,
+                            child: Image.asset(
+                              "assets/icons/notsub.jpg",
+                              fit: BoxFit.contain,
+                            ),
+                          );
+                        }
+
+                        if (snapshot.connectionState == ConnectionState.done) {
+                          Map<String, dynamic> data =
+                              snapshot.data!.data() as Map<String, dynamic>;
+                          return Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: s.height * 0.02, vertical: 5),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        spreadRadius: 2,
+                                        blurRadius: 3,
+                                        color: black.withOpacity(.08),
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ]),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        Image.asset(
+                                          "assets/icons/scooter.png",
+                                          width: s.height * 0.08,
+                                          height: s.height * 0.08,
                                         ),
-                                      ]),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Image.asset(
-                                        "assets/icons/expenses.png",
-                                        width: 40,
-                                        height: 40,
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      Text(
-                                        "Expense Details",
-                                        style: TextStyle(
-                                          fontFamily: "Montserrat",
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 15,
+                                        SizedBox(
+                                          width: 10,
                                         ),
-                                      ),
-                                      Divider(),
-                                      SizedBox(height: 5),
-                                      FutureBuilder<DocumentSnapshot>(
-                                        future: fb
+                                        const Text(
+                                          "Vehicle Details",
+                                          style: TextStyle(
+                                            fontFamily: "Montserrat",
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 19,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 5),
+                                    StreamBuilder<QuerySnapshot>(
+                                        stream: fb
                                             .collection("Reports")
                                             .doc(year)
                                             .collection("Month")
@@ -553,106 +449,275 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                             .doc("Tech")
                                             .collection("Reports")
                                             .doc("${widget.username}")
-                                            .get(),
+                                            .collection("vehicle")
+                                            .snapshots(),
                                         builder: (BuildContext context,
-                                            AsyncSnapshot<DocumentSnapshot>
+                                            AsyncSnapshot<QuerySnapshot>
                                                 snapshot) {
-                                          if (snapshot.hasError) {
-                                            return Text("Something went wrong");
-                                          }
-
-                                          if (snapshot.hasData &&
-                                              !snapshot.data!.exists) {
-                                            return Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: 40),
-                                              child: Text(
-                                                "No data Found!",
-                                                style: TextStyle(
-                                                    fontFamily: "Montserrat",
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              ),
-                                            );
-                                          }
-
+                                          if (snapshot.hasError) {}
                                           if (snapshot.connectionState ==
-                                              ConnectionState.done) {
-                                            Map<String, dynamic> data =
-                                                snapshot.data!.data()
-                                                    as Map<String, dynamic>;
-
-                                            return Column(
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Expanded(
-                                                      child: Text(
-                                                        "${data['expense']}",
-                                                        style: TextStyle(
-                                                          fontFamily:
-                                                              "Montserrat",
-                                                          fontSize: 15,
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )
-                                              ],
+                                              ConnectionState.waiting) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: s.height * 0.08,
+                                                height: s.height * 0.08,
+                                                child: const LoadingIndicator(
+                                                  indicatorType: Indicator
+                                                      .ballClipRotateMultiple,
+                                                  colors: [bluebg],
+                                                ),
+                                              ),
                                             );
                                           }
 
-                                          return Container(
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(25),
-                                              color: white,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  offset: const Offset(0, 10),
-                                                  blurRadius: 20,
-                                                  color: secondbg
-                                                      .withOpacity(0.23),
-                                                ),
-                                              ],
-                                            ),
-                                            child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  vertical: s.height * 0.1),
-                                              child: Center(
-                                                child: SizedBox(
-                                                  width: s.height * 0.15,
-                                                  height: s.height * 0.15,
-                                                  child: LoadingIndicator(
-                                                    indicatorType: Indicator
-                                                        .ballClipRotateMultiple,
-                                                    colors: const [black],
+                                          final List vehicle = [];
+                                          snapshot.data!.docs
+                                              .map((DocumentSnapshot document) {
+                                            Map a = document.data()
+                                                as Map<String, dynamic>;
+                                            vehicle.add(a);
+                                            // a['uid'] = document.id;
+                                          }).toList();
+                                          return Column(
+                                            children: [
+                                              Container(
+                                                  child: vehicle.isEmpty
+                                                      ? Padding(
+                                                          padding: EdgeInsets
+                                                              .symmetric(
+                                                                  horizontal:
+                                                                      s.height *
+                                                                          0.01),
+                                                          child: Column(
+                                                            children: [
+                                                              Image.asset(
+                                                                "assets/icons/warning.png",
+                                                                height:
+                                                                    s.height *
+                                                                        0.12,
+                                                              ),
+                                                              const Text(
+                                                                "No Vehicle Used !",
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontFamily:
+                                                                      "Montserrat",
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  fontSize: 17,
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        )
+                                                      : null),
+                                              for (var i = 0;
+                                                  i < vehicle.length;
+                                                  i++) ...[
+                                                Padding(
+                                                  padding: const EdgeInsets.symmetric(
+                                                      vertical: 5.0),
+                                                  child: Vreportoverviewcard(
+                                                    name: vehicle[i]['name'],
+                                                    vdocname: vehicle[i]
+                                                        ['vdocname'],
+                                                    docname: vehicle[i]
+                                                        ['docname'],
+                                                    username: vehicle[i]
+                                                        ['username'],
+                                                    update: vehicle[i]
+                                                        ['upDate'],
+                                                    start: vehicle[i]['start'],
+                                                    end: vehicle[i]['end'],
+                                                    desc: vehicle[i]['desc'],
+                                                    uptime: vehicle[i]
+                                                        ['upTime'],
                                                   ),
-                                                ),
-                                              ),
+                                                )
+                                              ]
+                                            ],
+                                          );
+                                        }),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: s.height * 0.02,
+                                    vertical: s.height * 0.02),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        spreadRadius: 2,
+                                        blurRadius: 4,
+                                        color: black.withOpacity(.1),
+                                        offset: Offset(1, 2),
+                                      ),
+                                    ]),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        Image.asset(
+                                          "assets/icons/expenses.png",
+                                          width: s.height * 0.08,
+                                          height: s.height * 0.08,
+                                        ),
+                                        SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text(
+                                          "Expense Details",
+                                          style: TextStyle(
+                                            fontFamily: "Montserrat",
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 17,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Divider(),
+                                    SizedBox(height: 5),
+                                    FutureBuilder<DocumentSnapshot>(
+                                      future: fb
+                                          .collection("Reports")
+                                          .doc(year)
+                                          .collection("Month")
+                                          .doc(month)
+                                          .collection(day)
+                                          .doc("Tech")
+                                          .collection("Reports")
+                                          .doc("${widget.username}")
+                                          .get(),
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot<DocumentSnapshot>
+                                              snapshot) {
+                                        if (snapshot.hasError) {
+                                          return Text("Something went wrong");
+                                        }
+
+                                        if (snapshot.hasData &&
+                                            !snapshot.data!.exists) {
+                                          return Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 40),
+                                            child: Text(
+                                              "No data Found!",
+                                              style: TextStyle(
+                                                  fontFamily: "Montserrat",
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w400),
                                             ),
                                           );
-                                        },
-                                      ),
-                                    ],
-                                  ),
+                                        }
+
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.done) {
+                                          Map<String, dynamic> data =
+                                              snapshot.data!.data()
+                                                  as Map<String, dynamic>;
+
+                                          return Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Expanded(
+                                                    child: Text(
+                                                      "${data['expense']}",
+                                                      style: TextStyle(
+                                                        fontFamily:
+                                                            "Montserrat",
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          );
+                                        }
+
+                                        return Container(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                            color: white,
+                                            boxShadow: [
+                                              BoxShadow(
+                                                offset: const Offset(0, 10),
+                                                blurRadius: 20,
+                                                color:
+                                                    secondbg.withOpacity(0.23),
+                                              ),
+                                            ],
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: s.height * 0.1),
+                                            child: Center(
+                                              child: SizedBox(
+                                                width: s.height * 0.15,
+                                                height: s.height * 0.15,
+                                                child: LoadingIndicator(
+                                                  indicatorType: Indicator
+                                                      .ballClipRotateMultiple,
+                                                  colors: const [black],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            )
-                          : Container(
-                              width: double.infinity,
-                              height: s.height * 0.27,
-                              child: Image.asset(
-                                "assets/icons/notsub.jpg",
-                                fit: BoxFit.contain,
+                              ),
+                            ],
+                          );
+                        }
+
+                        return Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25),
+                            color: white,
+                            boxShadow: [
+                              BoxShadow(
+                                offset: const Offset(0, 10),
+                                blurRadius: 20,
+                                color: secondbg.withOpacity(0.23),
+                              ),
+                            ],
+                          ),
+                          child: Padding(
+                            padding:
+                                EdgeInsets.symmetric(vertical: s.width * 0.1),
+                            child: Center(
+                              child: SizedBox(
+                                width: s.height * 0.08,
+                                height: s.height * 0.08,
+                                child: const LoadingIndicator(
+                                  indicatorType:
+                                      Indicator.ballClipRotateMultiple,
+                                  colors: [bluebg],
+                                ),
                               ),
                             ),
+                          ),
+                        );
+                      },
                     ),
                   ]),
                 ),
@@ -717,21 +782,20 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                             return Column(
                               children: [
                                 Image.asset(
-                                            "assets/icons/noprograms.jpg",
-                                            width: double.infinity,
-                                            height: s.height * 0.3,
-                                            fit: BoxFit.contain,
-                                          ),
-                                          const Text(
-                                            "No Programs Found !",
-                                            style: TextStyle(
-                                              fontFamily: "Montserrat",
-                                              fontWeight: FontWeight.w600
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            height: 20,
-                                          )
+                                  "assets/icons/noprograms.jpg",
+                                  width: double.infinity,
+                                  height: s.height * 0.3,
+                                  fit: BoxFit.contain,
+                                ),
+                                const Text(
+                                  "No Programs Found !",
+                                  style: TextStyle(
+                                      fontFamily: "Montserrat",
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                )
                               ],
                             );
                           }
@@ -784,9 +848,8 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                           const Text(
                                             "No Programs Found !",
                                             style: TextStyle(
-                                              fontFamily: "Montserrat",
-                                              fontWeight: FontWeight.w600
-                                            ),
+                                                fontFamily: "Montserrat",
+                                                fontWeight: FontWeight.w600),
                                           ),
                                           const SizedBox(
                                             height: 20,
@@ -1078,6 +1141,40 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
             ],
           ),
         ));
+  }
+
+  Future<void> submit_validator() async {
+    print("Wokring");
+    // Report side
+    DateTime now = DateTime.now();
+    String day = DateFormat('d').format(now);
+    String month = DateFormat('MM').format(now);
+    String year = DateFormat('y').format(now);
+
+    await fb
+        .collection("Reports")
+        .doc(year)
+        .collection("Month")
+        .doc(month)
+        .collection(day)
+        .doc("Tech")
+        .collection("Reports")
+        .doc(widget.username)
+        .get()
+        .then((DocumentSnapshot doc) {
+      if (doc.exists) {
+        try {
+          bool nested = doc.get(FieldPath(['submit']));
+          if (nested) {
+            setState(() {
+              is_sub = true;
+            });
+          }
+        } on StateError catch (e) {
+          print('Feild is not exist error!');
+        }
+      }
+    });
   }
 }
 

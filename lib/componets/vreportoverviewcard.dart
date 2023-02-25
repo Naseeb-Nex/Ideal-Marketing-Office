@@ -74,9 +74,9 @@ class _VreportoverviewcardState extends State<Vreportoverviewcard> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Container(
-                      width: s.height * 0.11,
-                      height: s.height * 0.11,
+                    SizedBox(
+                      width: s.height * 0.07,
+                      height: s.height * 0.07,
                       child: Image.asset("assets/icons/scooter-1.png"),
                     ),
                     Flexible(
@@ -84,7 +84,7 @@ class _VreportoverviewcardState extends State<Vreportoverviewcard> {
                       fit: FlexFit.tight,
                       child: Padding(
                         padding:
-                            EdgeInsets.symmetric(horizontal: s.height * 0.03),
+                            EdgeInsets.symmetric(horizontal: s.height * 0.02),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
