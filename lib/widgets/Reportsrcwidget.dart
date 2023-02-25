@@ -500,9 +500,6 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
                                   duration: const Duration(
                                     milliseconds: 2000,
                                   ),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: s.height * 0.03,
-                                      vertical: s.height * 0.02),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(20),
                                       color: white,
@@ -738,105 +735,111 @@ class _TechReportstatusState extends State<TechReportstatus> {
   String selectedRprt = "Daily";
   @override
   Widget build(BuildContext context) {
+    // Screen size
+    Size s = MediaQuery.of(context).size;
     return Column(children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Flexible(
-            flex: 1,
-            fit: FlexFit.loose,
-            child: InkWell(
-              onTap: () => setState(() {
-                selectedRprt = "Daily";
-              }),
-              child: Column(
-                children: [
-                  Text(
-                    "Daily Report",
-                    style: TextStyle(
-                      color: selectedRprt == "Daily" ? bluebg : black,
-                      fontFamily: "Montserrat",
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
+      Padding(
+        padding: EdgeInsets.fromLTRB(
+            s.height * 0.03, s.height * 0.02, s.height * 0.03, 0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Flexible(
+              flex: 1,
+              fit: FlexFit.loose,
+              child: InkWell(
+                onTap: () => setState(() {
+                  selectedRprt = "Daily";
+                }),
+                child: Column(
+                  children: [
+                    Text(
+                      "Daily Report",
+                      style: TextStyle(
+                        color: selectedRprt == "Daily" ? bluebg : black,
+                        fontFamily: "Montserrat",
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Divider(
-                    height: 3,
-                    thickness: 3,
-                    color: selectedRprt == "Daily"
-                        ? bluebg
-                        : const Color(0XFFECEDEC),
-                  )
-                ],
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Divider(
+                      height: 3,
+                      thickness: 3,
+                      color: selectedRprt == "Daily"
+                          ? bluebg
+                          : const Color(0XFFECEDEC),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-          Flexible(
-            flex: 1,
-            fit: FlexFit.loose,
-            child: InkWell(
-              onTap: () => setState(() {
-                selectedRprt = "Search";
-              }),
-              child: Column(
-                children: [
-                  Text(
-                    "Search",
-                    style: TextStyle(
-                        color: selectedRprt == "Search" ? bluebg : black,
-                        fontFamily: "Montserrat",
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Divider(
-                    height: 3,
-                    thickness: 3,
-                    color: selectedRprt == "Search"
-                        ? bluebg
-                        : const Color(0XFFECEDEC),
-                  )
-                ],
+            Flexible(
+              flex: 1,
+              fit: FlexFit.loose,
+              child: InkWell(
+                onTap: () => setState(() {
+                  selectedRprt = "Search";
+                }),
+                child: Column(
+                  children: [
+                    Text(
+                      "Search",
+                      style: TextStyle(
+                          color: selectedRprt == "Search" ? bluebg : black,
+                          fontFamily: "Montserrat",
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Divider(
+                      height: 3,
+                      thickness: 3,
+                      color: selectedRprt == "Search"
+                          ? bluebg
+                          : const Color(0XFFECEDEC),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-          Flexible(
-            flex: 1,
-            fit: FlexFit.loose,
-            child: InkWell(
-              onTap: () => setState(() {
-                selectedRprt = "Monthly";
-              }),
-              child: Column(
-                children: [
-                  Text(
-                    "Monthly Report",
-                    style: TextStyle(
-                        color: selectedRprt == "Monthly" ? bluebg : black,
-                        fontFamily: "Montserrat",
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Divider(
-                    height: 3,
-                    thickness: 3,
-                    color: selectedRprt == "Monthly"
-                        ? bluebg
-                        : const Color(0XFFECEDEC),
-                  )
-                ],
+            Flexible(
+              flex: 1,
+              fit: FlexFit.loose,
+              child: InkWell(
+                onTap: () => setState(() {
+                  selectedRprt = "Monthly";
+                }),
+                child: Column(
+                  children: [
+                    Text(
+                      "Monthly Report",
+                      style: TextStyle(
+                          color: selectedRprt == "Monthly" ? bluebg : black,
+                          fontFamily: "Montserrat",
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Divider(
+                      height: 3,
+                      thickness: 3,
+                      color: selectedRprt == "Monthly"
+                          ? bluebg
+                          : const Color(0XFFECEDEC),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       Techreportstatuswarpper(
         username: widget.username,
