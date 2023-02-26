@@ -43,7 +43,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
     "assets/icons/tech_avatar2.png",
     "assets/icons/tech_avatar3.png",
   ];
-  
+
   @override
   Widget build(BuildContext context) {
     Size s = MediaQuery.of(context).size;
@@ -62,6 +62,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
     return SizedBox(
         height: s.height * 0.8,
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               SizedBox(
@@ -337,7 +338,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                       ]),
                   child: Column(children: [
                     Row(
-                      children:  const [
+                      children: const [
                         Text(
                           "Summary Report",
                           style: TextStyle(
@@ -349,8 +350,8 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                         ),
                       ],
                     ),
-                     const Divider(),
-                     const SizedBox(
+                    const Divider(),
+                    const SizedBox(
                       height: 10,
                     ),
                     FutureBuilder<DocumentSnapshot>(
@@ -367,7 +368,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                       builder: (BuildContext context,
                           AsyncSnapshot<DocumentSnapshot> snapshot) {
                         if (snapshot.hasError) {
-                          return  const Text("Something went wrong");
+                          return const Text("Something went wrong");
                         }
 
                         if (snapshot.hasData && !snapshot.data!.exists) {
@@ -402,15 +403,17 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
                                       children: [
                                         Image.asset(
                                           "assets/icons/scooter.png",
                                           width: s.height * 0.08,
                                           height: s.height * 0.08,
                                         ),
-                                         const SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
                                         const Text(
@@ -423,7 +426,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                         ),
                                       ],
                                     ),
-                                     const SizedBox(height: 5),
+                                    const SizedBox(height: 5),
                                     StreamBuilder<QuerySnapshot>(
                                         stream: fb
                                             .collection("Reports")
@@ -501,8 +504,8 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                                   i < vehicle.length;
                                                   i++) ...[
                                                 Padding(
-                                                  padding: const EdgeInsets.symmetric(
-                                                      vertical: 5.0),
+                                                  padding: const EdgeInsets
+                                                      .symmetric(vertical: 5.0),
                                                   child: Vreportoverviewcard(
                                                     name: vehicle[i]['name'],
                                                     vdocname: vehicle[i]
@@ -527,7 +530,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                   ],
                                 ),
                               ),
-                             const   SizedBox(
+                              const SizedBox(
                                 height: 15,
                               ),
                               Container(
@@ -542,25 +545,27 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                         spreadRadius: 2,
                                         blurRadius: 4,
                                         color: black.withOpacity(.1),
-                                        offset: const  Offset(1, 2),
+                                        offset: const Offset(1, 2),
                                       ),
                                     ]),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
                                       children: [
                                         Image.asset(
                                           "assets/icons/expenses.png",
                                           width: s.height * 0.08,
                                           height: s.height * 0.08,
                                         ),
-                                         const SizedBox(
+                                        const SizedBox(
                                           width: 10,
                                         ),
-                                        const  Text(
+                                        const Text(
                                           "Expense Details",
                                           style: TextStyle(
                                             fontFamily: "Montserrat",
@@ -570,8 +575,8 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                         ),
                                       ],
                                     ),
-                                     const Divider(),
-                                    const  SizedBox(height: 5),
+                                    const Divider(),
+                                    const SizedBox(height: 5),
                                     FutureBuilder<DocumentSnapshot>(
                                       future: fb
                                           .collection("Reports")
@@ -587,12 +592,13 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                           AsyncSnapshot<DocumentSnapshot>
                                               snapshot) {
                                         if (snapshot.hasError) {
-                                          return  const Text("Something went wrong");
+                                          return const Text(
+                                              "Something went wrong");
                                         }
 
                                         if (snapshot.hasData &&
                                             !snapshot.data!.exists) {
-                                          return  const Padding(
+                                          return const Padding(
                                             padding: EdgeInsets.symmetric(
                                                 vertical: 40),
                                             child: Text(
@@ -618,7 +624,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                                   Expanded(
                                                     child: Text(
                                                       "${data['expense']}",
-                                                      style: const  TextStyle(
+                                                      style: const TextStyle(
                                                         fontFamily:
                                                             "Montserrat",
                                                         fontSize: 15,
@@ -656,10 +662,10 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                               child: SizedBox(
                                                 width: s.height * 0.15,
                                                 height: s.height * 0.15,
-                                                child:  const LoadingIndicator(
+                                                child: const LoadingIndicator(
                                                   indicatorType: Indicator
                                                       .ballClipRotateMultiple,
-                                                  colors:  [black],
+                                                  colors: [black],
                                                 ),
                                               ),
                                             ),
@@ -707,7 +713,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                   ]),
                 ),
               ),
-              const  SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Padding(
@@ -732,7 +738,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children:  const [
+                        children: const [
                           Text(
                             "Daily Activity",
                             style: TextStyle(
@@ -744,8 +750,8 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                           ),
                         ],
                       ),
-                      const  Divider(),
-                      const  SizedBox(
+                      const Divider(),
+                      const SizedBox(
                         height: 8,
                       ),
                       // Daily Activity
@@ -792,10 +798,10 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                 child: SizedBox(
                                   width: s.height * 0.25,
                                   height: s.height * 0.25,
-                                  child:  const LoadingIndicator(
+                                  child: const LoadingIndicator(
                                     indicatorType:
                                         Indicator.ballClipRotateMultiple,
-                                    colors:  [bluebg],
+                                    colors: [bluebg],
                                   ),
                                 ),
                               ),
@@ -1047,7 +1053,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                               ],
                                             ),
                                           ),
-                                           const SizedBox(
+                                          const SizedBox(
                                             height: 15,
                                           ),
                                         ],
@@ -1101,7 +1107,7 @@ class _DailyReportwidgetState extends State<DailyReportwidget> {
                                       ['custdocname'],
                                   rpdocname: filteredActivity[i]['rpdocname'],
                                 ),
-                                 const SizedBox(
+                                const SizedBox(
                                   height: 10,
                                 ),
                               ],
