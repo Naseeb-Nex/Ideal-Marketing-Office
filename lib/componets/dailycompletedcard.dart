@@ -140,7 +140,7 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                                     ),
                                     Text(
                                       "${widget.name}",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontFamily: "Nunito",
                                         fontSize: 15,
                                         fontWeight: FontWeight.bold,
@@ -149,7 +149,7 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                                     ),
                                     Text(
                                       "${widget.address}",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontFamily: "Nunito",
                                         fontSize: 13,
                                         color: Colors.black,
@@ -163,12 +163,12 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          Text(
+                          const Text(
                             "Program",
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontFamily: "Montserrat",
                               fontSize: 14,
                               fontWeight: FontWeight.w700,
@@ -189,7 +189,7 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                               children: [
                                 Row(
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Iconsax.location,
                                       color: cheryred,
                                       size: 25,
@@ -212,7 +212,7 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                               ],
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Container(
@@ -227,7 +227,7 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                               children: [
                                 const Text(
                                   "Remarks :",
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontFamily: "Nunito",
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
@@ -278,9 +278,9 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
+                              const Text(
                                 "More Details",
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontFamily: "Nunito",
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
@@ -312,7 +312,7 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                                           horizontal: 5),
                                       child: Text(
                                         "${widget.address}",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontFamily: "Nunito",
                                           fontSize: 15,
                                           fontWeight: FontWeight.w400,
@@ -322,26 +322,24 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Container(
-                                    child: Text(
-                                      "Location :",
-                                      style: TextStyle(
-                                        fontFamily: "Nunito",
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                      ),
+                                  const Text(
+                                    "Location :",
+                                    style: TextStyle(
+                                      fontFamily: "Nunito",
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
                                     ),
                                   ),
                                   Flexible(
                                     child: Text(
                                       "  ${widget.loc}",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontFamily: "Nunito",
                                         fontSize: 15,
                                         fontWeight: FontWeight.w400,
@@ -350,7 +348,7 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
                               Row(
@@ -370,7 +368,7 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                                           horizontal: 5),
                                       child: Text(
                                         "${widget.pgm}",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontFamily: "Nunito",
                                           fontSize: 15,
                                         ),
@@ -379,7 +377,7 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
                               Row(
@@ -393,38 +391,34 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                                       fontSize: 16,
                                     ),
                                   ),
-                                  Container(
-                                    child: Text(
-                                      "  ${widget.phn}",
-                                      style: TextStyle(
-                                        fontFamily: "Nunito",
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w400,
-                                      ),
+                                  Text(
+                                    "  ${widget.phn}",
+                                    style: const TextStyle(
+                                      fontFamily: "Nunito",
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w400,
                                     ),
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Container(
-                                    child: Text(
-                                      "Date :",
-                                      style: TextStyle(
-                                        fontFamily: "Nunito",
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                      ),
+                                  const Text(
+                                    "Date :",
+                                    style: TextStyle(
+                                      fontFamily: "Nunito",
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
                                     ),
                                   ),
                                   Flexible(
                                     child: Text(
                                       "  ${widget.upDate}",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontFamily: "Nunito",
                                         fontSize: 15,
                                         fontWeight: FontWeight.w400,
@@ -433,26 +427,24 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Container(
-                                    child: Text(
-                                      "Time :",
-                                      style: TextStyle(
-                                        fontFamily: "Nunito",
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                      ),
+                                  const Text(
+                                    "Time :",
+                                    style: TextStyle(
+                                      fontFamily: "Nunito",
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
                                     ),
                                   ),
                                   Flexible(
                                     child: Text(
                                       "  ${widget.upTime}",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontFamily: "Nunito",
                                         fontSize: 15,
                                         fontWeight: FontWeight.w400,
@@ -465,14 +457,12 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Container(
-                                    child: Text(
-                                      "Collection Amount :",
-                                      style: TextStyle(
-                                        fontFamily: "Nunito",
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                  const Text(
+                                    "Collection Amount :",
+                                    style: TextStyle(
+                                      fontFamily: "Nunito",
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   Flexible(
@@ -481,7 +471,7 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                                           horizontal: 5),
                                       child: Text(
                                         "  ${widget.chrg} / ${widget.camount}",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontFamily: "Nunito",
                                           fontSize: 15,
                                           // color: Colors.blueGrey.shade700,
@@ -499,7 +489,7 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Remarks :",
                                     style: TextStyle(
                                       fontFamily: "Nunito",
@@ -514,7 +504,7 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                                           horizontal: 5),
                                       child: Text(
                                         "${widget.remarks}",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontFamily: "Nunito",
                                           fontSize: 15,
                                         ),
@@ -523,7 +513,7 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
                               Row(
@@ -534,7 +524,7 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                                     children: [
                                       Text(
                                         " ${widget.assigneddate}",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontFamily: "Nunito",
                                           fontSize: 12,
                                           fontWeight: FontWeight.w300,
@@ -542,7 +532,7 @@ class _DailycompltedcardState extends State<Dailycompltedcard> {
                                       ),
                                       Text(
                                         "${widget.ctime}",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontFamily: "Nunito",
                                           fontSize: 12,
                                           fontWeight: FontWeight.w400,
