@@ -13,8 +13,9 @@ import 'Reportsrcwidget.dart';
 
 // ignore: must_be_immutable
 class Homewidget extends StatefulWidget {
-  String? uid;
   Homewidget({Key? key, this.uid}) : super(key: key);
+
+  String? uid;
 
   @override
   // ignore: library_private_types_in_public_api
@@ -24,6 +25,8 @@ class Homewidget extends StatefulWidget {
 class _HomewidgetState extends State<Homewidget> {
   FirebaseFirestore fb = FirebaseFirestore.instance;
   int p = 0, c = 0;
+  final List techprofile = [];
+
   @override
   void initState() {
     super.initState();
@@ -32,7 +35,29 @@ class _HomewidgetState extends State<Homewidget> {
     }
   }
 
-  final List techprofile = [];
+  pgmsetup() async {
+    DateTime now = DateTime.now();
+    String cday = DateFormat('MM d y').format(now);
+    try {
+      await fb
+          .collection('Completedpgm')
+          .doc("Day")
+          .collection(cday)
+          .get()
+          .then((snap) => {
+                setState(() {
+                  c = snap.size;
+                })
+              });
+      await fb.collection('Programs').get().then((snap) => {
+            setState(() {
+              p = snap.size;
+            })
+          });
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -152,42 +177,44 @@ class _HomewidgetState extends State<Homewidget> {
               ),
             ),
           ),
-          Row(
-            children: const [
-              SizedBox(
-                width: 50,
-              ),
-              Icon(
-                Icons.person,
-                color: Colors.black26,
-              ),
-              Text(
-                "  Technicians",
-                style: TextStyle(
-                  fontFamily: "Nunito",
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black26,
+          Padding(
+            padding: const EdgeInsets.only(left : 25),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Icon(
+                      Icons.person,
+                      color: Colors.black26,
+                    ),
+                    Text(
+                      " Technicians",
+                      style: TextStyle(
+                        fontFamily: "Nunito",
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black26,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Row(
-            children: [
-              const SizedBox(
-                width: 100,
-              ),
-              Container(
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding:  EdgeInsets.only(left: 20),
+              child: Container(
                 height: 2,
                 width: 100,
                 decoration: BoxDecoration(
                     color: Colors.black26,
                     borderRadius: BorderRadius.circular(10)),
               ),
-            ],
+            ),
+              ],
+            ),
           ),
           const SizedBox(
             height: 20,
@@ -202,38 +229,16 @@ class _HomewidgetState extends State<Homewidget> {
       ),
     );
   }
-
-  pgmsetup() async {
-    DateTime now = DateTime.now();
-    String cday = DateFormat('MM d y').format(now);
-    try {
-      await fb
-          .collection('Completedpgm')
-          .doc("Day")
-          .collection(cday)
-          .get()
-          .then((snap) => {
-                setState(() {
-                  c = snap.size;
-                })
-              });
-      await fb.collection('Programs').get().then((snap) => {
-            setState(() {
-              p = snap.size;
-            })
-          });
-    } catch (e) {
-      print(e);
-    }
-  }
 }
 
 // ignore: must_be_immutable
 class Example extends StatelessWidget {
-  String? userid;
   Example({Key? key, this.userid}) : super(key: key);
+
   final Stream<QuerySnapshot> studentsStream =
       FirebaseFirestore.instance.collection('Technician').snapshots();
+
+  String? userid;
 
   @override
   Widget build(BuildContext context) {
@@ -278,27 +283,82 @@ class Example extends StatelessWidget {
 
 // ignore: must_be_immutable
 class Techcard extends StatefulWidget {
-  String? name;
-  String? img;
-  String? uid;
-  String? username;
   Techcard({Key? key, this.name, this.img, this.uid, this.username})
       : super(key: key);
+
+  String? img;
+  String? name;
+  String? uid;
+  String? username;
 
   @override
   _TechcardState createState() => _TechcardState();
 }
 
 class _TechcardState extends State<Techcard> {
-  FirebaseFirestore fb = FirebaseFirestore.instance;
   int a = 0;
   int c = 0;
+  FirebaseFirestore fb = FirebaseFirestore.instance;
   int p = 0;
   int pro = 0;
+
   @override
   void initState() {
     super.initState();
     if (mounted) startup();
+  }
+
+  startup() async {
+    DateTime now = DateTime.now();
+    String cday = DateFormat('MM d y').format(now);
+    try {
+      await fb
+          .collection('Technician')
+          .doc(widget.username)
+          .collection("Assignedpgm")
+          .get()
+          .then((snap) => {
+                setState(() {
+                  a = snap.size;
+                })
+              });
+
+      await fb
+          .collection('Technician')
+          .doc(widget.username)
+          .collection("Completedpgm")
+          .doc("Day")
+          .collection(cday)
+          .get()
+          .then((snap) => {
+                setState(() {
+                  c = snap.size;
+                })
+              });
+      await fb
+          .collection('Technician')
+          .doc(widget.username)
+          .collection("Pendingpgm")
+          .get()
+          .then((snap) => {
+                setState(() {
+                  p = snap.size;
+                })
+              });
+
+      await fb
+          .collection('Technician')
+          .doc(widget.username)
+          .collection("Processingpgm")
+          .get()
+          .then((snap) => {
+                setState(() {
+                  pro = snap.size;
+                })
+              });
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -503,6 +563,37 @@ class _TechcardState extends State<Techcard> {
       ),
     );
   }
+}
+
+// ignore: must_be_immutable
+class Assigntechpgm extends StatefulWidget {
+  Assigntechpgm({Key? key, this.name, this.uid, this.username})
+      : super(key: key);
+
+  String? name;
+  String? uid;
+  String? username;
+
+  @override
+  _AssigntechpgmState createState() => _AssigntechpgmState();
+}
+
+class _AssigntechpgmState extends State<Assigntechpgm> {
+  int a = 0;
+  int c = 0;
+  FirebaseFirestore fb = FirebaseFirestore.instance;
+  int p = 0;
+  int pro = 0;
+
+  String _currentsrc = "Assign";
+
+  @override
+  void initState() {
+    super.initState();
+    if (mounted) {
+      startup();
+    }
+  }
 
   startup() async {
     DateTime now = DateTime.now();
@@ -541,7 +632,6 @@ class _TechcardState extends State<Techcard> {
                   p = snap.size;
                 })
               });
-
       await fb
           .collection('Technician')
           .doc(widget.username)
@@ -556,37 +646,7 @@ class _TechcardState extends State<Techcard> {
       print(e);
     }
   }
-}
 
-// ignore: must_be_immutable
-class Assigntechpgm extends StatefulWidget {
-  String? username;
-  String? name;
-  String? uid;
-
-  Assigntechpgm({Key? key, this.name, this.uid, this.username})
-      : super(key: key);
-
-  @override
-  _AssigntechpgmState createState() => _AssigntechpgmState();
-}
-
-class _AssigntechpgmState extends State<Assigntechpgm> {
-  FirebaseFirestore fb = FirebaseFirestore.instance;
-  int a = 0;
-  int c = 0;
-  int p = 0;
-  int pro = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    if (mounted) {
-      startup();
-    }
-  }
-
-  String _currentsrc = "Assign";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -962,68 +1022,17 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
       ),
     );
   }
-
-  startup() async {
-    DateTime now = DateTime.now();
-    String cday = DateFormat('MM d y').format(now);
-    try {
-      await fb
-          .collection('Technician')
-          .doc(widget.username)
-          .collection("Assignedpgm")
-          .get()
-          .then((snap) => {
-                setState(() {
-                  a = snap.size;
-                })
-              });
-
-      await fb
-          .collection('Technician')
-          .doc(widget.username)
-          .collection("Completedpgm")
-          .doc("Day")
-          .collection(cday)
-          .get()
-          .then((snap) => {
-                setState(() {
-                  c = snap.size;
-                })
-              });
-      await fb
-          .collection('Technician')
-          .doc(widget.username)
-          .collection("Pendingpgm")
-          .get()
-          .then((snap) => {
-                setState(() {
-                  p = snap.size;
-                })
-              });
-      await fb
-          .collection('Technician')
-          .doc(widget.username)
-          .collection("Processingpgm")
-          .get()
-          .then((snap) => {
-                setState(() {
-                  pro = snap.size;
-                })
-              });
-    } catch (e) {
-      print(e);
-    }
-  }
 }
 
 // ignore: must_be_immutable
 class Techsrcwrapper extends StatelessWidget {
+  Techsrcwrapper({Key? key, this.src, this.uid, this.username, this.name})
+      : super(key: key);
+
+  String? name;
   String? src;
   String? uid;
   String? username;
-  String? name;
-  Techsrcwrapper({Key? key, this.src, this.uid, this.username, this.name})
-      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
