@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'dart:math';
@@ -27,25 +28,24 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
 
   int c = 0;
   // Daily activity filter
+  // ignore: non_constant_identifier_names
   String daily_activity_filter = "all";
 
   // Date Picker
   late DateTime dateTime;
 
+  // ignore: non_constant_identifier_names
   bool date_selected = false;
+
   FirebaseFirestore fb = FirebaseFirestore.instance;
+  // ignore: non_constant_identifier_names
   String formated_month = "";
+
+  // ignore: non_constant_identifier_names
   bool is_datesub = false;
+
   int p = 0;
   int pro = 0;
-// Images
-  var random = Random();
-
-  List<String> techimg = [
-    "assets/icons/tech_avatar1.png",
-    "assets/icons/tech_avatar2.png",
-    "assets/icons/tech_avatar3.png",
-  ];
 
   String? _selectedday;
   String? _selectedmonth;
@@ -54,17 +54,6 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
   @override
   Widget build(BuildContext context) {
     Size s = MediaQuery.of(context).size;
-    // Date
-    DateTime now = DateTime.now();
-
-    // Report
-    String day = DateFormat('d').format(now);
-    String month = DateFormat('MM').format(now);
-    String year = DateFormat('y').format(now);
-
-    // Image selection task
-    int num = random.nextInt(100);
-    int loc = num % 3;
 
     return SizedBox(
         height: s.height * 0.8,
@@ -98,7 +87,7 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: const [
                               Text(
                                 "Search",
                                 style: TextStyle(
@@ -163,7 +152,7 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                   if (doc.exists) {
                                     try {
                                       bool nested =
-                                          doc.get(FieldPath(['submit']));
+                                          doc.get(FieldPath(const ['submit']));
                                       if (nested) {
                                         setState(() {
                                           is_datesub = true;
@@ -192,7 +181,7 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                   ),
                                 ],
                               ),
-                              child: Text(
+                              child:  const Text(
                                 "Select the Date",
                                 style: TextStyle(
                                     fontFamily: "Montserrat",
@@ -245,10 +234,10 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                               color: bluebg,
                                             ),
                                           ),
-                                          SizedBox(height: 10),
+                                           const SizedBox(height: 10),
                                           Text(
                                             "$_selectedday - $formated_month - $_selectedyear",
-                                            style: TextStyle(
+                                            style: const  TextStyle(
                                               fontFamily: "Montserrat",
                                               fontWeight: FontWeight.w600,
                                               fontSize: 17,
@@ -259,8 +248,8 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                       ),
                                     ],
                                   ),
-                                  Divider(),
-                                  SizedBox(
+                                  const  Divider(),
+                                  const  SizedBox(
                                     height: 8,
                                   ),
 
@@ -284,7 +273,7 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                                         blurRadius: 4,
                                                         color: black
                                                             .withOpacity(.05),
-                                                        offset: Offset(1, 2),
+                                                        offset: const  Offset(1, 2),
                                                       ),
                                                     ]),
                                                 child: Column(
@@ -304,7 +293,7 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                                           width: 40,
                                                           height: 40,
                                                         ),
-                                                        SizedBox(
+                                                        const  SizedBox(
                                                           width: 8,
                                                         ),
                                                         const Text(
@@ -321,7 +310,7 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                                         ),
                                                       ],
                                                     ),
-                                                    SizedBox(height: 5),
+                                                    const  SizedBox(height: 5),
                                                     StreamBuilder<
                                                             QuerySnapshot>(
                                                         stream: fb
@@ -360,11 +349,11 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                                                     s.height *
                                                                         0.25,
                                                                 child:
-                                                                    LoadingIndicator(
+                                                                   const   LoadingIndicator(
                                                                   indicatorType:
                                                                       Indicator
                                                                           .ballClipRotateMultiple,
-                                                                  colors: const [
+                                                                  colors: [
                                                                     bluebg
                                                                   ],
                                                                 ),
@@ -405,7 +394,7 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                                                                     "assets/icons/warning.png",
                                                                                     height: s.height * 0.12,
                                                                                   ),
-                                                                                  Text(
+                                                                                  const  Text(
                                                                                     "No Vehicle Used !",
                                                                                     style: TextStyle(
                                                                                       fontFamily: "Montserrat",
@@ -425,7 +414,7 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                                                           .length;
                                                                   i++) ...[
                                                                 Padding(
-                                                                  padding: EdgeInsets
+                                                                  padding:  const EdgeInsets
                                                                       .symmetric(
                                                                           vertical:
                                                                               5.0),
@@ -469,7 +458,7 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                                   ],
                                                 ),
                                               ),
-                                              SizedBox(
+                                             const   SizedBox(
                                                 height: 15,
                                               ),
                                               Container(
@@ -508,10 +497,10 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                                           width: 40,
                                                           height: 40,
                                                         ),
-                                                        SizedBox(
+                                                       const   SizedBox(
                                                           width: 8,
                                                         ),
-                                                        Text(
+                                                        const  Text(
                                                           "Expense Details",
                                                           style: TextStyle(
                                                             fontFamily:
@@ -524,8 +513,8 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                                         ),
                                                       ],
                                                     ),
-                                                    Divider(),
-                                                    SizedBox(height: 5),
+                                                   const   Divider(),
+                                                 const     SizedBox(height: 5),
                                                     FutureBuilder<
                                                         DocumentSnapshot>(
                                                       future: fb
@@ -546,14 +535,14 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                                                   DocumentSnapshot>
                                                               snapshot) {
                                                         if (snapshot.hasError) {
-                                                          return Text(
-                                                              "Something went wrong");
+                                                          return  const Text(
+                                                              "Something went wrong", style: TextStyle(fontFamily: "Montserrat", fontSize: 16, fontWeight: FontWeight.w600),);
                                                         }
 
                                                         if (snapshot.hasData &&
                                                             !snapshot
                                                                 .data!.exists) {
-                                                          return Padding(
+                                                          return  const Padding(
                                                             padding: EdgeInsets
                                                                 .symmetric(
                                                                     vertical:
@@ -590,7 +579,7 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                                                     child: Text(
                                                                       "${data['expense']}",
                                                                       style:
-                                                                          TextStyle(
+                                                                          const  TextStyle(
                                                                         fontFamily:
                                                                             "Montserrat",
                                                                         fontSize:
@@ -645,11 +634,11 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                                                     s.height *
                                                                         0.15,
                                                                 child:
-                                                                    LoadingIndicator(
+                                                                     const LoadingIndicator(
                                                                   indicatorType:
                                                                       Indicator
                                                                           .ballClipRotateMultiple,
-                                                                  colors: const [
+                                                                  colors:  [
                                                                     black
                                                                   ],
                                                                 ),
@@ -662,10 +651,10 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                                   ],
                                                 ),
                                               ),
-                                              SizedBox(height: 15),
+                                               const SizedBox(height: 15),
                                             ],
                                           )
-                                        : Container(
+                                        :  SizedBox(
                                             width: double.infinity,
                                             height: s.height * 0.27,
                                             child: Image.asset(
@@ -674,7 +663,7 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                             ),
                                           ),
                                   ),
-                                  SizedBox(
+                                  const  SizedBox(
                                     height: 15,
                                   ),
 
@@ -706,7 +695,7 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                             width: 40,
                                             height: 40,
                                           ),
-                                          Text(
+                                           const Text(
                                             "Daily Activity",
                                             style: TextStyle(
                                               fontFamily: "Montserrat",
@@ -715,8 +704,8 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                               color: bluebg,
                                             ),
                                           ),
-                                          Divider(),
-                                          SizedBox(height: 15),
+                                          const  Divider(),
+                                          const  SizedBox(height: 15),
                                           StreamBuilder<QuerySnapshot>(
                                             stream: fb
                                                 .collection("Reports")
@@ -735,7 +724,7 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                               if (snapshot.hasError) {
                                                 return Column(
                                                   children: [
-                                                    Container(
+                                                    SizedBox(
                                                       width: double.infinity,
                                                       height: s.height * 0.27,
                                                       child: Image.asset(
@@ -743,8 +732,8 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                                         fit: BoxFit.cover,
                                                       ),
                                                     ),
-                                                    Padding(
-                                                      padding: const EdgeInsets
+                                                     const Padding(
+                                                      padding:  EdgeInsets
                                                               .symmetric(
                                                           vertical: 10),
                                                       child: Text(
@@ -767,10 +756,10 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                                     child: SizedBox(
                                                       width: s.height * 0.25,
                                                       height: s.height * 0.25,
-                                                      child: LoadingIndicator(
+                                                      child:  const LoadingIndicator(
                                                         indicatorType: Indicator
                                                             .ballClipRotateMultiple,
-                                                        colors: const [bluebg],
+                                                        colors:  [bluebg],
                                                       ),
                                                     ),
                                                   ),
@@ -778,7 +767,7 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                               }
 
                                               final List activityrp = [];
-                                              List filtered_activity = [];
+                                              List filteredActivity = [];
                                               snapshot.data!.docs.map(
                                                   (DocumentSnapshot document) {
                                                 Map a = document.data()
@@ -788,9 +777,9 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
 
                                               if (daily_activity_filter ==
                                                   "all") {
-                                                filtered_activity = activityrp;
+                                                filteredActivity = activityrp;
                                               } else {
-                                                filtered_activity = activityrp
+                                                filteredActivity = activityrp
                                                     .where((i) =>
                                                         i['status'] ==
                                                         daily_activity_filter)
@@ -801,10 +790,10 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                                 children: [
                                                   Container(
                                                     child:
-                                                        activityrp.length == 0
+                                                        activityrp.isEmpty
                                                             ? Column(
                                                                 children: [
-                                                                  Container(
+                                                                  SizedBox(
                                                                     width: double
                                                                         .infinity,
                                                                     height:
@@ -817,8 +806,8 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                                                           .cover,
                                                                     ),
                                                                   ),
-                                                                  Padding(
-                                                                    padding: const EdgeInsets
+                                                                  const  Padding(
+                                                                    padding:  EdgeInsets
                                                                             .symmetric(
                                                                         vertical:
                                                                             10),
@@ -986,20 +975,17 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                                                       ],
                                                                     ),
                                                                   ),
-                                                                  SizedBox(
+                                                                   const SizedBox(
                                                                     height: 15,
                                                                   ),
                                                                 ],
                                                               ),
                                                   ),
                                                   Container(
-                                                    child: activityrp.length ==
-                                                            0
+                                                    child: activityrp.isEmpty
                                                         ? null
                                                         : Container(
-                                                            child: filtered_activity
-                                                                        .length ==
-                                                                    0
+                                                            child: filteredActivity.isEmpty
                                                                 ? Padding(
                                                                     padding: EdgeInsets.only(
                                                                         top: s.height *
@@ -1016,89 +1002,87 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                                   ),
                                                   for (var i = 0;
                                                       i <
-                                                          filtered_activity
+                                                          filteredActivity
                                                               .length;
                                                       i++) ...[
                                                     Activitywrapper(
-                                                      name: filtered_activity[i]
+                                                      name: filteredActivity[i]
                                                           ['name'],
                                                       address:
-                                                          filtered_activity[i]
+                                                          filteredActivity[i]
                                                               ['address'],
-                                                      loc: filtered_activity[i]
+                                                      loc: filteredActivity[i]
                                                           ['loc'],
-                                                      phn: filtered_activity[i]
+                                                      phn: filteredActivity[i]
                                                           ['phn'],
-                                                      pgm: filtered_activity[i]
+                                                      pgm: filteredActivity[i]
                                                           ['pgm'],
-                                                      chrg: filtered_activity[i]
+                                                      chrg: filteredActivity[i]
                                                           ['chrg'],
-                                                      type: filtered_activity[i]
+                                                      type: filteredActivity[i]
                                                           ['type'],
                                                       upDate:
-                                                          filtered_activity[i]
+                                                          filteredActivity[i]
                                                               ['upDate'],
                                                       upTime:
-                                                          filtered_activity[i]
+                                                          filteredActivity[i]
                                                               ['upTime'],
                                                       docname:
-                                                          filtered_activity[i]
+                                                          filteredActivity[i]
                                                               ['docname'],
                                                       status:
-                                                          filtered_activity[i]
+                                                          filteredActivity[i]
                                                               ['status'],
                                                       username:
-                                                          filtered_activity[i]
+                                                          filteredActivity[i]
                                                               ['username'],
                                                       techname:
-                                                          filtered_activity[i]
+                                                          filteredActivity[i]
                                                               ['techname'],
                                                       assignedtime:
-                                                          filtered_activity[i]
+                                                          filteredActivity[i]
                                                               ['assignedtime'],
                                                       assigneddate:
-                                                          filtered_activity[i]
+                                                          filteredActivity[i]
                                                               ['assigneddate'],
                                                       priority:
-                                                          filtered_activity[i]
+                                                          filteredActivity[i]
                                                               ['priority'],
                                                       camount:
-                                                          filtered_activity[i]
+                                                          filteredActivity[i]
                                                               ['camount'],
                                                       remarks:
-                                                          filtered_activity[i]
+                                                          filteredActivity[i]
                                                               ['remarks'],
                                                       cdate:
-                                                          filtered_activity[i]
+                                                          filteredActivity[i]
                                                               ['cdate'],
                                                       ctime:
-                                                          filtered_activity[i]
+                                                          filteredActivity[i]
                                                               ['ctime'],
                                                       ccollname:
-                                                          filtered_activity[i]
+                                                          filteredActivity[i]
                                                               ['ccollname'],
                                                       cdocname:
-                                                          filtered_activity[i]
+                                                          filteredActivity[i]
                                                               ['cdocname'],
                                                       custdocname:
-                                                          filtered_activity[i]
+                                                          filteredActivity[i]
                                                               ['custdocname'],
                                                       rpdocname:
-                                                          filtered_activity[i]
+                                                          filteredActivity[i]
                                                               ['rpdocname'],
                                                     ),
-                                                    SizedBox(
+                                                     const SizedBox(
                                                       height: 10,
                                                     ),
                                                   ],
                                                   Container(
                                                       child:
-                                                          activityrp.length == 0
+                                                          activityrp.isEmpty
                                                               ? null
                                                               : Container(
-                                                                  child: filtered_activity
-                                                                              .length ==
-                                                                          0
+                                                                  child: filteredActivity.isEmpty
                                                                       ? SizedBox(
                                                                           height: s.height *
                                                                               0.12)
