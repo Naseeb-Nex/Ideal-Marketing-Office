@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:test2/widgets/TechReport/Dailyreportwidget.dart';
+import 'package:test2/widgets/TechReport/Monthlyreportwidget.dart';
 import 'package:test2/widgets/TechReport/Searchreportwidget.dart';
 
 // ignore: must_be_immutable
@@ -862,18 +863,20 @@ class Techreportstatuswarpper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (selectedRprt == "Daily") {
-      return DailyReportwidget(
+    if (selectedRprt == "Monthly") {
+      return MonthlyReportWidget(
         username: username,
         techname: techname,
       );
-    }
-    else if ( selectedRprt == "Search"){
+    } else if (selectedRprt == "Search") {
       return Searchreportwidget(
         username: username,
         techname: techname,
       );
     }
-    return Container();
+    return DailyReportwidget(
+      username: username,
+      techname: techname,
+    );
   }
 }
