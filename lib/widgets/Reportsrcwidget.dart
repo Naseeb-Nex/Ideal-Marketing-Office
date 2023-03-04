@@ -37,12 +37,13 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
 
   set string(String value) => setState(() => _username = value);
   set techname(String value) => setState(() => _techname = value);
+  set vichat(bool value) => setState(() => visChat = value);
 
   FirebaseFirestore fb = FirebaseFirestore.instance;
   int p = 0, c = 0;
   int touchedIndex = 0;
   bool rpstatus = false;
-  bool visChat = true;
+  bool visChat = false;
   // Selected tech report view
   String selectedRprt = "Daily";
 
@@ -83,13 +84,6 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
               ),
             ],
           ),
-          // Container(
-          //   height: 3,
-          //   width: 36,
-          //   decoration: BoxDecoration(
-          //       color: Colors.blueAccent,
-          //       borderRadius: BorderRadius.circular(10)),
-          // ),
           const Divider(),
           const SizedBox(
             height: 5,

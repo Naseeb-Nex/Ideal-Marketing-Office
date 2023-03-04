@@ -9,6 +9,7 @@ import 'package:loading_indicator/loading_indicator.dart';
 import 'package:test2/widgets/Reportsrcwidget.dart';
 
 typedef void StringCallback(String val);
+typedef void BoolCallback(bool val);
 
 // ignore: must_be_immutable
 class Techreportcard extends StatefulWidget {
@@ -17,6 +18,7 @@ class Techreportcard extends StatefulWidget {
   String? selectedUser;
   final StringCallback? callback;
   final StringCallback? technamecallback;
+  final StringCallback? visChat;
 
   Techreportcard(
       {Key? key,
@@ -24,7 +26,7 @@ class Techreportcard extends StatefulWidget {
       this.name,
       this.callback,
       this.selectedUser,
-      this.technamecallback})
+      this.technamecallback, this.visChat})
       : super(key: key);
 
   @override
@@ -70,6 +72,7 @@ class _TechreportcardState extends State<Techreportcard> {
       onTap: () {
         Reportsrcwidget.of(context)?.string = "${widget.username}";
         Reportsrcwidget.of(context)?.techname = "${widget.name}";
+        Reportsrcwidget.of(context)?.vichat = true;
       },
       child: Stack(
         children: [
