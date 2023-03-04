@@ -956,36 +956,6 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                         const SizedBox(
                           height: 20,
                         ),
-                        InkWell(
-                          onTap: () => setState(() {
-                            _currentsrc = 'Report';
-                          }),
-                          child: Container(
-                            height: 55,
-                            width: double.infinity,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color:
-                                  _currentsrc == "Report" ? white : Colors.blue,
-                              border: Border.all(color: Colors.blue),
-                            ),
-                            child: Text(
-                              "Report",
-                              style: TextStyle(
-                                fontFamily: "Nunito",
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: _currentsrc == "Report"
-                                    ? Colors.blue
-                                    : white,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
                       ],
                     ),
                   ),
@@ -1038,9 +1008,6 @@ class Techsrcwrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     if (src == 'Status') {
       return Statussrc(uid: uid, username: username, techname: name);
-    }
-    else if (src == 'Report') {
-      return Reportsrcwidget(uid: uid, username: username, techname: name);
     }
     return Assignpgmwidget(uid: uid, username: username, techname: name);
   }
