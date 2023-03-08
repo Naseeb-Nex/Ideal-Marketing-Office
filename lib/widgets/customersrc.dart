@@ -12,15 +12,34 @@ class Customersrc extends StatefulWidget {
 }
 
 class _CustomersrcState extends State<Customersrc> {
-  String textquery = '';
-
-  List _allcustomer = [];
+  final controller = TextEditingController();
   List resultc = [];
-
   final Stream<QuerySnapshot> studentsStream =
       FirebaseFirestore.instance.collection('Customer').snapshots();
 
-  final controller = TextEditingController();
+  String textquery = '';
+
+  List _allcustomer = [];
+
+  void searchcustomer(String query) {
+    setState(() {
+      resultc = _allcustomer.where((pgm) {
+        final nameLower = pgm["name"]!.toLowerCase();
+        final addressLower = pgm["address"]!.toLowerCase();
+        final locLower = pgm["loc"]!.toLowerCase();
+        final phn1umber = pgm["phn1"]!;
+        final phn2umber = pgm["phn2"]!;
+        final searchquery = query.toLowerCase();
+
+        return nameLower.contains(searchquery) ||
+            addressLower.contains(searchquery) ||
+            locLower.contains(searchquery) ||
+            phn1umber.contains(searchquery) ||
+            phn2umber.contains(searchquery);
+      }).toList();
+    });
+    // searching is postponed
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -195,62 +214,62 @@ class _CustomersrcState extends State<Customersrc> {
                   child: SizedBox(
                     width: double.infinity,
                     height: double.infinity,
-                    child: SingleChildScrollView(
+                    child: StreamBuilder<QuerySnapshot>(
+                        stream: studentsStream,
+                        builder: (BuildContext context,
+                            AsyncSnapshot<QuerySnapshot> snapshot) {
+                          if (snapshot.hasError) {
+                            return const  Text('Something went Wrong',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: "Montserrat",
+                            fontWeight: FontWeight.w500,),);
+                          }
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Padding(
+                              padding:
+                                  EdgeInsets.only(top: s.height * 0.24),
+                              child: const Center(
+                                child: CircularProgressIndicator(
+                                  color: bluebg,
+                                ),
+                              ),
+                            );
+                          }
+
+                          _allcustomer.clear();
+                          snapshot.data!.docs
+                              .map((DocumentSnapshot document) {
+                            Map a = document.data() as Map<String, dynamic>;
+                            _allcustomer.add(a);
+                            a['uid'] = document.id;
+                          }).toList();
+
+                          if (controller.text.isEmpty) {
+                            resultc = _allcustomer;
+                          }
+
+                          return ListView.builder(
                         physics: const BouncingScrollPhysics(),
-                        child: StreamBuilder<QuerySnapshot>(
-                            stream: studentsStream,
-                            builder: (BuildContext context,
-                                AsyncSnapshot<QuerySnapshot> snapshot) {
-                              if (snapshot.hasError) {
-                                print('Something went Wrong');
-                              }
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return Padding(
-                                  padding:
-                                      EdgeInsets.only(top: s.height * 0.24),
-                                  child: const Center(
-                                    child: CircularProgressIndicator(
-                                      color: bluebg,
-                                    ),
-                                  ),
-                                );
-                              }
-
-                              _allcustomer.clear();
-                              snapshot.data!.docs
-                                  .map((DocumentSnapshot document) {
-                                Map a = document.data() as Map<String, dynamic>;
-                                _allcustomer.add(a);
-                                a['uid'] = document.id;
-                              }).toList();
-
-                              if (controller.text.isEmpty) {
-                                resultc = _allcustomer;
-                              }
-
-                              return Column(
-                                children: [
-                                  const SizedBox(
-                                    width: 30,
-                                  ),
-                                  for (var i = 0; i < resultc.length; i++) ...[
-                                    CustomerListCard(
-                                      name: resultc[i]['name'],
-                                      address: resultc[i]['address'],
-                                      loc: resultc[i]['loc'],
-                                      phn1: resultc[i]['phn1'],
-                                      phn2: resultc[i]['phn2'],
-                                      upDate: resultc[i]['upDate'],
-                                      upTime: resultc[i]['upTime'],
-                                      docname: resultc[i]['docname'],
-                                      prospec: resultc[i]['prospec'],
-                                      instadate: resultc[i]['instadate'],
-                                    )
-                                  ]
-                                ],
-                              );
-                            })),
+                          itemCount: resultc.length,
+                          itemBuilder: (context, i) => Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 3, horizontal: 3),
+                                child: CustomerListCard(
+                                  name: resultc[i]['name'],
+                                  address: resultc[i]['address'],
+                                  loc: resultc[i]['loc'],
+                                  phn1: resultc[i]['phn1'],
+                                  phn2: resultc[i]['phn2'],
+                                  upDate: resultc[i]['upDate'],
+                                  upTime: resultc[i]['upTime'],
+                                  docname: resultc[i]['docname'],
+                                  prospec: resultc[i]['prospec'],
+                                  instadate: resultc[i]['instadate'],
+                                ),
+                              ));
+                        }),
                   ),
                 ),
               ),
@@ -259,25 +278,5 @@ class _CustomersrcState extends State<Customersrc> {
         )
       ],
     );
-  }
-
-  void searchcustomer(String query) {
-    setState(() {
-      resultc = _allcustomer.where((pgm) {
-        final nameLower = pgm["name"]!.toLowerCase();
-        final addressLower = pgm["address"]!.toLowerCase();
-        final locLower = pgm["loc"]!.toLowerCase();
-        final phn1umber = pgm["phn1"]!;
-        final phn2umber = pgm["phn2"]!;
-        final searchquery = query.toLowerCase();
-
-        return nameLower.contains(searchquery) ||
-            addressLower.contains(searchquery) ||
-            locLower.contains(searchquery) ||
-            phn1umber.contains(searchquery) ||
-            phn2umber.contains(searchquery);
-      }).toList();
-    });
-    // searching is postponed
   }
 }
