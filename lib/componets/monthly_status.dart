@@ -73,6 +73,13 @@ class _MontlystatusState extends State<Montlystatus> {
     // Random Image loc
     int num = random.nextInt(100);
     loc = num % 3;
+
+       // year extraction
+    if (widget.day?.length == 1) {
+      year = widget.more!.substring(5, 9);
+    } else {
+      year = widget.more!.substring(6, 10);
+    }
   }
 
   String? year;
@@ -80,16 +87,6 @@ class _MontlystatusState extends State<Montlystatus> {
   @override
   Widget build(BuildContext context) {
     Size s = MediaQuery.of(context).size;
-
-    DateTime now = DateTime.now();
-    String day = DateFormat('d').format(now);
-
-    // year extraction
-    if (day.length == 1) {
-      year = widget.more!.substring(5, 9);
-    } else {
-      year = widget.more!.substring(6, 10);
-    }
 
     return Column(
       children: [
