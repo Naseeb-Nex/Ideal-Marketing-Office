@@ -15,8 +15,8 @@ class _LoginSrcState extends State<LoginSrc> {
   final _formKey = GlobalKey<FormState>();
 
   // editing controller
-  final TextEditingController emailController =  TextEditingController();
-  final TextEditingController passwordController =  TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   final _auth = FirebaseAuth.instance;
 
@@ -57,30 +57,33 @@ class _LoginSrcState extends State<LoginSrc> {
 
     //password field
     final passwordField = TextFormField(
-        autofocus: false,
-        controller: passwordController,
-        obscureText: true,
-        validator: (value) {
-          RegExp regex = RegExp(r'^.{6,}$');
-          if (value!.isEmpty) {
-            return ("Password is required for login");
-          }
-          if (!regex.hasMatch(value)) {
-            return ("Enter Valid Password(Min. 6 Character)");
-          }
-        },
-        onSaved: (value) {
-          passwordController.text = value!;
-        },
-        textInputAction: TextInputAction.done,
-        decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.vpn_key),
-          contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Password",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ));
+      autofocus: false,
+      controller: passwordController,
+      obscureText: true,
+      validator: (value) {
+        RegExp regex = RegExp(r'^.{6,}$');
+        if (value!.isEmpty) {
+          return ("Password is required for login");
+        }
+        if (!regex.hasMatch(value)) {
+          return ("Enter Valid Password(Min. 6 Character)");
+        }
+      },
+      onSaved: (value) {
+        passwordController.text = value!;
+      },
+      textInputAction: TextInputAction.done,
+      decoration: InputDecoration(
+        prefixIcon: const Icon(Icons.vpn_key),
+        contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        hintText: "Password",
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      onFieldSubmitted: (value) =>
+          signIn(emailController.text, passwordController.text),
+    );
 
     final loginButton = Material(
       elevation: 5,
@@ -165,8 +168,8 @@ class _LoginSrcState extends State<LoginSrc> {
       });
       try {
         await _auth
-        //  .signInWithEmailAndPassword(
-        //         email: "o@gmail.com", password: "12345678")
+            //  .signInWithEmailAndPassword(
+            //         email: "o@gmail.com", password: "12345678")
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -241,7 +244,9 @@ class SimpleCustomAlert extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(white),),
+              style: const ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll<Color>(white),
+              ),
               child: const Text(
                 "Okay",
                 style: TextStyle(
