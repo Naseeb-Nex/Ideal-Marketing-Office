@@ -524,26 +524,6 @@ class _AssignpgmwidgetState extends State<Assignpgmwidget> {
                                 ),
                         ),
                       ),
-                      const SizedBox(width: 5,),
-                      Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: vButton ? white : bluebg,
-                              boxShadow: [
-                                BoxShadow(
-                                  spreadRadius: 2,
-                                  blurRadius: 7,
-                                  color: bluebg.withOpacity(0.25),
-                                  offset: const Offset(0, 4),
-                                )
-                              ]),
-                          child: const Icon(
-                                  Iconsax.add,
-                                  color: white,
-                                ),
-                        ),
                     ],
                   )
                 ],
@@ -808,14 +788,15 @@ class _AddvehicleDialogState extends State<AddvehicleDialog> {
                                                     width: double.infinity,
                                                     height: s.height * 0.5,
                                                     child: Column(
-                                                      mainAxisAlignment: MainAxisAlignment.end,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
                                                       children: [
                                                         Image.asset(
                                                             "assets/icons/no_vehicle.png",
                                                             width:
                                                                 s.height * 0.33,
-                                                            height:
-                                                                s.height * 0.33),
+                                                            height: s.height *
+                                                                0.33),
                                                         Text(
                                                           "No Vehicle Available",
                                                           style: TextStyle(
@@ -824,7 +805,8 @@ class _AddvehicleDialogState extends State<AddvehicleDialog> {
                                                             fontSize: 18,
                                                             fontWeight:
                                                                 FontWeight.w600,
-                                                            color: Colors.blueGrey
+                                                            color: Colors
+                                                                .blueGrey
                                                                 .shade600,
                                                           ),
                                                         ),
@@ -836,7 +818,8 @@ class _AddvehicleDialogState extends State<AddvehicleDialog> {
                                                             fontSize: 12,
                                                             fontWeight:
                                                                 FontWeight.w300,
-                                                            color: Colors.blueGrey
+                                                            color: Colors
+                                                                .blueGrey
                                                                 .shade300,
                                                           ),
                                                         ),
