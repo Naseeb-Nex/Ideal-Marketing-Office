@@ -1007,6 +1007,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                         ),
                       ],
                     ),
+                    clipBehavior: Clip.hardEdge,
                     // Use wrapper here
                     child: Techsrcwrapper(
                       src: _currentsrc,
