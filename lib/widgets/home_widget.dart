@@ -8,6 +8,7 @@ import 'package:test2/screens/homesrc.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/gestures.dart';
 import 'package:test2/componets/vscroll.dart';
+import 'package:test2/widgets/schedule_pgm.dart';
 
 import 'Reportsrcwidget.dart';
 
@@ -585,7 +586,7 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
   int p = 0;
   int pro = 0;
 
-  String _currentsrc = "Assign";
+  String _currentsrc = "Schedule";
 
   @override
   void initState() {
@@ -956,6 +957,36 @@ class _AssigntechpgmState extends State<Assigntechpgm> {
                         const SizedBox(
                           height: 20,
                         ),
+                        InkWell(
+                          onTap: () => setState(() {
+                            _currentsrc = 'Schedule';
+                          }),
+                          child: Container(
+                            height: 55,
+                            width: double.infinity,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color:
+                                  _currentsrc == "Schedule" ? white : Colors.blue,
+                              border: Border.all(color: Colors.blue),
+                            ),
+                            child: Text(
+                              "Schedule",
+                              style: TextStyle(
+                                fontFamily: "Nunito",
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: _currentsrc == "Schedule"
+                                    ? Colors.blue
+                                    : white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
                       ],
                     ),
                   ),
@@ -1008,6 +1039,9 @@ class Techsrcwrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     if (src == 'Status') {
       return Statussrc(uid: uid, username: username, techname: name);
+    }
+    else if (src == 'Schedule') {
+      return SchedulePgmSrc(uid: uid, username: username, techname: name);
     }
     return Assignpgmwidget(uid: uid, username: username, techname: name);
   }
