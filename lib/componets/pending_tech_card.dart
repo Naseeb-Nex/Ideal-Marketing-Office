@@ -299,6 +299,7 @@ class PendingTechcard extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class ConfirmBox extends StatelessWidget {
   String? uid;
   String? username;

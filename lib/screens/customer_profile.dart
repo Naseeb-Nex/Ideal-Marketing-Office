@@ -1275,6 +1275,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
   }
 }
 
+// ignore: must_be_immutable
 class CustomerViewWrappaer extends StatelessWidget {
   String? src;
   final cust;

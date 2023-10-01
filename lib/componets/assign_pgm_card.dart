@@ -3,9 +3,8 @@ import 'package:test2/constants/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:test2/services/assignedpgmdata.dart';
 import 'package:intl/intl.dart';
-import 'package:test2/services/customer_history.dart';
-import 'package:test2/services/history.dart';
 
+// ignore: must_be_immutable
 class Assignpgmcard extends StatefulWidget {
   String? uid;
   String? name;
@@ -90,41 +89,55 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                      width: s.width * 0.12,
-                      child: Text(
-                        "${widget.name}",
-                        style: const TextStyle(
-                          fontFamily: "Nunito",
-                          fontSize: 16,
-                        ),
-                        textAlign: TextAlign.left,
-                        softWrap: true,
-                      ),
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Icon(Icons.add_business_rounded, color: Color(0XFF9b5de5), size: 20,),
-                            const SizedBox(height: 5,),
-                        SizedBox(
-                          width: s.width * 0.1,
+                          width: s.width * 0.12,
                           child: Text(
-                            "${widget.address}",
+                            "${widget.name}",
                             style: const TextStyle(
                               fontFamily: "Nunito",
-                              fontSize: 14,
+                              fontSize: 16,
                             ),
                             textAlign: TextAlign.left,
                             softWrap: true,
                           ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: 5,),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Icon(
+                              Icons.add_business_rounded,
+                              color: Color(0XFF9b5de5),
+                              size: 20,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            SizedBox(
+                              width: s.width * 0.1,
+                              child: Text(
+                                "${widget.address}",
+                                style: const TextStyle(
+                                  fontFamily: "Nunito",
+                                  fontSize: 14,
+                                ),
+                                textAlign: TextAlign.left,
+                                softWrap: true,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
                         Row(
                           children: [
-                            const Icon(Icons.pin_drop_outlined, color: cheryred, size: 20,),
-                            const SizedBox(height: 5,),
+                            const Icon(
+                              Icons.pin_drop_outlined,
+                              color: cheryred,
+                              size: 20,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
                             SizedBox(
                               width: s.width * 0.11,
                               child: Text(
@@ -134,27 +147,29 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
                                     fontSize: 15,
                                     color: Colors.black45,
                                     fontWeight: FontWeight.w500),
-                                    textAlign: TextAlign.left,
-                                    softWrap: true,
+                                textAlign: TextAlign.left,
+                                softWrap: true,
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(height: 8,),
+                        const SizedBox(
+                          height: 8,
+                        ),
                         Container(
-                              decoration: BoxDecoration(
-                                  color: bluebg,
-                                  borderRadius: BorderRadius.circular(20)),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 3, horizontal: 8),
-                              child: Text(
-                                "${widget.type}",
-                                style: const TextStyle(
-                                    fontFamily: "Nunito",
-                                    fontSize: 15,
-                                    color: white),
-                              ),
-                            ),
+                          decoration: BoxDecoration(
+                              color: bluebg,
+                              borderRadius: BorderRadius.circular(20)),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 3, horizontal: 8),
+                          child: Text(
+                            "${widget.type}",
+                            style: const TextStyle(
+                                fontFamily: "Nunito",
+                                fontSize: 15,
+                                color: white),
+                          ),
+                        ),
                       ],
                     ),
                     Column(
@@ -195,7 +210,11 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
                             ),
                             Row(
                               children: [
-                                const Icon( Icons.production_quantity_limits_rounded, color: bluebg, size: 20,),
+                                const Icon(
+                                  Icons.production_quantity_limits_rounded,
+                                  color: bluebg,
+                                  size: 20,
+                                ),
                                 Text(
                                   "${widget.prospec}",
                                   style: const TextStyle(
@@ -208,7 +227,11 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
                             ),
                             Row(
                               children: [
-                                const Icon( Icons.date_range_rounded, color: Color(0XFFe56b6f), size: 20,),
+                                const Icon(
+                                  Icons.date_range_rounded,
+                                  color: Color(0XFFe56b6f),
+                                  size: 20,
+                                ),
                                 Text(
                                   "${widget.instadate}",
                                   style: const TextStyle(
@@ -358,7 +381,6 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
       custdocname: widget.custdocname,
     );
 
-
     if (_priorityKey.currentState!.validate()) {
       setState(() {
         loading = true;
@@ -373,9 +395,7 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
           _up = true;
           loading = false;
         });
-      }).catchError((error) =>
-              print("Failed to update program in program field : $error"));
-
+      }).catchError((error) {});
     }
   }
 }

@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:test2/componets/view_pgm_card.dart';
 import 'package:test2/constants/constants.dart';
 
+// ignore: must_be_immutable
 class PendingPgmWrapper extends StatelessWidget {
   String? userid;
   PendingPgmWrapper({Key? key, this.userid}) : super(key: key);

@@ -111,12 +111,9 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                 fontFamily: "Montserrat",
                                 theme: ThemeData(
                                     primaryColor: bluebg,
-                                    accentColor: bluebg,
+hintColor: bluebg,
                                     textTheme: TextTheme(
                                       caption: TextStyle(color: bluebg),
-                                    ),
-                                    accentTextTheme: TextTheme(
-                                      bodyText2: TextStyle(color: bluebg),
                                     )),
                               );
                               if (newDateTime != null) {
@@ -155,8 +152,8 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                           is_datesub = true;
                                         });
                                       }
-                                    } on StateError catch (e) {
-                                      print('Feild is not exist error!');
+                                    } on StateError catch (_) {
+                                    return const Text("Something When wrong");
                                     }
                                   }
                                 });
