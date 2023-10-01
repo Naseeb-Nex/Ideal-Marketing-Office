@@ -55,13 +55,13 @@ class CustomerListCardState extends State<CustomerListCard> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: InkWell(
-        onDoubleTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) => CustomerProfilesrc(
-                                docname: widget.docname,
-                                cust: cust,
-                              ))),
+        onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) => CustomerProfilesrc(
+                      docname: widget.docname,
+                      cust: cust,
+                    ))),
         child: Container(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),

@@ -43,17 +43,12 @@ dependencies:
   loading_indicator: ^3.1.0
   motion_toast: ^2.6.4
   pdf: ^3.9.0
+  shared_preferences: ^2.2.1
 
 dependency_overrides:
   firebase_core_platform_interface: 4.8.0
 
 dev_dependencies:
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter

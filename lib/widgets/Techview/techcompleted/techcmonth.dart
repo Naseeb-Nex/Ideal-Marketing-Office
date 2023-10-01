@@ -1,8 +1,9 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
-import 'package:intl/intl.dart';
 
 import 'package:test2/componets/completed_pgm_card.dart';
 
@@ -16,13 +17,14 @@ class Techcmonth extends StatefulWidget {
       : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _TechcmonthState createState() => _TechcmonthState();
 }
 
 class _TechcmonthState extends State<Techcmonth> {
-  @override
-  List _allpgm = [];
+  final List _allpgm = [];
 
+  @override
   Widget build(BuildContext context) {
     return ScrollConfiguration(
       behavior: htechassignswipe(),

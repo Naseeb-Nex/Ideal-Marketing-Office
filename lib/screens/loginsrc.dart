@@ -1,3 +1,4 @@
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -163,29 +164,31 @@ class _LoginSrcState extends State<LoginSrc> {
   // login function
   void signIn(String email, String password) async {
     // firebase
+    final prefs = await SharedPreferences.getInstance();
     // if (_formKey.currentState!.validate()) {
-      setState(() {
-        load = true;
+    setState(() {
+      load = true;
+    });
+    try {
+      await _auth
+          .signInWithEmailAndPassword(
+              email: "o@gmail.com", password: "12345678")
+          // .signInWithEmailAndPassword(email: email, password: password)
+          .then((uid) {
+        prefs.setInt('login', 1);
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => const OfficeHome()));
       });
-      try {
-        await _auth
-             .signInWithEmailAndPassword(
-                    email: "o@gmail.com", password: "12345678")
-            // .signInWithEmailAndPassword(email: email, password: password)
-            .then((uid) => {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => const OfficeHome())),
-                });
-      } catch (error) {
-        setState(() {
-          load = false;
-        });
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return const SimpleCustomAlert("Email or Password is incorrect!");
-            });
-      }
+    } catch (error) {
+      setState(() {
+        load = false;
+      });
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const SimpleCustomAlert("Email or Password is incorrect!");
+          });
+    }
     // }
   }
 }

@@ -26,7 +26,8 @@ class Techreportcard extends StatefulWidget {
       this.name,
       this.callback,
       this.selectedUser,
-      this.technamecallback, this.visChat})
+      this.technamecallback,
+      this.visChat})
       : super(key: key);
 
   @override
@@ -46,7 +47,9 @@ class _TechreportcardState extends State<Techreportcard> {
   @override
   void initState() {
     super.initState();
-    submit_validator();
+    if (mounted) {
+      submit_validator();
+    }
   }
 
   var random = Random();

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:test2/screens/splash_src.dart';
 
 import 'config/config.dart';
-import 'screens/loginsrc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
           ),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-      home: const LoginSrc(),
+      home: const SplashSrc(),
       
     );
   }

@@ -39,9 +39,10 @@ class _VusagehistorycardState extends State<Vusagehistorycard> {
   @override
   void initState() {
     super.initState();
-
-    if (widget.start != null && widget.end != null) {
-      dis = int.parse("${widget.end}") - int.parse("${widget.start}");
+    if (mounted) {
+      if (widget.start != null && widget.end != null) {
+        dis = int.parse("${widget.end}") - int.parse("${widget.start}");
+      }
     }
   }
 
@@ -185,8 +186,8 @@ class _VusagehistorycardState extends State<Vusagehistorycard> {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                           const  Divider(),
-                           const  Center(
+                            const Divider(),
+                            const Center(
                               child: Text(
                                 "Usage Details",
                                 style: TextStyle(
@@ -196,11 +197,11 @@ class _VusagehistorycardState extends State<Vusagehistorycard> {
                                 ),
                               ),
                             ),
-                           const  Divider(),
+                            const Divider(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                               const  Text(
+                                const Text(
                                   "Distance Covered : ",
                                   style: TextStyle(
                                     fontFamily: "Montserrat",
@@ -210,14 +211,14 @@ class _VusagehistorycardState extends State<Vusagehistorycard> {
                                 ),
                                 Text(
                                   "$dis",
-                                  style:const  TextStyle(
+                                  style: const TextStyle(
                                     fontFamily: "Montserrat",
                                     fontSize: 17,
                                     fontWeight: FontWeight.w600,
                                   ),
                                   textAlign: TextAlign.start,
                                 ),
-                              const   Text(
+                                const Text(
                                   " Km",
                                   style: TextStyle(
                                     fontFamily: "Montserrat",
@@ -279,7 +280,7 @@ class _VusagehistorycardState extends State<Vusagehistorycard> {
                                       child: Image.asset(
                                           "assets/icons/scooter_icon.png"),
                                     ),
-                                   const  SizedBox(height: 3),
+                                    const SizedBox(height: 3),
                                     Container(
                                       decoration: BoxDecoration(
                                           borderRadius:
@@ -289,7 +290,7 @@ class _VusagehistorycardState extends State<Vusagehistorycard> {
                                           horizontal: 10, vertical: 5),
                                       child: Text(
                                         "${widget.end}",
-                                        style:const  TextStyle(
+                                        style: const TextStyle(
                                           fontFamily: "Montserrat",
                                           fontWeight: FontWeight.w500,
                                           color: redfg,
@@ -414,7 +415,7 @@ class VStatuswrapper extends StatelessWidget {
               spreadRadius: 1,
               blurRadius: 1,
               color: black.withOpacity(.05),
-              offset:const  Offset(1, 1),
+              offset: const Offset(1, 1),
             ),
           ],
         ),
@@ -441,7 +442,7 @@ class VStatuswrapper extends StatelessWidget {
               spreadRadius: 1,
               blurRadius: 1,
               color: black.withOpacity(.05),
-              offset:const  Offset(1, 1),
+              offset: const Offset(1, 1),
             ),
           ],
         ),

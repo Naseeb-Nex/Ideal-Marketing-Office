@@ -37,15 +37,17 @@ class StatussrcState extends State<CustomerProfilesrc> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      namecontroller.text = widget.cust.name;
-      addresscontroller.text = widget.cust.address;
-      loccontroller.text = widget.cust.loc;
-      prospeccontroller.text = widget.cust.prospec;
-      instadatecontroller.text = widget.cust.instadate;
-      phn1controller.text = widget.cust.phn1;
-      phn2controller.text = widget.cust.phn2;
-    });
+    if (mounted) {
+      setState(() {
+        namecontroller.text = widget.cust.name;
+        addresscontroller.text = widget.cust.address;
+        loccontroller.text = widget.cust.loc;
+        prospeccontroller.text = widget.cust.prospec;
+        instadatecontroller.text = widget.cust.instadate;
+        phn1controller.text = widget.cust.phn1;
+        phn2controller.text = widget.cust.phn2;
+      });
+    }
   }
 
   @override
@@ -1230,30 +1232,28 @@ class StatussrcState extends State<CustomerProfilesrc> {
         'phn2': phn2controller.text,
         'prospec': prospeccontroller.text,
         'instadate': instadatecontroller.text,
-      }).then((value)  {
+      }).then((value) {
         setState(() {
           loading = false;
           editmode = false;
         });
         showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return const Homealertbox(
-                    "Customer Profile Updated", bluebg, "Sucessfull");
-              });
+            context: context,
+            builder: (BuildContext context) {
+              return const Homealertbox(
+                  "Customer Profile Updated", bluebg, "Sucessfull");
+            });
       }).catchError((eroor) {
         setState(() {
-            loading = false;
-            editmode = false;
-          });
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return const SimpleCustomAlert(
-                    "Something went Wrong, Try again!",
-                    Colors.redAccent,
-                    "Error");
-              });
+          loading = false;
+          editmode = false;
+        });
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return const SimpleCustomAlert("Something went Wrong, Try again!",
+                  Colors.redAccent, "Error");
+            });
       });
     }
   }

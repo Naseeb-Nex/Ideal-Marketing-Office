@@ -27,10 +27,12 @@ class _TechcompletedState extends State<Techcompleted> {
   void initState() {
     super.initState();
     DateTime now = DateTime.now();
-    setState(() {
-      _selectedmonth = DateFormat('MM y').format(now);
-      year = DateFormat('y').format(now);
-    });
+    if (mounted) {
+      setState(() {
+        _selectedmonth = DateFormat('MM y').format(now);
+        year = DateFormat('y').format(now);
+      });
+    }
   }
 
   String _currentsw = "day";

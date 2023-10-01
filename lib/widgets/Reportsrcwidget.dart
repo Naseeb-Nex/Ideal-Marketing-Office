@@ -29,7 +29,9 @@ class ReportsrcwidgetState extends State<Reportsrcwidget> {
   @override
   void initState() {
     super.initState();
-    overviewLoader();
+    if (mounted) {
+      overviewLoader();
+    }
   }
 
   String _username = "Akhil";

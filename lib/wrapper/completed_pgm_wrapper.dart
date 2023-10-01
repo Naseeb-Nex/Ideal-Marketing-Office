@@ -23,10 +23,12 @@ class _CompletedpgmwrapperState extends State<Completedpgmwrapper> {
   void initState() {
     super.initState();
     DateTime now = DateTime.now();
-    setState(() {
-      _selectedmonth = DateFormat('MM y').format(now);
-      year = DateFormat('y').format(now);
-    });
+    if (mounted) {
+      setState(() {
+        _selectedmonth = DateFormat('MM y').format(now);
+        year = DateFormat('y').format(now);
+      });
+    }
   }
 
   List<DropdownMenuItem<String>> _dropDownItem() {

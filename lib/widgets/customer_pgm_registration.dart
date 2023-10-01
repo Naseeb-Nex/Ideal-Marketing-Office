@@ -6,14 +6,15 @@ import 'package:intl/intl.dart';
 import 'package:test2/services/customer_history.dart';
 import 'package:test2/services/history.dart';
 import 'package:test2/services/pgm.dart';
-import 'package:test2/widgets/customer_history_widget.dart';
 
 // ignore: must_be_immutable
 class CustomerpgmReg extends StatefulWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final cust;
-  CustomerpgmReg({Key? key, this.cust}) : super(key: key);
+  const CustomerpgmReg({Key? key, this.cust}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _CustomerpgmRegState createState() => _CustomerpgmRegState();
 }
 
@@ -35,14 +36,16 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      namecontroller.text = widget.cust.name;
-      addresscontroller.text = widget.cust.address;
-      loccontroller.text = widget.cust.loc;
-      prospeccontroller.text = widget.cust.prospec;
-      instadatecontroller.text = widget.cust.instadate;
-      phn1controller.text = widget.cust.phn1;
-    });
+    if (mounted) {
+      setState(() {
+        namecontroller.text = widget.cust.name;
+        addresscontroller.text = widget.cust.address;
+        loccontroller.text = widget.cust.loc;
+        prospeccontroller.text = widget.cust.prospec;
+        instadatecontroller.text = widget.cust.instadate;
+        phn1controller.text = widget.cust.phn1;
+      });
+    }
   }
 
   List<DropdownMenuItem<String>> _dropDownItem() {
@@ -595,7 +598,7 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
         ch: "New program added",
       );
 
-      // customer pgm view 
+      // customer pgm view
       await firebaseFirestore
           .collection("Customer")
           .doc(widget.cust.docname)
@@ -604,7 +607,7 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
           .set(pgmr.toMap())
           .then((value) => print("done"));
 
-      // Upload to the main list 
+      // Upload to the main list
       await firebaseFirestore
           .collection("Programs")
           .doc(formattedDate)
@@ -712,7 +715,9 @@ class SimpleCustomAlert extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(white),),
+              style: const ButtonStyle(
+                backgroundColor: MaterialStatePropertyAll<Color>(white),
+              ),
               child: Text(
                 "Okay",
                 style: TextStyle(

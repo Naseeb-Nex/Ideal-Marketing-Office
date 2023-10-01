@@ -527,7 +527,6 @@ class ConfirmBox extends StatelessWidget {
           .doc(pdocname)
           .delete()
           .then((value) {
-        print("Delete from pending list");
       }).catchError(
               (error) => print("Failed to Delete Pending pgm list : $error"));
 

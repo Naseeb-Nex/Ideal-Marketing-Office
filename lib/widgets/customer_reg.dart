@@ -1,3 +1,4 @@
+import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:test2/componets/simplealertbox.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
@@ -24,9 +25,11 @@ class _CustomerregState extends State<Customerreg> {
   TextEditingController addresscontroller = TextEditingController();
   TextEditingController loccontroller = TextEditingController();
   TextEditingController prospeccontroller = TextEditingController();
-  TextEditingController instadatecontroller = TextEditingController();
   TextEditingController phn1controller = TextEditingController();
   TextEditingController phn2controller = TextEditingController();
+
+  // Date
+  String? _selectedDate;
 
   @override
   Widget build(BuildContext context) {
@@ -260,22 +263,58 @@ class _CustomerregState extends State<Customerreg> {
                             const SizedBox(
                               height: 5,
                             ),
-                            TextFormField(
-                              autofocus: false,
-                              controller: instadatecontroller,
-                              textInputAction: TextInputAction.next,
-                              onSaved: (value) {
-                                instadatecontroller.text = value!;
-                              },
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return ("Please enter the Installation Date");
+                            InkWell(
+                              onTap: () async {
+                                DateTime? newDateTime =
+                                    await showRoundedDatePicker(
+                                  context: context,
+                                  locale: const Locale('en', 'US'),
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(DateTime.now().year - 15),
+                                  lastDate: DateTime(DateTime.now().year + 1),
+                                  borderRadius: 20,
+                                  fontFamily: "Montserrat",
+                                  theme: ThemeData(
+                                      primaryColor: bluebg,
+                                      focusColor: bluebg,
+                                      hintColor: bluebg,
+                                      textTheme: const TextTheme(
+                                        bodySmall: TextStyle(color: bluebg),
+                                      )),
+                                );
+                                if (newDateTime != null) {
+                                  setState(() {
+                                    _selectedDate = DateFormat('d MM y')
+                                        .format(newDateTime);
+                                  });
                                 }
-                                return null;
                               },
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8))),
+                              child: Container(
+                                width: double.infinity,
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 15),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: const Color(0xFFFFFFFE),
+                                  border: Border.all(
+                                    color: _selectedDate != null
+                                        ? black 
+                                        : Colors.blueGrey,
+                                  ),
+                                ),
+                                child: Center(
+                                    child: Text(
+                                  _selectedDate != null
+                                      ? '$_selectedDate'
+                                      : "Select the Date",
+                                  style: TextStyle(
+                                    color: black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: "Montserrat",
+                                  ),
+                                )),
+                              ),
                             ),
                           ],
                         ),
@@ -419,10 +458,7 @@ class _CustomerregState extends State<Customerreg> {
     final docname =
         namecontroller.text.toLowerCase() + phn1controller.text.toLowerCase();
 
-    final existance =
-        FirebaseFirestore.instance.collection("Customer").doc(docname);
-
-    if (_formkey.currentState!.validate()) {
+    if (_formkey.currentState!.validate() && _selectedDate != null) {
       setState(() {
         _loading = true;
       });
@@ -437,7 +473,7 @@ class _CustomerregState extends State<Customerreg> {
         upTime: upTime,
         docname: docname,
         prospec: prospeccontroller.text,
-        instadate: instadatecontroller.text,
+        instadate: _selectedDate!,
       );
 
       // Pgmhistory history = Pgmhistory(
@@ -484,7 +520,9 @@ class _CustomerregState extends State<Customerreg> {
               phn1controller.clear();
               phn2controller.clear();
               prospeccontroller.clear();
-              instadatecontroller.clear();
+              setState(() {
+                _selectedDate = null;
+              });
             }).catchError((error) {
               setState(() {
                 _loading = false;

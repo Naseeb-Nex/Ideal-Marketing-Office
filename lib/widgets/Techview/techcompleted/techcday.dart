@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 
 import 'package:test2/componets/completed_pgm_card.dart';
 
+// ignore: must_be_immutable
 class Techcday extends StatefulWidget {
   String? uid;
   String? username;
@@ -15,13 +16,13 @@ class Techcday extends StatefulWidget {
       : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _TechcdayState createState() => _TechcdayState();
 }
 
 class _TechcdayState extends State<Techcday> {
+  final List _allpgm = [];
   @override
-  List _allpgm = [];
-
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
     String cday = DateFormat('MM d y').format(now);
@@ -40,7 +41,7 @@ class _TechcdayState extends State<Techcday> {
             builder:
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasError) {
-                print('Something went Wrong');
+              return const Text("Something went Wrong");
               }
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Container(
