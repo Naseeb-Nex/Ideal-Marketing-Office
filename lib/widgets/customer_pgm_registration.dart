@@ -9,9 +9,29 @@ import 'package:test2/services/pgm.dart';
 
 // ignore: must_be_immutable
 class CustomerpgmReg extends StatefulWidget {
-  // ignore: prefer_typing_uninitialized_variables
-  final cust;
-  const CustomerpgmReg({Key? key, this.cust}) : super(key: key);
+  String? docname;
+  String? name;
+  String? address;
+  String? loc;
+  String? phn1;
+  String? phn2;
+  String? upDate;
+  String? upTime;
+  String? prospec;
+  String? instadate;
+  CustomerpgmReg({
+    Key? key,
+    this.docname,
+    this.name,
+    this.address,
+    this.loc,
+    this.phn1,
+    this.phn2,
+    this.upDate,
+    this.upTime,
+    this.prospec,
+    this.instadate,
+  }) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -38,12 +58,12 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
     super.initState();
     if (mounted) {
       setState(() {
-        namecontroller.text = widget.cust.name;
-        addresscontroller.text = widget.cust.address;
-        loccontroller.text = widget.cust.loc;
-        prospeccontroller.text = widget.cust.prospec;
-        instadatecontroller.text = widget.cust.instadate;
-        phn1controller.text = widget.cust.phn1;
+        namecontroller.text = widget.name!;
+        addresscontroller.text = widget.address!;
+        loccontroller.text = widget.loc!;
+        prospeccontroller.text = widget.prospec!;
+        instadatecontroller.text = widget.instadate!;
+        phn1controller.text = widget.phn1!;
       });
     }
   }
@@ -556,18 +576,18 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
       });
 
       Pgmdata pgmr = Pgmdata(
-        name: widget.cust.name,
-        address: widget.cust.address,
-        loc: widget.cust.loc,
-        phn: widget.cust.phn1,
-        phn2: widget.cust.phn2,
+        name: widget.name,
+        address: widget.address,
+        loc: widget.loc,
+        phn: widget.phn1,
+        phn2: widget.phn2,
         pgm: pgmcontroller.text,
         chrg: chrgcontroller.text,
         type: _selectedcategory,
         upDate: upDate,
         upTime: upTime,
         docname: formattedDate,
-        custdocname: widget.cust.docname,
+        custdocname: widget.docname,
         prospec: prospeccontroller.text,
         instadate: instadatecontroller.text,
         status: "pending",
@@ -579,13 +599,13 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
           msg: "Program Registered",
           status: "pending",
           docname: formattedDate,
-          custdocname: widget.cust.docname);
+          custdocname: widget.docname);
 
       Pgmhistory history = Pgmhistory(
-        name: widget.cust.name,
-        address: widget.cust.address,
-        loc: widget.cust.loc,
-        phn: widget.cust.phn1,
+        name: widget.name,
+        address: widget.address,
+        loc: widget.loc,
+        phn: widget.phn1,
         pgm: pgmcontroller.text,
         chrg: chrgcontroller.text,
         type: _selectedcategory,
@@ -601,7 +621,7 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
       // customer pgm view
       await firebaseFirestore
           .collection("Customer")
-          .doc(widget.cust.docname)
+          .doc(widget.docname)
           .collection("Programs")
           .doc(formattedDate)
           .set(pgmr.toMap())
@@ -622,7 +642,7 @@ class _CustomerpgmRegState extends State<CustomerpgmReg> {
         // customer program history updated
         firebaseFirestore
             .collection("Customer")
-            .doc(widget.cust.docname)
+            .doc(widget.docname)
             .collection("Programs")
             .doc(formattedDate)
             .collection("History")

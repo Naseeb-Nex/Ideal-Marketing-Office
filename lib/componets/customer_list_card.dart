@@ -39,19 +39,6 @@ class CustomerListCard extends StatefulWidget {
 class CustomerListCardState extends State<CustomerListCard> {
   @override
   Widget build(BuildContext context) {
-    final cust = Customer(
-      name: widget.name,
-      address: widget.address,
-      loc: widget.loc,
-      phn1: widget.phn1,
-      phn2: widget.phn2,
-      upDate: widget.upDate,
-      upTime: widget.upTime,
-      docname: widget.docname,
-      prospec: widget.prospec,
-      instadate: widget.instadate,
-    );
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: InkWell(
@@ -60,7 +47,15 @@ class CustomerListCardState extends State<CustomerListCard> {
             MaterialPageRoute(
                 builder: (BuildContext context) => CustomerProfilesrc(
                       docname: widget.docname,
-                      cust: cust,
+                      name: widget.name,
+                      address: widget.address,
+                      loc: widget.loc,
+                      phn1: widget.phn1,
+                      phn2: widget.phn2,
+                      upDate: widget.upDate,
+                      upTime: widget.upTime,
+                      prospec: widget.prospec,
+                      instadate: widget.instadate,
                     ))),
         child: Container(
           width: double.infinity,
@@ -135,7 +130,15 @@ class CustomerListCardState extends State<CustomerListCard> {
                       MaterialPageRoute(
                           builder: (BuildContext context) => CustomerProfilesrc(
                                 docname: widget.docname,
-                                cust: cust,
+                                name: widget.name,
+                                address: widget.address,
+                                loc: widget.loc,
+                                phn1: widget.phn1,
+                                phn2: widget.phn2,
+                                upDate: widget.upDate,
+                                upTime: widget.upTime,
+                                prospec: widget.prospec,
+                                instadate: widget.instadate,
                               ))),
                   child: const SizedBox(
                     width: 50,

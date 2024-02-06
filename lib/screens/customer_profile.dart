@@ -9,9 +9,29 @@ import 'package:test2/widgets/customer_pgm_registration.dart';
 
 // ignore: must_be_immutable
 class CustomerProfilesrc extends StatefulWidget {
-  final cust;
   String? docname;
-  CustomerProfilesrc({Key? key, this.docname, this.cust}) : super(key: key);
+  String? name;
+  String? address;
+  String? loc;
+  String? phn1;
+  String? phn2;
+  String? upDate;
+  String? upTime;
+  String? prospec;
+  String? instadate;
+  CustomerProfilesrc({
+    Key? key,
+    this.docname,
+    this.name,
+    this.address,
+    this.loc,
+    this.phn1,
+    this.phn2,
+    this.upDate,
+    this.upTime,
+    this.prospec,
+    this.instadate,
+  }) : super(key: key);
 
   @override
   StatussrcState createState() => StatussrcState();
@@ -39,13 +59,13 @@ class StatussrcState extends State<CustomerProfilesrc> {
     super.initState();
     if (mounted) {
       setState(() {
-        namecontroller.text = widget.cust.name;
-        addresscontroller.text = widget.cust.address;
-        loccontroller.text = widget.cust.loc;
-        prospeccontroller.text = widget.cust.prospec;
-        instadatecontroller.text = widget.cust.instadate;
-        phn1controller.text = widget.cust.phn1;
-        phn2controller.text = widget.cust.phn2;
+        namecontroller.text = widget.name!;
+        addresscontroller.text = widget.address!;
+        loccontroller.text = widget.loc!;
+        prospeccontroller.text = widget.prospec!;
+        instadatecontroller.text = widget.instadate!;
+        phn1controller.text = widget.phn1!;
+        phn2controller.text = widget.phn2!;
       });
     }
   }
@@ -266,7 +286,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                 Center(
                                                   child: Padding(
                                                     padding: const EdgeInsets
-                                                            .symmetric(
+                                                        .symmetric(
                                                         horizontal: 20),
                                                     child: TextFormField(
                                                       autofocus: false,
@@ -288,7 +308,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                           isDense: true,
                                                           contentPadding:
                                                               const EdgeInsets
-                                                                      .symmetric(
+                                                                  .symmetric(
                                                                   horizontal: 8,
                                                                   vertical: 15),
                                                           border: OutlineInputBorder(
@@ -320,7 +340,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                 ),
                                                 Padding(
                                                   padding: const EdgeInsets
-                                                          .symmetric(
+                                                      .symmetric(
                                                       horizontal: 20),
                                                   child: Column(
                                                     children: [
@@ -364,7 +384,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                               decoration: InputDecoration(
                                                                   isDense: true,
                                                                   contentPadding: const EdgeInsets
-                                                                          .symmetric(
+                                                                      .symmetric(
                                                                       horizontal:
                                                                           8,
                                                                       vertical:
@@ -422,7 +442,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                               decoration: InputDecoration(
                                                                   isDense: true,
                                                                   contentPadding: const EdgeInsets
-                                                                          .symmetric(
+                                                                      .symmetric(
                                                                       horizontal:
                                                                           8,
                                                                       vertical:
@@ -483,7 +503,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                                 isDense: true,
                                                                 contentPadding:
                                                                     const EdgeInsets
-                                                                            .symmetric(
+                                                                        .symmetric(
                                                                         horizontal:
                                                                             8,
                                                                         vertical:
@@ -534,7 +554,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                               decoration: InputDecoration(
                                                                   isDense: true,
                                                                   contentPadding: const EdgeInsets
-                                                                          .symmetric(
+                                                                      .symmetric(
                                                                       horizontal:
                                                                           8,
                                                                       vertical:
@@ -553,7 +573,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                    .symmetric(
+                                                                .symmetric(
                                                                 horizontal: 10),
                                                         child: Container(
                                                           width:
@@ -610,7 +630,8 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                                 child: Padding(
                                                                   padding:
                                                                       const EdgeInsets
-                                                                          .all(10),
+                                                                          .all(
+                                                                          10),
                                                                   child:
                                                                       TextFormField(
                                                                     autofocus:
@@ -636,7 +657,8 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                                     decoration: InputDecoration(
                                                                         isDense:
                                                                             true,
-                                                                        contentPadding: const EdgeInsets.symmetric(
+                                                                        contentPadding: const EdgeInsets
+                                                                            .symmetric(
                                                                             horizontal:
                                                                                 8,
                                                                             vertical:
@@ -692,7 +714,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                               isDense: true,
                                                               contentPadding:
                                                                   const EdgeInsets
-                                                                          .symmetric(
+                                                                      .symmetric(
                                                                       horizontal:
                                                                           8,
                                                                       vertical:
@@ -713,7 +735,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                         child: Container(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .symmetric(
+                                                                  .symmetric(
                                                                   horizontal:
                                                                       20,
                                                                   vertical: 10),
@@ -741,7 +763,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                         alignment: Alignment
                                                             .centerRight,
                                                         child: Text(
-                                                          "${widget.cust.upDate}",
+                                                          "${widget.upDate}",
                                                           style:
                                                               const TextStyle(
                                                             fontFamily:
@@ -756,7 +778,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                         alignment: Alignment
                                                             .centerRight,
                                                         child: Text(
-                                                          "${widget.cust.upTime}",
+                                                          "${widget.upTime}",
                                                           style:
                                                               const TextStyle(
                                                             fontFamily:
@@ -782,7 +804,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                           ),
                                           Center(
                                             child: Text(
-                                              "${widget.cust.name}",
+                                              "${widget.name}",
                                               style: const TextStyle(
                                                 fontFamily: "Montserrat",
                                                 fontSize: 20,
@@ -831,7 +853,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                     Flexible(
                                                       flex: 1,
                                                       child: Text(
-                                                        "${widget.cust.address}",
+                                                        "${widget.address}",
                                                         style: const TextStyle(
                                                           fontFamily:
                                                               "Montserrat",
@@ -861,7 +883,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                     Flexible(
                                                       flex: 1,
                                                       child: Text(
-                                                        "${widget.cust.loc}",
+                                                        "${widget.loc}",
                                                         style: const TextStyle(
                                                           fontFamily:
                                                               "Montserrat",
@@ -891,7 +913,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                     Flexible(
                                                       flex: 1,
                                                       child: Text(
-                                                        "${widget.cust.phn1}",
+                                                        "${widget.phn1}",
                                                         style: const TextStyle(
                                                           fontFamily:
                                                               "Montserrat",
@@ -903,8 +925,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                 ),
                                                 const SizedBox(height: 15),
                                                 Container(
-                                                  child: widget
-                                                          .cust.phn2.isNotEmpty
+                                                  child: widget.phn2 != null
                                                       ? Row(
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
@@ -925,7 +946,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                             Flexible(
                                                               flex: 1,
                                                               child: Text(
-                                                                "${widget.cust.phn2}",
+                                                                "${widget.phn2}",
                                                                 style:
                                                                     const TextStyle(
                                                                   fontFamily:
@@ -943,7 +964,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                 ),
                                                 Padding(
                                                   padding: const EdgeInsets
-                                                          .symmetric(
+                                                      .symmetric(
                                                       horizontal: 10),
                                                   child: Container(
                                                     width: double.infinity,
@@ -997,7 +1018,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                                 const EdgeInsets
                                                                     .all(10),
                                                             child: Text(
-                                                              "${widget.cust.prospec}",
+                                                              "${widget.prospec}",
                                                               style:
                                                                   const TextStyle(
                                                                 fontFamily:
@@ -1030,7 +1051,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                   height: 5,
                                                 ),
                                                 Text(
-                                                  "${widget.cust.instadate}",
+                                                  "${widget.instadate}",
                                                   style: const TextStyle(
                                                     fontFamily: "Nunito",
                                                     fontSize: 17,
@@ -1043,7 +1064,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                   alignment:
                                                       Alignment.centerRight,
                                                   child: Text(
-                                                    "${widget.cust.upDate}",
+                                                    "${widget.upDate}",
                                                     style: const TextStyle(
                                                       fontFamily: "Nunito",
                                                       fontSize: 12,
@@ -1055,7 +1076,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                                   alignment:
                                                       Alignment.centerRight,
                                                   child: Text(
-                                                    "${widget.cust.upTime}",
+                                                    "${widget.upTime}",
                                                     style: const TextStyle(
                                                       fontFamily: "Nunito",
                                                       fontSize: 12,
@@ -1201,7 +1222,16 @@ class StatussrcState extends State<CustomerProfilesrc> {
                           ),
                           CustomerViewWrappaer(
                             src: current_scr,
-                            cust: widget.cust,
+                            docname: widget.docname,
+                            name: widget.name,
+                            address: widget.address,
+                            loc: widget.loc,
+                            phn1: widget.phn1,
+                            phn2: widget.phn2,
+                            upDate: widget.upDate,
+                            upTime: widget.upTime,
+                            prospec: widget.prospec,
+                            instadate: widget.instadate,
                           ),
                         ],
                       ),
@@ -1224,7 +1254,7 @@ class StatussrcState extends State<CustomerProfilesrc> {
         loading = true;
       });
 
-      firebaseFirestore.collection("Customer").doc(widget.cust.docname).update({
+      firebaseFirestore.collection("Customer").doc(widget.docname).update({
         'name': namecontroller.text,
         'address': addresscontroller.text,
         'loc': loccontroller.text,
@@ -1277,19 +1307,59 @@ class StatussrcState extends State<CustomerProfilesrc> {
 
 // ignore: must_be_immutable
 class CustomerViewWrappaer extends StatelessWidget {
+  String? docname;
   String? src;
-  final cust;
-  CustomerViewWrappaer({Key? key, this.src, this.cust}) : super(key: key);
+  String? name;
+  String? address;
+  String? loc;
+  String? phn1;
+  String? phn2;
+  String? upDate;
+  String? upTime;
+  String? prospec;
+  String? instadate;
+  CustomerViewWrappaer({
+    Key? key,
+    this.src,
+    this.name,
+    this.address,
+    this.loc,
+    this.phn1,
+    this.phn2,
+    this.upDate,
+    this.upTime,
+    this.prospec,
+    this.instadate,
+    this.docname,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     if (src == 'programs') {
       return CustomerHistory(
-        cust: cust,
+        name: name,
+        address: address,
+        loc: loc,
+        phn1: phn1,
+        phn2: phn2,
+        upDate: upDate,
+        upTime: upTime,
+        prospec: prospec,
+        instadate: instadate,
+        docname: docname,
       );
     }
     return CustomerpgmReg(
-      cust: cust,
+      name: name,
+      address: address,
+      loc: loc,
+      phn1: phn1,
+      phn2: phn2,
+      upDate: upDate,
+      upTime: upTime,
+      prospec: prospec,
+      instadate: instadate,
+      docname: docname,
     );
   }
 }

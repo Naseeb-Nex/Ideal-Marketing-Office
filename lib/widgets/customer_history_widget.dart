@@ -2,12 +2,32 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:test2/componets/customer_pgm_view.dart';
 import 'package:test2/constants/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:test2/services/customer.dart';
 
 // ignore: must_be_immutable
 class CustomerHistory extends StatefulWidget {
-  Customer cust = Customer();
-  CustomerHistory({Key? key, required this.cust}) : super(key: key);
+  String? docname;
+  String? name;
+  String? address;
+  String? loc;
+  String? phn1;
+  String? phn2;
+  String? upDate;
+  String? upTime;
+  String? prospec;
+  String? instadate;
+  CustomerHistory({
+    Key? key,
+    this.docname,
+    this.name,
+    this.address,
+    this.loc,
+    this.phn1,
+    this.phn2,
+    this.upDate,
+    this.upTime,
+    this.prospec,
+    this.instadate,
+  }) : super(key: key);
 
   @override
   _CustomerHistoryState createState() => _CustomerHistoryState();
@@ -30,13 +50,13 @@ class _CustomerHistoryState extends State<CustomerHistory> {
             color: Colors.black38,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
-                children: const [
+                children: [
                   SizedBox(
                     width: 20,
                   ),
@@ -60,7 +80,7 @@ class _CustomerHistoryState extends State<CustomerHistory> {
                 ],
               ),
               Row(
-                children: const [
+                children: [
                   Text(
                     "Status",
                     style: TextStyle(
@@ -100,7 +120,7 @@ class _CustomerHistoryState extends State<CustomerHistory> {
               child: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection('Customer')
-                      .doc(widget.cust.docname)
+                      .doc(widget.docname)
                       .collection("Programs")
                       .orderBy('docname', descending: true)
                       .snapshots(),
