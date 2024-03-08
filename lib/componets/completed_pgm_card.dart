@@ -156,22 +156,13 @@ class _CompletedpgmcardState extends State<Completedpgmcard> {
                             fontSize: 15,
                           ),
                         ),
-                      Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 5),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: bluebg),
-                          child: const Text(
-                            "Completed",
-                            style: TextStyle(
-                              fontFamily: "Montserrat",
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: white,
-                            ),
-                          ),
+                      SizedBox(
+                        width: 60,
+                        height: 30,
+                        child: Image.asset("assets/icons/tech_complete.png"),
+
                         ),  
+
                       ],
                     ),
                   ],

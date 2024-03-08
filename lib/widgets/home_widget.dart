@@ -174,7 +174,7 @@ class _HomewidgetState extends State<Homewidget> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left : 25),
+            padding: const EdgeInsets.only(left: 25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -196,19 +196,19 @@ class _HomewidgetState extends State<Homewidget> {
                     ),
                   ],
                 ),
-            const SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding:  EdgeInsets.only(left: 20),
-              child: Container(
-                height: 2,
-                width: 100,
-                decoration: BoxDecoration(
-                    color: Colors.black26,
-                    borderRadius: BorderRadius.circular(10)),
-              ),
-            ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 20),
+                  child: Container(
+                    height: 2,
+                    width: 100,
+                    decoration: BoxDecoration(
+                        color: Colors.black26,
+                        borderRadius: BorderRadius.circular(10)),
+                  ),
+                ),
               ],
             ),
           ),
@@ -301,7 +301,7 @@ class _TechcardState extends State<Techcard> {
   @override
   void initState() {
     super.initState();
-    if (mounted) startup();
+    startup();
   }
 
   startup() async {

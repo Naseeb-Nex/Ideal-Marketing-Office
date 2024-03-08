@@ -61,6 +61,7 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
   @override
   Widget build(BuildContext context) {
     Size s = MediaQuery.of(context).size;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
       child: Container(
@@ -391,11 +392,18 @@ class _AssignpgmcardState extends State<Assignpgmcard> {
           .doc(widget.docname)
           .set(apgm.toMap())
           .then((value) {
+            print("Success fully completed");
         setState(() {
           _up = true;
           loading = false;
         });
-      }).catchError((error) {});
+      }).catchError((error) {
+        print("Something went wrong");
+        print(error);
+        setState(() {
+        _up = false;
+        });
+      });
     }
   }
 }
