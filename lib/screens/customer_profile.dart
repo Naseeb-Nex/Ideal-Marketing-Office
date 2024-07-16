@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:test2/componets/homealertbox.dart';
 
 import 'package:test2/constants/constants.dart';
@@ -212,10 +213,12 @@ class StatussrcState extends State<CustomerProfilesrc> {
                                       clipBehavior: Clip.none,
                                       children: [
                                         const CircleAvatar(
-                                          backgroundColor: bluebg,
-                                          backgroundImage: AssetImage(
-                                              "assets/images/customer_icon.jpg"),
-                                        ),
+                                            backgroundColor: yellowfg,
+                                            child: Icon(
+                                              Iconsax.user,
+                                              color: white,
+                                              size: 40,
+                                            )),
                                         Positioned(
                                           right: 3,
                                           bottom: 0,

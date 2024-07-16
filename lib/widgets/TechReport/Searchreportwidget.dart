@@ -113,7 +113,7 @@ class _SearchreportwidgetState extends State<Searchreportwidget> {
                                     primaryColor: bluebg,
 hintColor: bluebg,
                                     textTheme: TextTheme(
-                                      caption: TextStyle(color: bluebg),
+                                      bodySmall: TextStyle(color: bluebg),
                                     )),
                               );
                               if (newDateTime != null) {
